@@ -1,6 +1,6 @@
 # Minishell
 
-## simullate linux enviroment on mac:
+## simulate linux [environment](https://gist.github.com/CarloCattano/73482a9e846e27165e85dcf32cda91ad) on mac :
 
 to build
 ```

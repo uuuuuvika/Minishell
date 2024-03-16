@@ -18,6 +18,21 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include <readline/readline.h>
+#include <readline/history.h>
+
+// enum builtin_t
+// {
+//     echo,
+//     cd,
+//     pwd,
+//     env,
+//     exit,
+//     export,
+//     unset
+// };
+
+
 // struct command
 // {
 //     int argc;
