@@ -21,17 +21,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-// enum builtin_t
-// {
-//     echo,
-//     cd,
-//     pwd,
-//     env,
-//     exit,
-//     export,
-//     unset
-// };
-
 
 // struct command
 // {
@@ -68,5 +57,7 @@
 // // execute
 
 // //redirect
+
+int parse_input(char *input);
 
 #endif

@@ -1,4 +1,4 @@
-SRCS	= minishell.c
+SRCS	= minishell.c parser.c
 OBJS	= $(SRCS:.c=.o)
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra
