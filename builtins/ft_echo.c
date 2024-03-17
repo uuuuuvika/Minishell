@@ -9,5 +9,5 @@ void ft_echo(char *flag, char **str)
     }
     if (flag == NULL)
         printf("\n");
-    exit(0);
+    //exit(0);
 }

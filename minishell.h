@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/param.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -56,6 +57,8 @@ typedef struct s_data{
 // | redirect_out: <output.txt fd> | next: NULL
 // +----------+
 
-
 int parse_input(char *input);
+void ft_echo(char *flag, char **str);
+void ft_env(t_data data);
+void ft_pwd();
 #endif

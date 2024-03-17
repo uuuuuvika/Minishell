@@ -8,26 +8,25 @@
 int main(int argc, char *argv[], char **envp)
 
 {
-    t_data  data;
+    t_data data;
 
     (void)argc;
     (void)argv;
     data.envp = envp;
-
-    // Print the environment variables (just for testing purposes, remove it later!)
-    while(data.envp != NULL && *data.envp != NULL)
-    {
-        printf("%s\n", *data.envp);
-        data.envp++;
-    }
+    //char *arg[2] = { "potato", NULL };
 
     while (1)
     {
         // DAI! Feel free to add other colors/emojis or rename it in any way you like!
         char *input = readline(YEL "Minishell > " RESET);
 
-        printf(YEL "Minishell > " RESET);
-        printf("yo! you entered: %s\n", input);
+        if (strcmp(input, "pwd") == 0)
+        {
+            //ft_echo("dsfsfsfs", data.envp);
+            ft_pwd();
+            break;
+        }
+        // printf("yo! you entered: %s\n", input);
         free(input);
     }
 
