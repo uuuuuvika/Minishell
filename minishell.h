@@ -18,6 +18,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+void ft_echo(char *flag, char **str);
 // struct command
 // {
 //     int argc;

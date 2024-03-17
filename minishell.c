@@ -18,29 +18,10 @@ int print_env(pid_t pid)
 
 int main()
 {
-    pid_t pid;
-    // read_cmdline();
-    // Evaluate cmd_line
-
-while(1)
-{
+    char *args[1000] = {"hola"};
     printf(CYN"🐚 minishell$ "RESET);
-    pid = fork();
-    if (pid == -1)
-    {
-        perror("Unsuccessful\n");
-        return(1);
-    }
-    if (pid == 0)
-        print_env(getpid());
-    else
-    {
-        wait(NULL);
-        printf(BLU"Im the parent and my pid is: %d\n" WHT, pid);
-    } 
-}
-
-      
+    ft_echo(NULL, args);
+    return(0);
 }
     // parse_cmdline();//remember to null terminate
     // get_tocken():
