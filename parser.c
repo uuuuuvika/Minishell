@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+extern char **environ;
+
 int is_builtin(char *token)
 {
     int i = 0;
@@ -44,7 +46,21 @@ int parse_input(char *input)
         if (is_builtin(token))
         {
             printf(RED "Found a builtin command --> %s\n" RESET, token);
-            // execute_builtin(token);
+            if (strcmp(token, "exit") == 0)
+            {
+                printf("Exiting minishell...\n");
+                exit(0);
+            }
+            //uses forbiden global variable
+            if (strcmp(token, "env") == 0)
+            {
+                printf("Printing environment variables...\n");
+                for (char **current = environ; *current; current++)
+                {
+                    puts(*current);
+                }
+                return 0;
+            }
         }
 
         if (strcmp(token, "|") == 0)
