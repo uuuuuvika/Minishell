@@ -1,4 +1,4 @@
-SRCS	= minishell.c builtins/ft_echo.c builtins/ft_env.c builtins/ft_pwd.c 
+SRCS	= minishell.c builtins/ft_echo.c builtins/ft_env.c builtins/ft_pwd.c  utils/ft_strcmp.c
 OBJS	= $(SRCS:.c=.o)
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra

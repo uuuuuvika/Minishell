@@ -20,10 +20,11 @@ int main(int argc, char *argv[], char **envp)
         // DAI! Feel free to add other colors/emojis or rename it in any way you like!
         char *input = readline(YEL "Minishell > " RESET);
 
-        if (strcmp(input, "pwd") == 0)
+        if (ft_strcmp(input, "echo") == 0)
         {
-            //ft_echo("dsfsfsfs", data.envp);
-            ft_pwd();
+            ft_echo("n", data.envp);
+            printf("NEW LINE?");
+            //ft_pwd();
             break;
         }
         // printf("yo! you entered: %s\n", input);
