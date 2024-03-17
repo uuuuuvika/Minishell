@@ -1,5 +1,4 @@
 #include "minishell.h"
-
 // TODO: write our own strcmp
 // TODO: add libft
 // TODO: builtins
@@ -7,6 +6,7 @@
 // TODO: execute
 
 int main(int argc, char *argv[], char **envp)
+
 {
     t_data  data;
 

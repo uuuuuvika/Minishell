@@ -20,7 +20,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-
 typedef struct s_command {
 char *cmd;
 char **args;
