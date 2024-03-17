@@ -1,22 +1,5 @@
 #include "minishell.h"
 
-// void print_env(char *str)
-// {
-//     int id;
-
-//     id = fork();
-//     if (id == 0)
-//     {
-//         printf("Im only a child %d \n", id);
-//         printf("%s\n",getenv(str));
-//     }
-//     else
-//     {
-//         wait(0);
-//         printf("Im the parent %d \n", getpid());
-//     }
-// }
-
 int print_env(pid_t pid)
 {
     char input[10];
