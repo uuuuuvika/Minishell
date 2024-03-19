@@ -54,7 +54,6 @@ int parse(char *input, t_data *data)
         data->commands[index].args = ft_split(future_children[index], ' ');
         index++;
     }
-
     // printf("CHILDREN: %d\n", data->num_of_children);
     
     // int i = 0;
