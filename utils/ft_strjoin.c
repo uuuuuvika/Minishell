@@ -1,6 +1,6 @@
 #include "../minishell.h"
 
-size_t	ft_strlen(const char	*str)
+size_t	ft_strlenn(const char	*str)
 {
 	size_t	i;
 
@@ -19,7 +19,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
+	len = ft_strlenn(s1) + ft_strlenn(s2);
 	join = malloc((len + 1) * sizeof(char));
 	i = 0;
 	if (join == 0)

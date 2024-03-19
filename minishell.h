@@ -37,11 +37,14 @@ struct s_command *next;
 typedef struct s_data{
     char **envp;
     int exit_code;
-    int num_of_pipes; //maybe?
+    int num_of_children; //maybe?
+    //char **piped_commands;
+    char **sub;
     t_command *commands;
 } t_data;
 
-// ls -l | grep foo > output.txt
+// ls -l " | grep foo > output.txt "
+// ls -l "fffffffffffffffffffff"
 
 // +----------+
 // | command|
@@ -57,13 +60,17 @@ typedef struct s_data{
 // | redirect_out: <output.txt fd> | next: NULL
 // +----------+
 
-size_t	ft_strlen(const char	*str);
 char	*ft_strjoin(char *s1, char *s2);
 int     ft_strcmp(const char *str1, const char *str2);
+char	**ft_split(char const *s, char c);
 
-int     parse_input(char *input);
-void    exec_cmd(t_data *data, t_command *cmd);
 void    ft_echo(char *flag, char **str);
 void    ft_env(t_data data);
 void    ft_pwd();
+
+int     parse(char *input, t_data *data);
+void    exec_cmd(t_data *data, t_command *cmd);
+
+
+
 #endif
