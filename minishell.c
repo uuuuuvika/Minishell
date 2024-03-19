@@ -11,26 +11,26 @@ int main(int argc, char *argv[], char **envp)
     (void)argc;
     (void)argv;
     data.envp = envp;
-    //char *arg[2] = { "potato", NULL };
-
-    while (1)
-    {
-        char *input = readline(YEL "Minishell > " RESET);
+    static t_command *com;
+    com = malloc(sizeof(t_command));
+    com->args = malloc(sizeof(char *) * 3);
+    com->args[0] = "date";
+    com->args[1] = NULL;
+    com->args[2] = NULL;
+    char *input = readline(YEL "Minishell > " RESET);
   
         ///If cmd is not builtin we send it here:
-            char *args[] = {input, NULL, NULL};
-            exec_cmd(&data, args); //exec_cmd(t_data *data, char **args)
+            exec_cmd(&data, com); //exec_cmd(t_data *data, char **args)
 
         if (ft_strcmp(input, "echo") == 0)
         {
             ft_echo("-n", data.envp);
             printf("NEW LINE?\n");
             //ft_pwd();
-            break;
+          //  break;
         }
         // printf("yo! you entered: %s\n", input);
         free(input);
-    }
 
     return (0);
 }
