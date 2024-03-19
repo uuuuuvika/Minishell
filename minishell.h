@@ -57,10 +57,13 @@ typedef struct s_data{
 // | redirect_out: <output.txt fd> | next: NULL
 // +----------+
 
-int ft_strcmp(const char *str1, const char *str2);
+size_t	ft_strlen(const char	*str);
+char	*ft_strjoin(char *s1, char *s2);
+int     ft_strcmp(const char *str1, const char *str2);
 
-int parse_input(char *input);
-void ft_echo(char *flag, char **str);
-void ft_env(t_data data);
-void ft_pwd();
+int     parse_input(char *input);
+void    exec_cmd(t_data *data, char **args);
+void    ft_echo(char *flag, char **str);
+void    ft_env(t_data data);
+void    ft_pwd();
 #endif
