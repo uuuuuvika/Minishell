@@ -152,8 +152,8 @@ int parse_input(char *input)
 //                 if(i == 0)
 //                 {
 //                     //close it bc we dont use it, bc we dont need to read from it (just write)
-//                     //write is 1
-//                     //read is 0
+//                     //writing end is 1
+//                     //reading end is 0
 //                     close(pipes[0]);
 
 //                     dup2(pipes[1], 1);
