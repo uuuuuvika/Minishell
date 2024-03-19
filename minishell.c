@@ -8,17 +8,20 @@
 int main(int argc, char *argv[], char **envp)
 
 {
-    t_data data;
+    static t_data data;
+    static t_command *commands;
 
     (void)argc;
     (void)argv;
     data.envp = envp;
-    //char *arg[2] = { "potato", NULL };
 
     while (1)
     {
         // DAI! Feel free to add other colors/emojis or rename it in any way you like!
         char *input = readline(YEL "Minishell > " RESET);
+
+        parse(input, &data);
+        //printf("yo! you entered: %s\n", input);
 
         if (ft_strcmp(input, "echo") == 0)
         {
@@ -28,6 +31,7 @@ int main(int argc, char *argv[], char **envp)
             break;
         }
         // printf("yo! you entered: %s\n", input);
+
         free(input);
     }
 
