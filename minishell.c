@@ -22,6 +22,16 @@ int main(int argc, char *argv[], char **envp)
 
         parse(input, &data);
         //printf("yo! you entered: %s\n", input);
+
+        if (ft_strcmp(input, "echo") == 0)
+        {
+            ft_echo("n", data.envp);
+            printf("NEW LINE?");
+            //ft_pwd();
+            break;
+        }
+        // printf("yo! you entered: %s\n", input);
+
         free(input);
     }
 

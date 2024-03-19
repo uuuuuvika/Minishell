@@ -7,7 +7,6 @@ void ft_echo(char *flag, char **str)
         printf("%s", *str);
         str++;
     }
-    if (flag == NULL)
+    if (ft_strcmp(flag, "-n") != 0)
         printf("\n");
-    //exit(0);
 }

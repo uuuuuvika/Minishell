@@ -60,6 +60,8 @@ typedef struct s_data{
 // | redirect_out: <output.txt fd> | next: NULL
 // +----------+
 
+int ft_strcmp(const char *str1, const char *str2);
+
 int parse_input(char *input);
 void ft_echo(char *flag, char **str);
 void ft_env(t_data data);
