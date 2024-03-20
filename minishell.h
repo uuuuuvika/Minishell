@@ -25,8 +25,8 @@ typedef struct s_command {
 char *cmd;
 char **args;
 int num_args;
-int pipe_in;
-int pipe_out;
+int pipe_in; //-1
+int pipe_out; // <pipe fd>
 int redirect_in;
 int redirect_out;
 //bool has_built_in;
@@ -40,6 +40,7 @@ typedef struct s_data{
     int num_of_children; //maybe?
     //char **piped_commands;
     char **sub;
+    int pipes[10][2];
     t_command *commands;
 } t_data;
 
@@ -50,14 +51,16 @@ typedef struct s_data{
 // | command|
 // | cmd: "ls"
 // | args: ["-l", NULL]
-// | pipe_out: <pipe fd> | next: --+
+// | pipe_out: <pipe fd> 
+// | next: --+
 // | +----------+
 
 // | command |
 // | cmd: "grep"
 // | args: ["foo", NULL]
 // | pipe_in: <pipe fd>
-// | redirect_out: <output.txt fd> | next: NULL
+// | redirect_out: <output.txt fd> 
+// | next: NULL
 // +----------+
 
 char	*ft_strjoin(char *s1, char *s2);
@@ -70,7 +73,7 @@ void    ft_pwd();
 
 int     parse(char *input, t_data *data);
 void    exec_cmd(t_data *data, t_command *cmd);
-
+int     pipe_it(t_data *data);
 
 
 #endif
