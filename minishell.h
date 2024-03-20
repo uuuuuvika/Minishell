@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 #define MINISHELL_H
 #define MAXARGS 128
+#define STDIN 0
+#define STDOUT 1
 #define RED "\e[0;31m"
 #define GRN "\e[0;32m"
 #define YEL "\e[0;33m"
@@ -18,6 +20,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/param.h>
+#include <sys/stat.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -72,8 +75,8 @@ void    ft_env(t_data data);
 void    ft_pwd();
 
 int     parse(char *input, t_data *data);
-void    exec_cmd(t_data *data, t_command *cmd);
 int     pipe_it(t_data *data);
-
+char    *create_path(char *cmd);
+void    exec_cmd(t_data *data, char *const argv[]);
 
 #endif

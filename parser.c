@@ -72,7 +72,6 @@ int parse(char *input, t_data *data)
         {
             // int pipes[2];
             // pipe(pipes);
-
             data->commands[index - 1].pipe_out = data->pipes[index - 1][0];
             data->commands[index].pipe_in = data->pipes[index - 1][1];
             // data->commands[index - 1].pipe_out = pipes[0];
@@ -101,41 +100,24 @@ int pipe_it(t_data *data)
     pid_t pid;
     int i = 0;
 
-    char *path_1 = ft_strjoin("/bin/", data->commands[0].args[0]);
-    char *path_2 = ft_strjoin("/bin/", data->commands[1].args[0]);
-   // char *path_3 = ft_strjoin("/bin/", data->commands[2].args[0]);
-    char *paths[] = {path_1, path_2};
-
-    // char *cmd_1[5] = data->commands[0].args;
-    // char *cmd_2[5] = data->commands[1].args;
-
-    char ***commands;
-    commands = malloc(5 * sizeof(char **));
-    commands[0] = data->commands[0].args;
-    commands[1] = data->commands[1].args;
+    char **commands;
+    commands = malloc(5 * sizeof(char *));
+    commands[0] = *data->commands[0].args;
+    commands[1] = *data->commands[1].args;
     //commands[2] = data->commands[2].args;
 
     int read_e = data->commands[0].pipe_out;
     int write_e = data->commands[1].pipe_in;
-
-    // int read_e_2 = data->commands[1].pipe_out;
-    // int write_e_2 = data->commands[2].pipe_in;
-
     // printf("PIPE 1: %d\n", read_e);
     // printf("PIPE 2: %d\n", write_e);
 
     int pipe[2];
     pipe[0] = read_e;
     pipe[1] = write_e;
-
-    // int pipe_2[2];
-    // pipe_2[0] = read_e_2;
-    // pipe_2[1] = write_e_2;
-
-    while (i < 2)
+    printf(BLU"Num of int children passed to struct: %d\n "RESET, data->num_of_children);
+    while (i < data->num_of_children)
     {
         pid = fork();
-
         if (pid == -1)
         {
             perror("fork error");
@@ -143,43 +125,36 @@ int pipe_it(t_data *data)
         }
         if (pid == 0)
         {
-            //fork();
             if (i == 0)
             {
+                printf("Loop1 %s ",commands[i]);
                 close(pipe[0]);
-                dup2(pipe[1], 1);
+                dup2(pipe[1], STDOUT);
                 close(pipe[1]);
             }
             if (i == 1)
             {
+                printf("Loop2 %s ",commands[i]);
                 close(pipe[1]);
-                dup2(pipe[0], 0);
+                dup2(pipe[0], STDIN);
                 close(pipe[0]);
             }
-            // if (i == 2)
+            printf(BLU"Passing command: %s\n "RESET,  commands[i]);
+            //PROTOTYPE: void exec_cmd(t_data *data, char *const cmd[])
+            //  exec_cmd(data, &commands[i]);
+            // if (execve(paths[i], &commands[i], NULL) == -1)
             // {
-            //     close(pipe_2[0]);
-            //     dup2(pipe_2[1], 1);
-            //     close(pipe_2[1]);
+            //     perror(RED"execve"RESET);
+            //     exit(1);
             // }
-            // if (i == 2)
-            // {
-            //     close(pipe_2[0]);
-            //     dup2(pipe_2[1], 1);
-            //     close(pipe_2[1]);
-            // }
-
-            if (execve(paths[i], commands[i], NULL) == -1)
-            {
-                perror("execve");
-                exit(1);
-            }
+        }
+        else
+        { 
+            wait(NULL);
+            close(pipe[0]);
+            close(pipe[1]);
         }
         i++;
     }
-    wait(NULL);
-
-    close(pipe[0]);
-    close(pipe[1]);
     return 0;
 }
