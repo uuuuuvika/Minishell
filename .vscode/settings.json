@@ -59,6 +59,7 @@
   "files.associations": {
     "minishell.h": "c",
     "types.h": "c",
-    "unistd.h": "c"
+    "unistd.h": "c",
+    "wait.h": "c"
   }
 }
