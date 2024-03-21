@@ -105,14 +105,14 @@ int parse(char *input, t_data *data)
     // printf("NUM OF ARGS 2nd cmd: %d\n", data->commands[1].num_args);
 
 
-    // index = 0;
-    // while (index < data->num_of_children)
-    // {
-    //     printf("PIPE IN [%d]: %d\n", index, data->commands[index].pipe_in);
-    //     printf("PIPE OUT [%d]: %d\n", index, data->commands[index].pipe_out);
+    index = 0;
+    while (index < data->num_of_children)
+    {
+        printf("PIPE IN [%d]: %d\n", index, data->commands[index].pipe_in);
+        printf("PIPE OUT [%d]: %d\n", index, data->commands[index].pipe_out);
 
-    //     index++;
-    // }
+        index++;
+    }
 
     return (0);
 }
