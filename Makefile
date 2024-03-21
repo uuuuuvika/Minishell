@@ -1,16 +1,26 @@
-SRCS	= minishell.c execute/create_path.c execute/exec_cmd.c parser.c builtins/ft_echo.c builtins/ft_env.c builtins/ft_pwd.c utils/ft_strcmp.c utils/ft_strjoin.c utils/ft_split.c
-OBJS	= $(SRCS:.c=.o)
-CC		= cc
-CFLAGS	= -Wall -Werror -Wextra
+cc		= cc
+CFLAGS  = -Wall -Werror -Wextra -Iinclude
 LDFLAGS = -lreadline #-lhistory
+
+SRCDIR = src  
+OBJDIR = build 
+
+SOURCES := $(shell find $(SRCDIR) -name '*.c')  
+OBJECTS := $(SOURCES:.c=.o)
+
+$(OBJDIR):
+		mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c 
+		$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 
 all: minishell
 
-minishell: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LDFLAGS)
+minishell: $(OBJECTS)
+		$(CC) $(CFLAGS) $(OBJECTS) -o $@ $(LDFLAGS)
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJECTS)
 
 fclean: clean
 	rm -f minishell

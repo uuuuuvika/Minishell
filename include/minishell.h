@@ -3,6 +3,9 @@
 #define MAXARGS 128
 #define STDIN 0
 #define STDOUT 1
+#define STDERR 2
+#define PIPE_READ 0
+#define PIPE_WRITE 1
 #define RED "\e[0;31m"
 #define GRN "\e[0;32m"
 #define YEL "\e[0;33m"

@@ -1,4 +1,5 @@
-#include "../minishell.h"
+#include "minishell.h"
+
 // void exec_ls(char *str)
 // {
 //     char *args[] = {"ls", "-l", NULL}; //
