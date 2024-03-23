@@ -12,7 +12,7 @@ int main(int argc, char *argv[], char **envp)
     {
         char *input = readline(YEL "Minishell > " RESET);
         parse(input, &data);
-        //pipe_it(&data);
+        pipe_it(&data);
         //exec_cmd(&data, &data.commands[0]);
         // if (ft_strcmp(input, "echo") == 0)
         // {

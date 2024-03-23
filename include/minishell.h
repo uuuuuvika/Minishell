@@ -29,6 +29,7 @@
 
 typedef struct s_command {
 char *cmd;
+//char * flag;
 char **args;
 int num_args;
 int pipe_in; //-1
@@ -80,6 +81,8 @@ void    ft_pwd();
 int     parse(char *input, t_data *data);
 int     pipe_it(t_data *data);
 char    *create_path(char *cmd);
-void    exec_cmd(t_data *data, char *const argv[]);
+//void    exec_cmd(t_data *data, char *const argv[]);
+void    exec_cmd(t_data *data, t_command *command);
+
 
 #endif

@@ -20,6 +20,6 @@ char *create_path(char *cmd)
             return(path);
         }
     }
-    printf(RED"%s do not exists, returns null \n"RESET, path);
-    return (NULL);
+    printf(RED"-minishell: %s: command not found \n"RESET, cmd);
+    exit(1);
 }

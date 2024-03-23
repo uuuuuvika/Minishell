@@ -12,39 +12,56 @@
 //         }
 //     }
 // }
-// void exec_cmd(t_data *data, t_command *cmd)
-// {
-//     char *path;
-//     //// First check_existing_cmd();
-//     //execve prototype: int execve(const char *path, char *const argv[], char *const envp[]);
-//     path = ft_strjoin("/bin/", cmd->args[0]);
-//     printf("path passed to execve: %s\n",path);
-//     if (execve(path, cmd->args, data->envp) == -1)
-//         {
-//             perror("execve");
-//             exit(EXIT_FAILURE);
-//         }
-//   //  exit(0);
-// }
 
-void exec_cmd(t_data *data, char *const cmd[])
+void exec_cmd(t_data *data, t_command *command)
 {
     char *path;
-    
-    if (ft_strcmp(cmd[0], "pwd") == 0)
+
+    // if (ft_strcmp(cmd[0], "cd") == 0)
+    // {
+    //     printf("Executing builtin cd\n");
+    //     ft_cd();
+    // }    
+    if (ft_strcmp(command->args[0], "echo") == 0)
     {
-        printf("Executing builtin pwd\n");
+        printf("Executing builtin echo\n");
+        ft_echo(command->args[1], command->args);
+    }    
+    if (ft_strcmp(command->args[0], "env") == 0)
+    {
+        printf(GRN"Executing builtin env\n"RESET);
+        ft_env(*data);
+    }    
+    // else if (ft_strcmp(cmd[0], "exit") == 0)
+    // {
+    //     printf("Executing builtin exit\n");
+    //     ft_exit();
+    // }  
+    // else if (ft_strcmp(cmd[0], "export") == 0)
+    // {
+    //     printf("Executing builtin export\n");
+    //     ft_export();
+    // }  
+    else if (ft_strcmp(command->args[0], "pwd") == 0)
+    {
+        printf(GRN"Executing builtin pwd\n"RESET);
         ft_pwd();
     }
-    else 
+    // else if (ft_strcmp(cmd[0], "unset") == 0)
+    // {
+    //     printf(GRN"Executing builtin unset\n"RESET);
+    //     ft_unset();
+    // }
+    else
     {
-        path = create_path(cmd[0]);
+        printf(GRN"Non-builtin, creating path\n"WHT);
+        path = create_path(command->args[0]);
         //prototype: int execve(const char *path, char *const argv[], char *const envp[]);
-        if (execve(path, cmd, data->envp) == -1)
+        if (execve(path, command->args, data->envp) == -1)
             {
                 perror("execve");
                 exit(EXIT_FAILURE);
             }
-    }
+   }
   //  exit(0);
 }
