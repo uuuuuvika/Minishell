@@ -28,9 +28,9 @@
 #include <readline/history.h>
 
 typedef struct s_command {
-char *cmd;
-//char * flag;
-char **args;
+char *cmd; //Need it for execution
+//char * flag; Add to parsing, we need it for builtin echo
+char **args; // Need it for execution
 int num_args;
 int pipe_in; //-1
 int pipe_out; // <pipe fd>
@@ -82,7 +82,7 @@ int     parse(char *input, t_data *data);
 int     pipe_it(t_data *data);
 char    *create_path(char *cmd);
 //void    exec_cmd(t_data *data, char *const argv[]);
-void    exec_cmd(t_data *data, t_command *command);
+void    exec_cmd(t_data *data, t_command *command, char *cmd);
 
 
 #endif

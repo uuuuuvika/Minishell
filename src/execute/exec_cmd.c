@@ -13,7 +13,7 @@
 //     }
 // }
 
-void exec_cmd(t_data *data, t_command *command)
+void exec_cmd(t_data *data, t_command *command, char *cmd)
 {
     char *path;
 
@@ -29,7 +29,7 @@ void exec_cmd(t_data *data, t_command *command)
     }    
     if (ft_strcmp(command->args[0], "env") == 0)
     {
-        printf(GRN"Executing builtin env\n"RESET);
+        printf(GRN "Executing builtin env\n" RESET);
         ft_env(*data);
     }    
     // else if (ft_strcmp(cmd[0], "exit") == 0)
@@ -44,7 +44,7 @@ void exec_cmd(t_data *data, t_command *command)
     // }  
     else if (ft_strcmp(command->args[0], "pwd") == 0)
     {
-        printf(GRN"Executing builtin pwd\n"RESET);
+        printf(GRN "Executing builtin pwd\n" RESET);
         ft_pwd();
     }
     // else if (ft_strcmp(cmd[0], "unset") == 0)
@@ -54,8 +54,8 @@ void exec_cmd(t_data *data, t_command *command)
     // }
     else
     {
-        printf(GRN"Non-builtin, creating path\n"WHT);
-        path = create_path(command->args[0]);
+        printf(GRN "Non-builtin, creating path\n" RESET);
+        path = create_path(cmd);
         //prototype: int execve(const char *path, char *const argv[], char *const envp[]);
         if (execve(path, command->args, data->envp) == -1)
             {
