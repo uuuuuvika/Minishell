@@ -16,7 +16,12 @@
 void exec_cmd(t_data *data, char *cmd)
 {
     char *path;
-
+    
+    if (cmd == NULL)
+    {
+        printf(RED "Something is wrong. 'null' is being passed as cmd\n" RESET);
+        exit (1);
+    }
     if (ft_strcmp(cmd, "cd") == 0)
         ft_cd(data, data->commands->args[1]);
     if (ft_strcmp(cmd, "echo") == 0)
@@ -48,7 +53,7 @@ void exec_cmd(t_data *data, char *cmd)
     //     printf(GRN"Executing builtin unset\n"RESET);
     //     ft_unset();
     // }
-    else
+    else if (is_builtin(cmd) == 0)
     {
         printf(GRN "Non-builtin, creating path\n" RESET);
         path = create_path(cmd);
@@ -59,5 +64,5 @@ void exec_cmd(t_data *data, char *cmd)
                 exit(EXIT_FAILURE);
             }
    }
-  //  exit(0);
+    exit(0);
 }
