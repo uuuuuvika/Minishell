@@ -12,5 +12,4 @@ void ft_pwd()
         perror("getcwd error");
         exit(0);
     }
-    exit (1);
 }

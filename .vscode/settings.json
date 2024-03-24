@@ -60,6 +60,7 @@
     "minishell.h": "c",
     "types.h": "c",
     "unistd.h": "c",
-    "wait.h": "c"
+    "wait.h": "c",
+    "sstream": "c"
   }
 }

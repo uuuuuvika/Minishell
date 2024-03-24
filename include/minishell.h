@@ -28,9 +28,7 @@
 #include <readline/history.h>
 
 typedef struct s_command {
-char *cmd; //Need it for execution
-//char * flag; Add to parsing, we need it for builtin echo
-char **args; // Need it for execution
+char **args;
 int num_args;
 int pipe_in; //-1
 int pipe_out; // <pipe fd>
@@ -72,17 +70,18 @@ typedef struct s_data{
 
 char	*ft_strjoin(char *s1, char *s2);
 int     ft_strcmp(const char *str1, const char *str2);
+int     ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char const *s, char c);
 
-void    ft_echo(char *flag, char **str);
+void    ft_cd(t_data *data, char *new_path);
+void    ft_echo(char **args);
 void    ft_env(t_data data);
 void    ft_pwd();
 
 int     parse(char *input, t_data *data);
 int     pipe_it(t_data *data);
 char    *create_path(char *cmd);
-//void    exec_cmd(t_data *data, char *const argv[]);
-void    exec_cmd(t_data *data, t_command *command, char *cmd);
+void    exec_cmd(t_data *data, char *command);
 
 
 #endif

@@ -35,7 +35,7 @@ int pipe_it(t_data *data)
             if (data->num_of_children == 1)
             {
                 printf(RED"Executing in child\n"RESET);
-                exec_cmd(data, data->commands, data->commands->cmd);
+                exec_cmd(data, commands[i]);
                 exit(0);
             }
             if (i == 0 && data->num_of_children > 1)
@@ -45,6 +45,7 @@ int pipe_it(t_data *data)
                 // int dup2(int oldfd, int newfd);
                 dup2(pipe[PIPE_WRITE], STDIN);
                 close(pipe[PIPE_WRITE]);
+                exec_cmd(data, commands[i]);
             }
             if (i == 1 && data->num_of_children > 1)
             {
@@ -53,15 +54,9 @@ int pipe_it(t_data *data)
                 // int dup2(int oldfd, int newfd);
                 dup2(pipe[PIPE_READ], STDOUT);
                 close(pipe[PIPE_READ]);
+                 exec_cmd(data, commands[i]);
             }
             printf(BLU "Passing command: %s\n " RESET, commands[i]);
-            // PROTOTYPE: void exec_cmd(t_data *data, char *const cmd[])
-            exec_cmd(data, data->commands, commands[i]);
-            //  if (execve(paths[i], &commands[i], NULL) == -1)
-            //  {
-            //      perror(RED"execve"RESET);
-            //      exit(1);
-            //  }
         }
         else
         {
