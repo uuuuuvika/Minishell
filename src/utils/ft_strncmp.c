@@ -27,17 +27,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return (0);
 	return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
 }
-
-// #include <stdio.h>
-// #include <string.h>
-
-// int	main(void)
-// {
-// 	const char	s1 [] = "AC20";
-// 	const char	s2 [] = "AB20jhkabnkabn";
-// 	int result;
-// 	result = strncmp(s1, s2, 2);
-// 	printf("Original func = %d \n", result);
-// 	ft_strncmp(s1, s2, 2);
-// 	printf("42 func = %d", ft_strncmp(s1, s2, 2));
-// }

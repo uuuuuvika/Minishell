@@ -34,7 +34,6 @@ int pipe_in; //-1
 int pipe_out; // <pipe fd>
 int redirect_in;
 int redirect_out;
-//bool has_built_in;
 struct s_command *next;
 } t_command;
 
@@ -69,15 +68,16 @@ typedef struct s_data{
 // +----------+
 
 char	*ft_strjoin(char *s1, char *s2);
+size_t	ft_strlen(const char *str);
 int     ft_strcmp(const char *str1, const char *str2);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char const *s, char c);
 int     is_builtin(char *token);
 
 void    ft_cd(t_data *data, char *new_path);
-void    ft_echo(char **args);
+void    ft_echo(t_data *data, char **args);
 void    ft_env(t_data data);
-void    ft_pwd();
+void    ft_pwd(t_data *data);
 //void    ft_exit();
 //void    ft_unset();
 //void    ft_exit();
@@ -86,6 +86,7 @@ int     parse(char *input, t_data *data);
 int     pipe_it(t_data *data);
 char    *create_path(char *cmd);
 void    exec_cmd(t_data *data, char *command);
+//void    exec_cmd(t_data *data, char *args[]);
 
 
 #endif

@@ -20,7 +20,7 @@ int pipe_it(t_data *data)
     int pipe[2];
     pipe[PIPE_READ] = read_e;
     pipe[PIPE_WRITE] = write_e;
-    printf("Num of int children passed to struct: " BLU "%d\n" RESET, data->num_of_children);
+    printf("Num of int children in struct: " BLU "%d\n" RESET, data->num_of_children);
     while (i < data->num_of_children)
     {
         pid = fork();
@@ -32,41 +32,30 @@ int pipe_it(t_data *data)
         printf("ENTERS LOOP\n");
         if (pid == 0)
         {
-            if (data->num_of_children == 1)
-            {
-                printf(BLU "Executing simple cmd in child\n" RESET);
-                exec_cmd(data, commands[i]);
-                exit(0);
-            }
             if (i == 0 && data->num_of_children > 1)
             {
-                printf("LOOP 1" BLU " %s " RESET, commands[i]);
+                //printf("LOOP 1" BLU " %s " RESET, commands[i]);
+               // close(pipe[PIPE_READ]);
+                // // PROTOTYPE: int dup2(int oldfd, int newfd);
+                dup2(pipe[PIPE_WRITE], STDOUT);
                 close(pipe[PIPE_READ]);
-                // PROTOTYPE: int dup2(int oldfd, int newfd);
-                dup2(pipe[PIPE_WRITE], STDIN);
-                close(pipe[PIPE_WRITE]);
                 exec_cmd(data, commands[i]);
+              //  exit(0);
             }
             if (i == 1 && data->num_of_children > 1)
             {
-                printf("LOOP 2 " BLU "%s " RESET, commands[i]);
+                printf("LOOP 2 " BLU "%s\n " RESET, commands[i]);
                 close(pipe[PIPE_WRITE]);
                 // PROTOTYPE: int dup2(int oldfd, int newfd);
-                dup2(pipe[PIPE_READ], STDOUT);
+                dup2(pipe[PIPE_READ], STDIN);
                 close(pipe[PIPE_READ]);
                 exec_cmd(data, commands[i]);
             }
-            printf("Passing command: " BLU " %s\n " RESET, commands[i]);
         }
         else
         {
             printf("Parent with pid %d waiting\n",pid);
             wait(NULL);
-            if (data->num_of_children > 1)
-            {
-                close(pipe[PIPE_WRITE]);
-                close(pipe[PIPE_READ]);
-            } 
         }
         i++;
     }
