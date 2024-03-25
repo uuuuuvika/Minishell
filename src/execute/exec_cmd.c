@@ -69,17 +69,16 @@ void exec_cmd(t_data *data, char *cmd)
 {
     char *path;
 
-    path = create_path(cmd);
     if (cmd == NULL)
     {
         printf(RED "Something is wrong. 'null' is being passed as cmd\n" RESET);
         exit (1);
     }
-    if (ft_strcmp(cmd, "cd") == 0)
+    else if (ft_strcmp(cmd, "cd") == 0)
         ft_cd(data, data->commands->args[1]);
-    if (ft_strcmp(cmd, "echo") == 0)
+    else if (ft_strcmp(cmd, "echo") == 0)
         ft_echo(data, data->commands->args);
-    if (ft_strcmp(cmd, "env") == 0)
+    else if (ft_strcmp(cmd, "env") == 0)
     {
         printf(GRN "Executing builtin env\n" RESET);
         ft_env(*data);
@@ -104,9 +103,10 @@ void exec_cmd(t_data *data, char *cmd)
     //     printf(GRN"Executing builtin unset\n"RESET);
     //     ft_unset();
     // }
-    else if (is_builtin(cmd) == 0)
+    else if (is_builtin(cmd) == 0) //Why is it exiting after non builtins????
     {
-        printf(GRN "Non-builtin" RESET);
+        path = create_path(cmd);
+        printf(GRN "Non-builtin \n" RESET);
         //prototype: int execve(const char *path, char *const argv[], char *const envp[]);
         if (execve(path, data->commands->args, data->envp) == -1)
             {

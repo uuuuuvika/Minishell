@@ -16,7 +16,7 @@ char *create_path(char *cmd)
         path = ft_strjoin("/usr/bin/", cmd);
         if (stat(path, &statbuf) == 0)
         {
-         //   printf(GRN "%s exists," RESET "returns path to execute\n", path);
+            printf(GRN "%s" RESET " path exists\n", path);
             return(path);
         }
     }

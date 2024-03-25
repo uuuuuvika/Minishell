@@ -21,7 +21,7 @@ void ft_pwd(t_data *data)
         } 
         else
             printf( "%s\n", cwd);
-        exit(0);
+      //  exit(0);
     }
     else
     {

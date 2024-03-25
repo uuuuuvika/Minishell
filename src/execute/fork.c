@@ -20,7 +20,7 @@ int pipe_it(t_data *data)
     int pipe[2];
     pipe[PIPE_READ] = read_e;
     pipe[PIPE_WRITE] = write_e;
-    printf("Num of int children in struct: " BLU "%d\n" RESET, data->num_of_children);
+    printf("Num of children in struct: " BLU "%d\n" RESET, data->num_of_children);
     while (i < data->num_of_children)
     {
         pid = fork();
@@ -29,32 +29,33 @@ int pipe_it(t_data *data)
             perror("fork error");
             exit (1);
         }
-        printf("ENTERS LOOP\n");
         if (pid == 0)
-        {
+        {   
+            printf("ENTERS LOOP %d\n", i);
             if (i == 0 && data->num_of_children > 1)
             {
-                //printf("LOOP 1" BLU " %s " RESET, commands[i]);
+                printf("LOOP 1" BLU " %s " RESET, commands[i]);
                // close(pipe[PIPE_READ]);
                 // // PROTOTYPE: int dup2(int oldfd, int newfd);
                 dup2(pipe[PIPE_WRITE], STDOUT);
                 close(pipe[PIPE_READ]);
                 exec_cmd(data, commands[i]);
-              //  exit(0);
             }
-            if (i == 1 && data->num_of_children > 1)
+            else if (i == 1 && data->num_of_children > 1)
             {
-                printf("LOOP 2 " BLU "%s\n " RESET, commands[i]);
+                printf("LOOP 2 " BLU "%s\n " RESET , commands[i]);
                 close(pipe[PIPE_WRITE]);
                 // PROTOTYPE: int dup2(int oldfd, int newfd);
                 dup2(pipe[PIPE_READ], STDIN);
                 close(pipe[PIPE_READ]);
                 exec_cmd(data, commands[i]);
             }
+            exit(0);
         }
         else
         {
-            printf("Parent with pid %d waiting\n",pid);
+            printf(YEL "Child PID " RESET "%d\n", pid);
+            printf(YEL "Parent PID %d " RESET "waiting...\n", getpid());
             wait(NULL);
         }
         i++;
