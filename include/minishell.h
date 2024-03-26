@@ -37,17 +37,17 @@ int redirect_in;
 int redirect_out;
 //bool has_built_in;
 struct s_command *next;
-} t_command;
+} t_cmd;
 
 
 typedef struct s_data{
     char **envp;
     int exit_code;
-    int num_of_children; //maybe?
+    int num_of_children;
     //char **piped_commands;
-    char **sub;
     int pipes[10][2];
-    t_command *commands;
+    char **sub;
+    t_cmd *commands;
 } t_data;
 
 // ls -l " | grep foo > output.txt "
@@ -73,6 +73,11 @@ char	*ft_strjoin(char *s1, char *s2);
 int     ft_strcmp(const char *str1, const char *str2);
 char	**ft_split(char const *s, char c);
 
+void	free_arr2D(char **arr2D);
+void	free_command(t_cmd *command);
+void	free_commands(t_cmd *commands);
+void	free_data(t_data *data);
+
 void    ft_echo(char *flag, char **str);
 void    ft_env(t_data data);
 void    ft_pwd();
@@ -81,5 +86,8 @@ int     parse(char *input, t_data *data);
 int     pipe_it(t_data *data);
 char    *create_path(char *cmd);
 void    exec_cmd(t_data *data, char *const argv[]);
+
+int check_NULL(char *str);
+void sub_quot(char *line_copy, t_data *data);
 
 #endif

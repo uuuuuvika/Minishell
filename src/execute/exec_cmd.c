@@ -12,7 +12,7 @@
 //         }
 //     }
 // }
-// void exec_cmd(t_data *data, t_command *cmd)
+// void exec_cmd(t_data *data, t_cmd *cmd)
 // {
 //     char *path;
 //     //// First check_existing_cmd();
