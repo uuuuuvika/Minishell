@@ -17,9 +17,9 @@ int pipe_it(t_data *data)
     // printf("PIPE 1: %d\n", read_e);
     // printf("PIPE 2: %d\n", write_e);
 
-    int pipe[2];
-    pipe[PIPE_READ] = read_e;
-    pipe[PIPE_WRITE] = write_e;
+    // int pipe[2];
+    // pipe[PIPE_READ] = read_e;
+    // pipe[PIPE_WRITE] = write_e;
     printf("Num of children in struct: " BLU "%d\n" RESET, data->num_of_children);
     while (i < data->num_of_children)
     {
@@ -34,31 +34,30 @@ int pipe_it(t_data *data)
             printf("ENTERS LOOP %d\n", i);
             if (i == 0 && data->num_of_children > 1)
             {
-           //     printf("LOOP 1" BLU " %s " RESET, commands[i]);
-               // close(pipe[PIPE_READ]);
-                // // PROTOTYPE: int dup2(int oldfd, int newfd);
-                dup2(pipe[PIPE_WRITE], STDOUT);
-                close(pipe[PIPE_READ]);
+                printf("LOOP 1" BLU " %s \n" RESET, commands[i]);
+                close(read_e);
+                // // PROTOTYPE: int dup2(int newfd, int oldfd);
+                dup2(write_e, STDOUT);
+                close(write_e);
                 exec_cmd(data, commands[i]);
             }
             else if (i == 1 && data->num_of_children > 1)
             {
-              //  printf("LOOP 2 " BLU "%s\n " RESET , commands[i]);
-                close(pipe[PIPE_WRITE]);
+             //   printf("LOOP 2 %s\n " RESET , commands[i]);
+                close(write_e);
                 // PROTOTYPE: int dup2(int oldfd, int newfd);
-                dup2(pipe[PIPE_READ], STDIN);
-                close(pipe[PIPE_READ]);
+                dup2(read_e, STDIN);
+                close(read_e);
                 exec_cmd(data, commands[i]);
             }
-            exit(0);
         }
         else
         {
             printf(YEL "Child PID " RESET "%d\n", pid);
             printf(YEL "Parent PID %d " RESET "waiting...\n", getpid());
-            wait(NULL);
         }
         i++;
     }
+    wait(NULL);
     return 0;
 }

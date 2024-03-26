@@ -27,25 +27,25 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-typedef struct s_command {
+typedef struct s_cmd {
 char **args;
 int num_args;
 int pipe_in; //-1
 int pipe_out; // <pipe fd>
 int redirect_in;
 int redirect_out;
-struct s_command *next;
-} t_command;
+struct s_cmd *next;
+} t_cmd;
 
 
 typedef struct s_data{
     char **envp;
     int exit_code;
-    int num_of_children; //maybe?
+    int num_of_children;
     //char **piped_commands;
-    char **sub;
     int pipes[10][2];
-    t_command *commands;
+    char **sub;
+    t_cmd *commands;
 } t_data;
 
 // ls -l " | grep foo > output.txt "
@@ -72,7 +72,15 @@ size_t	ft_strlen(const char *str);
 int     ft_strcmp(const char *str1, const char *str2);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
 char	**ft_split(char const *s, char c);
-int     is_builtin(char *token);
+// int     is_builtin(char *token);
+int     is_builtin(t_cmd *command);
+int     check_NULL(char *str);
+
+
+void	free_arr2D(char **arr2D);
+void	free_command(t_cmd *command);
+void	free_commands(t_cmd *commands);
+void	free_data(t_data *data);
 
 void    ft_cd(t_data *data, char *new_path);
 void    ft_echo(t_data *data, char **args);
@@ -85,8 +93,12 @@ void    ft_pwd();
 int     parse(char *input, t_data *data);
 int     pipe_it(t_data *data);
 char    *create_path(char *cmd);
-void    exec_cmd(t_data *data, char *command);
+void    exec_cmd(t_data *data, t_cmd *cmd);
+// void    exec_cmd(t_data *data, char *command);
 //void    exec_cmd(t_data *data, char *args[]);
 
+
+int     check_NULL(char *str);
+void    sub_quot(char *line_copy, t_data *data);
 
 #endif
