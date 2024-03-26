@@ -1,8 +1,8 @@
 #include "minishell.h"
 
-int main(int argc, char *argv[], char **envp)
+int	main(int argc, char *argv[], char **envp)
 {
-    static t_data data;
+	static t_data data;
 
     (void)argc;
     (void)argv;
@@ -17,7 +17,7 @@ int main(int argc, char *argv[], char **envp)
         {
             printf("Num of children in struct: " BLU "%d\n" RESET, data.num_of_children);
             printf(YEL "Executing simple cmd in main\n" RESET);
-            exec_cmd(&data, input); //replace this to take data->commands[0].args;
+            exec_cmd(&data, data.commands); //replace this to take data->commands[0].args;
         }
         else
             pipe_it(&data);

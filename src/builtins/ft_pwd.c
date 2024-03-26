@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-void ft_pwd(t_data *data)
+void ft_pwd(t_data data)
 {
     char cwd[MAXPATHLEN];
    // int read_e = data->commands[0].pipe_out;
-    int write_e = data->commands[1].pipe_in;
+    int write_e = data.commands[1].pipe_in;
     // printf("PIPE 1 read_e: %d\n", read_e);
     //printf("PIPE 2 write_e: %d\n", write_e);
 
