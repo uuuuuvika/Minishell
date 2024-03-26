@@ -96,7 +96,7 @@ void exec_cmd(t_data *data, char *cmd)
     else if (ft_strcmp(cmd, "pwd") == 0)
     {
         //printf(GRN "Executing builtin pwd\n" RESET);
-        ft_pwd(data);
+        ft_pwd();
     }
     // else if (ft_strcmp(cmd[0], "unset") == 0)
     // {
@@ -106,7 +106,7 @@ void exec_cmd(t_data *data, char *cmd)
     else if (is_builtin(cmd) == 0) //Why is it exiting after non builtins????
     {
         path = create_path(cmd);
-        printf(GRN "Non-builtin \n" RESET);
+      //  printf(GRN "Non-builtin \n" RESET);
         //prototype: int execve(const char *path, char *const argv[], char *const envp[]);
         if (execve(path, data->commands->args, data->envp) == -1)
             {

@@ -34,7 +34,7 @@ int pipe_it(t_data *data)
             printf("ENTERS LOOP %d\n", i);
             if (i == 0 && data->num_of_children > 1)
             {
-                printf("LOOP 1" BLU " %s " RESET, commands[i]);
+           //     printf("LOOP 1" BLU " %s " RESET, commands[i]);
                // close(pipe[PIPE_READ]);
                 // // PROTOTYPE: int dup2(int oldfd, int newfd);
                 dup2(pipe[PIPE_WRITE], STDOUT);
@@ -43,7 +43,7 @@ int pipe_it(t_data *data)
             }
             else if (i == 1 && data->num_of_children > 1)
             {
-                printf("LOOP 2 " BLU "%s\n " RESET , commands[i]);
+              //  printf("LOOP 2 " BLU "%s\n " RESET , commands[i]);
                 close(pipe[PIPE_WRITE]);
                 // PROTOTYPE: int dup2(int oldfd, int newfd);
                 dup2(pipe[PIPE_READ], STDIN);
