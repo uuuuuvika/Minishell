@@ -35,53 +35,68 @@ int parse(char *input, t_data *data)
         current = newNode;
         index++;
     }
-    data->commands = head;
-    data->num_of_children = index;
-    printf("Num of children: %d\n", data->num_of_children);
 
-    while(head)
+    index = 0;
+    while (index < data->num_of_children - 1)
     {
-        printf("Command: %s\n", head->args[0]);
-        head = head->next;
-    }
-    // pipe
-   // index = 0;
-    // while (index < data->num_of_children - 1)
-    // {
-    //     if (pipe(data->pipes[index]) == -1)
-    //     {
-    //         perror("pipe error!!\n");
-    //         return (-1);
-    //     }
-    //     index++;
-    // }
-
-    current = head;
-    t_cmd *previous = NULL;
-    //int i = 0;
-    while (current)
-    {
-        if (previous)
+        if (pipe(data->pipes[index]) == -1)
         {
-            int p[2];
-            pipe(p);
-            current->pipe_in = p[PIPE_READ];
-            previous->pipe_out = p[PIPE_WRITE];
-            // current->pipe_in = data->pipes[i - 1][PIPE_READ];
-            // previous->pipe_out = data->pipes[i - 1][PIPE_WRITE];
+            perror("pipe error!!\n");
+            return (-1);
         }
-
-        previous = current;
-        current = current->next;
-        //i++;
+        index++;
     }
 
-    while (head)
+    index = 0;
+    while (future_children[index])
     {
-        printf("PIPE IN: %d\n", head->pipe_in);
-        printf("PIPE OUT: %d\n", head->pipe_out);
-        head = head->next;
+        data->commands[index].pipe_in = -1;
+        data->commands[index].pipe_out = -1;
+
+        if (index > 0)
+        {
+            data->commands[index - 1].pipe_out = data->pipes[index - 1][PIPE_READ];
+            data->commands[index].pipe_in = data->pipes[index - 1][PIPE_WRITE];
+        }
+        index++;
     }
+
+    index = 0;
+    while (index < data->num_of_children)
+    {
+        int i = 0;
+        while(data->commands[index].args[i])
+        {
+            data->commands[index].num_args++;
+
+            if(strcmp(data->commands[index].args[i], ">") == 0)
+            {
+                // --- WIP
+                // data->commands[index].redirect_out = fopen(data->commands[index].args[i + 1]);
+                // data->commands[index].args[i] = NULL;
+                // data->commands[index].args[i + 1] = NULL;
+                // printf("Redirect out: %d\n", data->commands[index].redirect_out);
+                // close(data->commands[index].redirect_out);
+                printf("Redirect out!!!\n");
+            }
+            i++;
+
+        }
+        index++;
+    }
+    // printf("NUM OF ARGS 1st cmd: %d\n", data->commands[0].num_args);
+    // printf("NUM OF ARGS 2nd cmd: %d\n", data->commands[1].num_args);
+
+
+    index = 0;
+    while (index < data->num_of_children)
+    {
+        printf("PIPE WRITE [%d]: %d\n", index, data->commands[index].pipe_in);
+        printf("PIPE READ [%d]: %d\n", index, data->commands[index].pipe_out);
+
+        index++;
+    }
+
     return (0);
 }
 
