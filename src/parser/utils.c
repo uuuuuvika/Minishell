@@ -1,15 +1,5 @@
 #include "minishell.h"
 
-int check_NULL(char *str)
-{
-    if (str == NULL)
-    {
-        printf("Error: %s\n", str);
-        return -1;
-    }
-    return 0;
-}
-
 void sub_quot(char *line_copy, t_data *data)
 {
     char str[20];

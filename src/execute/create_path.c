@@ -8,7 +8,7 @@ char *create_path(char *cmd)
     path = ft_strjoin("/bin/", cmd);
     if (stat(path, &statbuf) == 0)
     {
-        printf(GRN"%s exists, returns path\n"RESET, path);
+        printf(GRN "%s" RESET " path exists\n", path);
         return(path);
     }
     else
@@ -16,10 +16,10 @@ char *create_path(char *cmd)
         path = ft_strjoin("/usr/bin/", cmd);
         if (stat(path, &statbuf) == 0)
         {
-            printf(GRN"%s exists, returns path\n"RESET, path);
+            printf(GRN "%s" RESET " path exists\n", path);
             return(path);
         }
     }
-    printf(RED"%s do not exists, returns null \n"RESET, path);
-    return (NULL);
+    printf(RED "-minishell: %s: command not found \n" WHT, cmd);
+    return(0);
 }

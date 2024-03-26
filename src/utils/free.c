@@ -12,7 +12,6 @@ void free_arr2D(char **arr2D)
 
 void free_command(t_cmd *command)
 {
-    free(command->cmd);
     free_arr2D(command->args);
     free(command);
 }

@@ -20,7 +20,6 @@ int parse(char *input, t_data *data)
     while (future_children[index])
     {
         t_cmd *newNode = (t_cmd *)malloc(sizeof(t_cmd));
-        newNode->cmd = "";
         newNode->args = ft_split(future_children[index], ' ');
         newNode->num_args = 0;
         newNode->pipe_in = -1;
@@ -94,11 +93,12 @@ int pipe_it(t_data *data)
 
     char **commands;
     commands = malloc(5 * sizeof(char *));
-    commands[0] = *data->commands->args;
-    commands[1] = *data->commands->next->args;
+    commands[0] = *data->commands[0].args;
+    commands[1] = *data->commands[1].args;
+    // commands[2] = data->commands[2].args;
 
-    int read_e = data->commands->pipe_out;
-    int write_e = data->commands->next->pipe_in;
+    int read_e = data->commands[0].pipe_out;
+    int write_e = data->commands[1].pipe_in;
     // printf("PIPE 1: %d\n", read_e);
     // printf("PIPE 2: %d\n", write_e);
 
@@ -132,7 +132,7 @@ int pipe_it(t_data *data)
             }
             printf(BLU "Passing command: %s\n " RESET, commands[i]);
             // PROTOTYPE: void exec_cmd(t_data *data, char *const cmd[])
-              exec_cmd(data, &commands[i]);
+            //   exec_cmd(data, &commands[i]);
             //  if (execve(paths[i], &commands[i], NULL) == -1)
             //  {
             //      perror(RED"execve"RESET);
