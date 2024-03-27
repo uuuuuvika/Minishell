@@ -84,9 +84,9 @@ void	free_data(t_data *data);
 
 void    ft_cd(t_data *data, char *new_path);
 void    ft_echo(t_data *data, char **args);
-void    ft_env(t_data data);
+void    ft_env(t_data *data);
 void    ft_pwd();
-//void    ft_exit();
+//void    ft_export();
 //void    ft_unset();
 //void    ft_exit();
 

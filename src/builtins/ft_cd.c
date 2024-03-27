@@ -24,15 +24,15 @@ void ft_cd(t_data *data, char *new_path)
     
     if (new_path == NULL)
         exit(0);
-    printf(YEL "Directory before cd: " RESET);
-    //ft_pwd();
-    printf(YEL"Enviroment PWD before: " RESET "%s\n", getenv("PWD"));
+    printf(GRN "Directory before cd: " RESET);
+    ft_pwd();
+    printf(GRN "Enviroment PWD before: " RESET "%s\n", getenv("PWD"));
     //ft_env(*data);
     if (chdir(new_path) != 0)
         printf(RED "Can not change directory" RESET);
     ch_env_pwd(data, new_path);
     printf(GRN "Directory after cd: " RESET);
-   // ft_pwd();
+    ft_pwd();
     printf(GRN "Enviroment PWD after: " RESET "%s\n", getenv("PWD"));
     //ft_env(*data);
 }

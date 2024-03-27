@@ -1,10 +1,10 @@
 #include "minishell.h"
 
-void ft_env(t_data data)
+void ft_env(t_data *data)
 {
-    while (data.envp != NULL && *data.envp != NULL)
+    while (data->envp != NULL && *data->envp != NULL)
     {
-        printf("%s\n", *data.envp);
-        data.envp++;
+        printf("%s\n", *data->envp);
+        data->envp++;
     }
 }

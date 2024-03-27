@@ -9,6 +9,8 @@ void ft_echo(t_data *data, char **args)
     printf(GRN "Executing builtin echo\n" RESET);
     while (args[i])
     {
+        if (i > 1)
+            printf(" ");
         if (ft_strcmp(args[i], "-n") == 0)
             i++;
         printf("%s", args[i]);

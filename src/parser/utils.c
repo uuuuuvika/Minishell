@@ -33,5 +33,6 @@ void sub_quot(char *line_copy, t_data *data)
         }
         index++;
     }
+
     data->sub[s_index] = NULL;
 }

@@ -5,13 +5,13 @@ int pipe_it(t_data *data)
     pid_t pid;
     int i = 0;
 
-    char **commands;
-    commands = malloc(5 * sizeof(char *));
-    commands[0] = *data->commands[0].args;
-    commands[1] = *data->commands[1].args;
+    t_cmd **commands;
+    commands = malloc(5 * sizeof(t_cmd *));
+    commands[0] = data->commands;
+    commands[1] = data->commands->next;
     // commands[2] = *data->commands[2].args;
-    printf("Command 0: " BLU " %s " RESET, commands[0]);
-    printf("Command 1: " BLU "%s\n" RESET, commands[1]);
+    // printf("Command 0: " BLU " %s " RESET, commands[0]);
+    // printf("Command 1: " BLU "%s\n" RESET, commands[1]);
     int read_e = data->commands[0].pipe_out;
     int write_e = data->commands[1].pipe_in;
     printf("PIPE 1: %d\n", read_e);
@@ -39,7 +39,7 @@ int pipe_it(t_data *data)
                 // // PROTOTYPE: int dup2(int newfd, int oldfd);
                 dup2(write_e, STDOUT);
                 close(write_e);
-                exec_cmd(data, commands[i]);
+                exec_cmd(data, commands[0]);
             }
             else if (i == 1 && data->num_of_children > 1)
             {
@@ -48,7 +48,7 @@ int pipe_it(t_data *data)
                 // // PROTOTYPE: int dup2(int newfd, int oldfd);
                 dup2(read_e, STDIN);
                 close(read_e);
-                exec_cmd(data, commands[i]);
+                exec_cmd(data, commands[1]);
             }
         }
         else
