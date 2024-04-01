@@ -6,16 +6,15 @@ void handle_error(const char *message)
     exit(1);
 }
 
-// in - read out - write
+// in - read - 0 --------------- out - write - 1
 int pipe_cmds(t_data *data)
 {
-    t_cmd   *current; 
-    pid_t   pid;
+    t_cmd *current;
+    pid_t pid;
 
     current = data->commands;
     while (current != NULL)
     {
-        printf("loop\n");
         pid = fork();
         if (pid == -1)
             handle_error("fork error");
@@ -30,7 +29,7 @@ int pipe_cmds(t_data *data)
 
             if (current->pipe_out != -1)
             {
-                if (dup2(current->pipe_out, STDOUT) == -1) 
+                if (dup2(current->pipe_out, STDOUT) == -1)
                     handle_error("dup2 error");
                 close(current->pipe_out);
             }
@@ -39,10 +38,11 @@ int pipe_cmds(t_data *data)
         }
         else
         {
-            if (current->pipe_in != -1) 
-                close(current->pipe_in);
-            if (current->pipe_out != -1) 
+            wait(NULL);
+            if (current->pipe_out != -1)
                 close(current->pipe_out);
+            if (current->pipe_in != -1)
+                close(current->pipe_in);
             current = current->next;
         }
     }
