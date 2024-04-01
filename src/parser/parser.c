@@ -66,7 +66,7 @@ int parse(char *input, t_data *data)
 }
 
 
-// int pipe_it(t_data *data)
+// int pipe_cmds(t_data *data)
 // {
 //     pid_t pid;
 //     int i = 0;

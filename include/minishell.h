@@ -91,7 +91,7 @@ void    ft_pwd(t_data data);
 //void    ft_exit();
 
 int     parse(char *input, t_data *data);
-int     pipe_it(t_data *data);
+int     pipe_cmds(t_data *data);
 char    *create_path(char *cmd);
 void    exec_cmd(t_data *data, t_cmd *cmd);
 // void    exec_cmd(t_data *data, char *command);

@@ -19,7 +19,7 @@ int	main(int argc, char *argv[], char **envp)
             exec_cmd(&data, data.commands);
         }
         else
-            pipe_it(&data);
+            pipe_cmds(&data);
         free(input);
     }
     return (0);
