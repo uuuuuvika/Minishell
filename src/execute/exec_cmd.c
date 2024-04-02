@@ -10,7 +10,7 @@ void exec_cmd(t_data *data, t_cmd *cmd)
         if (ft_strcmp(cmd->args[0], "cd") == 0)
             ft_cd(data, cmd);
         else if (ft_strcmp(cmd->args[0], "echo") == 0)
-            ft_echo(data, cmd->args);
+            ft_echo(data, cmd);
         else if (ft_strcmp(cmd->args[0], "env") == 0)
             ft_env(data);
         else if (ft_strcmp(cmd->args[0], "pwd") == 0)

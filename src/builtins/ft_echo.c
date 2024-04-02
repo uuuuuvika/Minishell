@@ -1,21 +1,21 @@
 #include "minishell.h"
 
-void ft_echo(t_data *data, char **args)
+void ft_echo(t_data *data, t_cmd *cmd)
 {
     (void) data;
     int i;
-    
+
     i = 1;
     printf(GRN "Executing builtin echo\n" RESET);
-    while (args[i])
+    while (cmd->args[i])
     {
         if (i > 1)
             printf(" ");
-        if (ft_strcmp(args[i], "-n") == 0)
+        if (ft_strcmp(cmd->args[i], "-n") == 0)
             i++;
-        printf("%s", args[i]);
+        printf("%s", cmd->args[i]);
         i++;
     }
-    if (ft_strcmp(args[1], "-n") != 0)
+    if (ft_strcmp(cmd->args[1], "-n") != 0)
         printf("\n");
 }

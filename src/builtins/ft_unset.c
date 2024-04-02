@@ -15,6 +15,7 @@ void ft_unset(t_data *data, t_cmd *cmd)
     int i;
     int j;
     char **envp;
+    char **new_envp;
 
     i = 0;
     j = 0;
@@ -22,7 +23,7 @@ void ft_unset(t_data *data, t_cmd *cmd)
     if (cmd->args[1] == NULL)
         return;
 
-    char **new_envp = malloc(sizeof(char*) * (count_env(envp) + 1));
+    new_envp = malloc(sizeof(char*) * (count_env(envp) + 1));
     if (new_envp == NULL) {
         perror("Malloc failed");
         exit(1);
