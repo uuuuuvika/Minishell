@@ -2,21 +2,22 @@
 
 int parse(char *input, t_data *data)
 {
-    char *line_copy;
-    char **future_children;
+    char    *line_copy;
+    char    **future_children;
+    int     index;
 
     check_NULL(input);
     line_copy = strdup(input);
     check_NULL(line_copy);
-    //substitute double quotes
-    sub_quot(line_copy, data);
+    
+    sub_quot(line_copy, data); //substitute double quotes
 
     future_children = ft_split(line_copy, '|');
     free(line_copy);
 
-    int index = 0;
     t_cmd *head = NULL;
     t_cmd *current = NULL;
+    index = 0;
     while (future_children[index])
     {
         t_cmd *newNode = (t_cmd *)malloc(sizeof(t_cmd));
@@ -37,56 +38,35 @@ int parse(char *input, t_data *data)
     }
     data->commands = head;
     data->num_of_children = index;
-    printf("Num of children: %d\n", data->num_of_children);
-
-    while(head)
-    {
-        printf("Command: %s\n", head->args[0]);
-        head = head->next;
-    }
-    // pipe
-   // index = 0;
-    // while (index < data->num_of_children - 1)
-    // {
-    //     if (pipe(data->pipes[index]) == -1)
-    //     {
-    //         perror("pipe error!!\n");
-    //         return (-1);
-    //     }
-    //     index++;
-    // }
 
     current = head;
     t_cmd *previous = NULL;
-    //int i = 0;
     while (current)
     {
         if (previous)
         {
             int p[2];
             pipe(p);
-            current->pipe_in = p[PIPE_READ];
             previous->pipe_out = p[PIPE_WRITE];
-            // current->pipe_in = data->pipes[i - 1][PIPE_READ];
-            // previous->pipe_out = data->pipes[i - 1][PIPE_WRITE];
+            current->pipe_in = p[PIPE_READ];
         }
-
         previous = current;
         current = current->next;
-        //i++;
     }
 
-    while (head)
-    {
-        printf("PIPE IN: %d\n", head->pipe_in);
-        printf("PIPE OUT: %d\n", head->pipe_out);
-        head = head->next;
-    }
+    // current = head;
+    // while (current)
+    // {
+    //     printf("PIPE IN: %d\n", current->pipe_in);
+    //     printf("PIPE OUT: %d\n", current->pipe_out);
+    //     previous = current;
+    //     current = current->next;
+    // }
     return (0);
 }
 
 
-// int pipe_it(t_data *data)
+// int pipe_cmds(t_data *data)
 // {
 //     pid_t pid;
 //     int i = 0;

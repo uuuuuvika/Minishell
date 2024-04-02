@@ -8,13 +8,13 @@ void exec_cmd(t_data *data, t_cmd *cmd)
     if (is_builtin(cmd) == 1)
     {
         if (ft_strcmp(cmd->args[0], "cd") == 0)
-            ft_cd(data, cmd->args[1]);
+            ft_cd(data, cmd);
         else if (ft_strcmp(cmd->args[0], "echo") == 0)
             ft_echo(data, cmd->args);
         else if (ft_strcmp(cmd->args[0], "env") == 0)
             ft_env(data);
         else if (ft_strcmp(cmd->args[0], "pwd") == 0)
-            ft_pwd();
+            ft_pwd(data);
     }
     else
     {

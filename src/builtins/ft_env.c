@@ -2,9 +2,17 @@
 
 void ft_env(t_data *data)
 {
-    while (data->envp != NULL && *data->envp != NULL)
+    char **envp;
+
+    envp = data->envp;
+    if (envp == NULL)
     {
-        printf("%s\n", *data->envp);
-        data->envp++;
+        printf(RED "envp is null\n" RESET);
+        return;
+    }
+    while (*envp != NULL)
+    {
+        printf("%s\n", *envp);
+        envp++;
     }
 }

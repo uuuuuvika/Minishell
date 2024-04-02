@@ -71,6 +71,7 @@ char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *str);
 int     ft_strcmp(const char *str1, const char *str2);
 int     ft_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	**ft_split(char const *s, char c);
 // int     is_builtin(char *token);
 int     is_builtin(t_cmd *command);
@@ -82,16 +83,16 @@ void	free_command(t_cmd *command);
 void	free_commands(t_cmd *commands);
 void	free_data(t_data *data);
 
-void    ft_cd(t_data *data, char *new_path);
+void    ft_cd(t_data *data, t_cmd *cmd);
 void    ft_echo(t_data *data, char **args);
 void    ft_env(t_data *data);
-void    ft_pwd();
+void    ft_pwd(t_data *data);
 //void    ft_export();
 //void    ft_unset();
 //void    ft_exit();
 
 int     parse(char *input, t_data *data);
-int     pipe_it(t_data *data);
+int     pipe_cmds(t_data *data);
 char    *create_path(char *cmd);
 void    exec_cmd(t_data *data, t_cmd *cmd);
 // void    exec_cmd(t_data *data, char *command);
