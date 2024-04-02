@@ -15,6 +15,8 @@ void exec_cmd(t_data *data, t_cmd *cmd)
             ft_env(data);
         else if (ft_strcmp(cmd->args[0], "pwd") == 0)
             ft_pwd(data);
+        else if (ft_strcmp(cmd->args[0], "unset") == 0)
+            ft_unset(data, cmd);
     }
     else
     {
