@@ -19,10 +19,11 @@ void exec_cmd(t_data *data, t_cmd *cmd)
     else
     {
         path = create_path(cmd->args[0]);
+        printf(GRN "Non-builtin \n" RESET);
         if (execve(path, cmd->args, data->envp) == -1)
         {
             printf(RED "Execve broke\n" RESET);
-            exit(EXIT_FAILURE);
+            exit(1);
         }
     }
 }

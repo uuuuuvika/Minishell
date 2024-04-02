@@ -34,7 +34,7 @@ int pipe_cmds(t_data *data)
                 close(current->pipe_out);
             }
             exec_cmd(data, current);
-            handle_error("exec_cmd error");
+            handle_error("exec_cmd error");// This is error is printed after executung builtins, there is already an error check when executing execve
         }
         else
         {
@@ -46,6 +46,6 @@ int pipe_cmds(t_data *data)
             current = current->next;
         }
     }
-  //  wait(NULL);
+    wait(NULL);
     return 0;
 }

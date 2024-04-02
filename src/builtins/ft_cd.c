@@ -11,7 +11,7 @@ void ch_env_pwd(t_data *data, char *new_path)
     char *old_env;
     old_env = getenv("PWD");
     if (envp == NULL) {
-        printf(RED "envp is null\n" RESET);
+        printf(RED "envp is null in ch_env_pwd()\n" RESET);
         exit(1);
     }
     while (envp[i] != NULL)
@@ -22,23 +22,21 @@ void ch_env_pwd(t_data *data, char *new_path)
             envp[i] = ft_strjoin("OLDPWD=", old_env);
         i++;
     }
-    printf(GRN "Enviroment PWD after: " RESET "%s\n", getenv("PWD"));
-    printf(GRN "Enviroment OLDPWD after: " RESET "%s\n", getenv("OLDPWD"));
     data->envp = envp;
 }
 
 void ft_cd(t_data *data, t_cmd *cmd)
 {
     if (cmd->args[1] == NULL)
-        exit(0);
-    printf(GRN "Directory before cd: " RESET);
-    ft_pwd(data);
-    printf(GRN "Enviroment PWD before: " RESET "%s\n", getenv("PWD"));
+        return;
+    //printf(GRN "Directory before cd: " RESET);
+    //ft_pwd(data);
+    //printf(GRN "Enviroment PWD before: " RESET "%s\n", getenv("PWD"));
     if (chdir(cmd->args[1]) != 0)
-        printf(RED "Can not change directory" RESET);
+        printf(RED "%s: No such file or director" RESET, cmd->args[1]);
     ch_env_pwd(data, cmd->args[1]);
-    printf(GRN "Directory after cd: " RESET);
-    ft_pwd(data);
-    printf(GRN "Enviroment PWD after: " RESET "%s\n", getenv("PWD"));
-    ft_env(data);
+    //printf(GRN "Directory after cd: " RESET);
+    //ft_pwd(data);
+    //printf(GRN "Enviroment PWD after: " RESET "%s\n", getenv("PWD"));
+    //ft_env(data);
 }
