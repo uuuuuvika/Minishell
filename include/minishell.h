@@ -37,6 +37,10 @@ int redirect_out;
 struct s_cmd *next;
 } t_cmd;
 
+// typedef struct s_env{
+//     char *var;
+//     int num_var;
+// } t_envs;
 
 typedef struct s_data{
     char **envp;
@@ -77,7 +81,6 @@ char	*ft_strdup(char const *s);
 int     is_builtin(t_cmd *command);
 int     check_NULL(char *str);
 
-
 void	free_arr2D(char **arr2D);
 void	free_command(t_cmd *command);
 void	free_commands(t_cmd *commands);
@@ -88,7 +91,7 @@ void    ft_echo(t_data *data, t_cmd *cmd);
 void    ft_env(t_data *data);
 void    ft_pwd(t_data *data);
 void    ft_unset(t_data *data, t_cmd *cmd);
-//void    ft_export();
+void    ft_export(t_data *data, t_cmd *cmd);
 //void    ft_exit();
 
 int     parse(char *input, t_data *data);
