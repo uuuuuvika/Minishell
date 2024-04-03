@@ -37,10 +37,10 @@ int redirect_out;
 struct s_cmd *next;
 } t_cmd;
 
-// typedef struct s_env{
-//     char *var;
-//     int num_var;
-// } t_envs;
+typedef struct s_envs{
+    char **var;
+  //  int num_var;
+} t_envs;
 
 typedef struct s_data{
     char **envp;
@@ -78,8 +78,6 @@ int     ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(char const *s);
-int     is_builtin(t_cmd *command);
-int     check_NULL(char *str);
 
 void	free_arr2D(char **arr2D);
 void	free_command(t_cmd *command);
@@ -90,14 +88,17 @@ void    ft_cd(t_data *data, t_cmd *cmd);
 void    ft_echo(t_data *data, t_cmd *cmd);
 void    ft_env(t_data *data);
 void    ft_pwd(t_data *data);
-void    ft_unset(t_data *data, t_cmd *cmd);
+void    ft_unset(t_envs *envs, t_cmd *cmd);
 void    ft_export(t_data *data, t_cmd *cmd);
-//void    ft_exit();
+void    ft_exit(t_data *data, t_cmd *cmd);
 
 int     parse(char *input, t_data *data);
-int     pipe_cmds(t_data *data);
+int     pipe_cmds(t_data *data, t_envs *envs);
 char    *create_path(char *cmd);
-void    exec_cmd(t_data *data, t_cmd *cmd);
+void    exec_cmd(t_data *data, t_cmd *cmd, t_envs *envs);
+int     is_builtin(t_cmd *command);
+int     count_env(char **envp);
+int     cpy_envs(t_data *data, t_envs *envs);
 
 int     check_NULL(char *str);
 void    sub_quot(char *line_copy, t_data *data);

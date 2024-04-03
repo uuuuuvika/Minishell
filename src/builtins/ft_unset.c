@@ -1,25 +1,23 @@
 #include "minishell.h"
 
-int count_env(char **envp)
-{
-    int i;
-
-    i = 0;
-    while (envp[i] != NULL)
-        i++;
-    return (i);
-}
-
-void ft_unset(t_data *data, t_cmd *cmd)
+void ft_unset(t_envs *envs, t_cmd *cmd)
 {
     int i;
     int j;
     char **envp;
     char **new_envp;
 
+
     i = 0;
     j = 0;
-    envp = data->envp;
+    envp = envs->var;
+    while (envs->var[i] != NULL)
+    { 
+        printf(BLU "%s\n" RESET, envs->var[i]);
+        i++;
+    }
+    i = 0;
+
     if (cmd->args[1] == NULL)
         return;
 
@@ -39,5 +37,14 @@ void ft_unset(t_data *data, t_cmd *cmd)
         i++;
     }
     new_envp[j] = NULL;
-    data->envp = new_envp;
+    free(envs->var);
+    envs->var = new_envp;
+     i = 0;
+    while (envs->var[i] != NULL)
+    { 
+        printf(GRN "%s\n" RESET, envs->var[i]);
+        i++;
+    }
+
+   free(new_envp);
 }
