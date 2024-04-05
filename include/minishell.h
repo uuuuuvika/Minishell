@@ -27,29 +27,30 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-typedef struct s_cmd {
-char **args;
-int num_args;
-int pipe_in; //-1
-int pipe_out; // <pipe fd>
-int redirect_in;
-int redirect_out;
-struct s_cmd *next;
-} t_cmd;
-
 typedef struct s_envs{
     char **var;
   //  int num_var;
 } t_envs;
 
+typedef struct s_cmd {
+    char **args;
+    int num_args;
+    int pipe_in; //-1
+    int pipe_out; // <pipe fd>
+    int redirect_in;
+    int redirect_out;
+    struct s_cmd *next;
+} t_cmd;
+
 typedef struct s_data{
-    char **envp;
+  //  char **envp;
     int exit_code;
     int num_of_children;
     //char **piped_commands;
     int pipes[10][2];
     char **sub;
     t_cmd *commands;
+    t_envs  *envs;
 } t_data;
 
 // ls -l " | grep foo > output.txt "
@@ -88,17 +89,17 @@ void    ft_cd(t_data *data, t_cmd *cmd);
 void    ft_echo(t_data *data, t_cmd *cmd);
 void    ft_env(t_data *data);
 void    ft_pwd(t_data *data);
-void    ft_unset(t_envs *envs, t_cmd *cmd);
+void    ft_unset(t_data *data, t_cmd *cmd);
 void    ft_export(t_data *data, t_cmd *cmd);
 void    ft_exit(t_data *data, t_cmd *cmd);
 
 int     parse(char *input, t_data *data);
-int     pipe_cmds(t_data *data, t_envs *envs);
+int     pipe_cmds(t_data *data);
 char    *create_path(char *cmd);
-void    exec_cmd(t_data *data, t_cmd *cmd, t_envs *envs);
+void    exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
 int     count_env(char **envp);
-int     cpy_envs(t_data *data, t_envs *envs);
+int     cpy_envs(t_data *data, char **envp);
 
 int     check_NULL(char *str);
 void    sub_quot(char *line_copy, t_data *data);

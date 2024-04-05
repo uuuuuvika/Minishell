@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void exec_cmd(t_data *data, t_cmd *cmd, t_envs *envs)
+void exec_cmd(t_data *data, t_cmd *cmd)
 {
     char *path;
 
@@ -16,7 +16,7 @@ void exec_cmd(t_data *data, t_cmd *cmd, t_envs *envs)
         else if (ft_strcmp(cmd->args[0], "pwd") == 0)
             ft_pwd(data);
         else if (ft_strcmp(cmd->args[0], "unset") == 0)
-            ft_unset(envs, cmd);
+            ft_unset(data, cmd);
         else if (ft_strcmp(cmd->args[0], "export") == 0)
             ft_export(data, cmd);
         else if (ft_strcmp(cmd->args[0], "exit") == 0)
@@ -26,7 +26,7 @@ void exec_cmd(t_data *data, t_cmd *cmd, t_envs *envs)
     {
         path = create_path(cmd->args[0]);
     //    printf(GRN "Non-builtin \n" RESET);
-        if (execve(path, cmd->args, data->envp) == -1)
+        if (execve(path, cmd->args, data->envs->var) == -1)
         {
             printf(RED "Execve broke\n" RESET);
             exit(1);

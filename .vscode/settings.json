@@ -61,6 +61,10 @@
     "types.h": "c",
     "unistd.h": "c",
     "wait.h": "c",
-    "sstream": "c"
+    "sstream": "c",
+    "__bit_reference": "c",
+    "bitset": "c",
+    "unordered_map": "c",
+    "chrono": "c"
   }
 }

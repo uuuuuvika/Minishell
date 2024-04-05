@@ -3,12 +3,13 @@
 int	main(int argc, char *argv[], char **envp)
 {
 	static t_data data;
-    static t_envs envs;
+   // static t_envs envs;
 
     (void)argc;
     (void)argv;
-    data.envp = envp;
- 
+
+    cpy_envs(&data, envp);
+    printf("wtf");
     while (1)
     {
         char *input = readline(YEL "Minishell > " RESET);
@@ -16,14 +17,13 @@ int	main(int argc, char *argv[], char **envp)
         if (input != NULL)
             add_history(input);
         //validate_cmds();
-        cpy_envs(&data, &envs);
-        // if (data.num_of_children == 1)
-        // {
-        //     printf(YEL "Executing simple cmd in main\n" RESET);
-        //     exec_cmd(&data, data.commands);
-        // }
+        if (data.num_of_children == 1)
+        {
+            printf(YEL "Executing simple cmd in main\n" RESET);
+            exec_cmd(&data, data.commands);
+        }
         // else
-            pipe_cmds(&data, &envs);
+         //   pipe_cmds(&data);
         free(input);
     }
     return (0);

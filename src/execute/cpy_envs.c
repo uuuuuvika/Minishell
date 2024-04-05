@@ -1,28 +1,36 @@
 #include "minishell.h"
 
-int cpy_envs(t_data *data, t_envs *envs)
+int cpy_envs(t_data *data, char **envp)
 {
-   // char    **envs_cpy;
-    int     i;
+    int i;
 
     i = 0;
-    envs->var = malloc(sizeof(char*) * count_env(data->envp) + 1);
-    if (envs->var == NULL)
+    if (data->envs == NULL) {
+        data->envs = malloc(sizeof(t_envs)); // Allocate memory for t_envs if not already allocated
+        if (data->envs == NULL) {
+            perror("Malloc failed");
+            exit(1);
+        }
+        data->envs->var = NULL; // Initialize var to NULL
+    }
+    data->envs->var = malloc(sizeof(char*) * (count_env(envp) + 1));
+    if (data->envs->var == NULL)
     {
         perror("Malloc failed");
         exit(1);
     }
-    while(data->envp[i] != NULL)
-    {   
-        envs->var[i] = ft_strdup(data->envp[i]);
+    while(envp[i])
+    {
+        data->envs->var[i] = ft_strdup(envp[i]);
         i++;
     }
-    envs->var[i] = NULL;
+    data->envs->var[i] = NULL;
 
-   // i = 0;
-    // while (envs->var[i] != NULL)
+////////PRINT COPY
+    // i = 0;
+    // while (data->envs->var[i] != NULL)
     // { 
-    //     printf("%s\n", envs->var[i]);
+    //     printf("%s\n", data->envs->var[i]);
     //     i++;
     // }
     return (0);
