@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_put_unsigned.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 18:17:03 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/28 13:14:05 by darotche         ###   ########.fr       */
+/*   Created: 2023/06/11 16:15:14 by darotche          #+#    #+#             */
+/*   Updated: 2023/12/01 18:36:19 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-char	*ft_strdup(char const *s)
+int	ft_put_unsigned(unsigned int n)
 {
-	char		*str;
 	int			len;
-	int			i;
 
-	len = ft_strlen(s);
-	str = malloc(sizeof(char) * (len + 1));
-	i = 0;
-	if (str == NULL)
-		return (NULL);
-	while (i < len)
+	len = 0;
+	if (n >= 10)
 	{
-		str[i] = s[i];
-		i++;
+		len += ft_putnbr(n / 10);
+		len += ft_putnbr(n % 10);
 	}
-	str[i] = '\0';
-	return (str);
+	if (n < 10)
+		len += ft_putchar(n + '0');
+	return (len);
 }

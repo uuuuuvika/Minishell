@@ -20,7 +20,6 @@ void ch_env_pwd(t_data *data, char *new_pwd, char *old_pwd)
             envp[i] = ft_strjoin("OLDPWD=", old_pwd);
         i++;
     }
-    //free(data->envs->var);
     data->envs->var = envp;
 }
 

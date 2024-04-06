@@ -15,7 +15,7 @@
 #define WHT "\e[0;37m"
 #define RESET "\033[0m"
 
-// #include "libft.h"
+#include "libft.h"
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -40,10 +40,10 @@ typedef struct s_cmd {
     int redirect_in;
     int redirect_out;
     struct s_cmd *next;
+    t_envs  *envs;
 } t_cmd;
 
 typedef struct s_data{
-  //  char **envp;
     int exit_code;
     int num_of_children;
     //char **piped_commands;
@@ -72,13 +72,13 @@ typedef struct s_data{
 // | next: NULL
 // +----------+
 
-char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(const char *str);
-int     ft_strcmp(const char *str1, const char *str2);
-int     ft_strncmp(const char *s1, const char *s2, size_t n);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
-char	**ft_split(char const *s, char c);
-char	*ft_strdup(char const *s);
+// char	*ft_strjoin(char *s1, char *s2);
+// size_t	ft_strlen(const char *str);
+// int     ft_strcmp(const char *str1, const char *str2);
+// int     ft_strncmp(const char *s1, const char *s2, size_t n);
+// size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+// char	**ft_split(char const *s, char c);
+// char	*ft_strdup(char const *s);
 
 void	free_arr2D(char **arr2D);
 void	free_command(t_cmd *command);

@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 12:09:27 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/28 13:27:11 by darotche         ###   ########.fr       */
+/*   Created: 2023/05/28 14:03:20 by darotche          #+#    #+#             */
+/*   Updated: 2023/05/31 16:37:02 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	i;
-	size_t	src_len;
+	t_list	*new_node;
 
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
-	i = 0;
-	while (src[i] && i < (size -1))
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (src_len);
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (!new_node)
+		return (0);
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }
+
+// #include <stdio.h>
+// int	main()
+// {
+// 	t_list *node = (ft_lstnew("Hola"));
+// 	printf("\033[0;33mContent: %s\n\033[0m", (char *)node->content);
+// }

@@ -40,7 +40,6 @@ void ft_export(t_data *data, t_cmd *cmd)
         j++;
     }
     data->envs->var = new_var;
-   // free(new_var);
 
     //PRINT AFTER
     i = 0;

@@ -9,7 +9,6 @@ int	main(int argc, char *argv[], char **envp)
     (void)argv;
 
     cpy_envs(&data, envp);
-    printf("wtf");
     while (1)
     {
         char *input = readline(YEL "Minishell > " RESET);
@@ -23,7 +22,7 @@ int	main(int argc, char *argv[], char **envp)
             exec_cmd(&data, data.commands);
         }
         // else
-         //   pipe_cmds(&data);
+        // pipe_cmds(&data);
         free(input);
     }
     return (0);
