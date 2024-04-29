@@ -12,9 +12,9 @@ int	main(int argc, char *argv[], char **envp)
     while (1)
     {
 		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, SIG_IGN); 
+		signal(SIGQUIT, SIG_IGN);
         char *input = readline(YEL "Minishell > " RESET);
-        if(!input)
+        if(!input && errno == EINVAL)
             break;
         parse(input, &data);
         if (input != NULL)

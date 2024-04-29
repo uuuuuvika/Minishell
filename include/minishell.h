@@ -30,6 +30,7 @@
 #include <sys/stat.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <errno.h>
 
 typedef struct s_envs{
     char **var;
