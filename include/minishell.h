@@ -6,6 +6,9 @@
 #define STDERR 2
 #define PIPE_READ 0
 #define PIPE_WRITE 1
+#define SIGINT
+#define SIGQUIT
+//#define EOF
 #define RED "\e[0;31m"
 #define GRN "\e[0;32m"
 #define YEL "\e[0;33m"
@@ -17,6 +20,7 @@
 
 #include "libft.h"
 #include <unistd.h>
+#include <signal.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -91,7 +95,7 @@ void    ft_env(t_data *data);
 void    ft_pwd(t_data *data);
 void    ft_unset(t_data *data, t_cmd *cmd);
 void    ft_export(t_data *data, t_cmd *cmd);
-void    ft_exit(t_data *data, t_cmd *cmd);
+void    ft_exit(t_data *data);
 
 int     parse(char *input, t_data *data);
 int     pipe_cmds(t_data *data);
@@ -103,5 +107,8 @@ int     cpy_envs(t_data *data, char **envp);
 
 int     check_NULL(char *str);
 void    sub_quot(char *line_copy, t_data *data);
+
+void	sig_handler();
+int get_input(char **input);
 
 #endif

@@ -2,7 +2,7 @@
 
 void ch_env_pwd(t_data *data, char *new_pwd, char *old_pwd)
 {
-    char **envp;
+    char **envp;//////this might be wrong, pass envs instead
     int i;
 
     envp = data->envs->var;
@@ -38,7 +38,8 @@ void ft_cd(t_data *data, t_cmd *cmd)
     if (cmd->args[1] == NULL)
         return;
     printf(BLU "Directory before cd: " RESET);
-    printf("%s\n", old_pwd);
+    //printf("%s\n", old_pwd);
+	ft_pwd(data);
     //printf("%s\n", new_pwd);
     //ft_pwd(data);
     // printf(BLU "Enviroment PWD before: " RESET "%s\n", getenv("PWD"));
