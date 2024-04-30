@@ -3,7 +3,7 @@
 void handle_error(const char *message)
 {
     perror(message);
-    exit(1);
+    exit(0);
 }
 
 // in - read - 0 --------------- out - write - 1
@@ -34,11 +34,11 @@ int pipe_cmds(t_data *data)
                 close(current->pipe_out);
             }
             exec_cmd(data, current);
-            handle_error("exec_cmd error");
+            handle_error("exec_cmd error");// This is error is printed after executung builtins, there is already an error check when executing execve
         }
         else
         {
-            wait(NULL);
+            //wait(NULL);
             if (current->pipe_out != -1)
                 close(current->pipe_out);
             if (current->pipe_in != -1)

@@ -57,10 +57,22 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
-    "minishell.h": "c",
-    "types.h": "c",
-    "unistd.h": "c",
-    "wait.h": "c",
-    "sstream": "c"
-  }
+	"minishell.h": "c",
+	"types.h": "c",
+	"unistd.h": "c",
+	"wait.h": "c",
+	"sstream": "c",
+	"__bit_reference": "c",
+	"bitset": "c",
+	"unordered_map": "c",
+	"chrono": "c",
+	"readline.h": "c",
+	"param.h": "c",
+	"stdlib.h": "c",
+	"stat.h": "c",
+	"history.h": "c",
+	"stdio.h": "c",
+	"string.h": "c",
+	"errno.h": "c"
+}
 }
