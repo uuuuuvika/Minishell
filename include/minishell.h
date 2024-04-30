@@ -47,7 +47,7 @@ typedef struct s_cmd {
     t_envs  *envs;
 } t_cmd;
 
-typedef struct s_data{
+typedef struct s_data {
     int exit_code;
     int num_of_children;
     //char **piped_commands;
@@ -110,6 +110,6 @@ void	print_envs(t_data *data);
 int     check_NULL(char *str);
 void    sub_quot(char *line_copy, t_data *data);
 
-void	sig_handler();
+void	sig_handler(int sig);
 
 #endif

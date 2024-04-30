@@ -2,8 +2,11 @@
 
 int varname_len(char *var)
 {
-    int i = 0;
+    int i;
+
+	i = 0;
     while (var[i] && var[i] != '=')
+		i++;
     return (i);
 }
 
@@ -71,6 +74,7 @@ void ft_export(t_data *data, t_cmd *cmd)
     j = 1;
     check_NULL(cmd->args[1]); //neeed to check args format as well
     int extra_alloc = var_cmp(data->envs->var, cmd->args[j]);
+
     printf("extra allocation = %d\n", extra_alloc);
     new_var = malloc(sizeof(char*) * (count_env(data->envs->var) + extra_alloc));
     if (new_var == NULL)
