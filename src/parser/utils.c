@@ -32,5 +32,6 @@ void sub_dub_quotes(char *line_copy, t_data *data)
         }
         index++;
     }
+
     data->sub[s_index] = NULL;
 }

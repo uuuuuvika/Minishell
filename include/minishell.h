@@ -6,6 +6,8 @@
 #define STDERR 2
 #define PIPE_READ 0
 #define PIPE_WRITE 1
+#define SIGINT
+#define SIGQUIT
 #define RED "\e[0;31m"
 #define GRN "\e[0;32m"
 #define YEL "\e[0;33m"
@@ -15,8 +17,9 @@
 #define WHT "\e[0;37m"
 #define RESET "\033[0m"
 
-// #include "libft.h"
+#include "libft.h"
 #include <unistd.h>
+#include <signal.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,24 +30,30 @@
 #include <readline/readline.h>
 #include <sys/fcntl.h>
 #include <readline/history.h>
+#include <errno.h>
+
+typedef struct s_envs{
+    char **var;
+  //  int num_var;
+} t_envs;
 
 typedef struct s_cmd {
-char **args;
-int num_args;
-int pipe_in; //-1
-int pipe_out; // <pipe fd>
-int redirect_in;
-int redirect_out;
-struct s_cmd *next;
+    char **args;
+    int num_args;
+    int pipe_in; //-1
+    int pipe_out; // <pipe fd>
+    int redirect_in;
+    int redirect_out;
+    struct s_cmd *next;
+    t_envs  *envs;
 } t_cmd;
 
-
-typedef struct s_data{
-    char **envp;
+typedef struct s_data {
     int exit_code;
     int num_of_children;
     char **sub;
     t_cmd *commands;
+    t_envs  *envs;
 } t_data;
 
 // ls -l " | grep foo > output.txt "
@@ -66,15 +75,13 @@ typedef struct s_data{
 // | next: NULL
 // +----------+
 
-char	*ft_strjoin(char *s1, char *s2);
-size_t	ft_strlen(const char *str);
-int     ft_strcmp(const char *str1, const char *str2);
-int     ft_strncmp(const char *s1, const char *s2, size_t n);
-char	**ft_split(char const *s, char c);
-// int     is_builtin(char *token);
-int     is_builtin(t_cmd *command);
-int     check_NULL(char *str);
-
+// char	*ft_strjoin(char *s1, char *s2);
+// size_t	ft_strlen(const char *str);
+// int     ft_strcmp(const char *str1, const char *str2);
+// int     ft_strncmp(const char *s1, const char *s2, size_t n);
+// size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+// char	**ft_split(char const *s, char c);
+// char	*ft_strdup(char const *s);
 
 void	free_arr2D(char **arr2D);
 void    free_data(t_data *data, char *input);
@@ -82,23 +89,29 @@ void    free_data(t_data *data, char *input);
 // void	free_commands(t_cmd *commands);
 // void	free_data(t_data *data);
 
-void    ft_cd(t_data *data, char *new_path);
-void    ft_echo(t_data *data, char **args);
-void    ft_env(t_data data);
-void    ft_pwd(t_data data);
-//void    ft_exit();
-//void    ft_unset();
-//void    ft_exit();
+void    ft_cd(t_data *data, t_cmd *cmd);
+void    ft_echo(t_data *data, t_cmd *cmd);
+void    ft_env(t_data *data);
+void    ft_pwd(t_data *data);
+void    ft_unset(t_data *data, t_cmd *cmd);
+void    ft_export(t_data *data, t_cmd *cmd);
+void    ft_exit(t_data *data);
 
 int     parse(char *input, t_data *data);
 int     pipe_cmds(t_data *data);
 char    *create_path(char *cmd);
 void    exec_cmd(t_data *data, t_cmd *cmd);
-// void    exec_cmd(t_data *data, char *command);
-//void    exec_cmd(t_data *data, char *args[]);
+int     is_builtin(t_cmd *command);
 
+int     count_env(char **envp);
+int     cpy_envs(t_data *data, char **envp);
+void	print_envs(t_data *data);
 
 int     check_NULL(char *str);
 void    sub_dub_quotes(char *line_copy, t_data *data);
 
+void	sig_handler(int sig);
+void	handle_ctrl(void);
+
+void handle_error(const char *message);
 #endif

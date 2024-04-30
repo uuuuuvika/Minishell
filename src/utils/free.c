@@ -25,4 +25,28 @@ void free_data(t_data *data, char *input)
     }
     free(input);
     free(data);
+	// while (commands)
+	// {
+	// 	tmp = commands;
+	// 	commands = commands->next;
+	// 	free_command(tmp);
+	// }	
 }
+
+// void free_command(t_cmd *command)
+// {
+//     free_arr2D(command->args);
+//     free(command);
+// }
+
+// void free_commands(t_cmd *commands)
+// {
+//     t_cmd *tmp;
+
+// 	while (commands)
+// 	{
+// 		tmp = commands;
+// 		commands = commands->next;
+// 		free_command(tmp);
+// 	}	
+// }

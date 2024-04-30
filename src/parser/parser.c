@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 int parse(char *input, t_data *data)
 {
     char *line_copy;
@@ -30,18 +29,18 @@ int parse(char *input, t_data *data)
         new_node->redirect_out = -1;
         new_node->next = NULL;
 
-        // int i = 0;
-        // while (new_node->args[i])
-        // {
-        //     printf("args[%d]: %s\n", i, new_node->args[i]);
-        //     if (ft_strcmp(new_node->args[i], ">") == 0)
-        //     {
-        //         new_node->redirect_out = open(new_node->args[i + 1], O_RDWR | O_CREAT | O_TRUNC);
-        //         new_node->args[i] = NULL;
-        //         new_node->args[i + 1] = NULL;
-        //     }
-        //     i++;
-        // }
+        int i = 0;
+        while (new_node->args[i])
+        {
+            printf("args[%d]: %s\n", i, new_node->args[i]);
+            if (ft_strcmp(new_node->args[i], ">") == 0)
+            {
+                new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+                new_node->args[i] = NULL;
+                new_node->args[i + 1] = NULL;
+            }
+            i++;
+        }
         if (head == NULL)
             head = new_node;
         else

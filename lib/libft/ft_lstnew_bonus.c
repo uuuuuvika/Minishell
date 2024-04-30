@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 15:07:01 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/27 21:08:44 by darotche         ###   ########.fr       */
+/*   Created: 2023/05/28 14:03:20 by darotche          #+#    #+#             */
+/*   Updated: 2023/05/31 16:37:02 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+t_list	*ft_lstnew(void *content)
 {
-	size_t	i;
+	t_list	*new_node;
 
-	i = 0;
-	if (n == 0)
+	new_node = (t_list *)malloc(sizeof(t_list));
+	if (!new_node)
 		return (0);
-	while (s1[i] && (s1[i] == s2[i]) && i < n - 1)
-	{
-		i++;
-	}
-	if (i == n)
-		return (0);
-	return ((unsigned char)(s1[i]) - (unsigned char)(s2[i]));
+	new_node->content = content;
+	new_node->next = NULL;
+	return (new_node);
 }
+
+// #include <stdio.h>
+// int	main()
+// {
+// 	t_list *node = (ft_lstnew("Hola"));
+// 	printf("\033[0;33mContent: %s\n\033[0m", (char *)node->content);
+// }
