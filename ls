@@ -1,0 +1,10 @@
+Dockerfile
+Makefile
+README.md
+ignore_it.c
+include
+ls
+minishell
+out
+src
+words

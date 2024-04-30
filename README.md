@@ -14,7 +14,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 
 ## TODO:
 
-[ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env,exit
+[ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
 [ ] Compound commands
 [ ] < > >>  Redirections for stdin and stdout
 [ ] | output from one program to the input of the next program

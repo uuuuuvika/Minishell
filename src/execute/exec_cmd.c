@@ -5,7 +5,7 @@ void exec_cmd(t_data *data, t_cmd *cmd)
     char *path;
 
     check_NULL(cmd->args[0]);
-    if (is_builtin(cmd) == 1)
+    if (is_builtin(cmd))
     {
         if (ft_strcmp(cmd->args[0], "cd") == 0)
             ft_cd(data, cmd->args[1]);
@@ -15,6 +15,10 @@ void exec_cmd(t_data *data, t_cmd *cmd)
             ft_env(*data);
         else if (ft_strcmp(cmd->args[0], "pwd") == 0)
             ft_pwd(*data);
+        else if (ft_strcmp(cmd->args[0], "unset") == 0)
+            execve("/usr/bin/unset", cmd->args, data->envp);
+        else if (ft_strcmp(cmd->args[0], "export") == 0)
+            execve("/usr/bin/export", cmd->args, data->envp);   
     }
     else
     {

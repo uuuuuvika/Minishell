@@ -25,6 +25,7 @@
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <readline/readline.h>
+#include <sys/fcntl.h>
 #include <readline/history.h>
 
 typedef struct s_cmd {
@@ -42,8 +43,6 @@ typedef struct s_data{
     char **envp;
     int exit_code;
     int num_of_children;
-    //char **piped_commands;
-    int pipes[10][2];
     char **sub;
     t_cmd *commands;
 } t_data;
@@ -78,9 +77,10 @@ int     check_NULL(char *str);
 
 
 void	free_arr2D(char **arr2D);
-void	free_command(t_cmd *command);
-void	free_commands(t_cmd *commands);
-void	free_data(t_data *data);
+void    free_data(t_data *data, char *input);
+// void	free_command(t_cmd *command);
+// void	free_commands(t_cmd *commands);
+// void	free_data(t_data *data);
 
 void    ft_cd(t_data *data, char *new_path);
 void    ft_echo(t_data *data, char **args);
@@ -99,6 +99,6 @@ void    exec_cmd(t_data *data, t_cmd *cmd);
 
 
 int     check_NULL(char *str);
-void    sub_quot(char *line_copy, t_data *data);
+void    sub_dub_quotes(char *line_copy, t_data *data);
 
 #endif
