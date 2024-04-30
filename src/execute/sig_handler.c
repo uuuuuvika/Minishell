@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+void handle_ctrl()
+{
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
 void sig_handler(int sig)
 {
   if (sig == SIGINT)

@@ -29,7 +29,6 @@ void ft_cd(t_data *data, t_cmd *cmd)
     char *new_pwd;
 
     old_pwd = getcwd(NULL, 0);
-    //old_pwd = getcwd(cwd, sizeof(cwd));
     if (old_pwd == NULL)
     {
         perror("Failed to get current directory");
@@ -38,18 +37,13 @@ void ft_cd(t_data *data, t_cmd *cmd)
     if (cmd->args[1] == NULL)
         return;
     printf(BLU "Directory before cd: " RESET);
-    //printf("%s\n", old_pwd);
 	ft_pwd(data);
-    //printf("%s\n", new_pwd);
-    //ft_pwd(data);
-    // printf(BLU "Enviroment PWD before: " RESET "%s\n", getenv("PWD"));
-    //     ft_env(data);
     if (chdir(cmd->args[1]) != 0) {
         perror("chdir failed");
         free(old_pwd);
         return;
     }
-    new_pwd = getcwd(NULL, 0); // Obtiene el nuevo directorio
+    new_pwd = getcwd(NULL, 0);
     if (new_pwd == NULL) {
         perror("Failed to get current directory");
         free(old_pwd);
@@ -58,9 +52,6 @@ void ft_cd(t_data *data, t_cmd *cmd)
     ch_env_pwd(data, new_pwd, old_pwd);
     printf(GRN "Directory after cd: " RESET);
     ft_pwd(data);
-
-    // printf(GRN "Enviroment PWD after: " RESET "%s\n", getenv("PWD"));
-    // ft_env(data);
     free(new_pwd);
     free(old_pwd);
 }

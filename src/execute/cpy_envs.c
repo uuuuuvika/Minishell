@@ -27,13 +27,5 @@ int cpy_envs(t_data *data, char **envp)
         i++;
     }
     data->envs->var[i] = NULL;
-
-////////PRINT COPY
-    // i = 0;
-    // while (data->envs->var[i] != NULL)
-    // { 
-    //     printf("%s\n", data->envs->var[i]);
-    //     i++;
-    // }
     return (0);
 }

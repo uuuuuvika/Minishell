@@ -19,15 +19,6 @@ void ft_unset(t_data *data, t_cmd *cmd)
     }
     if (cmd->args[k] == NULL)
         return;
-    /// PRINT BEFORE unset
-    // while (data->envs->var[i] != NULL)
-    // { 
-    //     printf(BLU "%s\n" RESET, data->envs->var[i]);
-    //     i++;
-    // }
-    //i = 0;
-
-    //consider checking if the variable exists before attempting to remove it.
 
     while(cmd->args[k] != NULL)
     {
@@ -47,11 +38,4 @@ void ft_unset(t_data *data, t_cmd *cmd)
     new_envp[j] = NULL;
     free(data->envs->var);
     data->envs->var = new_envp;
-    //// PRINT AFTER unset
-    // i = 0;
-    // while (data->envs->var[i] != NULL)
-    // { 
-    //     printf(GRN "%s\n" RESET, data->envs->var[i]);
-    //     i++;
-    // }
 }

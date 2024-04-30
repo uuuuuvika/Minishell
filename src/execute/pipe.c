@@ -3,7 +3,7 @@
 void handle_error(const char *message)
 {
     perror(message);
-    exit(1);
+    exit(0);
 }
 
 // in - read - 0 --------------- out - write - 1
@@ -38,7 +38,7 @@ int pipe_cmds(t_data *data)
         }
         else
         {
-           // wait(NULL);
+            //wait(NULL);
             if (current->pipe_out != -1)
                 close(current->pipe_out);
             if (current->pipe_in != -1)

@@ -34,7 +34,7 @@ int var_cmp(char **envar, char *newvar)
         }
         i++;
     }
-    return (2); 
+    return(0); 
 }
 
 int replace_var(t_data *data, t_cmd *cmd)
@@ -64,25 +64,49 @@ int replace_var(t_data *data, t_cmd *cmd)
     return(0);
 }
 
+int	add_var(t_data *data, t_cmd *cmd)
+{
+	int i;
+	int j;
+	char **new_var;
+
+	new_var = malloc(sizeof(char*) * (count_env(data->envs->var) + 2));
+	if (new_var == NULL)
+        return(-1);
+	j = 0;
+	while(cmd->args[j] != NULL)
+	{
+		i = 0;
+		while(data->envs->var[i] != NULL)
+		{
+			new_var[i] = ft_strdup(data->envs->var[i]);
+			i++;
+		}
+		new_var[i] = ft_strdup(cmd->args[j]);
+		i++;
+		new_var[i] = NULL;
+		j++;
+	}
+	free(data->envs->var);
+	data->envs->var = new_var;
+	i = 0;
+	while(new_var[i])
+	{
+		data->envs->var[i] = ft_strdup(new_var[i]);
+		i++;
+	}
+	return(0);
+}
+
 void ft_export(t_data *data, t_cmd *cmd)
 {
     int     i;
     int     j;
-    char    **new_var;
 
     i = 0;
     j = 1;
     check_NULL(cmd->args[1]); //neeed to check args format as well
-    int extra_alloc = var_cmp(data->envs->var, cmd->args[j]);
-
-    printf("extra allocation = %d\n", extra_alloc);
-    new_var = malloc(sizeof(char*) * (count_env(data->envs->var) + extra_alloc));
-    if (new_var == NULL)
-    {
-        perror("Malloc failed");
-        exit(1);
-    }
-    if(extra_alloc == 1)
+    if(var_cmp(data->envs->var, cmd->args[j]) == 1)
     {
         printf(YEL "Replace variable\n" RESET);
         replace_var(data, cmd);
@@ -90,26 +114,7 @@ void ft_export(t_data *data, t_cmd *cmd)
     else
     {
         printf(YEL "Add a new variable\n" RESET);
-        while(cmd->args[j] != NULL)
-        {
-            while(data->envs->var[i] != NULL)
-            {
-                new_var[i] = ft_strdup(data->envs->var[i]);
-                i++;
-            }
-            new_var[i] = ft_strdup(cmd->args[j]);
-            i++;
-            new_var[i] = NULL;
-            j++;
-        }
-        free(data->envs->var);
-        data->envs->var = new_var;
-        i = 0;
-        while(new_var[i])
-        {
-            data->envs->var[i] = ft_strdup(new_var[i]);
-            i++;
-        }
+		add_var(data, cmd);
     }
 	//print_envs(data);
 }

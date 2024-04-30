@@ -111,5 +111,6 @@ int     check_NULL(char *str);
 void    sub_quot(char *line_copy, t_data *data);
 
 void	sig_handler(int sig);
+void	handle_ctrl(void);
 
 #endif
