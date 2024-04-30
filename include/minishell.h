@@ -8,7 +8,6 @@
 #define PIPE_WRITE 1
 #define SIGINT
 #define SIGQUIT
-//#define EOF
 #define RED "\e[0;31m"
 #define GRN "\e[0;32m"
 #define YEL "\e[0;33m"
@@ -103,13 +102,14 @@ int     pipe_cmds(t_data *data);
 char    *create_path(char *cmd);
 void    exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
+
 int     count_env(char **envp);
 int     cpy_envs(t_data *data, char **envp);
+void	print_envs(t_data *data);
 
 int     check_NULL(char *str);
 void    sub_quot(char *line_copy, t_data *data);
 
 void	sig_handler();
-int get_input(char **input);
 
 #endif

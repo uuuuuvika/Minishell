@@ -2,25 +2,25 @@
 
 void ch_env_pwd(t_data *data, char *new_pwd, char *old_pwd)
 {
-    char **envp;//////this might be wrong, pass envs instead
+    char **env_var;
     int i;
 
-    envp = data->envs->var;
+    env_var = data->envs->var;
     i = 0;
     char *new_env = ft_strjoin("PWD=", new_pwd);
-    if (envp == NULL) {
-        printf(RED "envp is null in ch_env_pwd()\n" RESET);
+    if (env_var == NULL) {
+        printf(RED "env_var is null in ch_env_pwd()\n" RESET);
         exit(1);
     }
-    while (envp[i] != NULL)
+    while (env_var[i] != NULL)
     {
-        if (ft_strncmp(envp[i], "PWD=", 4) == 0)
-            envp[i] = ft_strdup(new_env);
-        else if (ft_strncmp(envp[i], "OLDPWD=", 7) == 0)
-            envp[i] = ft_strjoin("OLDPWD=", old_pwd);
+        if (ft_strncmp(env_var[i], "PWD=", 4) == 0)
+            env_var[i] = ft_strdup(new_env);
+        else if (ft_strncmp(env_var[i], "OLDPWD=", 7) == 0)
+            env_var[i] = ft_strjoin("OLDPWD=", old_pwd);
         i++;
     }
-    data->envs->var = envp;
+    data->envs->var = env_var;
 }
 
 void ft_cd(t_data *data, t_cmd *cmd)
@@ -59,9 +59,8 @@ void ft_cd(t_data *data, t_cmd *cmd)
     printf(GRN "Directory after cd: " RESET);
     ft_pwd(data);
 
-    printf(GRN "Enviroment PWD after: " RESET "%s\n", getenv("PWD"));
-    ft_env(data);
+    // printf(GRN "Enviroment PWD after: " RESET "%s\n", getenv("PWD"));
+    // ft_env(data);
     free(new_pwd);
     free(old_pwd);
-
 }

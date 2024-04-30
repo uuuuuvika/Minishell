@@ -1,10 +1,11 @@
 #include "minishell.h"
 
+//static int g_signal;
+
 int	main(int argc, char *argv[], char **envp)
 {
 	static t_data data;
 	
-
     (void)argc;
     (void)argv;
 
@@ -14,9 +15,12 @@ int	main(int argc, char *argv[], char **envp)
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);
         char *input = readline(YEL "Minishell > " RESET);
-        if(!input && errno == EINVAL)
-            break;
-        parse(input, &data);
+        if(!input || errno == EINVAL)
+		{
+			printf("you have pressed CTRL-D\n");
+			break;
+		}
+		parse(input, &data);
         if (input != NULL)
             add_history(input);
     //    validate_cmds();

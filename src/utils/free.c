@@ -20,17 +20,10 @@ void free_commands(t_cmd *commands)
 {
     t_cmd *tmp;
 
-    {
-        tmp = commands;
-        commands = commands->next;
-        free_command(tmp);
-        free_command(commands++);
-    }
-}
-
-void free_data(t_data *data)
-{
-    // free_arr2D(data->envp);
-    free_arr2D(data->sub);
-    free_commands(data->commands);
+	while (commands)
+	{
+		tmp = commands;
+		commands = commands->next;
+		free_command(tmp);
+	}	
 }
