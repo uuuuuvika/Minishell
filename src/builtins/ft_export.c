@@ -12,123 +12,46 @@ int varname_len(char *var)
 
 int var_cmp(char **envar, char *newvar)
 {
-    while (*envar)
+    int i = 0;
+    while (envar[i])
     {
-        if (varname_len(*envar) == varname_len(newvar) && ft_strncmp(*envar, newvar, varname_len(*envar)) == 0)
+        if ((varname_len(envar[i]) == varname_len(newvar)) && (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
             return (1);
-        envar++;
+        i++;
     }
     return (0);
 }
-
-//     int i;
-
-//     i = 0;
-//     int j = 0;
-//     while (envar[i])
-//     {
-//         j = 0;
-//         if(varname_len(envar[i]) && varname_len(newvar))
-//         {
-//             while (j <= varname_len(envar[i]) && envar[i][j] == newvar[j])
-//             {
-//                 // printf("j is %d ", j);
-//                 // printf("varnamelen is %d\n", varname_len(envar[i]));
-//                 // printf("envar is %c\n",envar[i][j]);
-//                 // printf("newvar is %c\n",newvar[j]);
-//                 if(envar[i][j] == '=' && newvar[j] == '=')
-//                     return(1);
-//                 j++;
-//             }
-//         }
-//         i++;
-//     }
-//     return(0);
-//}
 
 int replace_var(char **envar, char *newvar)
 {
-    while (*envar)
+    int i = 0;
+    while (envar[i])
     {
-        if (varname_len(*envar) == varname_len(newvar) && ft_strncmp(*envar, newvar, varname_len(*envar)) == 0)
+        if ((varname_len(envar[i]) == varname_len(newvar)) && (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
         {
-            free(*envar);
-            *envar = ft_strdup(newvar);
-            // *envar = ft_calloc(ft_strlen(newvar) + 1, sizeof(char));
-            // ft_strlcpy(*envar, newvar, ft_strlen(newvar) + 1);
+            free(envar[i]);
+            envar[i] = ft_strdup(newvar);
             return (1);
         }
-        envar++;
+        i++;
     }
     return (0);
 }
-// int i;
-// char **tmp;
-// tmp = malloc(sizeof(char *) * (count_env(data->envs->var) + 1));
-// if (tmp == NULL)
-//     return (-1);
-// i = 0;
-// while (data->envs->var[i] != NULL)
-// {
-//     if (ft_strncmp(data->envs->var[i], cmd->args[1], varname_len(data->envs->var[i])) == 0)
-//     {
-//         tmp[i] = cmd->args[1];
-//         i++;
-//     }
-//     else
-//     {
-//         tmp[i] = ft_strdup(data->envs->var[i]);
-//         i++;
-//     }
-// }
-// tmp[i] = NULL;
-// free_arr2D(data->envs->var);
-// data->envs->var = tmp;
-// return (0);
-//}
 
-int add_var(char **envar, char *newvar)
+int add_var(char ***envar, char *newvar)
 {
-    //char *newvar = ft_strdup(newvar);
-    char **tmp = malloc(sizeof(char *) * (count_env(envar) + 2));
-    // envar = ft_realloc(envar, sizeof(char *) * (count_env(envar) + 2));
-    ft_memmove(tmp, envar, sizeof(char *) * (count_env(envar) + 1));
-    tmp[count_env(envar)] = ft_strdup(newvar);
-    tmp[count_env(envar) + 1] = NULL;
-    free_arr2D(envar);
-    envar = tmp;
-    return (0);
-
-    // int i;
-    // int j;
-    // char **new_var;
-
-    // new_var = malloc(sizeof(char *) * (count_env(data->envs->var) + 2));
-    // if (new_var == NULL)
-    //     return (-1);
-    // j = 0;
-    // while (cmd->args[j] != NULL)
-    // {
-    //     i = 0;
-    //     while (data->envs->var[i] != NULL)
-    //     {
-    //         new_var[i] = ft_strdup(data->envs->var[i]);
-    //         i++;
-    //     }
-    //     new_var[i] = ft_strdup(cmd->args[j]);
-    //     i++;
-    //     new_var[i] = NULL;
-    //     j++;
-    // }
-    // free(data->envs->var);
-    // data->envs->var = new_var;
-    // i = 0;
-    // while (new_var[i])
-    // {
-    //     data->envs->var[i] = ft_strdup(new_var[i]);
-    //     i++;
-    // }
-    // return (0);
+    char **tmp = malloc(sizeof(char *) * (count_env(*envar) + 2));
+    int i = 0;
+    while ((*envar)[i])
+    {
+        tmp[i] = ft_strdup((*envar)[i]);
+        i++;
+    }
+    tmp[count_env(*envar)] = ft_strdup(newvar);
+    tmp[count_env(*envar) + 1] = NULL;
+    free_arr2D(*envar);
+    *envar = tmp;
+    return 0;
 }
 
 void ft_export(t_data *data, t_cmd *cmd)
@@ -136,7 +59,7 @@ void ft_export(t_data *data, t_cmd *cmd)
     int j;
 
     j = 1;
-    check_NULL(cmd->args[1]); // need to check args format as well
+    // check_NULL(cmd->args[1]); // need to check args format as well
     while (cmd->args[j] != NULL)
     {
         if (var_cmp(data->envs->var, cmd->args[j]) == 1)
@@ -147,7 +70,7 @@ void ft_export(t_data *data, t_cmd *cmd)
         else
         {
             printf(GRN "Add variable\n" RESET);
-            add_var(data->envs->var, cmd->args[j]);
+            add_var(&data->envs->var, cmd->args[j]);
         }
         j++;
     }
