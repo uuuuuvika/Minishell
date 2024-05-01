@@ -25,7 +25,7 @@ void exec_cmd(t_data *data, t_cmd *cmd)
     else
     {
         path = create_path(cmd->args[0]);
-        if (execve(path, cmd->args, data->envs->var) == -1)
+        if (execve(path, cmd->args, data->envs) == -1)
             exit(EXIT_FAILURE);
     }
 }

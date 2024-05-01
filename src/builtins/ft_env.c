@@ -5,14 +5,14 @@ void ft_env(t_data *data)
     int i;
 
     i = 0;
-    if (data->envs->var == NULL)
+    if (data->envs == NULL)
     {
         printf(RED "envp is null\n" RESET);
         return;
     }
-    while (data->envs->var[i] != NULL)
+    while (data->envs[i] != NULL)
     { 
-        printf("%s\n", data->envs->var[i]);
+        printf("%s\n", data->envs[i]);
         i++;
     }
 }
