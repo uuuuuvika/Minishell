@@ -15,7 +15,7 @@ int parse(char *input, t_data *data)
     future_children = ft_split(line_copy, '|');
     free(line_copy);
 
-    t_cmd *head = NULL;
+    //t_cmd *head = NULL;
     t_cmd *current = NULL;
     index = 0;
     while (future_children[index])
@@ -32,26 +32,32 @@ int parse(char *input, t_data *data)
         int i = 0;
         while (new_node->args[i])
         {
-            printf("args[%d]: %s\n", i, new_node->args[i]);
+            printf("before args[%d]: %s\n", i, new_node->args[i]);
             if (ft_strcmp(new_node->args[i], ">") == 0)
             {
                 new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-                new_node->args[i] = NULL;
-                new_node->args[i + 1] = NULL;
+                new_node->args[i] = NULL; // >
+                new_node->args[i + 1] = NULL; // fd
+                printf("in args[%d]: %s\n", i, new_node->args[i]);
+                printf("in args[%d]: %s\n", i + 1, new_node->args[i + 1]);
             }
             i++;
+            printf("after args[%d]: %s\n", i, new_node->args[i]);
         }
-        if (head == NULL)
-            head = new_node;
+        // if (head == NULL)
+        //     head = new_node;
+        if (index == 0)
+            data->commands = new_node;
         else
             current->next = new_node;
         current = new_node;
+        
         index++;
     }
-    data->commands = head;
+    //data->commands = head;
     data->num_of_children = index;
 
-    current = head;
+    current = data->commands;
     t_cmd *previous = NULL;
     while (current)
     {
@@ -66,7 +72,7 @@ int parse(char *input, t_data *data)
         current = current->next;
     }
 
-    current = head;
+    current = data->commands;
     while (current)
     {
         printf("redirect_in: %d\n", current->redirect_in);
