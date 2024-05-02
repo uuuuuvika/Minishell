@@ -10,17 +10,17 @@ int varname_len(char *var)
     return (i);
 }
 
-int var_cmp(char **envar, char *newvar)
-{
-    int i = 0;
-    while (envar[i])
-    {
-        if ((varname_len(envar[i]) == varname_len(newvar)) && (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
-            return (1);
-        i++;
-    }
-    return (0);
-}
+// int var_cmp(char **envar, char *newvar)
+// {
+//     int i = 0;
+//     while (envar[i])
+//     {
+//         if ((varname_len(envar[i]) == varname_len(newvar)) && (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
+//             return (1);
+//         i++;
+//     }
+//     return (0);
+// }
 
 int replace_var(char **envar, char *newvar)
 {
@@ -51,23 +51,25 @@ int add_var(char ***envar, char *newvar)
     tmp[count_env(*envar) + 1] = NULL;
     free_arr2D(*envar);
     *envar = tmp;
-    return 0;
+    return (0);
 }
 
 void ft_export(t_data *data, t_cmd *cmd)
 {
+    // int     i;
     int j;
 
+    // i = 0;
     j = 1;
     // check_NULL(cmd->args[1]); // need to check args format as well
     while (cmd->args[j] != NULL)
     {
-        if (var_cmp(data->envs->var, cmd->args[j]) == 1)
-        {
-            printf(YEL "Replace variable\n" RESET);
-            replace_var(data->envs->var, cmd->args[j]);
-        }
-        else
+        if (!replace_var(data->envs->var, cmd->args[j]))
+        // {
+        //     printf(YEL "Replace variable\n" RESET);
+        //     replace_var(data->envs->var, cmd->args[j]);
+        // }
+        // else
         {
             printf(GRN "Add variable\n" RESET);
             add_var(&data->envs->var, cmd->args[j]);

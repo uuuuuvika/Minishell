@@ -37,7 +37,9 @@ int parse(char *input, t_data *data)
             {
                 new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
                 new_node->args[i] = NULL;
+                i++;
                 new_node->args[i + 1] = NULL;
+                i++;
             }
             i++;
         }

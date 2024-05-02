@@ -1,0 +1,9 @@
+[0m/Users/vika/Desktop/_code/Minishell
+[0;33mMinishell > [0m
+
+[0;33mFork
+[0m[0;33mMinishell > [0m[K[0;33mMinishell > [0m
+[0;33mFork
+[0m[0;33mMinishell > [0m
+[0;33mFork
+[0m[0;33mMinishell > [0m^Dyou have pressed CTRL-D

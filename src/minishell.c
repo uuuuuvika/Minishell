@@ -27,18 +27,18 @@ int	main(int argc, char *argv[], char **envp)
         if (data.num_of_children == 1 && is_builtin(data.commands))
         {
             printf(YEL "Executing simple cmd in main\n" RESET);
-			if (data.commands->redirect_in != -1)
-            {
-                if (dup2(data.commands->redirect_in, STDIN) == -1)
-                    handle_error("dup2 error redirect_in");
-                close(data.commands->redirect_in);
-            }
+			// if (data.commands->redirect_in != -1)
+            // {
+            //     if (dup2(data.commands->redirect_in, STDIN) == -1)
+            //         handle_error("dup2 error redirect_in");
+            //     close(data.commands->redirect_in);
+            // }
 
             if (data.commands->redirect_out != -1)
             {
                 if (dup2(data.commands->redirect_out, STDOUT) == -1)
                     handle_error("dup2 error redirect_out");
-                close(data.commands->redirect_out);
+                //close(data.commands->redirect_out);
             }
 
 			// if(data.commands->redirect_in != -1)
@@ -47,6 +47,8 @@ int	main(int argc, char *argv[], char **envp)
             //     close(data.commands->redirect_out);
 
             exec_cmd(&data, data.commands);
+            if(data.commands->redirect_out != -1)
+                close(data.commands->redirect_out);
         }
         else
 		{
