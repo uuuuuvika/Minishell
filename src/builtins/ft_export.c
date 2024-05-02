@@ -64,18 +64,16 @@ void ft_export(t_data *data, t_cmd *cmd)
     // check_NULL(cmd->args[1]); // need to check args format as well
     while (cmd->args[j] != NULL)
     {
-        if (!replace_var(data->envs->var, cmd->args[j]))
-        // {
-        //     printf(YEL "Replace variable\n" RESET);
-        //     replace_var(data->envs->var, cmd->args[j]);
-        // }
-        // else
+        if (var_cmp(data->envs, cmd->args[j]) == 1)
+        {
+            printf(YEL "Replace variable\n" RESET);
+            replace_var(data->envs, cmd->args[j]);
+        }
+        else
         {
             printf(GRN "Add variable\n" RESET);
-            add_var(&data->envs->var, cmd->args[j]);
+            add_var(&data->envs, cmd->args[j]);
         }
         j++;
     }
-
-    // print_envs(data);
 }

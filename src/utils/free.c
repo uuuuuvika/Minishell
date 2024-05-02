@@ -10,7 +10,7 @@ void free_arr2D(char **arr2D)
     free(arr2D);
 }
 
-void free_data(t_data *data, char *input)
+void free_data(t_data *data)
 {
     t_cmd *current;
     t_cmd *next;
@@ -23,14 +23,7 @@ void free_data(t_data *data, char *input)
         free(current);
         current = next;
     }
-    free(input);
-    free(data);
-	// while (commands)
-	// {
-	// 	tmp = commands;
-	// 	commands = commands->next;
-	// 	free_command(tmp);
-	// }	
+    free(data);	
 }
 
 // void free_command(t_cmd *command)

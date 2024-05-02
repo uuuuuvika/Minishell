@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [0m/Users/vika/Desktop/_code/Minishell
 [0;33mMinishell > [0m
 
@@ -7,3 +8,22 @@
 [0m[0;33mMinishell > [0m
 [0;33mFork
 [0m[0;33mMinishell > [0m^Dyou have pressed CTRL-D
+=======
+Dockerfile
+ignore_it.c
+include
+lib
+ls
+Makefile
+minishell
+out
+out3
+out.txt
+README.md
+src
+t1
+t1.txt
+t2
+t3
+t4
+>>>>>>> 81b196a3f6b70686460031f69696c8dede0807b4

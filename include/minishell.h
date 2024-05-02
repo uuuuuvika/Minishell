@@ -32,10 +32,10 @@
 #include <readline/history.h>
 #include <errno.h>
 
-typedef struct s_envs{
-    char **var;
-  //  int num_var;
-} t_envs;
+// typedef struct s_envs{
+//     char **var;
+//   //  int num_var;
+// } t_envs;
 
 typedef struct s_cmd {
     char **args;
@@ -45,7 +45,6 @@ typedef struct s_cmd {
     int redirect_in;
     int redirect_out;
     struct s_cmd *next;
-    t_envs  *envs;
 } t_cmd;
 
 typedef struct s_data {
@@ -53,7 +52,7 @@ typedef struct s_data {
     int num_of_children;
     char **sub;
     t_cmd *commands;
-    t_envs  *envs;
+    char  **envs;
 } t_data;
 
 // ls -l " | grep foo > output.txt "
@@ -84,7 +83,7 @@ typedef struct s_data {
 // char	*ft_strdup(char const *s);
 
 void	free_arr2D(char **arr2D);
-void    free_data(t_data *data, char *input);
+void    free_data(t_data *data);
 // void	free_command(t_cmd *command);
 // void	free_commands(t_cmd *commands);
 // void	free_data(t_data *data);
