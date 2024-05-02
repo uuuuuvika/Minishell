@@ -41,10 +41,10 @@ int	main(int argc, char *argv[], char **envp)
                 close(data.commands->redirect_out);
             }
 
-			if(data.commands->redirect_in != -1)
-                close(data.commands->redirect_in);
-            if(data.commands->redirect_out != -1)
-                close(data.commands->redirect_out);
+			// if(data.commands->redirect_in != -1)
+            //     close(data.commands->redirect_in);
+            // if(data.commands->redirect_out != -1)
+            //     close(data.commands->redirect_out);
 
             exec_cmd(&data, data.commands);
         }
