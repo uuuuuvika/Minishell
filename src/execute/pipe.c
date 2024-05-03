@@ -12,7 +12,7 @@ int pipe_cmds(t_data *data)
     t_cmd *current;
     pid_t pid;
 
-    current = data->commands;
+    current = data->commands; // cat | cat | ls
     while (current != NULL)
     {
         pid = fork();
@@ -25,7 +25,7 @@ int pipe_cmds(t_data *data)
                 if (dup2(current->pipe_in, STDIN) == -1)
                     handle_error("dup2 error pipe_in");
                 close(current->pipe_in);
-            } 
+            }
             else if (current->redirect_in != -1)
             {
                 if (dup2(current->redirect_in, STDIN) == -1)
@@ -46,25 +46,27 @@ int pipe_cmds(t_data *data)
                     handle_error("dup2 error pipe_out");
                 close(current->pipe_out);
             }
-           
+
             exec_cmd(data, current);
-            handle_error("exec_cmd error");// This is error is printed after executung builtins, there is already an error check when executing execve
+            handle_error("exec_cmd error"); // This is error is printed after executung builtins, there is already an error check when executing execve
         }
         else
         {
-            wait(NULL);
+            //wait(NULL);
             if (current->pipe_out != -1)
                 close(current->pipe_out);
             if (current->pipe_in != -1)
                 close(current->pipe_in);
-            if(current->redirect_in != -1)
+
+            if (current->redirect_in != -1)
                 close(current->redirect_in);
-            if(current->redirect_out != -1)
+            if (current->redirect_out != -1)
                 close(current->redirect_out);
+
             current = current->next;
         }
     }
-    wait(NULL);
+    waitpid(-1, NULL, 0);
     return 0;
 }
 
