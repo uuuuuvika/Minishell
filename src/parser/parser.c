@@ -15,7 +15,6 @@ int parse(char *input, t_data *data)
     future_children = ft_split(line_copy, '|');
     free(line_copy);
 
-    //t_cmd *head = NULL;
     t_cmd *current = NULL;
     index = 0;
     while (future_children[index])
@@ -30,31 +29,52 @@ int parse(char *input, t_data *data)
         new_node->next = NULL;
 
         int i = 0;
+        while (new_node->args[i] && ft_strcmp(new_node->args[i], ">") != 0 && ft_strcmp(new_node->args[i], "<") != 0 && ft_strcmp(new_node->args[i], "<<") != 0 && ft_strcmp(new_node->args[i], ">>") != 0)
+        {
+            new_node->num_args++;
+            i++;
+        }
+        i = 0;
         while (new_node->args[i])
         {
-            printf("before args[%d]: %s\n", i, new_node->args[i]);
             if (ft_strcmp(new_node->args[i], ">") == 0)
             {
                 new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-                new_node->args[i] = NULL; // >
-                new_node->args[i + 1] = NULL; // fd
-                printf("in args[%d]: %s\n", i, new_node->args[i]);
-                printf("in args[%d]: %s\n", i + 1, new_node->args[i + 1]);
+                i++;
             }
+            else if (ft_strcmp(new_node->args[i], "<") == 0)
+            {
+                new_node->redirect_in = open(new_node->args[i + 1], O_RDONLY);
+                i++;
+            }
+            else if (ft_strcmp(new_node->args[i], ">>") == 0)
+            {
+                new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+                i++;
+            }
+            // else if (ft_strcmp(new_node->args[i], "<<") == 0)
+            // {
+            //     here we need to implement the here_doc function
+            //     new_node->redirect_in = here_doc(new_node->args[i + 1]);
+            //     i++;
+            // }
             i++;
-            printf("after args[%d]: %s\n", i, new_node->args[i]);
         }
-        // if (head == NULL)
-        //     head = new_node;
-        if (index == 0)
+        new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
+        new_node->args[new_node->num_args] = NULL;
+
+        // i = 0;
+        // while(new_node->args[i])
+        // {
+        //     printf("args[%d]: %s\n", i, new_node->args[i]);
+        //     i++;
+        // }
+        if (index++ == 0)
             data->commands = new_node;
         else
             current->next = new_node;
         current = new_node;
-        
-        index++;
     }
-    //data->commands = head;
     data->num_of_children = index;
 
     current = data->commands;
@@ -72,13 +92,14 @@ int parse(char *input, t_data *data)
         current = current->next;
     }
 
-    current = data->commands;
-    while (current)
-    {
-        printf("redirect_in: %d\n", current->redirect_in);
-        printf("redirect_out: %d\n", current->redirect_out);
-        previous = current;
-        current = current->next;
-    }
+    // current = data->commands;
+    // while (current)
+    // {
+    //     printf("num_args: %d\n", current->num_args);
+    //     printf("redirect_in: %d\n", current->redirect_in);
+    //     printf("redirect_out: %d\n", current->redirect_out);
+    //     previous = current;
+    //     current = current->next;
+    // }
     return (0);
 }

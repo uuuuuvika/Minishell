@@ -52,7 +52,7 @@ int pipe_cmds(t_data *data)
         }
         else
         {
-            //wait(NULL);
+            wait(NULL);
             if (current->pipe_out != -1)
                 close(current->pipe_out);
             if (current->pipe_in != -1)
