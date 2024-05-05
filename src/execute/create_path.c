@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char *create_path(char *cmd)
+char *create_path(char *cmd, t_data *data)
 {
     char *path;
     struct stat statbuf;
@@ -8,16 +8,19 @@ char *create_path(char *cmd)
     path = ft_strjoin("/bin/", cmd);
     if (stat(path, &statbuf) == 0)
     {
-        return(path);
+        // data->exit_code = 0;
+        return (path);
     }
     else
     {
         path = ft_strjoin("/usr/bin/", cmd);
         if (stat(path, &statbuf) == 0)
         {
-            return(path);
+            // data->exit_code = 0;
+            return (path);
         }
     }
-    printf(RED "-minishell: %s: command not found \n" WHT, cmd);
-    return(0);
+    printf(YEL "-minishell: %s: command not found \n" WHT, cmd);
+    data->exit_code = 127;
+    return (NULL);
 }

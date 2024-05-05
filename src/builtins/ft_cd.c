@@ -39,6 +39,7 @@ void ft_cd(t_data *data, t_cmd *cmd)
     if (chdir(cmd->args[1]) != 0)
     {
         perror("chdir failed");
+		data->exit_code = 1;
         free(old_pwd);
         return;
     }
