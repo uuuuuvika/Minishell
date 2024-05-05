@@ -3,21 +3,21 @@
 void handle_error(const char *message)
 {
     perror(message);
-    exit(0);
+    // exit(0);
 }
 
-// in - read - 0 --------------- out - write - 1
 int pipe_cmds(t_data *data)
 {
     t_cmd *current;
     pid_t pid;
+    int exit_code;
 
-    current = data->commands; // cat | cat | ls
+    current = data->commands;
     while (current != NULL)
     {
         pid = fork();
         if (pid == -1)
-            handle_error("fork error");
+            return EXIT_FAILURE;
         else if (pid == 0)
         {
             if (current->pipe_in != -1)
@@ -46,39 +46,31 @@ int pipe_cmds(t_data *data)
                     handle_error("dup2 error pipe_out");
                 close(current->pipe_out);
             }
-
-            exec_cmd(data, current);
-            handle_error("exec_cmd error"); // This is error is printed after executung builtins, there is already an error check when executing execve
+            exit(exec_cmd(data, current));
         }
         else
         {
-            //wait(NULL);
             if (current->pipe_out != -1)
                 close(current->pipe_out);
             if (current->pipe_in != -1)
                 close(current->pipe_in);
-
             if (current->redirect_in != -1)
                 close(current->redirect_in);
             if (current->redirect_out != -1)
                 close(current->redirect_out);
-
-            current = current->next;
         }
+        current = current->next;
     }
-    waitpid(-1, NULL, 0);
-    return 0;
+
+    if (waitpid(pid, &exit_code, 0) == -1)
+    {
+        perror("waitpid failed");
+        return EXIT_FAILURE;
+    }
+
+    if (WIFEXITED(exit_code))
+    {
+        data->exit_code = WEXITSTATUS(exit_code);
+    }
+    return EXIT_SUCCESS;
 }
-
-// int redirect_in(t_data *data, t_cmd *current)
-// {
-//     int fd;
-
-//     fd = open(current->args[1], O_RDWR | O_CREAT);
-//     if (fd == -1)
-//         handle_error("open error");
-//     if (dup2(fd, STDIN) == -1)
-//         handle_error("dup2 error redirect_in");
-//     close(fd);
-//     return 0;
-// }

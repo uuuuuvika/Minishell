@@ -101,7 +101,7 @@ void    ft_exit(t_data *data);
 int     parse(char *input, t_data *data);
 int     pipe_cmds(t_data *data);
 char    *create_path(char *cmd, t_data *data);
-void    exec_cmd(t_data *data, t_cmd *cmd);
+int    exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
 
 int     count_env(char **envp);

@@ -3,7 +3,8 @@
 int	main(int argc, char *argv[], char **envp)
 {
 	static t_data data;
-	char *input;
+	//data.exit_code = 0;
+	char	*input;
 	
     (void)argc;
     (void)argv;
@@ -22,7 +23,7 @@ int	main(int argc, char *argv[], char **envp)
 			add_history(input);
 		parse(input, &data);
     	// validate_cmds();
-        if (data.num_of_children == 1 && is_builtin(data.commands))
+        if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && ft_strcmp(data.commands->args[0], "$?") == 0))
         {
             printf(YEL "Executing simple builtin in main\n" RESET);
 			// if (data.commands->redirect_in != -1)
@@ -36,20 +37,21 @@ int	main(int argc, char *argv[], char **envp)
             { 
                 if (dup2(data.commands->redirect_out, STDOUT) == -1)
                     handle_error("dup2 error redirect_out");
-                //close(data.commands->redirect_out);
+                close(data.commands->redirect_out);
             }
 			exec_cmd(&data, data.commands);
         }
-		else if (data.num_of_children == 1 && !is_builtin(data.commands))
-		{
-			printf(YEL "Executing simple cmd in main\n" RESET);
-			exec_cmd(&data, data.commands);
-		}
+		// else if (data.num_of_children == 1 && !is_builtin(data.commands))
+		// {
+		// 	printf(YEL "Executing simple cmd in main\n" RESET);
+		// 	exec_cmd(&data, data.commands);
+		// }
 		else
 		{
 			printf(YEL "Fork\n" RESET);
         	pipe_cmds(&data);
 		}
+		printf("exit code in main is %d\n", data.exit_code);
 		printf("g_signal in main is %d\n", g_signal);
 	    free(input);
     }
