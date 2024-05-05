@@ -108,9 +108,12 @@ void	print_envs(t_data *data);
 
 int     check_NULL(char *str);
 void    sub_dub_quotes(char *line_copy, t_data *data);
+int     is_redir(char *str);
+int     cnt_args(char **args);
+void    pipe_assign(t_cmd *head);
 
 void	sig_handler(int sig);
 void	handle_ctrl(void);
 
-void handle_error(const char *message);
+void    handle_error(const char *message);
 #endif

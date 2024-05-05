@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vika <vika@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/29 14:55:20 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/31 17:45:13 by darotche         ###   ########.fr       */
+/*   Updated: 2024/05/05 03:07:46 by vika             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 		}
 	}
 }
+
 
 // #include <stdio.h>
 // void print_content(void *content)
