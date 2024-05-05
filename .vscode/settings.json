@@ -93,7 +93,8 @@
     "history.h": "c",
     "stdio.h": "c",
     "string.h": "c",
-    "errno.h": "c"
+    "errno.h": "c",
+    "random": "c"
   }
 >>>>>>> 23cf9a20c7b559eb2ddc4cdf2a7e7c17b9d41a3f
 }

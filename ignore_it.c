@@ -1,5 +1,43 @@
 #include "minishell.h"
 
+
+//parser back-up
+//printf("num_of_children: %d\n", data->num_of_children);
+
+    // t_cmd *current = data->commands;
+    // t_cmd *previous = NULL;
+    // while (current)
+    // {
+    //     if (previous)
+    //     {
+    //         int p[2];
+    //         pipe(p);
+    //         previous->pipe_out = p[PIPE_WRITE];
+    //         current->pipe_in = p[PIPE_READ];
+    //     }
+    //     previous = current;
+    //     current = current->next;
+    // }
+
+    // t_cmd *current = data->commands;
+    // // t_cmd *previous = NULL;
+    // while (current)
+    // {
+    //     printf("num_args: %d\n", current->num_args);
+    //     printf("cmd: %s\n", current->args[0]);
+    //     printf("redirect_in: %d\n", current->redirect_in);
+    //     printf("redirect_out: %d\n", current->redirect_out);
+    //     printf("pipe_in: %d\n", current->pipe_in);
+    //     printf("pipe_out: %d\n", current->pipe_out);
+    //     //previous = current;
+    //     current = current->next;
+    // }
+
+
+
+
+
+
 // int main(int argc, char *argv[], char **envp) //main with allocated memory for data
 // {
 

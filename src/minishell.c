@@ -12,7 +12,7 @@ int	main(int argc, char *argv[], char **envp)
     cpy_envs(&data, envp);
     while (1)
     {
-		handle_ctrl();
+        handle_ctrl();
         input = readline(YEL "Minishell > " RESET);
         if(!input || errno == EINVAL)
 		{

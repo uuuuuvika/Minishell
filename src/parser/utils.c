@@ -32,6 +32,36 @@ void sub_dub_quotes(char *line_copy, t_data *data)
         }
         index++;
     }
-
     data->sub[s_index] = NULL;
+}
+
+int is_redir(char *str)
+{
+    return (ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">>") == 0);
+}
+
+int cnt_args(char **args)
+{
+    int i = 0;
+    while (args[i] && !is_redir(args[i]))
+        i++;
+    return (i);
+}
+
+void pipe_assign(t_cmd *head)
+{
+    t_cmd *current = head;
+    t_cmd *previous = NULL;
+    while (current)
+    {
+        if (previous)
+        {
+            int p[2];
+            pipe(p);
+            previous->pipe_out = p[PIPE_WRITE];
+            current->pipe_in = p[PIPE_READ];
+        }
+        previous = current;
+        current = current->next;
+    }
 }
