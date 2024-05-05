@@ -1,9 +1,8 @@
 #include "minishell.h"
 
-void exec_cmd(t_data *data, t_cmd *cmd)
+int	exec_cmd(t_data *data, t_cmd *cmd)
 {
-    char *path;
-	char *exit_code_str;
+    char	*path;
 
     check_NULL(cmd->args[0]);
     if (is_builtin(cmd))
@@ -29,21 +28,20 @@ void exec_cmd(t_data *data, t_cmd *cmd)
 		{
 			data->exit_code = 130;
 			g_signal = 0;
-		}	
-		exit_code_str = ft_itoa(data->exit_code);
-		free(cmd->args[0]);
-		cmd->args[0]= exit_code_str;
-		printf(RED "-minishell: %s: command not found \n" WHT, cmd->args[0]);
+		}
+		printf(RED "data->exit_code: %d\n" WHT, data->exit_code);
 	}
 	else
 	{
-		//(ft_strcmp(cmd->args[0], "$?") != 0)
-		// {
 		path = create_path(cmd->args[0], data);
+		if (path == NULL)
+			return (data->exit_code);
 		execve(path, cmd->args, data->envs);
-		// }
 	}
+	return (0);
 }
+
+
 
 // void replace_exit_code(char** args, int last_exit_code)
 // {
