@@ -10,20 +10,36 @@ void free_arr2D(char **arr2D)
     free(arr2D);
 }
 
-void free_command(t_cmd *command)
+void free_data(t_data *data)
 {
-    free_arr2D(command->args);
-    free(command);
+    t_cmd *current;
+    t_cmd *next;
+
+    current = data->commands;
+    while (current != NULL)
+    {
+        next = current->next;
+        free_arr2D(current->args);
+        free(current);
+        current = next;
+    }
+    free(data);	
 }
 
-void free_commands(t_cmd *commands)
-{
-    t_cmd *tmp;
+// void free_command(t_cmd *command)
+// {
+//     free_arr2D(command->args);
+//     free(command);
+// }
 
-	while (commands)
-	{
-		tmp = commands;
-		commands = commands->next;
-		free_command(tmp);
-	}	
-}
+// void free_commands(t_cmd *commands)
+// {
+//     t_cmd *tmp;
+
+// 	while (commands)
+// 	{
+// 		tmp = commands;
+// 		commands = commands->next;
+// 		free_command(tmp);
+// 	}	
+// }

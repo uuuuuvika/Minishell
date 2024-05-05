@@ -28,13 +28,16 @@
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <readline/readline.h>
+#include <sys/fcntl.h>
 #include <readline/history.h>
 #include <errno.h>
 
-typedef struct s_envs{
-    char **var;
-  //  int num_var;
-} t_envs;
+extern int g_signal;
+
+// typedef struct s_envs{
+//     char **var;
+//   //  int num_var;
+// } t_envs;
 
 typedef struct s_cmd {
     char **args;
@@ -44,17 +47,14 @@ typedef struct s_cmd {
     int redirect_in;
     int redirect_out;
     struct s_cmd *next;
-    t_envs  *envs;
 } t_cmd;
 
 typedef struct s_data {
     int exit_code;
     int num_of_children;
-    //char **piped_commands;
-    int pipes[10][2];
     char **sub;
     t_cmd *commands;
-    t_envs  *envs;
+    char  **envs;
 } t_data;
 
 // ls -l " | grep foo > output.txt "
@@ -85,9 +85,10 @@ typedef struct s_data {
 // char	*ft_strdup(char const *s);
 
 void	free_arr2D(char **arr2D);
-void	free_command(t_cmd *command);
-void	free_commands(t_cmd *commands);
-void	free_data(t_data *data);
+void    free_data(t_data *data);
+// void	free_command(t_cmd *command);
+// void	free_commands(t_cmd *commands);
+// void	free_data(t_data *data);
 
 void    ft_cd(t_data *data, t_cmd *cmd);
 void    ft_echo(t_data *data, t_cmd *cmd);
@@ -99,7 +100,7 @@ void    ft_exit(t_data *data);
 
 int     parse(char *input, t_data *data);
 int     pipe_cmds(t_data *data);
-char    *create_path(char *cmd);
+char    *create_path(char *cmd, t_data *data);
 void    exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
 
@@ -108,9 +109,10 @@ int     cpy_envs(t_data *data, char **envp);
 void	print_envs(t_data *data);
 
 int     check_NULL(char *str);
-void    sub_quot(char *line_copy, t_data *data);
+void    sub_dub_quotes(char *line_copy, t_data *data);
 
 void	sig_handler(int sig);
 void	handle_ctrl(void);
 
+void handle_error(const char *message);
 #endif
