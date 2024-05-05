@@ -9,6 +9,7 @@ int parse(char *input, t_data *data)
     //check_NULL(input);
     line_copy = ft_strdup(input);
     check_NULL(line_copy);
+    /////////
     sub_dub_quotes(line_copy, data);
     future_children = ft_split(line_copy, '|'); // need to free
     free(line_copy);
@@ -17,7 +18,6 @@ int parse(char *input, t_data *data)
     nch = 0;
     while (future_children[nch])
     {
-        //char **args = ft_split(future_children[nch], ' ');
         new_node = malloc(sizeof(t_cmd));
         new_node->args = ft_split(future_children[nch], ' ');
         new_node->num_args = cnt_args(new_node->args);
@@ -62,35 +62,5 @@ int parse(char *input, t_data *data)
     }
     data->num_of_children = nch;
     pipe_assign(data->commands);
-    //printf("num_of_children: %d\n", data->num_of_children);
-
-    // t_cmd *current = data->commands;
-    // t_cmd *previous = NULL;
-    // while (current)
-    // {
-    //     if (previous)
-    //     {
-    //         int p[2];
-    //         pipe(p);
-    //         previous->pipe_out = p[PIPE_WRITE];
-    //         current->pipe_in = p[PIPE_READ];
-    //     }
-    //     previous = current;
-    //     current = current->next;
-    // }
-
-    // t_cmd *current = data->commands;
-    // // t_cmd *previous = NULL;
-    // while (current)
-    // {
-    //     printf("num_args: %d\n", current->num_args);
-    //     printf("cmd: %s\n", current->args[0]);
-    //     printf("redirect_in: %d\n", current->redirect_in);
-    //     printf("redirect_out: %d\n", current->redirect_out);
-    //     printf("pipe_in: %d\n", current->pipe_in);
-    //     printf("pipe_out: %d\n", current->pipe_out);
-    //     //previous = current;
-    //     current = current->next;
-    // }
     return (0);
 }
