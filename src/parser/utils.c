@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void sub_quot(char *line_copy, t_data *data)
+void sub_dub_quotes(char *line_copy, t_data *data)
 {
     char str[20];
     int index = 0;
@@ -14,7 +14,6 @@ void sub_quot(char *line_copy, t_data *data)
     }
 
     data->sub = malloc((count_subs / 2) * sizeof(char *));
-    printf("Count subs: %d\n", count_subs / 2);
 
     int s_index = 0;
     index = 0;

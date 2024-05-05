@@ -3,9 +3,10 @@
 void exec_cmd(t_data *data, t_cmd *cmd)
 {
     char *path;
+	char *exit_code_str;
 
     check_NULL(cmd->args[0]);
-    if (is_builtin(cmd) == 1)
+    if (is_builtin(cmd))
     {
         if (ft_strcmp(cmd->args[0], "cd") == 0)
             ft_cd(data, cmd);
@@ -22,10 +23,56 @@ void exec_cmd(t_data *data, t_cmd *cmd)
 		else if (ft_strcmp(cmd->args[0], "exit") == 0)
             ft_exit(data);
     }
-    else
-    {
-        path = create_path(cmd->args[0]);
-        if (execve(path, cmd->args, data->envs->var) == -1)
-            exit(EXIT_FAILURE);
-    }
+    else if (ft_strcmp(cmd->args[0], "$?") == 0)
+	{
+		if(g_signal == 2)
+		{
+			data->exit_code = 130;
+			g_signal = 0;
+		}	
+		exit_code_str = ft_itoa(data->exit_code);
+		free(cmd->args[0]);
+		cmd->args[0]= exit_code_str;
+		printf(RED "-minishell: %s: command not found \n" WHT, cmd->args[0]);
+	}
+	else
+	{
+		//(ft_strcmp(cmd->args[0], "$?") != 0)
+		// {
+		path = create_path(cmd->args[0], data);
+		execve(path, cmd->args, data->envs);
+		// }
+	}
 }
+
+// void replace_exit_code(char** args, int last_exit_code)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	//printf("g_signal: %d \n",  g_signal);
+// 	while(args[i])
+// 	{
+// 		if (g_signal == 2 && ft_strcmp(args[0], "$?") == 0)
+// 		{
+// 			data->exit_code = 130;
+// 			g_signal = 0;
+// 		}
+// 		//printf("%d\n", data->exit_code);
+
+// 		if (ft_strcmp(args[i], "$?") == 0)
+// 		{
+// 			char exit_code_str[10] = ft_itoa(last_exit_code);
+// 			free(args[i]);
+// 			args[i] = ft_strdup(exit_code_str);
+// 			printf("exit code in exec %d\n", data->exit_code);
+// 			printf("cmd after exec_cmd %s\n", cmd->args[0]);
+// 			printf("exit_code_str %s\n", exit_code_str);
+
+// 			free(cmd->args[0]); // Free memory allocated by strdup
+// 			cmd->args[0]= exit_code_str;
+// 			printf(YEL "-minishell: %s: command not found \n" WHT, cmd->args[0]);
+// 		}
+// 		i++;
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 17:30:59 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/26 17:42:00 by darotche         ###   ########.fr       */
+/*   Updated: 2024/05/03 13:09:53 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	size_t	i;
 
 	i = 0;
-	ptr = (char *)malloc(nmemb * size);
+	ptr = malloc(nmemb * size);
 	if (ptr == NULL)
 		return (NULL);
 	while (i < nmemb * size)

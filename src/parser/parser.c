@@ -2,44 +2,62 @@
 
 int parse(char *input, t_data *data)
 {
-    char    *line_copy;
-    char    **future_children;
-    int     index;
+    char *line_copy;
+    char **future_children;
+    int index;
 
     check_NULL(input);
     line_copy = strdup(input);
     check_NULL(line_copy);
-    
-    sub_quot(line_copy, data); //substitute double quotes
+
+    sub_dub_quotes(line_copy, data);
 
     future_children = ft_split(line_copy, '|');
     free(line_copy);
 
-    t_cmd *head = NULL;
+    //t_cmd *head = NULL;
     t_cmd *current = NULL;
     index = 0;
     while (future_children[index])
     {
-        t_cmd *newNode = (t_cmd *)malloc(sizeof(t_cmd));
-        newNode->args = ft_split(future_children[index], ' ');
-        newNode->num_args = 0;
-        newNode->pipe_in = -1;
-        newNode->pipe_out = -1;
-        newNode->redirect_in = -1;
-        newNode->redirect_out = -1;
-        newNode->next = NULL;
+        t_cmd *new_node = malloc(sizeof(t_cmd));
+        new_node->args = ft_split(future_children[index], ' ');
+        new_node->num_args = 0;
+        new_node->pipe_in = -1;
+        new_node->pipe_out = -1;
+        new_node->redirect_in = -1;
+        new_node->redirect_out = -1;
+        new_node->next = NULL;
 
-        if (head == NULL)
-            head = newNode;
+        int i = 0;
+        while (new_node->args[i])
+        {
+            //printf("before args[%d]: %s\n", i, new_node->args[i]);
+            if (ft_strcmp(new_node->args[i], ">") == 0)
+            {
+                new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+                new_node->args[i] = NULL; // >
+                new_node->args[i + 1] = NULL; // fd
+                printf("in args[%d]: %s\n", i, new_node->args[i]);
+                printf("in args[%d]: %s\n", i + 1, new_node->args[i + 1]);
+            }
+            i++;
+            //printf("after args[%d]: %s\n", i, new_node->args[i]);
+        }
+        // if (head == NULL)
+        //     head = new_node;
+        if (index == 0)
+            data->commands = new_node;
         else
-            current->next = newNode;
-        current = newNode;
+            current->next = new_node;
+        current = new_node;
+        
         index++;
     }
-    data->commands = head;
+    //data->commands = head;
     data->num_of_children = index;
 
-    current = head;
+    current = data->commands;
     t_cmd *previous = NULL;
     while (current)
     {
@@ -54,80 +72,13 @@ int parse(char *input, t_data *data)
         current = current->next;
     }
 
-    // current = head;
-    // while (current)
-    // {
-    //     printf("PIPE IN: %d\n", current->pipe_in);
-    //     printf("PIPE OUT: %d\n", current->pipe_out);
-    //     previous = current;
-    //     current = current->next;
-    // }
+    current = data->commands;
+    while (current)
+    {
+        // printf("redirect_in: %d\n", current->redirect_in);
+        // printf("redirect_out: %d\n", current->redirect_out);
+        previous = current;
+        current = current->next;
+    }
     return (0);
 }
-
-
-// int pipe_cmds(t_data *data)
-// {
-//     pid_t pid;
-//     int i = 0;
-
-//     char **commands;
-//     commands = malloc(5 * sizeof(char *));
-//     commands[0] = *data->commands[0].args;
-//     commands[1] = *data->commands[1].args;
-//     // commands[2] = data->commands[2].args;
-
-//     int read_e = data->commands[0].pipe_out;
-//     int write_e = data->commands[1].pipe_in;
-//     // printf("PIPE 1: %d\n", read_e);
-//     // printf("PIPE 2: %d\n", write_e);
-
-//     int pipe[2];
-//     pipe[PIPE_READ] = read_e;
-//     pipe[PIPE_WRITE] = write_e;
-//     printf(BLU "Num of int children passed to struct: %d\n " RESET, data->num_of_children);
-//     while (i < data->num_of_children)
-//     {
-//         pid = fork();
-//         if (pid == -1)
-//         {
-//             perror("fork error");
-//             return (1);
-//         }
-//         if (pid == 0)
-//         {
-//             if (i == 0)
-//             {
-//                 printf("Loop1 %s ", commands[i]);
-//                 close(pipe[PIPE_READ]);
-//                 dup2(pipe[PIPE_WRITE], STDOUT);
-//                 close(pipe[PIPE_WRITE]);
-//             }
-//             if (i == 1)
-//             {
-//                 printf("Loop2 %s ", commands[i]);
-//                 close(pipe[PIPE_WRITE]);
-//                 dup2(pipe[PIPE_READ], STDIN);
-//                 close(pipe[PIPE_READ]);
-//             }
-//             printf(BLU "Passing command: %s\n " RESET, commands[i]);
-//             // PROTOTYPE: void exec_cmd(t_data *data, char *const cmd[])
-//             //   exec_cmd(data, &commands[i]);
-//             //  if (execve(paths[i], &commands[i], NULL) == -1)
-//             //  {
-//             //      perror(RED"execve"RESET);
-//             //      exit(1);
-//             //  }
-//         }
-//         else
-//         {
-//             printf("%d\n", pid);
-//             printf("Parent waiting\n");
-//             wait(NULL);
-//             close(pipe[PIPE_READ]);
-//             close(pipe[PIPE_WRITE]);
-//         }
-//         i++;
-//     }
-//     return 0;
-// }
