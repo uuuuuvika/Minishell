@@ -1,10 +1,10 @@
 {
+  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",
   "C_Cpp_Runner.debuggerPath": "lldb",
   "C_Cpp_Runner.cStandard": "",
   "C_Cpp_Runner.cppStandard": "",
-  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.useMsvc": false,
   "C_Cpp_Runner.warnings": [
     "-Wall",
@@ -55,46 +55,5 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "files.associations": {
-<<<<<<< HEAD
-	"minishell.h": "c",
-	"types.h": "c",
-	"unistd.h": "c",
-	"wait.h": "c",
-	"sstream": "c",
-	"__bit_reference": "c",
-	"bitset": "c",
-	"unordered_map": "c",
-	"chrono": "c",
-	"readline.h": "c",
-	"param.h": "c",
-	"stdlib.h": "c",
-	"stat.h": "c",
-	"history.h": "c",
-	"stdio.h": "c",
-	"string.h": "c",
-	"errno.h": "c"
-}
-=======
-    "minishell.h": "c",
-    "types.h": "c",
-    "unistd.h": "c",
-    "wait.h": "c",
-    "sstream": "c",
-    "__bit_reference": "c",
-    "bitset": "c",
-    "unordered_map": "c",
-    "chrono": "c",
-    "readline.h": "c",
-    "param.h": "c",
-    "stdlib.h": "c",
-    "stat.h": "c",
-    "history.h": "c",
-    "stdio.h": "c",
-    "string.h": "c",
-    "errno.h": "c",
-    "random": "c"
-  }
->>>>>>> 23cf9a20c7b559eb2ddc4cdf2a7e7c17b9d41a3f
+  "C_Cpp_Runner.msvcSecureNoWarnings": false
 }
