@@ -41,18 +41,13 @@ int	main(int argc, char *argv[], char **envp)
             }
 			exec_cmd(&data, data.commands);
         }
-		// else if (data.num_of_children == 1 && !is_builtin(data.commands))
-		// {
-		// 	printf(YEL "Executing simple cmd in main\n" RESET);
-		// 	exec_cmd(&data, data.commands);
-		// }
 		else
 		{
 			printf(YEL "Fork\n" RESET);
         	pipe_cmds(&data);
 		}
 		printf("exit code in main is %d\n", data.exit_code);
-		printf("g_signal in main is %d\n", g_signal);
+		//printf("g_signal in main is %d\n", g_signal);
 	    free(input);
     }
     return (0);
