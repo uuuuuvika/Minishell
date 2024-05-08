@@ -3,14 +3,14 @@
 void handle_error(const char *message)
 {
     perror(message);
-    exit(EXIT_FAILURE);
+    //exit(EXIT_FAILURE);
 }
 
 int pipe_cmds(t_data *data)
 {
     t_cmd *current;
     pid_t pid;
-    int exit_code;
+   // int exit_code;
 
     current = data->commands;
     while (current != NULL)
@@ -50,6 +50,7 @@ int pipe_cmds(t_data *data)
         }
         else
         {
+            wait(NULL);
             if (current->pipe_out != -1)
                 close(current->pipe_out);
             if (current->pipe_in != -1)
@@ -62,13 +63,13 @@ int pipe_cmds(t_data *data)
         current = current->next;
     }
 
-    if (waitpid(pid, &exit_code, 0) == -1)
-    {
-        perror("waitpid failed");
-        return EXIT_FAILURE;
-    }
+    // if (waitpid(pid, &exit_code, 0) == -1)
+    // {
+    //     perror("waitpid failed");
+    //     return EXIT_FAILURE;
+    // }
 
-    if (WIFEXITED(exit_code))
-        data->exit_code = WEXITSTATUS(exit_code);
+    // if (WIFEXITED(exit_code))
+    //     data->exit_code = WEXITSTATUS(exit_code);
     return EXIT_SUCCESS;
 }

@@ -33,19 +33,14 @@ int	main(int argc, char *argv[], char **envp)
             //     close(data.commands->redirect_in);
             // }
 
-            if (data.commands->redirect_out != -1)
-            { 
-                if (dup2(data.commands->redirect_out, STDOUT) == -1)
-                    handle_error("dup2 error redirect_out");
-                close(data.commands->redirect_out);
-            }
+            // if (data.commands->redirect_out != -1)
+            // { 
+            //     if (dup2(data.commands->redirect_out, STDOUT) == -1)
+            //         handle_error("dup2 error redirect_out");
+            //     close(data.commands->redirect_out);
+            // }
 			exec_cmd(&data, data.commands);
         }
-		// else if (data.num_of_children == 1 && !is_builtin(data.commands))
-		// {
-		// 	printf(YEL "Executing simple cmd in main\n" RESET);
-		// 	exec_cmd(&data, data.commands);
-		// }
 		else
 		{
 			printf(YEL "Fork\n" RESET);
