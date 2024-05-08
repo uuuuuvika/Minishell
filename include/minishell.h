@@ -113,6 +113,7 @@ void    sub_dub_quotes(char *line_copy, t_data *data);
 int     is_redir(char *str);
 int     cnt_args(char **args);
 void    pipe_assign(t_cmd *head);
+void    redirect_assign(t_cmd *cmd);
 
 void	sig_handler(int sig);
 void	handle_ctrl(void);

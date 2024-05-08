@@ -3,7 +3,7 @@
 void handle_error(const char *message)
 {
     perror(message);
-    // exit(0);
+    exit(EXIT_FAILURE);
 }
 
 int pipe_cmds(t_data *data)
@@ -69,8 +69,6 @@ int pipe_cmds(t_data *data)
     }
 
     if (WIFEXITED(exit_code))
-    {
         data->exit_code = WEXITSTATUS(exit_code);
-    }
     return EXIT_SUCCESS;
 }

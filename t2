@@ -1,0 +1,12 @@
+Dockerfile
+Makefile
+README.md
+ignore_it.c
+include
+lib
+minishell
+r1
+r2
+src
+t1
+t2
