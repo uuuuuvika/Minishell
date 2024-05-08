@@ -7,15 +7,17 @@ int parse(char *input, t_data *data)
     int     nch;
 
     //check_NULL(input);
-    line_copy = ft_strdup(input);
-    check_NULL(line_copy);
-    /////////
-	expand_input(line_copy, data);
+
+	line_copy = expand_arg(input);
+	printf("line_copy: %s\n", line_copy);
 	return(0);
+
+    //line_copy = ft_strdup(input);
+    check_NULL(line_copy);
     sub_dub_quotes(line_copy, data);
     future_children = ft_split(line_copy, '|'); // need to free
     free(line_copy);
-
+	printf("Continue after expand\n");
     t_cmd *new_node = NULL;
     nch = 0;
     while (future_children[nch])
