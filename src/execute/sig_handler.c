@@ -18,10 +18,8 @@ void sig_handler(int sig)
 		rl_redisplay();
 		g_signal = 2;
 	}
+	else if (sig == 13)
+	{
+		g_signal = 1;
+	}
 }
-
-// rpl_exit_code(int exit_status)
-// {
-// 	g_signal = exit_status;
-// 	data
-// }

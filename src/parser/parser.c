@@ -25,29 +25,9 @@ int parse(char *input, t_data *data)
         new_node->redirect_in = -1;
         new_node->redirect_out = -1;
         new_node->next = NULL;
-
 		expand_arg(new_node->args, new_node->num_args);
-        int i = 0;
-		printf("new_node->args %s\n", new_node->args[i]);
-        while (new_node->args[i])
-        {
-            if (ft_strcmp(new_node->args[i], ">") == 0)
-            {
-                new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-                i++;
-            }
-            else if (ft_strcmp(new_node->args[i], "<") == 0)
-            {
-                new_node->redirect_in = open(new_node->args[i + 1], O_RDONLY);
-                i++;
-            }
-            else if (ft_strcmp(new_node->args[i], ">>") == 0)
-            {
-                new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-                i++;
-            }
-            i++;
-        }
+
+        redirect_assign(new_node);
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
         if (nch++ == 0)
@@ -61,6 +41,16 @@ int parse(char *input, t_data *data)
         }
     }
     data->num_of_children = nch;
+    printf("num_of_children: %d\n", data->num_of_children);
     pipe_assign(data->commands);
+    t_cmd *current = data->commands;
+    while (current)
+    {
+        printf("cmd: %s\n", current->args[0]);
+        printf("pipe_in: %d\n", current->pipe_in);
+        printf("pipe_out: %d\n", current->pipe_out);
+        current = current->next;
+    }
+
     return (0);
 }

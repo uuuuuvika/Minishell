@@ -65,3 +65,27 @@ void pipe_assign(t_cmd *head)
         current = current->next;
     }
 }
+
+void redirect_assign(t_cmd *current)
+{
+    int i = 0;
+    while (current->args[i])
+    {
+        if (ft_strcmp(current->args[i], ">") == 0)
+        {
+            current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            i++;
+        }
+        else if (ft_strcmp(current->args[i], "<") == 0)
+        {
+            current->redirect_in = open(current->args[i + 1], O_RDONLY);
+            i++;
+        }
+        else if (ft_strcmp(current->args[i], ">>") == 0)
+        {
+            current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+            i++;
+        }
+        i++;
+    }
+}
