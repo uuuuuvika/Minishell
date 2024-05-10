@@ -43,6 +43,7 @@ int	main(int argc, char *argv[], char **envp)
 		else
 		{
 			printf(YEL "Fork\n" RESET);
+            fflush(stdout); //un-yellow 
         	pipe_cmds(&data);
 		}
 		printf("exit code in main is %d\n", data.exit_code);

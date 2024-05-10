@@ -42,23 +42,23 @@ int pipe_cmds(t_data *data)
         {
             if (current->pipe_in != -1)
             {
-                if (dup2(current->pipe_in, STDIN_FILENO) == -1)
+                if (dup2(current->pipe_in, STDIN) == -1)
                     handle_error("dup2 error pipe_in");
             }
             else if (current->redirect_in != -1)
             {
-                if (dup2(current->redirect_in, STDIN_FILENO) == -1)
+                if (dup2(current->redirect_in, STDIN) == -1)
                     handle_error("dup2 error redirect_in");
             }
 
             if (current->redirect_out != -1)
             {
-                if (dup2(current->redirect_out, STDOUT_FILENO) == -1)
+                if (dup2(current->redirect_out, STDOUT) == -1)
                     handle_error("dup2 error redirect_out");
             }
             else if (current->pipe_out != -1)
             {
-                if (dup2(current->pipe_out, STDOUT_FILENO) == -1)
+                if (dup2(current->pipe_out, STDOUT) == -1)
                     handle_error("dup2 error pipe_out");
             }
             close_pipes(data);
