@@ -22,6 +22,8 @@ int	main(int argc, char *argv[], char **envp)
 		if (input != NULL)
 			add_history(input);
 		parse(input, &data);
+		//expand_arg(data.commands);
+
     	// validate_cmds();
         if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && ft_strcmp(data.commands->args[0], "$?") == 0))
         {

@@ -8,13 +8,13 @@ int parse(char *input, t_data *data)
 
     check_NULL(input);
 
-	line_copy = expand_arg(input);
-	check_NULL(line_copy);
-	printf("line_copy: %s\n", line_copy);
+	// line_copy = expand_arg(input);
+	// check_NULL(line_copy);
+	// printf("line_copy: %s\n", line_copy);
 
-    // line_copy = ft_strdup(input);
-    // check_NULL(line_copy);
-	// printf("%s\n", line_copy);
+    line_copy = ft_strdup(input);
+    check_NULL(line_copy);
+	printf("%s\n", line_copy);
 	
     sub_dub_quotes(line_copy, data);
     future_children = ft_split(line_copy, '|'); // need to free
@@ -32,7 +32,9 @@ int parse(char *input, t_data *data)
         new_node->redirect_out = -1;
         new_node->next = NULL;
 
+		expand_arg(new_node->args, new_node->num_args);
         int i = 0;
+		printf("new_node->args %s\n", new_node->args[i]);
         while (new_node->args[i])
         {
             if (ft_strcmp(new_node->args[i], ">") == 0)
