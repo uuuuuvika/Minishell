@@ -6,14 +6,13 @@ int parse(char *input, t_data *data)
     char    **future_children;
     int     nch;
 
-    //check_NULL(input);
+    check_NULL(input);
+
     line_copy = ft_strdup(input);
     check_NULL(line_copy);
-    /////////
     sub_dub_quotes(line_copy, data);
     future_children = ft_split(line_copy, '|'); // need to free
     free(line_copy);
-
     t_cmd *new_node = NULL;
     nch = 0;
     while (future_children[nch])
@@ -26,14 +25,14 @@ int parse(char *input, t_data *data)
         new_node->redirect_in = -1;
         new_node->redirect_out = -1;
         new_node->next = NULL;
+		expand_arg(new_node->args, new_node->num_args);
 
         redirect_assign(new_node);
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
-
         if (nch++ == 0)
             data->commands = new_node;
-        else
+		else
         {
             t_cmd *current = data->commands;
             while (current->next)

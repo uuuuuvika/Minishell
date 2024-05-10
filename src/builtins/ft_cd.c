@@ -21,6 +21,10 @@ void ch_env_pwd(t_data *data, char *new_pwd, char *old_pwd)
     }
 }
 
+
+///NEED TO HANDLE
+///cd alone and cd ~ goes to home/user 
+
 void ft_cd(t_data *data, t_cmd *cmd)
 {
     char *old_pwd;
