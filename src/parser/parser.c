@@ -6,14 +6,13 @@ int parse(char *input, t_data *data)
     char    **future_children;
     int     nch;
 
-    //check_NULL(input);
+    check_NULL(input);
+
     line_copy = ft_strdup(input);
     check_NULL(line_copy);
-    /////////
     sub_dub_quotes(line_copy, data);
     future_children = ft_split(line_copy, '|'); // need to free
     free(line_copy);
-
     t_cmd *new_node = NULL;
     nch = 0;
     while (future_children[nch])
@@ -26,33 +25,14 @@ int parse(char *input, t_data *data)
         new_node->redirect_in = -1;
         new_node->redirect_out = -1;
         new_node->next = NULL;
+		expand_arg(new_node->args, new_node->num_args);
 
-        int i = 0;
-        while (new_node->args[i])
-        {
-            if (ft_strcmp(new_node->args[i], ">") == 0)
-            {
-                new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-                i++;
-            }
-            else if (ft_strcmp(new_node->args[i], "<") == 0)
-            {
-                new_node->redirect_in = open(new_node->args[i + 1], O_RDONLY);
-                i++;
-            }
-            else if (ft_strcmp(new_node->args[i], ">>") == 0)
-            {
-                new_node->redirect_out = open(new_node->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-                i++;
-            }
-            i++;
-        }
+        redirect_assign(new_node);
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
-
         if (nch++ == 0)
             data->commands = new_node;
-        else
+		else
         {
             t_cmd *current = data->commands;
             while (current->next)
@@ -61,6 +41,16 @@ int parse(char *input, t_data *data)
         }
     }
     data->num_of_children = nch;
+    printf("num_of_children: %d\n", data->num_of_children);
     pipe_assign(data->commands);
+    t_cmd *current = data->commands;
+    while (current)
+    {
+        printf("cmd: %s\n", current->args[0]);
+        printf("pipe_in: %d\n", current->pipe_in);
+        printf("pipe_out: %d\n", current->pipe_out);
+        current = current->next;
+    }
+
     return (0);
 }

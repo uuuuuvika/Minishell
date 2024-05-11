@@ -61,18 +61,3 @@ char	**ft_split(char const *s, char c)
 	split[i] = 0;
 	return (split);
 }
-
-// int main()
-// {
-// 	const char *str = "Hello,World,Potato,Tomato,Chocolate";
-// 	char **words = ft_split(str, ',');
-// 	if (words)
-// 	{
-// 		for (int i = 0; words[i] != NULL; i++)
-// 		{
-// 			printf("%s\n", words[i]);
-// 			free(words[i]);
-// 		}
-// 		free(words);
-// 	}
-// }
