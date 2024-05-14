@@ -62,6 +62,9 @@ int is_even(char *str, char c)
 void rm_quotes(char *str)
 {
 	char *unquoted;
+
+	if (ft_strchr(str, '\'') == NULL) //If no quotes, return
+		return;
 	unquoted = ft_strtrim(str, "'");
 	printf(GRN "removed: %s\n" RESET, unquoted);
 	free(str);
@@ -89,7 +92,7 @@ void sin_quotes(char *args)
 	i = 0;
 	j = 0;
 	if (ft_strchr(args, '\'') == NULL) //If no quotes, return
-		return ;
+		return;
 	else
 	{
 		// Check if quotes are closed

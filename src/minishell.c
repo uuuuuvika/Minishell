@@ -52,3 +52,7 @@ int	main(int argc, char *argv[], char **envp)
     }
     return (0);
 }
+
+
+///Commands not working
+// env | grep $HOME stays open until ctrl-C
