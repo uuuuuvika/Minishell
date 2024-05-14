@@ -21,17 +21,6 @@ void ch_env_pwd(t_data *data, char *new_pwd, char *old_pwd)
     }
 }
 
-
-///NEED TO HANDLE
-///cd alone and cd ~ goes to home/user 
-
-    // if (cmd->args[1] == NULL || cmd->args[1][0] == '~')
-	// {
-	// 	char *nd = getenv("HOME");
-	// 	printf("nd: %s\n", nd);
-    //     chdir(getenv("HOME"));
-	// 	return;
-	// }
 void ft_cd(t_data *data, t_cmd *cmd)
 {
     char *old_pwd;

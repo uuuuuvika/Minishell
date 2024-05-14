@@ -34,17 +34,6 @@
 //When quotes check if quotes are closed
 //If not closed, wait for closing quote
 
-//Check for number of pairs, if number of pairs is impair quotes are valid,
-//If number of pairs is pair quotes are invalid
-
-//If quotes are closed and valid, remove quotes and store in quoted, avoid interpreting inside
-
-//else if quotes are invalid ignore them and continue with rest of the code
-
-//If there is a pair of double quotes inside the single quotes, interpret input and write double quotes or not depending if single quotes are escaoing them or not
-//else
-///Wait for closing quote
-
 int is_even(char *str, char c)
 {
     int count = 0;

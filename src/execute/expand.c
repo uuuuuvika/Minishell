@@ -6,7 +6,6 @@
 // darotche@c4b5c1:~$ $? $TERM
 // 126: command not found
 
-
 char *expand_arg(char **args, int num_args)
 {
 	char *cmd;
