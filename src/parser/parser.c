@@ -42,16 +42,17 @@ int parse(char *input, t_data *data)
         }
     }
     data->num_of_children = nch;
-    printf("num_of_children: %d\n", data->num_of_children);
+    //printf("num_of_children: %d\n", data->num_of_children);
     pipe_assign(data->commands);
-    t_cmd *current = data->commands;
-    while (current)
-    {
-        printf("cmd: %s\n", current->args[0]);
-        printf("pipe_in: %d\n", current->pipe_in);
-        printf("pipe_out: %d\n", current->pipe_out);
-        current = current->next;
-    }
+
+    // t_cmd *current = data->commands;
+    // while (current)
+    // {
+    //     printf("cmd: %s\n", current->args[0]);
+    //     printf("pipe_in: %d\n", current->pipe_in);
+    //     printf("pipe_out: %d\n", current->pipe_out);
+    //     current = current->next;
+    // }
 
     return (0);
 }
