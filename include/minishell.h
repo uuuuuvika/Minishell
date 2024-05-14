@@ -94,7 +94,6 @@ int     pipe_cmds(t_data *data);
 char	*expand_arg(char **args, int num_args);
 char    *create_path(char *cmd, t_data *data);
 int     exec_cmd(t_data *data, t_cmd *cmd);
-int     exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
 
 int     count_env(char **envp);
@@ -117,5 +116,8 @@ void    fd_close(t_cmd *current);
 void    ultimate_fd_close(t_data *data);
 void    ultimate_wait(t_data *data, pid_t *pid);
 void    handle_dup2(t_cmd *current);
+
+void	sin_quotes(char *args);
+void	rm_quotes(char *str);
 
 #endif

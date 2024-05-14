@@ -21,9 +21,7 @@ int	main(int argc, char *argv[], char **envp)
 		if (input != NULL)
 			add_history(input);
 		parse(input, &data);
-		//expand_arg(data.commands);
 
-    	// validate_cmds();
         if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && ft_strcmp(data.commands->args[0], "$?") == 0))
         {
             printf(YEL "Executing simple builtin in main\n" RESET);
@@ -48,9 +46,13 @@ int	main(int argc, char *argv[], char **envp)
             fflush(stdout); //un-yellow 
         	pipe_cmds(&data);
 		}
-		printf("exit code in main is %d\n", data.exit_code);
+		//printf("exit code in main is %d\n", data.exit_code);
 		//printf("g_signal in main is %d\n", g_signal);
 	    free(input);
     }
     return (0);
 }
+
+
+///Commands not working
+// env | grep $HOME stays open until ctrl-C
