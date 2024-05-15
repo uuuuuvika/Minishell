@@ -35,10 +35,6 @@ void sub_dub_quotes(char *line_copy, t_data *data)
     data->sub[s_index] = NULL;
 }
 
-int is_redir(char *str)
-{
-    return (ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">>") == 0);
-}
 
 int cnt_args(char **args)
 {
@@ -48,15 +44,15 @@ int cnt_args(char **args)
     return (i);
 }
 
-void pipe_assign(t_cmd *head)
+void pipe_assign(t_cmd *command)
 {
-    t_cmd *current = head;
+    int p[2];
+    t_cmd *current = command;
     t_cmd *previous = NULL;
     while (current)
     {
         if (previous)
         {
-            int p[2];
             pipe(p);
             previous->pipe_out = p[PIPE_WRITE];
             current->pipe_in = p[PIPE_READ];
@@ -66,26 +62,3 @@ void pipe_assign(t_cmd *head)
     }
 }
 
-void redirect_assign(t_cmd *current)
-{
-    int i = 0;
-    while (current->args[i])
-    {
-        if (ft_strcmp(current->args[i], ">") == 0)
-        {
-            current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-            i++;
-        }
-        else if (ft_strcmp(current->args[i], "<") == 0)
-        {
-            current->redirect_in = open(current->args[i + 1], O_RDONLY);
-            i++;
-        }
-        else if (ft_strcmp(current->args[i], ">>") == 0)
-        {
-            current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-            i++;
-        }
-        i++;
-    }
-}

@@ -7,7 +7,7 @@ void ft_pwd(t_data *data)
 
         if (getcwd(cwd, sizeof(cwd)) != NULL)
 		{
-            printf( "%s\n", cwd);
+            printf("%s\n", cwd);
 			data->exit_code = 0;
 		}
 		else

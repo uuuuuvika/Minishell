@@ -34,11 +34,6 @@
 
 extern int g_signal;
 
-// typedef struct s_envs{
-//     char **var;
-//   //  int num_var;
-// } t_envs;
-
 typedef struct s_cmd {
     char **args;
     int num_args;
@@ -57,22 +52,6 @@ typedef struct s_data {
     char  **envs;
 } t_data;
 
-// +----------+
-// | command|
-// | cmd: "ls"
-// | args: ["-l", NULL]
-// | pipe_out: <pipe fd> 
-// | next: --+
-// | +----------+
-
-// | command |
-// | cmd: "grep"
-// | args: ["foo", NULL]
-// | pipe_in: <pipe fd>
-// | redirect_out: <output.txt fd> 
-// | next: NULL
-// +----------+
-
 int     handle_error(const char *message);
 int     check_NULL(char *str);
 void	free_arr2D(char **arr2D);
@@ -90,10 +69,10 @@ void    ft_export(t_data *data, t_cmd *cmd);
 void    ft_exit(t_data *data);
 
 int     parse(char *input, t_data *data);
+void    redirect_fd_dup(t_cmd *command);
 int     pipe_cmds(t_data *data);
 char	*expand_arg(char **args, int num_args);
 char    *create_path(char *cmd, t_data *data);
-int     exec_cmd(t_data *data, t_cmd *cmd);
 int     exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
 
@@ -105,7 +84,7 @@ int     parse(char *input, t_data *data);
 void    sub_dub_quotes(char *line_copy, t_data *data);
 int     is_redir(char *str);
 int     cnt_args(char **args);
-void    pipe_assign(t_cmd *head);
+void    pipe_assign(t_cmd *command);
 void    redirect_assign(t_cmd *cmd);
 
 void	sig_handler(int sig);
@@ -113,9 +92,9 @@ void	handle_ctrl(void);
 
 int     pipe_cmds(t_data *data);
 
-void    fd_close(t_cmd *current);
+void    fd_close(t_cmd *command);
 void    ultimate_fd_close(t_data *data);
 void    ultimate_wait(t_data *data, pid_t *pid);
-void    handle_dup2(t_cmd *current);
+void    fd_dup2(t_cmd *command);
 
 #endif
