@@ -97,4 +97,7 @@ void    ultimate_fd_close(t_data *data);
 void    ultimate_wait(t_data *data, pid_t *pid);
 void    fd_dup2(t_cmd *command);
 
+void	sin_quotes(char *args);
+void	rm_quotes(char *str);
+
 #endif

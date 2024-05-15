@@ -10,6 +10,7 @@ int parse(char *input, t_data *data)
 
     line_copy = ft_strdup(input);
     check_NULL(line_copy);
+	sin_quotes(line_copy);
     sub_dub_quotes(line_copy, data);
     future_children = ft_split(line_copy, '|'); // need to free
     free(line_copy);

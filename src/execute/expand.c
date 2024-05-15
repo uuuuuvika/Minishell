@@ -23,6 +23,7 @@ char *expand_arg(char **args, int num_args)
 		args[i] = ft_strdup("$?");
 		return(0);
 	}
+	////// Find somewhere to split the expanded string for example when ls -l
 	while (args[i] && args[i][0] == '$')
 	{
 		char *env_name = ft_strdup(args[i] + 1);
@@ -63,5 +64,6 @@ char *expand_arg(char **args, int num_args)
 			args[j - 1] = NULL;
 		}
 	}
+	rm_quotes(args[i]);
 	return(NULL);
 }

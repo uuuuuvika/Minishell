@@ -34,8 +34,13 @@ int main(int argc, char *argv[], char **envp)
         	pipe_cmds(&data);
 		}
 		//printf("exit code in main is %d\n", data.exit_code);
+		//printf("exit code in main is %d\n", data.exit_code);
 		//printf("g_signal in main is %d\n", g_signal);
 	    free(input);
     }
     return (0);
 }
+
+
+///Commands not working
+// env | grep $HOME stays open until ctrl-C
