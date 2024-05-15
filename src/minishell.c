@@ -21,7 +21,6 @@ int main(int argc, char *argv[], char **envp)
 		if (input != NULL)
 			add_history(input);
 		parse(input, &data);
-    	// validate_cmds();
         if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && ft_strcmp(data.commands->args[0], "$?") == 0))
         {
             printf(YEL "Executing simple builtin in main\n" RESET);
