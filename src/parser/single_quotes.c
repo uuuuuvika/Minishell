@@ -56,7 +56,7 @@ void rm_quotes(char *str)
 	if (ft_strchr(str, '\'') == NULL) //If no quotes, return
 		return;
 	unquoted = ft_strtrim(str, "'");
-	printf(GRN "removed quotes: %s\n" RESET, unquoted);
+//	printf(GRN "removed quotes: %s\n" RESET, unquoted);
 	free(str);
 	str = ft_strdup(unquoted);
 	free(unquoted);
@@ -81,7 +81,7 @@ void add_quotes_pair(char *args)
 
 	quoted = ft_strjoin("'", args);
 	quoted = ft_strjoin(quoted, "'");
-	printf(BLU "added quotes: %s\n" RESET, quoted);
+	//printf(BLU "added quotes: %s\n" RESET, quoted);
 	free(args);
 	args = ft_strdup(quoted);
 	free(quoted);
@@ -108,5 +108,5 @@ void sin_quotes(char *args)
 				add_quotes_pair(args);
 		}
 	}
-	printf(GRN "it stays: %s\n" RESET, args);
+	//printf(GRN "it stays: %s\n" RESET, args);
 }
