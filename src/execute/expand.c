@@ -36,7 +36,7 @@ char *expand_arg(char **args, int num_args, t_data *data)
 		return(0);
 	}
 	////// Find somewhere to split the expanded string for example when ls -l
-	while (args[i] && is_expansion(args) == 0 && ft_strchr(args[i], '\'') == 0)
+	while (args[i] && is_expansion(args) && ft_strchr(args[i], '\'') == 0)
 	{
 		if (args[i][0] != '$')
 			i++;

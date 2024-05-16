@@ -10,9 +10,9 @@ int is_expansion(char **args)
 		if (ft_strchr(args[i], '$'))
 		{
 			//printf(YEL "'$' found: %s\n" RESET, args[i]);
-			return(0);
+			return(1);
 		}
 		i++;
 	}
-	return(1);
+	return(0);
 }

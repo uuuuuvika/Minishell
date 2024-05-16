@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	exec_cmd(t_data *data, t_cmd *cmd)
+void	exec_cmd(t_data *data, t_cmd *cmd)
 {
     char	*path;
 
@@ -34,9 +34,6 @@ int	exec_cmd(t_data *data, t_cmd *cmd)
 	else
 	{
 		path = create_path(cmd->args[0], data);
-		if (path == NULL)
-			return (data->exit_code);
 		execve(path, cmd->args, data->envs);
 	}
-	return (0);
 }
