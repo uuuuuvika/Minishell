@@ -34,7 +34,7 @@ int is_expansion(char **args)
 	return(1);
 }
 
-char *expand_arg(char **args, int num_args)
+char *expand_arg(char **args, int num_args, t_data *data)
 {
 	int i;
 
@@ -55,9 +55,9 @@ char *expand_arg(char **args, int num_args)
 		if (args[i][0] != '$')
 			i++;
 		char *env_name = ft_strdup(args[i] + 1);
-		printf("env_name: %s\n",env_name);
 		if(getenv(env_name) != NULL)
-		{	printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args[i]);
+		{	
+			printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args[i]);
 			replace_for_expansion(args[i], getenv(env_name));
 			break;
 		}
@@ -70,9 +70,16 @@ char *expand_arg(char **args, int num_args)
 				free(env_name);
 				break;
 			}
-			if(ft_strcmp(args[i], "$?") == 0)
+			if(ft_strcmp(args[i], "$?") == 0) ///Replace for exit code since we can do 'echo $?'
 			{
-				printf("cmd is $?\n");// pass ? as a cmd and later in exec_cmd replace it for data->exit code
+				printf(YEL"cmd is $?\n" RESET);// pass ? as a cmd and later in exec_cmd replace it for data->exit code
+				//args[i] = ft_strdup("$?");
+				args[i] = ft_itoa(data->exit_code);
+				free(env_name);
+				break;
+			}
+			{
+				printf(YEL"cmd is $?\n" RESET);// pass ? as a cmd and later in exec_cmd replace it for data->exit code
 				args[i] = ft_strdup("$?");
 				free(env_name);
 				break;
