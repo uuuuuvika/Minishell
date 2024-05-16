@@ -33,6 +33,7 @@
 
 //When quotes check if quotes are closed
 //If not closed, wait for closing quote
+// check for expansions passed in seccond argument
 
 int is_even(char *str, char c)
 {
@@ -55,10 +56,23 @@ void rm_quotes(char *str)
 	if (ft_strchr(str, '\'') == NULL) //If no quotes, return
 		return;
 	unquoted = ft_strtrim(str, "'");
-	printf(GRN "removed: %s\n" RESET, unquoted);
+	printf(GRN "removed quotes: %s\n" RESET, unquoted);
 	free(str);
 	str = ft_strdup(unquoted);
 	free(unquoted);
+}
+
+void rm_quotes_arr(char **arr)
+{
+	int i;
+
+	i = 0;
+	while (arr[i])
+	{
+		if (arr[i][0] == '\'')
+			rm_quotes(arr[i]);
+		arr++;
+	}
 }
 
 void add_quotes_pair(char *args)
@@ -67,7 +81,7 @@ void add_quotes_pair(char *args)
 
 	quoted = ft_strjoin("'", args);
 	quoted = ft_strjoin(quoted, "'");
-	printf(BLU "added: %s\n" RESET, quoted);
+	printf(BLU "added quotes: %s\n" RESET, quoted);
 	free(args);
 	args = ft_strdup(quoted);
 	free(quoted);
@@ -94,5 +108,5 @@ void sin_quotes(char *args)
 				add_quotes_pair(args);
 		}
 	}
-	printf("it stays: %s\n", args);
+	printf(GRN "it stays: %s\n" RESET, args);
 }

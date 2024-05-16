@@ -119,5 +119,6 @@ void    handle_dup2(t_cmd *current);
 
 void	sin_quotes(char *args);
 void	rm_quotes(char *str);
+void	rm_quotes_arr(char **arr);
 
 #endif

@@ -6,9 +6,36 @@
 // darotche@c4b5c1:~$ $? $TERM
 // 126: command not found
 
+// try: 'cat $EXPANSION' is expand_arg() only taking fist arg as expansion??
+//export VAR2='echo 123'
+
+void replace_for_expansion(char *args, char *cmd)
+{
+	char *env_name;
+	
+	env_name = ft_strdup(args + 1);
+	free(env_name);
+	free(args);
+	args = ft_strdup(cmd);
+	//printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args);
+}
+
+int is_expansion(char **args)
+{
+	int i;
+
+	i = 0;
+	while(args[i])
+	{
+		if (ft_strchr(args[i], '$'))
+			return(0);
+		i++;
+	}
+	return(1);
+}
+
 char *expand_arg(char **args, int num_args)
 {
-	char *cmd;
 	int i;
 
 	i = 0;
@@ -19,27 +46,24 @@ char *expand_arg(char **args, int num_args)
 	}
 	if(ft_strcmp(args[0], "$?") == 0)
 	{
-		//printf("cmd is $?\n");// pass ? as a cmd and later in exec_cmd replace it for data->exit code
-		args[i] = ft_strdup("$?");
+		args[i] = ft_strdup("$?"); //printf("cmd is $?\n");// pasms ? as a cmd and later in exec_cmd replace it for data->exit code
 		return(0);
 	}
 	////// Find somewhere to split the expanded string for example when ls -l
-	while (args[i] && args[i][0] == '$')
+	while (args[i] && is_expansion(args) == 0 && ft_strchr(args[i], '\'') == 0)
 	{
+		if (args[i][0] != '$')
+			i++;
 		char *env_name = ft_strdup(args[i] + 1);
+		printf("env_name: %s\n",env_name);
 		if(getenv(env_name) != NULL)
-		{
-			cmd = getenv(env_name);
-			//printf("cmd is now: %s\n", cmd);
-			free(env_name);
-			free(args[i]);
-			args[i] = ft_strdup(cmd);
-		//	printf(RED "valid cmd args[i]: %s\n" RESET ,args[i]);
+		{	printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args[i]);
+			replace_for_expansion(args[i], getenv(env_name));
 			break;
 		}
 		else if(getenv(env_name) == NULL)
 		{
-			//printf("args[i] %s \n", args[i]);
+			printf(RED"env not found: %s \n" RESET, env_name);
 			if(num_args == 1)
 			{
 				args[i] = ft_strdup("");
@@ -48,7 +72,7 @@ char *expand_arg(char **args, int num_args)
 			}
 			if(ft_strcmp(args[i], "$?") == 0)
 			{
-				//printf("cmd is $?\n");// pass ? as a cmd and later in exec_cmd replace it for data->exit code
+				printf("cmd is $?\n");// pass ? as a cmd and later in exec_cmd replace it for data->exit code
 				args[i] = ft_strdup("$?");
 				free(env_name);
 				break;
@@ -64,6 +88,6 @@ char *expand_arg(char **args, int num_args)
 			args[j - 1] = NULL;
 		}
 	}
-	rm_quotes(args[i]);
+	rm_quotes_arr(args);
 	return(NULL);
 }
