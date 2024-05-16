@@ -43,7 +43,7 @@ int parse(char *input, t_data *data)
     }
     data->num_of_children = nch;
     // printf("num_of_children: %d\n", data->num_of_children);
-    // pipe_assign(data->commands);
+    pipe_assign(data->commands);
 
     // t_cmd *current = data->commands;
     // while (current)

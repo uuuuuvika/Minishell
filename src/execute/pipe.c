@@ -15,9 +15,10 @@ int pipe_cmds(t_data *data)
             return EXIT_FAILURE;
         else if (pid[i] == 0)
         {
-            handle_dup2(current);
+            fd_dup2(current);
             ultimate_fd_close(data);
-            return (exec_cmd(data, current));
+            exec_cmd(data, current);
+            exit(data->exit_code);
         }
         else
             fd_close(current);

@@ -6,7 +6,7 @@ void ft_echo(t_data *data, t_cmd *cmd)
     int i;
 
     i = 1;
-    printf(YEL"Executing builtin echo\n" RESET);
+    //printf(YEL"Executing builtin echo\n" RESET);
     while (cmd->args[i])
     {
         if (i > 1)
