@@ -22,8 +22,7 @@ void free_data(t_data *data)
         free_arr2D(current->args);
         free(current);
         current = next;
-    }
-    free(data);	
+    }	
 }
 
 // void free_command(t_cmd *command)
