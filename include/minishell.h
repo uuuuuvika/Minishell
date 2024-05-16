@@ -71,7 +71,8 @@ void    ft_exit(t_data *data);
 int     parse(char *input, t_data *data);
 void    redirect_fd_dup(t_cmd *command);
 int     pipe_cmds(t_data *data);
-char	*expand_arg(char **args, int num_args);
+char	*expand_arg(char **args, int num_args, t_data *data);
+int		is_expansion(char **args);
 char    *create_path(char *cmd, t_data *data);
 int     exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
@@ -99,5 +100,6 @@ void    fd_dup2(t_cmd *command);
 
 void	sin_quotes(char *args);
 void	rm_quotes(char *str);
+void	rm_quotes_arr(char **arr);
 
 #endif

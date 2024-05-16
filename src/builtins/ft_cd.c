@@ -14,8 +14,8 @@ void ch_env_pwd(t_data *data, char *new_pwd, char *old_pwd)
         }
         else if (ft_strncmp(data->envs[i], "OLDPWD=", 7) == 0)
         {
-            free(data->envs[i]);
-            data->envs[i] = ft_strjoin("OLDPWD=", old_pwd);
+            free(data->envs[i]);/// This is the line that is causing the issue
+		    data->envs[i] = ft_strjoin("OLDPWD=", old_pwd);
         }
         i++;
     }

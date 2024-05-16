@@ -21,12 +21,13 @@ int main(int argc, char *argv[], char **envp)
 		if (input != NULL)
 			add_history(input);
 		parse(input, &data);
-        if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && ft_strcmp(data.commands->args[0], "$?") == 0))
-        {
-            printf(YEL "Executing simple builtin in main\n" RESET);
-            redirect_fd_dup(data.commands);
-			exec_cmd(&data, data.commands);
-        }
+    //if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && ft_strcmp(data.commands->args[0], "$?") == 0))
+    if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && is_expansion(data.commands->args) == 0))
+    {
+          printf(YEL "Executing simple builtin in main\n" RESET);
+          redirect_fd_dup(data.commands);
+          exec_cmd(&data, data.commands);
+     }
 		else
 		{
 			// printf(YEL "Fork\n" RESET);
@@ -39,7 +40,6 @@ int main(int argc, char *argv[], char **envp)
     }
     return (0);
 }
-
 
 ///Commands not working
 // env | grep $HOME stays open until ctrl-C
