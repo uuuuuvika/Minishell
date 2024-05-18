@@ -64,12 +64,12 @@ char *expand_arg(char **args, int num_args, t_data *data)
 				free(env_name);
 				break;
 			}
-			{
-				//printf(YEL"cmd is $?\n" RESET);// pass ? as a cmd and later in exec_cmd replace it for data->exit code
-				args[i] = ft_strdup("$?");
-				free(env_name);
-				break;
-			}
+			// {
+			// 	//printf(YEL"cmd is $?\n" RESET);// pass ? as a cmd and later in exec_cmd replace it for data->exit code
+			// 	args[i] = ft_strdup("$?");
+			// 	free(env_name);
+			// 	break;
+			// }
 			int j = i;
 			free(args[j++]);
 			while (args[j])
