@@ -29,7 +29,7 @@ int main(int argc, char *argv[], char **envp)
 			{
 				int fin = dup(STDIN);
 				int fout = dup(STDOUT);
-				//printf(YEL "Executing simple builtin in main\n" RESET);
+				printf(YEL "Executing simple builtin in main\n" RESET);
 				redirect_fd_dup(data.commands);
 				exec_cmd(&data, data.commands);
 				dup2(fin, STDIN);
@@ -37,7 +37,7 @@ int main(int argc, char *argv[], char **envp)
 			}
 			else
 			{
-				//printf(YEL "Fork\n" RESET);
+				printf(YEL "Fork\n" RESET);
 				pipe_cmds(&data);
 			}
 			// if(data.exit_code == 127)

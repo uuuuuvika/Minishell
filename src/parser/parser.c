@@ -1,14 +1,14 @@
 #include "minishell.h"
 
-// void print_2D(char **args)
-// {
-// 	int j = 0;
-// 	while(args[j])
-// 	{
-// 		printf(BLU "args[%d]: %s\n" RESET, j, args[j]);
-// 		j++;
-// 	}
-// }
+void print_2D(char **args)
+{
+	int j = 0;
+	while(args[j])
+	{
+		printf(BLU "args[%d]: %s\n" RESET, j, args[j]);
+		j++;
+	}
+}
 
 int parse(char *input, t_data *data)
 {
@@ -39,7 +39,9 @@ int parse(char *input, t_data *data)
         new_node->next = NULL;
 
 		expand_arg(new_node->args, new_node->num_args, data);
-        //redirect_assign(new_node);
+
+		//print_2D(new_node->args);
+        redirect_assign(new_node);
 
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
@@ -56,7 +58,7 @@ int parse(char *input, t_data *data)
         }
     }
     data->num_of_children = nch;
-    // printf("num_of_children: %d\n", data->num_of_children);
+    //printf("num_of_children: %d\n", data->num_of_children);
     pipe_assign(data->commands);
 
     // t_cmd *current = data->commands;
