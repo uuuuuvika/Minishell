@@ -13,7 +13,7 @@ char    *create_path(char *cmd, t_data *data)
     if (stat(path, &statbuf) == 0)
             return (path);
     free(path);
-    //printf("-minishell: %s: command not found \n", cmd);
+    printf("-minishell: %s: command not found \n", cmd);// Do Not delete this line
     data->exit_code = 127;
     return (NULL);
 }

@@ -40,8 +40,8 @@ int main(int argc, char *argv[], char **envp)
 				//printf(YEL "Fork\n" RESET);
 				pipe_cmds(&data);
 			}
-			if(data.exit_code == 127)
-				printf("command not found\n");
+			// if(data.exit_code == 127)
+			// 	printf("command not found\n");
 			// printf("exit code in main is %d\n", data.exit_code);
 			//  printf("g_signal in main is %d\n", g_signal);
 		}

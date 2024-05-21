@@ -10,6 +10,8 @@ void	fd_close(t_cmd *current)
 		close(current->redirect_in);
 	if (current->redirect_out != -1)
 		close(current->redirect_out);
+	if (current->here_doc != 0)
+		close(current->here_doc);
 }
 
 void	ultimate_fd_close(t_data *data)
@@ -42,6 +44,13 @@ void	ultimate_wait(t_data *data, pid_t *pid)
 
 void	fd_dup2(t_cmd *current)
 {
+	if (current->here_doc != 0)
+	{
+		int r = open("here_doc", O_RDONLY, 777);
+		//printf("here_doc: %d\n", r);
+		if (dup2(r, STDIN) == -1)
+			handle_error("dup2 error here_doc");
+	}
 	if (current->pipe_in != -1)
 	{
 		if (dup2(current->pipe_in, STDIN) == -1)
@@ -62,4 +71,5 @@ void	fd_dup2(t_cmd *current)
 		if (dup2(current->pipe_out, STDOUT) == -1)
 			handle_error("dup2 error pipe_out");
 	}
+	
 }
