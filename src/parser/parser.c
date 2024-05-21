@@ -39,9 +39,12 @@ int parse(char *input, t_data *data)
         new_node->next = NULL;
 
 		expand_arg(new_node->args, new_node->num_args, data);
-        redirect_assign(new_node);
+        //redirect_assign(new_node);
+
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
+
+        return_dub_quotes(new_node->args, data);
         if (nch++ == 0)
             data->commands = new_node;
 		else

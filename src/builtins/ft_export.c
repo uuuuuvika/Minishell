@@ -69,7 +69,7 @@ void ft_export(t_data *data, t_cmd *cmd)
     {
         if(!replace_var(data->envs, cmd->args[j]))
         {
-            printf(GRN "Add variable\n" RESET);
+           // printf(GRN "Add variable\n" RESET);
             add_var(&data->envs, cmd->args[j]);
         }
         j++;

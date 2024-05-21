@@ -17,7 +17,7 @@ void replace_for_expansion(char *args, char *cmd)
 	free(env_name);
 	free(args);
 	args = ft_strdup(cmd);
-	//printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args);
+	printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args);
 }
 
 char *expand_arg(char **args, int num_args, t_data *data)
@@ -43,13 +43,13 @@ char *expand_arg(char **args, int num_args, t_data *data)
 		char *env_name = ft_strdup(args[i] + 1);
 		if(getenv(env_name) != NULL)
 		{	
-		//	printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args[i]);
+			printf(GRN "valid env: cmd args[i]: %s\n" RESET ,args[i]);
 			replace_for_expansion(args[i], getenv(env_name));
 			break;
 		}
 		else
 		{
-		//	printf(RED"env not found: %s \n" RESET, env_name);
+			printf(RED"env not found: %s \n" RESET, env_name);
 			if(num_args == 1)
 			{
 				args[i] = ft_strdup("");

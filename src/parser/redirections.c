@@ -43,8 +43,11 @@ void    redirect_fd_dup(t_cmd *current)
     }
     if (current->redirect_out != -1)
     {
+       // int fout = dup(STDOUT);
         if (dup2(current->redirect_out, STDOUT) == -1)
             handle_error("dup2 error redirect_out");
         close(current->redirect_out);
     }
 }
+
+

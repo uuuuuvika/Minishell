@@ -86,11 +86,12 @@ void	sin_quotes(char *args);
 void	rm_quotes(char *str);
 void	rm_quotes_arr(char **arr);
 void    sub_dub_quotes(char *line_copy, t_data *data);
-
+void    return_dub_quotes(char **args, t_data *data);
 int     is_redir(char *str);
 int     cnt_args(char **args);
 void    pipe_assign(t_cmd *command);
 void    redirect_assign(t_cmd *cmd);
+
 
 void	sig_handler(int sig);
 void	handle_ctrl(void);
