@@ -11,7 +11,9 @@ void ft_echo(t_data *data, t_cmd *cmd)
     {
         if (i > 1)
             printf(" ");
-        if (ft_strcmp(cmd->args[i], "-n") == 0)
+        if (ft_strcmp(cmd->args[i], "-n") == 0 && !cmd->args[i + 1])
+            return ;
+        if (ft_strcmp(cmd->args[i], "-n") == 0) 
             i++;
         printf("%s", cmd->args[i]);
         i++;

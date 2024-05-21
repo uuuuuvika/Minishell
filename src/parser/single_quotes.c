@@ -35,6 +35,31 @@
 //If not closed, wait for closing quote
 // check for expansions passed in seccond argument
 
+/*
+Minishell > cat ''
+
+Minishell > cat '""'
+cat: '""': No such file or directory
+Minishell > cat 'ggg'
+cat: ggg: No such file or directory
+Minishell > cat '"ggg"'
+cat: '"***"': No such file or directory
+Minishell > echo ''
+
+Minishell > echo ""
+""
+Minishell > cat 
+fdfdfd
+fdfdfd
+fdfdf
+fdfdf
+Minishell > cat ""
+cat: '""': No such file or directory
+Minishell > cat ''
+
+
+*/
+
 int is_even(char *str, char c)
 {
     int count = 0;

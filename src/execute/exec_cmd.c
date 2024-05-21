@@ -29,7 +29,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 			data->exit_code = 130;
 			g_signal = 0;
 		}
-		printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
+		//printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
 	}
 	else
 	{

@@ -7,14 +7,17 @@ SOURCES := $(shell find $(SRCDIR) -name '*.c')
 OBJECTS := $(SOURCES:.c=.o)
 LIBFT = lib/libft/libft.a 
 
+minishell: $(OBJECTS) $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
+
 $(LIBFT) :
 	$(MAKE) -C ./lib/libft
 
 all: minishell
 
-minishell: $(OBJECTS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
-
+m: all
+	./minishell
+	
 clean:
 	$(MAKE) -C ./lib/libft clean
 	rm -f $(OBJECTS)
