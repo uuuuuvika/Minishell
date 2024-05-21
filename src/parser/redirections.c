@@ -2,7 +2,7 @@
 
 int is_redir(char *str)
 {
-    return (ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">>") == 0);
+    return (ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">>") == 0 || ft_strcmp(str, "<<") == 0);
 }
 
 void redirect_assign(t_cmd *current)
@@ -25,6 +25,10 @@ void redirect_assign(t_cmd *current)
             current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
             i++;
         }
+		else if (ft_strcmp(current->args[i], "<<") == 0)
+		{
+			read_heredoc(current->args[i + 1], current);
+		}
         i++;
     }
 }

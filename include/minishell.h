@@ -41,6 +41,7 @@ typedef struct s_cmd {
     int pipe_out; // <pipe fd>
     int redirect_in;
     int redirect_out;
+	int here_doc;
     struct s_cmd *next;
 } t_cmd;
 
@@ -50,6 +51,7 @@ typedef struct s_data {
     char **sub;
     t_cmd *commands;
     char  **envs;
+	char *heredoc;
 } t_data;
 
 int     handle_error(const char *message);
@@ -80,8 +82,11 @@ int     count_env(char **envp);
 int     cpy_envs(t_data *data, char **envp);
 void	print_envs(t_data *data);
 
-int     parse(char *input, t_data *data);
+void	sin_quotes(char *args);
+void	rm_quotes(char *str);
+void	rm_quotes_arr(char **arr);
 void    sub_dub_quotes(char *line_copy, t_data *data);
+
 int     is_redir(char *str);
 int     cnt_args(char **args);
 void    pipe_assign(t_cmd *command);
@@ -97,8 +102,6 @@ void    ultimate_fd_close(t_data *data);
 void    ultimate_wait(t_data *data, pid_t *pid);
 void    fd_dup2(t_cmd *command);
 
-void	sin_quotes(char *args);
-void	rm_quotes(char *str);
-void	rm_quotes_arr(char **arr);
+void	read_heredoc(char *delimiter, t_cmd *current);
 
 #endif
