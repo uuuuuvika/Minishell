@@ -6,18 +6,18 @@ void ft_echo(t_data *data, t_cmd *cmd)
     int i;
 
     i = 1;
-    //printf(YEL"Executing builtin echo\n" RESET);
+
+    while (cmd->args && ft_strcmp(cmd->args[i], "-n") == 0) 
+        i++;
     while (cmd->args[i])
     {
-        if (i > 1)
-            printf(" ");
-        if (ft_strcmp(cmd->args[i], "-n") == 0 && !cmd->args[i + 1])
+        if (!cmd->args[i])
             return ;
-        if (ft_strcmp(cmd->args[i], "-n") == 0) 
-            i++;
-        printf("%s", cmd->args[i]);
+        ft_printf("%s", cmd->args[i]);
         i++;
+        if (cmd->args[i] != NULL)
+            ft_printf(" ");
     }
     if (ft_strcmp(cmd->args[1], "-n") != 0)
-        printf("\n");
+        ft_printf("\n");
 }

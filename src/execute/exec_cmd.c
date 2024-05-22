@@ -33,6 +33,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 	}
 	else
 	{
+		//Check if it will be cmd not found or is directory
 		path = create_path(cmd->args[0], data);
 		execve(path, cmd->args, data->envs);
 	}

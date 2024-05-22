@@ -74,13 +74,13 @@ int     parse(char *input, t_data *data);
 void    redirect_fd_dup(t_cmd *command);
 char	*expand_arg(char **args, int num_args, t_data *data);
 int		is_expansion(char **args);
+void	replace_for_expansion(char **args, char *cmd);
 char    *create_path(char *cmd, t_data *data);
 void     exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
 
 int     count_env(char **envp);
 int     cpy_envs(t_data *data, char **envp);
-void	print_envs(t_data *data);
 
 void	sin_quotes(char *args);
 void	rm_quotes(char *str);
@@ -104,5 +104,8 @@ void    ultimate_wait(t_data *data, pid_t *pid);
 void    fd_dup2(t_cmd *command);
 
 void	read_heredoc(char *delimiter, t_cmd *current);
+
+void	print_envs(t_data *data);
+void print_2D(char **args);
 
 #endif
