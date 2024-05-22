@@ -1,7 +1,4 @@
 #include "minishell.h"
-// void    redirect_fd_dup_back(t_cmd *current)
-// {
-// }
 
 int main(int argc, char *argv[], char **envp)
 {

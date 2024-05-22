@@ -114,11 +114,6 @@ void add_quotes_pair(char *args)
 
 void sin_quotes(char *args)
 {
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
 	if (ft_strchr(args, '\'') == NULL) //If no quotes, return
 		return;
 	else
