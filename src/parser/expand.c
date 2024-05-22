@@ -19,7 +19,7 @@ void replace_for_expansion(char **args, char *cmd)
 	// free(env_name);
 	free(*args);
 	*args = ft_strdup(cmd);
-	//printf(GRN "Valid env: args: %s\n" RESET ,*args);
+	printf(GRN "Valid env: args: %s\n" RESET ,*args);
 }
 
 char *expand_arg(char **args, int num_args, t_data *data)

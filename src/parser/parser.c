@@ -28,7 +28,6 @@ int parse(char *input, t_data *data)
 		new_node->here_doc = 0;
         new_node->next = NULL;
 
-
 		//print_2D(new_node->args);
         redirect_assign(new_node);
 		expand_arg(new_node->args, new_node->num_args, data);

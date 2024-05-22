@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 // To try:
-// c4a9c8% cat <<EOF
+// c4a9c8% cat << EOF
 // heredoc> $USER
 // heredoc> EOF
 // darotche
@@ -18,24 +18,28 @@
 
 char *split_expand_join(char *line)
 {
-	int i = 0;
-	char *exp_line = ft_strdup("");
-	char **splitted = ft_split(line, ' ');
+	char *exp_line;
+	char **splitted;
+	int i;
+	
+	exp_line = ft_strdup("");
+	splitted = ft_split(line, ' ');
+	i = 0;
 
 	printf(RED "line to expand: %s\n" RESET, line);
 	print_2D(splitted);
 	printf("num_args: %d\n", cnt_args(splitted));
-	while(splitted[i])
+	while (splitted[i])
 	{
-		if(ft_strchr(splitted[i], '$'))
-			splitted[i] = getenv(splitted[i] + 1);
-		//exp_line = ft_strjoin(line, splitted[i]);
+		expand_arg(splitted, cnt_args(splitted), NULL);
+		// if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
+		// 	splitted[i] = getenv(splitted[i] + 1);
 		if(i > 0)
 			exp_line = ft_strjoin(exp_line, " ");
 		exp_line = ft_strjoin(exp_line, splitted[i]);
 		i++;
 	}
-	printf(GRN "expanded line: %s\n" RESET, exp_line);
+	//printf(GRN "expanded line: %s\n" RESET, exp_line);
 	return (exp_line);
 }
 
@@ -59,11 +63,13 @@ void read_heredoc(char *delimiter, t_cmd *current)
 			free(line);
 			break;
 		}
-		if (ft_strchr(line, '$'))
+		if (ft_strchr(line, '$') && ft_strchr(line, '\'') == 0)// check if there are quotes
 		{
+			printf(RED "line to expand: %s\n" RESET, line);
 			char *exp_line = split_expand_join(line);
-			free(line);
+			//free(line);
 			line = exp_line;
+			//free(exp_line);
 		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
