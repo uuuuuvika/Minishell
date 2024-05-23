@@ -32,7 +32,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] cat << EOF  expands to darotche when $USER is called inside cat, which is correct. But this should not expand  cat << 'EOF'  cat << "EOF"  and should stay as $USER (variable not expanded)
 - [ ] heredoc + expansions + quotes
 - [ ] Check freeing and leaks
-- [ ] cat << "EOF" > file --- fix
+- [x] cat << "EOF" > file 
 - [ ] cat $PATH should write 'no such a file or directory'
       
 ## general TODO:
