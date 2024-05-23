@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+//TRY: echo -n $USER
+
 void ft_echo(t_data *data, t_cmd *cmd)
 {
     (void) data;

@@ -11,6 +11,26 @@
 // try:
 //export VAR2='echo 123'
 
+char  *ft_getenv(char *env_name, char **env)
+{
+	int i;
+	char *env_value;
+
+	i = 0;
+	while (env[i])
+	{
+		if (ft_strncmp(env[i], env_name, ft_strlen(env_name)) == 0)
+		{
+			env_value = ft_strdup(env[i] + ft_strlen(env_name) + 1);
+			printf(GRN "Valid env: %s\n" RESET, env_value);
+			return (env_value);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+
 void replace_for_expansion(char **args, char *cmd)
 {
 	// char *env_name;
@@ -43,9 +63,9 @@ char *expand_arg(char **args, int num_args, t_data *data)
 		if (args[i][0] != '$')
 			i++;
 		char *env_name = ft_strdup(args[i] + 1);
-		if(getenv(env_name) != NULL)
-		{	
-			replace_for_expansion(&args[i], getenv(env_name));
+		if (ft_getenv(env_name, data->envs) != NULL)
+		{
+			replace_for_expansion(&args[i], ft_getenv(env_name, data->envs));
 			free(env_name);
 			break;
 		}
