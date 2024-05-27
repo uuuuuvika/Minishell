@@ -73,7 +73,7 @@ void    ft_exit(t_data *data);
 
 int     parse(char *input, t_data *data);
 void    redirect_fd_dup(t_cmd *command);
-void	expand_arg(char **args, int num_args, t_data *data);
+//void	expand_arg(char **args, int num_args, t_data *data);
 int		is_expansion(char **args);
 void	replace_for_expansion(char **args, char *cmd);
 char    *create_path(char *cmd, t_data *data);
@@ -90,6 +90,8 @@ void    sub_sin_quotes(char *line_copy, t_data *data);
 void    return_sin_quotes(char **args, t_data *data);
 void    sub_dub_quotes(char *line_copy, t_data *data);
 void    return_dub_quotes(char **args, t_data *data);
+
+char *expand_arg(char **args, int num_args, t_data *data);
 
 int     is_redir(char *str);
 int     cnt_args(char **args);

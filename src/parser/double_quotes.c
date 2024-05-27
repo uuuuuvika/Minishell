@@ -55,6 +55,11 @@ void return_dub_quotes(char **args, t_data *data)
                     t++;
                // }
             }
+            else if (args[i][j] == '"' && args[i][j + 1] == '"'){
+                args[i][j] = '\0';
+                //args[i][j+1] = '\0';
+            }
+
             j++;
                 
         }

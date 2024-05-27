@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int is_expansion(char **args)
+int is_expansion(char **args) //find expansion in args
 {
 	int i;
 
