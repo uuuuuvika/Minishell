@@ -13,8 +13,8 @@ docker run -it -v $(pwd):/home/root ubuntu
 ```
 
 ## To fix for Evaluation Sheet:
-- [ ] Change path thing. It needs to run with bin/ls, check for relative and absolute paths
-- [ ] Try unset PATH Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again
+- [ ] Change path thing. It needs to run with bin/ls, check for relative and absolute paths  :cat:
+- [ ] Try unset PATH Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again  :cat:
 - [ ] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right.
 - [x] Run: `''` and  `' '` fix it, it works with double quotes but not single quotes
 - [ ] Test only spaces or tabs :face_with_peeking_eye:
@@ -23,7 +23,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [x] 'ls -l'  and ls '-l'
 - [x] echo '$USER' must print "$USER"  Now it prints $USER
 - [x] expansions have to work with exported variables, this does not work with getenv()
-- [x] expand whole command line :cat:
+- [x] expand whole command line
 - [x] Check what happens for non existing expansions $NONEXISTING
 - [ ] Add data->exit _code to all builtins
 - [x] Check expansions for cat $EXPANDTOFILE ?? Try with paths maybe?
