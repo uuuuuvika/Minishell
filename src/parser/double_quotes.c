@@ -28,7 +28,8 @@ void sub_dub_quotes(char *line_copy, t_data *data)
                 line_copy[index] = '*';
             }
             str[str_index] = '\0';
-            data->sub[s_index++] = strdup(str);
+            printf("str: %s\n", str);
+            data->sub[s_index++] = ft_strdup(str);
         }
         index++;
     }
@@ -46,18 +47,13 @@ void return_dub_quotes(char **args, t_data *data)
         {
             if(args[i][j] == '"' && args[i][j + 1] == '*')
             {
-                //printf("aaaaaaaa\n");
-                size_t len = ft_strlen(args[i]) - 2;
-                // printf("len: %zu\n", len);
-                // printf("sub: %s\n", data->sub[t]);
-                // printf("sub len: %zu\n", ft_strlen(data->sub[t]));
-                if(len == ft_strlen(data->sub[t]))
-                {
-                    //printf("len: %zu\n", len);
+                // size_t len = ft_strlen(args[i]) - 2;
+                // if(len == ft_strlen(data->sub[t]))
+                // {
                     free(args[i]);
                     args[i] = ft_strdup(data->sub[t]);
                     t++;
-                }
+               // }
             }
             j++;
                 

@@ -19,26 +19,27 @@ void replace_for_expansion(char **args, char *cmd)
 	// free(env_name);
 	free(*args);
 	*args = ft_strdup(cmd);
-	printf(GRN "Valid env: args: %s\n" RESET ,*args);
+	//printf(GRN "Valid env: args: %s\n" RESET ,*args);
 }
 
-char *expand_arg(char **args, int num_args, t_data *data)
+void expand_arg(char **args, int num_args, t_data *data)
 {
 	int i;
-
+	(void)data;
+	(void)num_args;
 	i = 0;
 	if(ft_strlen(args[0]) == 1 && (ft_strcmp(args[0], "$"))==0)
 	{
 		args[i] = ft_strdup("$");
-		return(0);
+		return;
 	}
-	if(ft_strcmp(args[0], "$?") == 0)
-	{
-		args[i] = ft_strdup("$?"); //printf("cmd is $?\n");// pasms ? as a cmd and later in exec_cmd replace it for data->exit code
-		return(0);
-	}
+	// if(ft_strcmp(args[0], "$?") == 0)
+	// {
+	// 	args[i] = ft_strdup("$?"); //printf("cmd is $?\n");// pasms ? as a cmd and later in exec_cmd replace it for data->exit code
+	// 	return;
+	// }
 	////// Find somewhere to split the expanded string for example when ls -l
-	while (args[i] && is_expansion(args) && ft_strchr(args[i], '\'') == 0)
+	while (args[i] && is_expansion(args) == 0)
 	{
 		if (args[i][0] != '$')
 			i++;
@@ -49,7 +50,7 @@ char *expand_arg(char **args, int num_args, t_data *data)
 			free(env_name);
 			break;
 		}
-		else
+		/*else
 		{
 			printf(RED"env not found: %s \n" RESET, env_name);
 			if(num_args == 1)
@@ -77,6 +78,7 @@ char *expand_arg(char **args, int num_args, t_data *data)
 			args[j - 1] = NULL;
 		}
 	}
-	rm_quotes_arr(args);
-	return(NULL);
+	//rm_quotes_arr(args);*/
+	}
+	//return (NULL);
 }

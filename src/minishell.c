@@ -34,7 +34,7 @@ int main(int argc, char *argv[], char **envp)
 			}
 			else
 			{
-				printf(YEL "Fork\n" RESET);
+				//printf(YEL "Fork\n" RESET);
 				pipe_cmds(&data);
 			}
 			// if(data.exit_code == 127)

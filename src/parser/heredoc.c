@@ -33,7 +33,7 @@ char *split_expand_join(char *line)
 	{
 		expand_arg(splitted, cnt_args(splitted), NULL);
 		// if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
-		// 	splitted[i] = getenv(splitted[i] + 1);
+		// splitted[i] = getenv(splitted[i] + 1);
 		if(i > 0)
 			exp_line = ft_strjoin(exp_line, " ");
 		exp_line = ft_strjoin(exp_line, splitted[i]);
