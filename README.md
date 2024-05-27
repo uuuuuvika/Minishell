@@ -34,6 +34,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] Check freeing and leaks
 - [x] cat << "EOF" > file 
 - [ ] cat $PATH should write 'no such a file or directory'
+- [ ] replace realloc (in parser) with allowed fnc;
       
 ## general TODO:
 - [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
