@@ -42,6 +42,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] check fucked up history :cat:
 
 - [ ] Something goes wrong with ctrl-D and it does not aways work
+- [ ] `cat '` is segfault and `cat "` does not behave like bash
       
 ## general TODO:
 - [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
