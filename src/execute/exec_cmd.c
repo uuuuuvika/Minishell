@@ -7,8 +7,10 @@ int is_b(char *cmd)
 
     while (builtins[i] != NULL)
     {
-        if (ft_strcmp(cmd, builtins[i]) == 0)
+        if (strcmp(cmd, builtins[i]) == 0)
+        {
             return (1);
+        }
         i++;
     }
     return (0);
@@ -18,6 +20,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 {
     char	*path;
 
+    // check_NULL(cmd->args[0]);
     int i = 0;
     while(ft_strcmp(cmd->args[i] , "") == 0 && cmd->args[i + 1] != NULL)
         i++;
@@ -50,7 +53,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 	else
 	{
 		//Check if it will be cmd not found or is directory
-		path = create_path(cmd->args[i], data);
+		path = find_path(cmd->args[i], data);
         //printf("path: %s\n", path);
 		execve(path, cmd->args, data->envs);
 	}

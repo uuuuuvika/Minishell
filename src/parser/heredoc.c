@@ -16,35 +16,71 @@
 // heredoc> EOF
 // $USER
 
-char *split_expand_join(char *line)
+// char *expand_var(char *args, t_data *data)
+// {
+// 	int i = 0;
+// 	if (args[i] == '$' && ft_strchr(args, '\'') == 0)
+// 	{
+// 		char *env_name = ft_strdup(args + 1);
+// 		printf(BLU"env_name: %s\n" RESET, env_name);
+// 		if (ft_getenv(env_name, data->envs) != NULL)
+// 		{
+// 			printf(GRN"Valid env: %s\n" RESET, env_name);
+// 			free(args);
+// 			args = ft_strdup(ft_getenv(env_name, data->envs));
+// 			free(env_name);
+// 			return (args);
+// 		}
+// 		else if (ft_strcmp(args, "$?") == 0) /// Replace for exit code since we can do 'echo $?'
+// 		{
+// 			// printf(YEL"cmd is $?\n" RESET);// pass ? as a cmd and later in exec_cmd replace it for data->exit code
+// 			// args[i] = ft_strdup("$?");
+// 			args = ft_itoa(data->exit_code);
+// 			free(env_name);
+// 			return (args);
+// 		}
+// 		else
+// 		{
+// 			printf(RED"Not valid env: %s \n" RESET, env_name);
+// 			free(env_name);
+// 			args[i] = '\0';
+// 		}
+// 	}
+// 	return(args);
+// }
+
+char *split_expand_join(char *line, t_data *data)
 {
 	char *exp_line;
 	char **splitted;
-	//int i;
+	int i;
 	
 	exp_line = ft_strdup("");
 	splitted = ft_split(line, ' ');
-	//i = 0;
+	i = 0;
 
 	printf(RED "line to expand: %s\n" RESET, line);
 	print_2D(splitted);
 	printf("num_args: %d\n", cnt_args(splitted));
-	// while (splitted[i])
-	// {
-	// 	expand_arg(splitted, cnt_args(splitted), NULL);
-	// 	// if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
-	// 	// splitted[i] = getenv(splitted[i] + 1);
-	// 	if(i > 0)
-	// 		exp_line = ft_strjoin(exp_line, " ");
-	// 	exp_line = ft_strjoin(exp_line, splitted[i]);
-	// 	i++;
-	// }
+	print_2D(splitted);
+	while (splitted[i])
+	{
+		printf("splitted[%d]: %s\n", i, splitted[i]);
+		expand_arg(splitted, cnt_args(splitted), data);
+		printf("splitted[%d]: %s\n", i, splitted[i]);
+		// if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
+		// 	splitted[i] = getenv(splitted[i] + 1);
+		if(i > 0)
+			exp_line = ft_strjoin(exp_line, " ");
+		exp_line = ft_strjoin(exp_line, splitted[i]);
+		i++;
+	}
 	//printf(GRN "expanded line: %s\n" RESET, exp_line);
 	return (exp_line);
 }
 
 
-void read_heredoc(char *delimiter, t_cmd *current)
+void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 {
 	(void)current;
 	char *line;
@@ -55,6 +91,7 @@ void read_heredoc(char *delimiter, t_cmd *current)
 	//dup2(fd, STDOUT);
 
 	// fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	printf("delimiter: %s\n", delimiter);
 	while (1)
 	{
 		line = readline("> ");
@@ -63,13 +100,16 @@ void read_heredoc(char *delimiter, t_cmd *current)
 			free(line);
 			break;
 		}
-		if (ft_strchr(line, '$') && ft_strchr(line, '\'') == 0)// check if there are quotes
+		if (delimiter[0] != '\'' || delimiter[0] != '\"')////// not nice
 		{
-			printf(RED "line to expand: %s\n" RESET, line);
-			char *exp_line = split_expand_join(line);
-			//free(line);
-			line = exp_line;
-			//free(exp_line);
+			if (ft_strchr(line, '$'))// check if there are quotes
+			{
+				printf(RED "line to expand: %s\n" RESET, line);
+				char *exp_line = split_expand_join(line, data);
+				//free(line);
+				line = exp_line;
+				//free(exp_line);
+			}
 		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
