@@ -6,9 +6,11 @@ char    *find_path(char *cmd, t_data *data)
     char        **paths;
     struct stat statbuf;
 
+	if (stat(cmd, &statbuf) == 0)
+			return (cmd);
 	//printf(BLU "PATH: %s\n" RESET, ft_getenv("PATH", data->envs));
 	paths = ft_split(ft_getenv("PATH", data->envs), ':');
-	//$print_2D(paths);
+	print_2D(paths);
 	int i = 0;
 	while (paths[i])
 	{
