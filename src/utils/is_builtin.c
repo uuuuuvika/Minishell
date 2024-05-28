@@ -10,10 +10,9 @@ int is_builtin(t_cmd *command)
     while (builtins[i] != NULL)
     {
         if (strcmp(token, builtins[i]) == 0)
-        {
             return (1);
-        }
         i++;
     }
     return (0);
 }
+

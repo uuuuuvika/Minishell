@@ -20,25 +20,25 @@ char *split_expand_join(char *line)
 {
 	char *exp_line;
 	char **splitted;
-	int i;
+	//int i;
 	
 	exp_line = ft_strdup("");
 	splitted = ft_split(line, ' ');
-	i = 0;
+	//i = 0;
 
 	printf(RED "line to expand: %s\n" RESET, line);
 	print_2D(splitted);
 	printf("num_args: %d\n", cnt_args(splitted));
-	while (splitted[i])
-	{
-		expand_arg(splitted, cnt_args(splitted), NULL);
-		// if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
-		// 	splitted[i] = getenv(splitted[i] + 1);
-		if(i > 0)
-			exp_line = ft_strjoin(exp_line, " ");
-		exp_line = ft_strjoin(exp_line, splitted[i]);
-		i++;
-	}
+	// while (splitted[i])
+	// {
+	// 	expand_arg(splitted, cnt_args(splitted), NULL);
+	// 	// if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
+	// 	// splitted[i] = getenv(splitted[i] + 1);
+	// 	if(i > 0)
+	// 		exp_line = ft_strjoin(exp_line, " ");
+	// 	exp_line = ft_strjoin(exp_line, splitted[i]);
+	// 	i++;
+	// }
 	//printf(GRN "expanded line: %s\n" RESET, exp_line);
 	return (exp_line);
 }
