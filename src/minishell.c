@@ -20,7 +20,7 @@ int main(int argc, char *argv[], char **envp)
 		}
 		if (ft_strlen(input) > 0)
 		{
-			add_history(input);
+			add_history(input);// maybe do not add history when reading from heredoc
 			parse(input, &data);
 
 			if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && is_expansion(data.commands->args)))
@@ -45,6 +45,7 @@ int main(int argc, char *argv[], char **envp)
 		}
 		free(input);
 	}
+	clear_history();
 	return (0);
 }
 
