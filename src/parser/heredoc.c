@@ -16,38 +16,38 @@
 // heredoc> EOF
 // $USER
 
-char *expand_var(char *args, t_data *data)
-{
-	int i = 0;
-	if (args[i] == '$' && ft_strchr(args, '\'') == 0)
-	{
-		char *env_name = ft_strdup(args + 1);
-		printf(BLU"env_name: %s\n" RESET, env_name);
-		if (ft_getenv(env_name, data->envs) != NULL)
-		{
-			printf(GRN"Valid env: %s\n" RESET, env_name);
-			free(args);
-			args = ft_strdup(ft_getenv(env_name, data->envs));
-			free(env_name);
-			return (args);
-		}
-		else if (ft_strcmp(args, "$?") == 0) /// Replace for exit code since we can do 'echo $?'
-		{
-			// printf(YEL"cmd is $?\n" RESET);// pass ? as a cmd and later in exec_cmd replace it for data->exit code
-			// args[i] = ft_strdup("$?");
-			args = ft_itoa(data->exit_code);
-			free(env_name);
-			return (args);
-		}
-		else
-		{
-			printf(RED"Not valid env: %s \n" RESET, env_name);
-			free(env_name);
-			args[i] = '\0';
-		}
-	}
-	return(args);
-}
+// char *expand_var(char *args, t_data *data)
+// {
+// 	int i = 0;
+// 	if (args[i] == '$' && ft_strchr(args, '\'') == 0)
+// 	{
+// 		char *env_name = ft_strdup(args + 1);
+// 		printf(BLU"env_name: %s\n" RESET, env_name);
+// 		if (ft_getenv(env_name, data->envs) != NULL)
+// 		{
+// 			printf(GRN"Valid env: %s\n" RESET, env_name);
+// 			free(args);
+// 			args = ft_strdup(ft_getenv(env_name, data->envs));
+// 			free(env_name);
+// 			return (args);
+// 		}
+// 		else if (ft_strcmp(args, "$?") == 0) /// Replace for exit code since we can do 'echo $?'
+// 		{
+// 			// printf(YEL"cmd is $?\n" RESET);// pass ? as a cmd and later in exec_cmd replace it for data->exit code
+// 			// args[i] = ft_strdup("$?");
+// 			args = ft_itoa(data->exit_code);
+// 			free(env_name);
+// 			return (args);
+// 		}
+// 		else
+// 		{
+// 			printf(RED"Not valid env: %s \n" RESET, env_name);
+// 			free(env_name);
+// 			args[i] = '\0';
+// 		}
+// 	}
+// 	return(args);
+// }
 
 char *split_expand_join(char *line, t_data *data)
 {

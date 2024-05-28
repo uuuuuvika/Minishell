@@ -26,7 +26,6 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
         i++;
     if (is_b(cmd->args[i]))
     {
-        //printf("FDFDFDFDFDF\n");
         if (ft_strcmp(cmd->args[i], "cd") == 0)
             ft_cd(data, cmd);
         else if (ft_strcmp(cmd->args[i], "echo") == 0)
@@ -55,7 +54,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 	{
 		//Check if it will be cmd not found or is directory
 		path = find_path(cmd->args[i], data);
-        printf("path: %s\n", path);
+        //printf("path: %s\n", path);
 		execve(path, cmd->args, data->envs);
 	}
 }

@@ -37,8 +37,8 @@ extern int g_signal;
 typedef struct s_cmd {
     char **args;
     int num_args;
-    int pipe_in; //-1
-    int pipe_out; // <pipe fd>
+    int pipe_in;
+    int pipe_out;
     int redirect_in;
     int redirect_out;
 	int here_doc;
@@ -49,6 +49,7 @@ typedef struct s_data {
     int exit_code;
     int num_of_children;
     char **sub;
+    char **subb;
     t_cmd *commands;
     char  **envs;
 	char *heredoc;
@@ -72,7 +73,7 @@ void    ft_exit(t_data *data);
 
 int     parse(char *input, t_data *data);
 void    redirect_fd_dup(t_cmd *command);
-char	*expand_arg(char **args, int num_args, t_data *data);
+//void	expand_arg(char **args, int num_args, t_data *data);
 int		is_expansion(char **args);
 void	replace_for_expansion(char **args, char *cmd);
 char	*ft_getenv(char *env_name, char **envs);
@@ -84,11 +85,16 @@ int     is_b(char *command);
 int     count_env(char **envp);
 int     cpy_envs(t_data *data, char **envp);
 
-void	sin_quotes(char *args);
+void	sin_quotes(char *args, t_data *data);
 void	rm_quotes(char *str);
 void	rm_quotes_arr(char **arr);
+void    sub_sin_quotes(char *line_copy, t_data *data);
+void    return_sin_quotes(char **args, t_data *data);
 void    sub_dub_quotes(char *line_copy, t_data *data);
 void    return_dub_quotes(char **args, t_data *data);
+
+char *expand_arg(char **args, int num_args, t_data *data);
+
 int     is_redir(char *str);
 int     cnt_args(char **args);
 void    pipe_assign(t_cmd *command);
