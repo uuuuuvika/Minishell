@@ -39,6 +39,8 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] Check freeing and leaks :cat:
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history :cat:
+
+- [ ] Something goes wrong with ctrl-D and it does not aways work
       
 ## general TODO:
 - [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
