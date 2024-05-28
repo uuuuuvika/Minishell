@@ -31,6 +31,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] cat $PATH should write 'no such a file or directory'
 
 - [x] Check expansions for cat $EXPANDTOFILE ?? Try with paths maybe?
+- [ ] << EOF (without cat) is causing seg fault
 - [ ] Split expansions
 - [ ] Execute $EXPANDCOMMAND ??
 - [x] reorganice expand function
