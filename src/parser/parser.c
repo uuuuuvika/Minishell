@@ -10,12 +10,10 @@ int parse(char *input, t_data *data)
 
     line_copy = ft_strdup(input);
     //check_NULL(line_copy);
-    //sin_quotes(line_copy, data);
     sub_dub_quotes(line_copy, data);
     sub_sin_quotes(line_copy, data);
-    future_children = ft_split(line_copy, '|'); // need to free
+    future_children = ft_split(line_copy, '|');
     free(line_copy);
-
     t_cmd *new_node = NULL;
     nch = 0;
     while (future_children[nch])
@@ -51,7 +49,7 @@ int parse(char *input, t_data *data)
     }
     data->num_of_children = nch;
     pipe_assign(data->commands);
-
+    free_arr2D(future_children);
     // printf("num_of_children: %d\n", data->num_of_children);
     // t_cmd *current = data->commands;
     // while (current)

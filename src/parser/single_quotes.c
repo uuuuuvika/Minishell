@@ -184,14 +184,9 @@ void return_sin_quotes(char **args, t_data *data)
 		{
 			if (args[i][j] == '\'' && args[i][j + 1] == '#')
 			{
-				size_t len = ft_strlen(args[i]);
-				//printf("len: %zu\n", len);
-				if (len == ft_strlen(data->subb[t]))
-				{
 					free(args[i]);
 					args[i] = ft_strdup(data->subb[t]);
 					t++;
-				}
 			}
 			else if (args[i][j] == '\'' && args[i][j + 1] == '\'')
 				args[i][j] = '\0';

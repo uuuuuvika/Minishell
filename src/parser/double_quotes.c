@@ -5,16 +5,13 @@ void sub_dub_quotes(char *line_copy, t_data *data)
     char str[20];
     int index = 0;
     int count_subs = 0;
-
     while (line_copy[index])
     {
         if (line_copy[index] == '"')
             count_subs++;
         index++;
     }
-
     data->sub = malloc((count_subs / 2) * sizeof(char *));
-
     int s_index = 0;
     index = 0;
     while (line_copy[index])
@@ -28,7 +25,7 @@ void sub_dub_quotes(char *line_copy, t_data *data)
                 line_copy[index] = '*';
             }
             str[str_index] = '\0';
-            printf("str: %s\n", str);
+            //printf("str: %s\n", str);
             data->sub[s_index++] = ft_strdup(str);
         }
         index++;
@@ -47,21 +44,13 @@ void return_dub_quotes(char **args, t_data *data)
         {
             if(args[i][j] == '"' && args[i][j + 1] == '*')
             {
-                // size_t len = ft_strlen(args[i]) - 2;
-                // if(len == ft_strlen(data->sub[t]))
-                // {
                     free(args[i]);
                     args[i] = ft_strdup(data->sub[t]);
                     t++;
-               // }
             }
-            else if (args[i][j] == '"' && args[i][j + 1] == '"'){
+            else if (args[i][j] == '"' && args[i][j + 1] == '"')
                 args[i][j] = '\0';
-                //args[i][j+1] = '\0';
-            }
-
-            j++;
-                
+            j++;         
         }
         i++;
     }
