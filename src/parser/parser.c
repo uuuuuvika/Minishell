@@ -29,7 +29,7 @@ int parse(char *input, t_data *data)
         new_node->next = NULL;
 
 		//print_2D(new_node->args);
-        redirect_assign(new_node);
+        redirect_assign(new_node, data);
 		expand_arg(new_node->args, new_node->num_args, data);
 
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));

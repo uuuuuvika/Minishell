@@ -75,9 +75,11 @@ void    redirect_fd_dup(t_cmd *command);
 char	*expand_arg(char **args, int num_args, t_data *data);
 int		is_expansion(char **args);
 void	replace_for_expansion(char **args, char *cmd);
-char    *create_path(char *cmd, t_data *data);
+char	*ft_getenv(char *env_name, char **envs);
+char    *find_path(char *cmd, t_data *data);
 void     exec_cmd(t_data *data, t_cmd *cmd);
 int     is_builtin(t_cmd *command);
+int     is_b(char *command);
 
 int     count_env(char **envp);
 int     cpy_envs(t_data *data, char **envp);
@@ -90,8 +92,7 @@ void    return_dub_quotes(char **args, t_data *data);
 int     is_redir(char *str);
 int     cnt_args(char **args);
 void    pipe_assign(t_cmd *command);
-void    redirect_assign(t_cmd *cmd);
-
+void    redirect_assign(t_cmd *cmd, t_data *data);
 
 void	sig_handler(int sig);
 void	handle_ctrl(void);
@@ -103,9 +104,9 @@ void    ultimate_fd_close(t_data *data);
 void    ultimate_wait(t_data *data, pid_t *pid);
 void    fd_dup2(t_cmd *command);
 
-void	read_heredoc(char *delimiter, t_cmd *current);
+void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
 
 void	print_envs(t_data *data);
-void print_2D(char **args);
+void	print_2D(char **args);
 
 #endif
