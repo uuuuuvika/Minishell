@@ -42,7 +42,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] check fucked up history :cat:
 
 - [ ] Something goes wrong with ctrl-D and it does not aways work
-- [ ] `cat '` is segfault and `cat "` does not behave like bash also seg fault for `echo '` `echo "` `pwd '` among others. Maybe we need to check when quotes are not pair, bash seems to wait for the second quote but maybe returnring some :non valid input error" is enough(?)
+- [ ] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others. Maybe we need to check when quotes are not pair, bash seems to wait for the second quote but maybe returnring some :non valid input error" is enough(?)
       
 ## general TODO:
 - [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
