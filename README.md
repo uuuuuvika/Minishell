@@ -17,7 +17,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] Try `unset PATH` Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again  :cat:
 - [ ] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right. :cat:
 - [x] Run: `''` and  `' '` fix it, it works with double quotes but not single quotes
-- [ ] Test only spaces or tabs :face_with_peeking_eye:
+- [x] Test only spaces or tabs
 - [x] echo -n -n -n -n hola has to print hola and no new line. Now it prints -n hola
 - [x] 'ls -l'  and ls '-l'
 - [x] `echo '$USER'` must print "$USER"  Now it prints $USER
@@ -35,7 +35,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] Split expansions
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
 - [x] reorganice expand function
-- [ ] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not :face_with_peeking_eye:
+- [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not 
 - [ ] heredoc + expansions + quotes
 - [ ] Check freeing and leaks :cat:
 - [ ] replace realloc (in parser) with allowed fnc
@@ -47,8 +47,8 @@ docker run -it -v $(pwd):/home/root ubuntu
 ## general TODO:
 - [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
 - [ ] Compound commands
-- [ ] < > >>  Redirections for stdin and stdout
-- [ ] | output from one program to the input of the next program
+- [x] < > >>  Redirections for stdin and stdout
+- [x] | output from one program to the input of the next program
 - [ ] ; is used for program sequencing
 - [ ] "" '' Quotes
 - [ ] $PATH Environment variables
