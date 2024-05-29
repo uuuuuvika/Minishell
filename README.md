@@ -36,7 +36,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
 - [x] reorganice expand function
 - [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not 
-- [ ] heredoc + expansions + quotes
+- [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 - [ ] Check freeing and leaks :cat:
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history :cat:
