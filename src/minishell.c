@@ -1,5 +1,24 @@
 #include "minishell.h"
 
+int is_space(char c)
+{
+	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
+		return (1);
+	return (0);
+}
+
+int is_str_space(char *str)
+{
+	int i = 0;
+	while (str[i])
+	{
+		if (!is_space(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int main(int argc, char *argv[], char **envp)
 {
 	static t_data data;
@@ -13,17 +32,18 @@ int main(int argc, char *argv[], char **envp)
 	{
 		handle_ctrl();
 		input = readline(YEL "Minishell > " RESET); 
+		//is_alnum(input);
 		if (!input || errno == EINVAL)
 		{
 			printf("you have pressed CTRL-D\n");
 			break;
 		}
-		if (ft_strlen(input) > 0)
+		if (ft_strlen(input) > 0 && !is_str_space(input))
 		{
-			add_history(input);// maybe do not add history when reading from heredoc
+			add_history(input);// maybe do not add history when reading from heredoc ?
 			parse(input, &data);
 
-			if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && is_expansion(data.commands->args)))
+			if ((data.num_of_children == 1 && is_builtin(data.commands)))
 			{
 				printf(YEL "Executing simple builtin in main\n" RESET);
 				int fin = dup(STDIN);

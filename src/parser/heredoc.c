@@ -68,7 +68,7 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 			free(line);
 			break;
 		}
-		if (delimiter[0] != '\'' || delimiter[0] != '\"')////// not nice
+		if (current->here_doc_exp)
 		{
 			if (ft_strchr(line, '$'))// check if there are quotes
 			{
@@ -120,7 +120,7 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 // }
 
 
-// char *get_delimiter(char *line)
+// char *get_d(char *line)
 // {
 // 	int i;
 // 	int j;

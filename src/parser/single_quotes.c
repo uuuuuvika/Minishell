@@ -59,82 +59,82 @@ Minishell > cat ''
 
 */
 
-int is_even(char *str, char c)
-{
-	int count = 0;
-	while (*str)
-	{
-		if (*str == c)
-		{
-			count++;
-		}
-		str++;
-	}
-	// if ((count/2) % 2 == 0)
-	// 	return (0);
-	return ((count / 2) % 2);
-}
+// int is_even(char *str, char c)
+// {
+// 	int count = 0;
+// 	while (*str)
+// 	{
+// 		if (*str == c)
+// 		{
+// 			count++;
+// 		}
+// 		str++;
+// 	}
+// 	// if ((count/2) % 2 == 0)
+// 	// 	return (0);
+// 	return ((count / 2) % 2);
+// }
 
-void rm_quotes(char *str)
-{
-	char *unquoted;
+// void rm_quotes(char *str)
+// {
+// 	char *unquoted;
 
-	if (ft_strchr(str, '\'') == NULL) // If no quotes, return
-		return;
-	unquoted = ft_strtrim(str, "'");
-	// printf(GRN "removed quotes: %s\n" RESET, unquoted);
-	free(str);
-	str = ft_strdup(unquoted);
-	free(unquoted);
-}
+// 	if (ft_strchr(str, '\'') == NULL) // If no quotes, return
+// 		return;
+// 	unquoted = ft_strtrim(str, "'");
+// 	// printf(GRN "removed quotes: %s\n" RESET, unquoted);
+// 	free(str);
+// 	str = ft_strdup(unquoted);
+// 	free(unquoted);
+// }
 
-void rm_quotes_arr(char **arr)
-{
-	int i;
+// void rm_quotes_arr(char **arr)
+// {
+// 	int i;
 
-	i = 0;
-	while (arr[i])
-	{
-		if (arr[i][0] == '\'')
-			rm_quotes(arr[i]);
-		arr++;
-	}
-}
+// 	i = 0;
+// 	while (arr[i])
+// 	{
+// 		if (arr[i][0] == '\'')
+// 			rm_quotes(arr[i]);
+// 		arr++;
+// 	}
+// }
 
-void add_quotes_pair(char *args)
-{
-	char *quoted;
+// void add_quotes_pair(char *args)
+// {
+// 	char *quoted;
 
-	quoted = ft_strjoin("'", args);
-	quoted = ft_strjoin(quoted, "'");
-	// printf(BLU "added quotes: %s\n" RESET, quoted);
-	free(args);
-	args = ft_strdup(quoted);
-	free(quoted);
-}
+// 	quoted = ft_strjoin("'", args);
+// 	quoted = ft_strjoin(quoted, "'");
+// 	// printf(BLU "added quotes: %s\n" RESET, quoted);
+// 	free(args);
+// 	args = ft_strdup(quoted);
+// 	free(quoted);
+// }
 
-void sin_quotes(char *args, t_data *data)
-{
-	if (ft_strchr(args, '\'') == NULL) // If no quotes, return
-		return;
-	else
-	{
-		// Check if quotes are closed
-		// Check for number of pairs, if number of pairs is impair keep 1 pair
-		if (is_even(args, '\'') || ft_strchr(args, '$') == NULL)
-		{
-			rm_quotes(args);
-			sub_sin_quotes(args, data);
-		}
-		else
-		{
-			printf(RED "Error: quotes not closed\n" RESET);
-			rm_quotes(args);
-			// add_quotes_pair(args);
-		}
-	}
-	// printf(GRN "it stays: %s\n" RESET, args);
-}
+// void sin_quotes(char *args, t_data *data)
+// {
+// 	if (ft_strchr(args, '\'') == NULL) // If no quotes, return
+// 		return;
+// 	else
+// 	{
+// 		// Check if quotes are closed
+// 		// Check for number of pairs, if number of pairs is impair keep 1 pair
+// 		if (is_even(args, '\'') || ft_strchr(args, '$') == NULL)
+// 		{
+// 			rm_quotes(args);
+// 			sub_sin_quotes(args, data);
+// 		}
+// 		else
+// 		{
+// 			printf(RED "Error: quotes not closed\n" RESET);
+// 			rm_quotes(args);
+// 			// add_quotes_pair(args);
+// 		}
+// 	}
+// 	// printf(GRN "it stays: %s\n" RESET, args);
+// }
 
 void sub_sin_quotes(char *line_copy, t_data *data)
 {

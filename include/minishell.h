@@ -28,8 +28,8 @@
 #include <sys/param.h>
 #include <sys/stat.h>
 #include <readline/readline.h>
-#include <sys/fcntl.h>
 #include <readline/history.h>
+#include <sys/fcntl.h>
 #include <errno.h>
 
 extern int g_signal;
@@ -42,6 +42,7 @@ typedef struct s_cmd {
     int redirect_in;
     int redirect_out;
 	int here_doc;
+    int here_doc_exp;
     struct s_cmd *next;
 } t_cmd;
 
