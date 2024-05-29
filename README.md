@@ -24,7 +24,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [x] expansions have to work with exported variables, this does not work with getenv()
 - [x] expand whole command line
 - [x] Check what happens for non existing expansions $NONEXISTING
-- [ ] `'$BOB' '$JO'` should return `$BOB: command not found`
+- [ ] `'$BOB' '$JO'` should return `$BOB: command not found` :face_with_peeking_eye:
 
 - [ ] Add data->exit _code to all builtins
 - [ ] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
@@ -42,7 +42,7 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [ ] check fucked up history :cat:
 
 - [ ] Something goes wrong with ctrl-D and it does not aways work
-- [ ] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others. Maybe we need to check when quotes are not pair, bash seems to wait for the second quote but maybe returnring some :non valid input error" is enough(?)
+- [ ] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others. Maybe we need to check when quotes are not pair, bash seems to wait for the second quote but maybe returnring some :non valid input error" is enough(?) :face_with_peeking_eye:
       
 ## general TODO:
 - [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
