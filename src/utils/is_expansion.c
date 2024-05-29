@@ -7,7 +7,7 @@ int is_expansion(char **args) //find expansion in args
 	i = 0;
 	while(args[i])
 	{
-		if (args[i][0] == '$')
+		if (ft_strchr(args[i], '$'))
 		{
 			//printf(YEL "'$' found: %s\n" RESET, args[i]);
 			return(1);
