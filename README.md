@@ -44,7 +44,7 @@ apt-get install git build-essential libreadline-dev
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history :cat:
 - [ ] Something goes wrong with ctrl-D and it does not aways work
-- [ ] cat '$TERM' giving seg fault when not forking
+- [ ] cat '$TERM' giving seg fault when not forking ( cat '$TERM' | wc is fine)
 - [ ] << EOF (without cat) is causing seg fault
 - [ ] Check freeing and leaks :cat:
       
