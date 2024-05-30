@@ -40,6 +40,7 @@ apt-get install git build-essential libreadline-dev
 - [x] Reorganice expand function
 - [ ] Split expansions
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
+- [ ] echo "$TERM fsfsfs" substitude "$TERM fsfsfs" by "\0" but it should print $TERM fsfsfs
 ---
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history :cat:
