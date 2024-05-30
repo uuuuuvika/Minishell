@@ -10,12 +10,15 @@ docker build -t ubuntu .
 to run it
 ```
 docker run -it -v $(pwd):/home/root ubuntu
+
+apt-get install git build-essential libreadline-dev
 ```
 
 ## To fix for Evaluation Sheet:
 - [ ] Change path thing. It needs to run with `bin/ls`, check for relative and absolute paths :cat:
 - [ ] Try `unset PATH` Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again  :cat:
 - [ ] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right. :cat:
+---
 - [x] Run: `''` and  `' '` fix it, it works with double quotes but not single quotes
 - [x] Test only spaces or tabs
 - [x] echo -n -n -n -n hola has to print hola and no new line. Now it prints -n hola
@@ -24,28 +27,28 @@ docker run -it -v $(pwd):/home/root ubuntu
 - [x] expansions have to work with exported variables, this does not work with getenv()
 - [x] expand whole command line
 - [x] Check what happens for non existing expansions $NONEXISTING
-- [ ] `'$BOB' '$JO'` should return `$BOB: command not found` :face_with_peeking_eye:
-
+- [x] `'$BOB' '$JO'` should return `$BOB: command not found` :face_with_peeking_eye:
+- [x] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others.
+- [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not
+- [ ] heredoc + expansions + quotes :face_with_peeking_eye:
+---
 - [ ] Add data->exit _code to all builtins
 - [ ] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
 - [ ] `cat $PATH`should write `no such a file or directory`
-
+---
 - [x] Check expansions for `cat $EXPANDTOFILE ??` Try with paths maybe?
-- [ ] << EOF (without cat) is causing seg fault
+- [x] Reorganice expand function
 - [ ] Split expansions
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
-- [x] reorganice expand function
-- [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not 
-- [ ] heredoc + expansions + quotes :face_with_peeking_eye:
-- [ ] Check freeing and leaks :cat:
+---
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history :cat:
-
 - [ ] Something goes wrong with ctrl-D and it does not aways work
-- [x] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others. Maybe we need to check when quotes are not pair, bash seems to wait for the second quote but maybe returnring some :non valid input error" is enough(?)
-- [ ]  cat '$TERM' giving seg fault when not forking
+- [ ] cat '$TERM' giving seg fault when not forking
+- [ ] << EOF (without cat) is causing seg fault
+- [ ] Check freeing and leaks :cat:
       
-## general TODO:
+## General TODO:
 - [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
 - [ ] Compound commands
 - [x] < > >>  Redirections for stdin and stdout
