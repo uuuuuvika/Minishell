@@ -49,6 +49,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 			g_signal = 0;
 		}
 		printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
+		data->exit_code = 127; // So when we call $? after "-minishell: 130: command not found" it changes to "(..)127: command(..)""
 	}
 	else
 	{
