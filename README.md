@@ -15,8 +15,8 @@ apt-get install git build-essential libreadline-dev
 ```
 
 ## To fix for Evaluation Sheet:
-- [ ] Change path thing. It needs to run with `bin/ls`, check for relative and absolute paths :cat:
-- [ ] Try `unset PATH` Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again  :cat:
+- [x] Change path thing. It needs to run with `bin/ls`, check for relative and absolute paths
+- [x] Try `unset PATH` Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again
 - [ ] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right. :cat:
 ---
 - [x] Run: `''` and  `' '` fix it, it works with double quotes but not single quotes
@@ -34,7 +34,7 @@ apt-get install git build-essential libreadline-dev
 ---
 - [ ] Add data->exit _code to all builtins
 - [ ] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
-- [ ] `cat $PATH`should write `no such a file or directory`
+- [x] `cat $PATH`should write `no such a file or directory`
 ---
 - [x] Check expansions for `cat $EXPANDTOFILE ??` Try with paths maybe?
 - [x] Reorganice expand function
