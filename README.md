@@ -48,6 +48,7 @@ apt-get install git build-essential libreadline-dev
 - [x] cat '$TERM' giving seg fault when not forking ( cat '$TERM' | wc is fine)
 - [ ] << EOF (without cat) is causing seg fault
 - [ ] Check freeing and leaks :cat:
+- [ ] Review/replace error messages and exit codes
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
