@@ -17,7 +17,7 @@ apt-get install git build-essential libreadline-dev
 ## To fix for Evaluation Sheet:
 - [x] Change path thing. It needs to run with `bin/ls`, check for relative and absolute paths
 - [x] Try `unset PATH` Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again
-- [ ] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right. :cat:
+- [x] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right.
 ---
 - [x] Run: `''` and  `' '` fix it, it works with double quotes but not single quotes
 - [x] Test only spaces or tabs
@@ -38,7 +38,7 @@ apt-get install git build-essential libreadline-dev
 ---
 - [x] Check expansions for `cat $EXPANDTOFILE ??` Try with paths maybe?
 - [x] Reorganice expand function
-- [ ] Split expansions
+- [ ] Split expansions so we can store commands in env and expand them after
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
 - [ ] echo "$TERM fsfsfs" substitude "$TERM fsfsfs" by "\0" but it should print $TERM fsfsfs
 ---
@@ -50,14 +50,14 @@ apt-get install git build-essential libreadline-dev
 - [ ] Check freeing and leaks :cat:
       
 ## General TODO:
-- [ ] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
+- [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
 - [ ] Compound commands
 - [x] < > >>  Redirections for stdin and stdout
 - [x] | output from one program to the input of the next program
 - [ ] ; is used for program sequencing
 - [ ] "" '' Quotes
-- [ ] $PATH Environment variables
+- [x] $PATH Environment variables
 - [ ] ctrl-C, ctrl-D, ctrl-\  SIGINT, EOG, SIGQUIT
-- [ ] $? should work like in bash
+- [x] $? should work like in bash
 - [ ] Use up and down arrows to navigate through the command using termcap (mandatory) history which we will then be able to edit (at least like we can for classic lines if we feel like it (the line, not the history)).
 - [ ] run programs in bg (not mandatory)
