@@ -49,6 +49,7 @@ apt-get install git build-essential libreadline-dev
 - [ ] << EOF (without cat) is causing seg fault
 - [ ] Check freeing and leaks :cat:
 - [ ] Review/replace error messages and exit codes
+- [ ] Ctrl-C has to exit heredoc
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
