@@ -15,4 +15,3 @@ int is_builtin(t_cmd *command)
     }
     return (0);
 }
-

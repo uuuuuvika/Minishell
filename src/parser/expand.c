@@ -89,6 +89,18 @@ char *expand_arg(char **args, int num_args, t_data *data)
 	int i;
 	(void)num_args;
 	i = 0;
+	if (ft_strcmp(args[0], "$?") == 0)
+	{
+		if(g_signal == 2)
+		{
+			data->exit_code = 130;
+			g_signal = 0;
+		printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
+		data->exit_code = 127; // So when we call $? after "-minishell: 130: command not found" it changes to "(..)127: command(..)""
+		}
+		args[i] = ft_itoa(data->exit_code);
+		return (NULL);
+	}
 	if ((ft_strlen(args[0]) == 1 && ft_strcmp(args[0], "$") == 0) || ft_strcmp(args[0], "$?") == 0 || !is_expansion(args))
 		return (NULL);
 	while (args[i])
