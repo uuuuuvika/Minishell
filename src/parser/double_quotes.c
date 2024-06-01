@@ -2,7 +2,6 @@
 
 void sub_dub_quotes(char *line_copy, t_data *data)
 {
-    char str[20];
     int index = 0;
     int count_subs = 0;
     while (line_copy[index])
@@ -13,7 +12,7 @@ void sub_dub_quotes(char *line_copy, t_data *data)
     }
     if (count_subs % 2 != 0)
     {
-        char *del = "\'";
+        char *del = "\"";
         read_heredoc_simple(del, data);
         return;
     }
@@ -25,13 +24,17 @@ void sub_dub_quotes(char *line_copy, t_data *data)
     {
         if (line_copy[index] == '"')
         {
+            int k = index;
+            while (line_copy[++k] != '"')
+                ;
+            int len = k - index;
+            char *str = calloc(len, sizeof(char));
             int str_index = 0;
             while (line_copy[++index] != '"')
             {
                 str[str_index++] = line_copy[index];
                 line_copy[index] = '*';
             }
-            str[str_index] = '\0';
             data->sub[s_index++] = ft_strdup(str);
         }
         index++;
@@ -45,19 +48,14 @@ void return_dub_quotes(char **args, t_data *data)
     int t = 0;
     while (args[i])
     {
-        int j = 0;
-        while (args[i][j])
+        if (args[i][0] == '"' && args[i][1] == '*')
         {
-            if (args[i][j] == '"' && args[i][j + 1] == '*')
-            {
-                free(args[i]);
-                args[i] = ft_strdup(data->sub[t]);
-                t++;
-            }
-            else if (args[i][j] == '"' && args[i][j + 1] == '"')
-                args[i][j] = '\0';
-            j++;
+            free(args[i]);
+            args[i] = ft_strdup(data->sub[t]);
+            t++;
         }
+        else if (args[i][0] == '"' && args[i][1] == '"')
+            args[i][0] = '\0';
         i++;
     }
 }

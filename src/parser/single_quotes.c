@@ -20,47 +20,8 @@
 // [1:05 PM] plandolf
 // ec$A''RG hi = ecRG: command not found
 
-// void rm_quotes(char *str)
-// {
-//     int len = ft_strlen(str);
-//     if (len >= 2 && str[0] == '\'' && str[len - 1] == '\'')
-// 	{
-//         ft_memmove(str, str + 1, len - 2);
-//         str[len - 2] = '\0';
-//     }
-// }
-
-// When quotes check if quotes are closed
-// If not closed, wait for closing quote
-//  check for expansions passed in seccond argument
-
-/*
-Minishell > cat ''
-
-Minishell > cat '""'
-cat: '""': No such file or directory
-Minishell > cat 'ggg'
-cat: ggg: No such file or directory
-Minishell > cat '"ggg"'
-cat: '"***"': No such file or directory
-Minishell > echo ''
-
-Minishell > echo ""
-""
-Minishell > cat
-fdfdfd
-fdfdfd
-fdfdf
-fdfdf
-Minishell > cat ""
-cat: '""': No such file or directory
-Minishell > cat ''
-
-*/
-
 void sub_sin_quotes(char *line_copy, t_data *data)
 {
-	char str[20];
 	int index = 0;
 	int count_subs = 0;
 
@@ -70,8 +31,6 @@ void sub_sin_quotes(char *line_copy, t_data *data)
 			count_subs++;
 		index++;
 	}
-	// index = 0;
-
 	if (count_subs % 2 != 0)
 	{
 		char *del = "\'";
@@ -80,21 +39,24 @@ void sub_sin_quotes(char *line_copy, t_data *data)
 	}
 
 	data->subb = malloc((count_subs / 2) * sizeof(char *));
-
 	int s_index = 0;
 	index = 0;
 	while (line_copy[index])
 	{
 		if (line_copy[index] == '\'')
 		{
+			int k = index;
+            while (line_copy[++k] != '"')
+                ;
+            int len = k - index;
+            char *str = calloc(len, sizeof(char));
 			int str_index = 0;
 			while (line_copy[++index] != '\'')
 			{
 				str[str_index++] = line_copy[index];
 				line_copy[index] = '#';
 			}
-			str[str_index] = '\0';
-			data->subb[s_index++] = strdup(str);
+			data->subb[s_index++] = ft_strdup(str);
 		}
 		index++;
 	}
