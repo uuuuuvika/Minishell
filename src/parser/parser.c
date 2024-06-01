@@ -1,19 +1,31 @@
 #include "minishell.h"
 
+// void create_cmd(t_cmd *new_node)
+// {
+//     new_node->args = NULL;
+//     new_node->num_args = 0;
+//     new_node->pipe_in = -1;
+//     new_node->pipe_out = -1;
+//     new_node->redirect_in = -1;
+//     new_node->redirect_out = -1;
+//     new_node->here_doc = 0;
+//     new_node->next = NULL;
+// }
+
 int parse(char *input, t_data *data)
 {
     char *line_copy;
     char **future_children;
     int nch;
 
-    //check_NULL(input);
-
+    // check_NULL(input);
     line_copy = ft_strdup(input);
-    //check_NULL(line_copy);
+    // check_NULL(line_copy);
     sub_dub_quotes(line_copy, data);
     sub_sin_quotes(line_copy, data);
     future_children = ft_split(line_copy, '|');
     free(line_copy);
+
     t_cmd *new_node = NULL;
     nch = 0;
     while (future_children[nch])
@@ -28,15 +40,28 @@ int parse(char *input, t_data *data)
         new_node->here_doc = 0;
         new_node->next = NULL;
 
+        int i = 0;
+        while (new_node->args[i])
+        {
+            if (ft_strcmp(new_node->args[i], "<<") == 0)
+            {
+                if (new_node->args[i + 1][0] == '\'' || new_node->args[i + 1][0] == '\"')
+                    new_node->here_doc_exp = 0;
+                else
+                    new_node->here_doc_exp = 1;
+            }
+            i++;
+        }
+
         return_dub_quotes(new_node->args, data);
         expand_arg(new_node->args, new_node->num_args, data);
         return_sin_quotes(new_node->args, data);
 
         redirect_assign(new_node, data);
-        
+
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
-        
+
         if (nch++ == 0)
             data->commands = new_node;
         else
@@ -50,6 +75,7 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
+
     // printf("num_of_children: %d\n", data->num_of_children);
     // t_cmd *current = data->commands;
     // while (current)

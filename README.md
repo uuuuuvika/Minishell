@@ -10,6 +10,8 @@ docker build -t ubuntu .
 to run it
 ```
 docker run -it -v $(pwd):/home/root ubuntu
+
+apt-get install git build-essential libreadline-dev
 ```
 
 ## To fix for Evaluation Sheet:

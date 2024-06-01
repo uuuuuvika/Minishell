@@ -11,6 +11,13 @@ void sub_dub_quotes(char *line_copy, t_data *data)
             count_subs++;
         index++;
     }
+    if (count_subs % 2 != 0)
+    {
+        char *del = "\'";
+        read_heredoc_simple(del, data);
+        return;
+    }
+
     data->sub = malloc((count_subs / 2) * sizeof(char *));
     int s_index = 0;
     index = 0;
@@ -25,7 +32,6 @@ void sub_dub_quotes(char *line_copy, t_data *data)
                 line_copy[index] = '*';
             }
             str[str_index] = '\0';
-            //printf("str: %s\n", str);
             data->sub[s_index++] = ft_strdup(str);
         }
         index++;
@@ -42,15 +48,15 @@ void return_dub_quotes(char **args, t_data *data)
         int j = 0;
         while (args[i][j])
         {
-            if(args[i][j] == '"' && args[i][j + 1] == '*')
+            if (args[i][j] == '"' && args[i][j + 1] == '*')
             {
-                    free(args[i]);
-                    args[i] = ft_strdup(data->sub[t]);
-                    t++;
+                free(args[i]);
+                args[i] = ft_strdup(data->sub[t]);
+                t++;
             }
             else if (args[i][j] == '"' && args[i][j + 1] == '"')
                 args[i][j] = '\0';
-            j++;         
+            j++;
         }
         i++;
     }

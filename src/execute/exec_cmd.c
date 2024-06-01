@@ -16,13 +16,13 @@ int is_b(char *cmd)
     return (0);
 }
 
-void	exec_cmd(t_data *data, t_cmd *cmd)
+void exec_cmd(t_data *data, t_cmd *cmd)
 {
-    char	*path;
+    char *path;
 
     // check_NULL(cmd->args[0]);
     int i = 0;
-    while(ft_strcmp(cmd->args[i] , "") == 0 && cmd->args[i + 1] != NULL)
+    while (ft_strcmp(cmd->args[i], "") == 0 && cmd->args[i + 1] != NULL)
         i++;
     if (is_b(cmd->args[i]))
     {
@@ -34,27 +34,27 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
             ft_env(data);
         else if (ft_strcmp(cmd->args[i], "pwd") == 0)
             ft_pwd(data);
-		else if (ft_strcmp(cmd->args[i], "export") == 0)
+        else if (ft_strcmp(cmd->args[i], "export") == 0)
             ft_export(data, cmd);
-		else if (ft_strcmp(cmd->args[i], "unset") == 0)
+        else if (ft_strcmp(cmd->args[i], "unset") == 0)
             ft_unset(data, cmd);
-		else if (ft_strcmp(cmd->args[i], "exit") == 0)
+        else if (ft_strcmp(cmd->args[i], "exit") == 0)
             ft_exit(data);
     }
     else if (ft_strcmp(cmd->args[i], "$?") == 0)
-	{
-		if(g_signal == 2)
-		{
-			data->exit_code = 130;
-			g_signal = 0;
-		}
-		printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
-	}
-	else
-	{
-		//Check if it will be cmd not found or is directory
-		path = find_path(cmd->args[i], data);
-        //printf("path: %s\n", path);
-		execve(path, cmd->args, data->envs);
-	}
+    {
+        if (g_signal == 2)
+        {
+            data->exit_code = 130;
+            g_signal = 0;
+        }
+        printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
+    }
+    else
+    {
+        // Check if it will be cmd not found or is directory
+        path = find_path(cmd->args[i], data);
+        printf("path: %s\n", path);
+        execve(path, cmd->args, data->envs);
+    }
 }
