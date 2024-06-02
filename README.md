@@ -27,7 +27,7 @@ apt-get install git build-essential libreadline-dev
 - [x] expansions have to work with exported variables, this does not work with getenv()
 - [x] expand whole command line
 - [x] Check what happens for non existing expansions $NONEXISTING
-- [x] `'$BOB' '$JO'` should return `$BOB: command not found` :face_with_peeking_eye:
+- [x] `'$BOB' '$JO'` should return `$BOB: command not found` 
 - [x] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others.
 - [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
