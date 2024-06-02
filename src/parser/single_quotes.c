@@ -46,10 +46,10 @@ void sub_sin_quotes(char *line_copy, t_data *data)
 		if (line_copy[index] == '\'')
 		{
 			int k = index;
-            while (line_copy[++k] != '"')
-                ;
-            int len = k - index;
-            char *str = calloc(len, sizeof(char));
+			while (line_copy[++k] != '\'')
+				;
+			int len = k - index;
+			char *str = calloc(len, sizeof(char));
 			int str_index = 0;
 			while (line_copy[++index] != '\'')
 			{
@@ -70,17 +70,23 @@ void return_sin_quotes(char **args, t_data *data)
 	while (args[i])
 	{
 		int j = 0;
-		while (args[i][j])
+		if (args[i][0] == '\'' && args[i][1] == '\'')
+			args[i][0] = '\0';
+		else
 		{
-			if (args[i][j] == '\'' && args[i][j + 1] == '#')
+			while (args[i][j])
 			{
-				free(args[i]);
-				args[i] = ft_strdup(data->subb[t]);
-				t++;
+				if (args[i][j] == '\'' && args[i][j + 1] == '#')
+				{
+					char *tmp = malloc((j + 2) * sizeof(char));
+					ft_strlcpy(tmp, args[i], j + 1);
+					// printf("tmp: %s\n", tmp);
+					free(args[i]);
+					args[i] = ft_strjoin(tmp, data->subb[t]);
+					t++;
+				}
+				j++;
 			}
-			else if (args[i][j] == '\'' && args[i][j + 1] == '\'')
-				args[i][j] = '\0';
-			j++;
 		}
 		i++;
 	}

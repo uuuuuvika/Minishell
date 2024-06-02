@@ -25,6 +25,7 @@ void sub_dub_quotes(char *line_copy, t_data *data)
         if (line_copy[index] == '"')
         {
             int k = index;
+
             while (line_copy[++k] != '"')
                 ;
             int len = k - index;
@@ -46,16 +47,39 @@ void return_dub_quotes(char **args, t_data *data)
 {
     int i = 0;
     int t = 0;
+    // while (args[i])
+    // {
+    //     if (args[i][0] == '"' && args[i][1] == '*')
+    //     {
+    //         free(args[i]);
+    //         args[i] = ft_strdup(data->sub[t]);
+    //         t++;
+    //     }
+    //     else if (args[i][0] == '"' && args[i][1] == '"')
+    //         args[i][0] = '\0';
+    //     i++;
+    // }
     while (args[i])
     {
-        if (args[i][0] == '"' && args[i][1] == '*')
-        {
-            free(args[i]);
-            args[i] = ft_strdup(data->sub[t]);
-            t++;
-        }
-        else if (args[i][0] == '"' && args[i][1] == '"')
+        int j = 0;
+        if (args[i][0] == '"' && args[i][1] == '"')
             args[i][0] = '\0';
+        else
+        {
+            while (args[i][j])
+            {
+                if (args[i][j] == '"' && args[i][j + 1] == '*')
+                {
+                    char *tmp = malloc((j + 2) * sizeof(char));
+                    ft_strlcpy(tmp, args[i], j + 1);
+                    // printf("tmp: %s\n", tmp);
+                    free(args[i]);
+                    args[i] = ft_strjoin(tmp, data->sub[t]);
+                    t++;
+                }
+                j++;
+            }
+        }
         i++;
     }
 }

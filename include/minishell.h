@@ -82,8 +82,8 @@ void replace_for_expansion(char **args, char *cmd);
 char *ft_getenv(char *env_name, char **envs);
 char *find_path(char *cmd, t_data *data);
 void exec_cmd(t_data *data, t_cmd *cmd);
-int is_builtin(t_cmd *command);
-int is_b(char *command);
+int is_builtin(char *command);
+// int is_b(char *command);
 
 int count_env(char **envp);
 int cpy_envs(t_data *data, char **envp);

@@ -46,7 +46,7 @@ int main(int argc, char *argv[], char **envp)
 		{
 			add_history(input);
 			parse(input, &data);
-			if ((data.num_of_children == 1 && is_builtin(data.commands)) || (data.num_of_children == 1 && is_dsqm(data.commands)) )
+			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)) )
 			{
 				printf(YEL "Executing simple builtin/$? in main\n" RESET);
 				int fin = dup(STDIN);

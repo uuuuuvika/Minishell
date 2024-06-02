@@ -96,4 +96,5 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 		free(line);
 	}
 	close(fd);
+	
 }

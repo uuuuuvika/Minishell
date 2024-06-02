@@ -39,7 +39,7 @@ static size_t ft_spec_strlen(char *str)
 	return (i);
 }
 
-char *ft_strjoin(char *str1, char *str2)
+char *ft_strjoin(char *str1, char *str2) //hello
 {
 	int i;
 	char *newstr;
@@ -54,12 +54,14 @@ char *ft_strjoin(char *str1, char *str2)
 		i++;
 	}
 	free(str1);
+	str1 = NULL;
 	while (*str2)
 	{
 		newstr[i++] = *str2;
 		if (*str2++ == '\n')
 			break;
 	}
+
 	newstr[i] = '\0';
 	return (newstr);
 }

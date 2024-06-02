@@ -1,29 +1,31 @@
 #include "minishell.h"
 
-char    *find_path(char *cmd, t_data *data)
+char *find_path(char *cmd, t_data *data)
 {
-	char        *path;
-    char        **paths;
-    struct stat statbuf;
+	char *path;
+	char **paths;
+	struct stat statbuf;
 
-	//printf(BLU "PATH: %s\n" RESET, ft_getenv("PATH", data->envs));
+	if (stat(cmd, &statbuf) == 0)
+		return (cmd);
+	if (ft_strcmp(cmd, "") == 0)
+		printf("-minishell: : command not found \n"); // This is a bit of a cheat code, if we have time we should make it better :)
 	paths = ft_split(ft_getenv("PATH", data->envs), ':');
 	int i = 0;
 	while (paths[i])
 	{
-		path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(path, cmd);
-		if (stat(path, &statbuf) == 0)
+		paths[i] = ft_strjoin(paths[i], "/");
+		paths[i] = ft_strjoin(paths[i], cmd);
+		if (stat(paths[i], &statbuf) == 0)
 		{
-			//free_arr2D(paths); //comment bc it was giving me a double free error
-			return (path);	
+			path = ft_strdup(paths[i]);
+			free_arr2D(paths);
+			return (path);
 		}
 		i++;
 	}
-	//free_arr2D(paths); //comment bc it was giving me a double free error
-    free(path);
-	printf("-minishell: %s: command not found \n", cmd);// This error is for commands
-	//add printferror for ("-minishell: %s: No such file or directory \n", cmd), there are some errors "Permision denied" w exit code 126(cmd found but not executable)
-    data->exit_code = 127;
-    return (NULL);
+	free_arr2D(paths);
+	printf(BLU "-minishell: %s: command not found \n" RESET, cmd); // This error is for commands														   // add printferror for ("-minishell: %s: No such file or directory \n", cmd), there are some errors "Permision denied" w exit code 126(cmd found but not executable)
+	data->exit_code = 127;
+	return (NULL);
 }
