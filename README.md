@@ -33,23 +33,25 @@ apt-get install git build-essential libreadline-dev
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 ---
 - [ ] Add data->exit _code to all builtins
-- [ ] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
+- [x] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
 - [x] `cat $PATH`should write `no such a file or directory`
 ---
 - [x] Check expansions for `cat $EXPANDTOFILE ??` Try with paths maybe?
 - [x] Reorganice expand function
-- [ ] Split expansions so we can store commands in env and expand them after
+- [x] Split expansions so we can store commands in env and expand them after
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
-- [ ] echo "$TERM fsfsfs" substitude "$TERM fsfsfs" by "\0" but it should print `xterm-256color fsfsfs`
+- [x] echo "$TERM fsfsfs" substitude "$TERM fsfsfs" by "\0" but it should print `xterm-256color fsfsfs`
 ---
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history :cat:
-- [ ] Something goes wrong with ctrl-D and it does not aways work
+- [ ] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
+- [ ] Ctrl-C has to exit heredoc :cat:
 - [x] cat '$TERM' giving seg fault when not forking ( cat '$TERM' | wc is fine)
-- [ ] << EOF (without cat) is causing seg fault
-- [ ] Check freeing and leaks :cat:
+- [x] << EOF (without cat) is causing seg fault
+- [ ] Check freeing and leaks
 - [ ] Review/replace error messages and exit codes
-- [ ] Ctrl-C has to exit heredoc
+
+
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
