@@ -29,6 +29,7 @@ void redirect_assign(t_cmd *current, t_data *data)
 		{
 			read_heredoc(current->args[i + 1], current, data);
 		}
+		//printf(RED"current->args[%d]: %s\n"RED, i, current->args[i]);
         i++;
     }
 }

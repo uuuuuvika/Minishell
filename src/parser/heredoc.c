@@ -43,26 +43,42 @@ char *split_expand_join(char *line, t_data *data)
 		exp_line = ft_strjoin(exp_line, splitted[i]);
 		i++;
 	}
-	//printf(GRN "expanded line: %s\n" RESET, exp_line);
+	printf(GRN "expanded line: %s\n" RESET, exp_line);
 	return (exp_line);
 }
 
+void sigint_handler(int sig) {
+    if (sig == SIGINT) {
+        g_signal = 2;
+    }
+}
+
+// Function to set up signal handler for readline
+void setup_readline_signal_handler() {
+    signal(SIGINT, sigint_handler);
+}
 
 void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 {
-	(void)current;
+	//(void)current;
 	char *line;
 	int fd;
-
+	setup_readline_signal_handler();
+	//char *joined_line = ft_strdup("");
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	current->here_doc = fd;
 	//dup2(fd, STDOUT);
-
-	// fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	printf(BLU"current %s\n" RESET,current->args[0]);
+		// fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	printf("delimiter: %s\n", delimiter);
 	while (1)
 	{
 		line = readline("> ");
+		if (g_signal) {
+        	printf("\nCTRL+C detected. Exiting readline...\n");
+    	    free(line);
+            break; // Exit the loop when CTRL+C is detected
+        }
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
@@ -70,20 +86,31 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 		}
 		if (delimiter[0] != '\'' || delimiter[0] != '\"')////// not nice
 		{
-			if (ft_strchr(line, '$'))// check if there are quotes
+			if (ft_strchr(line, '$'))
 			{
 				char *exp_line = split_expand_join(line, data);
-				//free(line);
+				free(line);
 				line = exp_line;
+				printf(	RED"LINE: %s\n"RESET , exp_line);
 				//free(exp_line);
 			}
 		}
+		printf(RED"LINE: %s\n"RESET , line);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
 	}
 	close(fd);
 }
+
+// else
+// {
+// 	ft_strjoin(line, joined_line);
+// 	printf(RED"LINE: %s\n"RESET , joined_line);
+// 	line = joined_line;
+// 	printf(RED"LINE: %s\n"RESET , line);
+// 	//free(joined_line);
+// }
 
 
 // char *expand_var(char *args, t_data *data)

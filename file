@@ -1,20 +1,5 @@
-[0m[0;34margs[0]: /home/darotche/bin
-[0m[0;34margs[1]: /home/darotche/bin
-[0m[0;34margs[2]: /usr/local/sbin
-[0m[0;34margs[3]: /usr/local/bin
-[0m[0;34margs[4]: /usr/sbin
-[0m[0;34margs[5]: /usr/bin
-[0m[0;34margs[6]: /sbin
-[0m[0;34margs[7]: /bin
-[0m[0;34margs[8]: /usr/games
-[0m[0;34margs[9]: /usr/local/games
-[0m[0;34margs[10]: /snap/bin
-[0m[0;32mpath: /usr/bin/grep
-PWD=/home/darotche/Projects/Rank3/minishell
-XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/home/darotche/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
-OLDPWD=/home/darotche/Projects/Rank3/minishell
-XAUTHORITY=/home/darotche/.Xauthority
-ZDOTDIR=/home/darotche
-PATH=/home/darotche/bin:/home/darotche/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
-USER_ZDOTDIR=/home/darotche
-HOME=/home/darotche
+[0m[0;32mpath: /usr/bin/cat
+asdas
+das
+da
+/home/darotche

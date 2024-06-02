@@ -10,7 +10,7 @@ char    *find_path(char *cmd, t_data *data)
 			return (cmd);
 	//printf(BLU "PATH: %s\n" RESET, ft_getenv("PATH", data->envs));
 	paths = ft_split(ft_getenv("PATH", data->envs), ':');
-	print_2D(paths);
+	//print_2D(paths);
 	int i = 0;
 	while (paths[i])
 	{
@@ -25,7 +25,7 @@ char    *find_path(char *cmd, t_data *data)
 	}
 	free_arr2D(paths);
     free(path);
-	printf("-minishell: %s: command not found \n", cmd);// This error is for commands
+	printf(BLU"-minishell: %s: command not found \n"RESET, cmd);// This error is for commands
 	//add printferror for ("-minishell: %s: No such file or directory \n", cmd), there are some errors "Permision denied" w exit code 126(cmd found but not executable)
     data->exit_code = 127;
     return (NULL);

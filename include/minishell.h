@@ -92,7 +92,7 @@ void    return_sin_quotes(char **args, t_data *data);
 void    sub_dub_quotes(char *line_copy, t_data *data);
 void    return_dub_quotes(char **args, t_data *data);
 
-char *expand_arg(char **args, int num_args, t_data *data);
+char	*expand_arg(char **args, int num_args, t_data *data);
 
 int     is_redir(char *str);
 int     cnt_args(char **args);

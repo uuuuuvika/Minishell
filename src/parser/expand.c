@@ -89,26 +89,37 @@ char *expand_arg(char **args, int num_args, t_data *data)
 	int i;
 	(void)num_args;
 	i = 0;
+
 	if (ft_strcmp(args[0], "$?") == 0)
 	{
 		if(g_signal == 2)
 		{
 			data->exit_code = 130;
 			g_signal = 0;
-		printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
-		data->exit_code = 127; // So when we call $? after "-minishell: 130: command not found" it changes to "(..)127: command(..)""
+			printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
+			data->exit_code = 127; // So when we call $? after "-minishell: 130: command not found" it changes to "(..)127: command(..)""
 		}
-		args[i] = ft_itoa(data->exit_code);
+		args[i] = ft_itoa(data->exit_code);/// Check this later for proper allocation
 		return (NULL);
 	}
-	if ((ft_strlen(args[0]) == 1 && ft_strcmp(args[0], "$") == 0) || ft_strcmp(args[0], "$?") == 0 || !is_expansion(args))
+	
+	print_2D(args);
+
+	if ((ft_strlen(args[0]) == 1 && ft_strcmp(args[0], "$") == 0) || !is_expansion(args))
 		return (NULL);
+	// if(ft_strchr(args[i], ' ') == 0)
+	// {
+	// 	printf(RED"We need to do something about this %s\n" RESET, args[i]);
+	// 	splt_expnd_join(args, i);
+	// 	ft_split(args[i], ' ');
+	// }
 	while (args[i])
 	{
 		if (args[i][0] == '$' && ft_strchr(args[i], '\'') == 0)
 		{
+			//char *env_name = "TERM";
 			char *env_name = ft_strdup(args[i] + 1);
-			// printf("env_name: %s\n", env_name);
+			printf(GRN"env_name: %s\n"RESET, env_name);
 			if (ft_getenv(env_name, data->envs) != NULL)
 			{
 				// printf(GRN"Valid env: %s\n" RESET, env_name);
@@ -121,10 +132,30 @@ char *expand_arg(char **args, int num_args, t_data *data)
 			}
 			else
 				args[i][0] = '\0';
-			free(env_name);
+			printf(GRN"args[%d]: %s\n" RESET, i, args[i]);
+			//free(env_name);
 		}
 		else
 			i++;
 	}
 	return (NULL);
 }
+
+// char *get_env_name(char *args)
+// {
+// 	char *env_name;
+// 	int i;
+// 	i = 0;
+// 	printf(RED"args: %s\n" RESET, args);
+// 	//printf(RED"env_name: %s\n" RESET, env_name);
+// 	while (args[i] != '\0')
+// 	{
+// 		if (args[i] == '$')
+// 		{
+// 			env_name = ft_strdup(args + 1);
+// 			return (env_name);
+// 		}
+// 		i++;
+// 	}
+// 	return (NULL);
+// }

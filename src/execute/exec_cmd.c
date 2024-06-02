@@ -44,21 +44,11 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
         i++;
     if (is_b(cmd->args[i]))
 		exec_builtin(data, cmd);
-    // else if (ft_strcmp(cmd->args[i], "$?") == 0)
-	// {
-	// 	if(g_signal == 2)
-	// 	{
-	// 		data->exit_code = 130;
-	// 		g_signal = 0;
-	// 	}
-	// 	printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
-	// 	data->exit_code = 127; // So when we call $? after "-minishell: 130: command not found" it changes to "(..)127: command(..)""
-	// }
 	else
 	{
 		//Check if it will be cmd not found or is directory
 		path = find_path(cmd->args[i], data);
-        printf(GRN "path: %s\n" RESET, path);
+        //printf(GRN "path: %s\n" RESET, path);
 		execve(path, cmd->args, data->envs);
 	}
 }
