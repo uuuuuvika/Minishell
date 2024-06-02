@@ -5,7 +5,7 @@ void free_arr2D(char **arr2D)
     int i;
 
     i = 0;
-    while (arr2D[i] != NULL && arr2D[i][0] != '\n')
+    while (arr2D[i] != NULL && arr2D[i][0] != '\n') // '\n' is a delimiter for the end of the array????
         free(arr2D[i++]);
     free(arr2D);
 }
