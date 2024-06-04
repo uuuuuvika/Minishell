@@ -51,8 +51,11 @@ int parse(char *input, t_data *data)
             free(new_node);
             return (1);
         }
+        
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
+
+    
 
         if (nch++ == 0)
             data->commands = new_node;
@@ -67,15 +70,14 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
-
     //printf("num_of_children: %d\n", data->num_of_children);
     t_cmd *current = data->commands;
     while (current)
     {
         // printf("cmd: %s\n", current->args[0]);
         printf("num_args: %d\n", current->num_args);
-        // for (int i = 0; current->args[i]; i++)
-        //     printf("args[%d]: %s\n", i, current->args[i]);
+        for (int i = 0; current->args[i]; i++)
+            printf("args[%d]: %s\n", i, current->args[i]);
         // printf("pipe_in: %d\n", current->pipe_in);
         // printf("pipe_out: %d\n", current->pipe_out);
         // printf("here_doc: %d\n", current->here_doc);

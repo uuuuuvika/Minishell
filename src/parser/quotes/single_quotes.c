@@ -65,6 +65,7 @@ void sub_sin_quotes(char *line_copy, t_data *data)
 
 void return_sin_quotes(char **args, t_data *data)
 {
+	
 	int i = 0;
 	int t = 0;
 	while (args[i])
@@ -80,7 +81,6 @@ void return_sin_quotes(char **args, t_data *data)
 				{
 					char *tmp = malloc((j + 2) * sizeof(char));
 					ft_strlcpy(tmp, args[i], j + 1);
-					// printf("tmp: %s\n", tmp);
 					free(args[i]);
 					args[i] = ft_strjoin(tmp, data->subb[t]);
 					t++;

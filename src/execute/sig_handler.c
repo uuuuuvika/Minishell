@@ -16,6 +16,7 @@ void sig_handler(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		clear_history();
 		g_signal = 2;
 	}
 	else if (sig == 13)
