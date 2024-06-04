@@ -33,10 +33,23 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	char *line;
 	int fd;
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	current->here_doc = fd; // probably can be replaced by data->cmn_here_doc 
+	current->here_doc = fd; // probably can be replaced by data->cmn_here_doc
+
+	//signal(SIGINT, handle_sigint);
+
 	while (1)
 	{
 		line = readline("> ");
+		if (!line || errno == EINVAL || g_signal == 1)
+		{
+			printf("you have pressed CTRL-D\n");
+			g_signal = 0;
+			data->exit_code = 130;
+			rl_replace_line("", 0);
+			clear_history();
+			free(line);
+			break;
+		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);
@@ -57,5 +70,4 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 		free(line);
 	}
 	close(fd);
-	
 }

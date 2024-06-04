@@ -1,5 +1,8 @@
 #include "minishell.h"
 
+// Minishell > <<
+// make: *** [Makefile:19: m] Segmentation fault (core dumped)
+// vshcherb@c4c1c2:~/Desktop/Minishell$ << ^C
 int is_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
@@ -33,13 +36,20 @@ int main(int argc, char *argv[], char **envp)
 	(void)argv;
 
 	cpy_envs(&data, envp);
+	signal(SIGINT, handle_sigint);
 	while (1)
 	{
-		handle_ctrl();
-		input = readline(YEL "Minishell > " RESET);
-		if (!input || errno == EINVAL)
+		//handle_ctrl();
+		if(g_signal == 1)
 		{
-			printf("you have pressed CTRL-D\n");
+			printf("\nYou have pressed CTRL-C\n");
+			g_signal = 0;
+			rl_replace_line("", 0);
+		}
+		input = readline(YEL "Minishell > " RESET);
+		if (!input || errno == EINVAL )
+		{
+			//printf("you have pressed CTRL-D\n");
 			break;
 		}
 		if (ft_strlen(input) > 0 && !is_str_space(input))
@@ -62,6 +72,7 @@ int main(int argc, char *argv[], char **envp)
 				pipe_cmds(&data);
 			}
 			// printf("exit code in main is %d\n", data.exit_code);
+			printf("g_signal in main: %d\n", g_signal);
 		}
 		free(input);
 	}

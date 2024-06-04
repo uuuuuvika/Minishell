@@ -27,6 +27,7 @@
 #include <sys/wait.h>
 #include <sys/param.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
 #include <readline/readline.h>
 #include <sys/fcntl.h>
 #include <readline/history.h>
@@ -122,5 +123,9 @@ char *split_expand_join(char *line, t_data *data);
 
 void print_envs(t_data *data);
 void print_2D(char **args);
+
+void handle_ctrl_s();
+void sig_handler_s(int sig);
+void handle_sigint(int sig);
 
 #endif
