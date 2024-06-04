@@ -44,10 +44,10 @@ int main(int argc, char *argv[], char **envp)
 		{
 			printf("\nYou have pressed CTRL-C\n");
 			g_signal = 0;
-			rl_replace_line("", 0);
+			//rl_replace_line("", 0);
 		}
 		input = readline(YEL "Minishell > " RESET);
-		if (!input || errno == EINVAL )
+		if (!input || errno == EINVAL || g_signal == 1)
 		{
 			//printf("you have pressed CTRL-D\n");
 			break;
@@ -56,6 +56,8 @@ int main(int argc, char *argv[], char **envp)
 		{
 			add_history(input);
 			parse(input, &data);
+			printf("%i\n",data.commands->num_args);
+			printf("%s\n",data.commands->args[0]);
 			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)) )
 			{
 				printf(YEL "Executing simple builtin/$? in main\n" RESET);
@@ -75,6 +77,11 @@ int main(int argc, char *argv[], char **envp)
 			printf("g_signal in main: %d\n", g_signal);
 		}
 		free(input);
+		rl_redisplay();
+		// rl_replace_line("", 0);
+		// //rl_on_new_line();
+		// rl_redisplay();
+		// free_data(&data);
 	}
 	clear_history();
 	return (0);
