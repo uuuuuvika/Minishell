@@ -27,8 +27,9 @@
 #include <sys/wait.h>
 #include <sys/param.h>
 #include <sys/stat.h>
-#include <readline/readline.h>
+#include <sys/ioctl.h>
 #include <sys/fcntl.h>
+#include <readline/readline.h>
 #include <readline/history.h>
 #include <errno.h>
 

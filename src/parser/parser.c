@@ -33,10 +33,13 @@ int parse(char *input, t_data *data)
         return_sin_quotes(new_node->args, data);
 
         redirect_assign(new_node, data);
-
+		
+		print_2D(new_node->args);
 		if (new_node->num_args == 0)
         {
-            free_arr2D(new_node->args);
+			printf(MAG "num_args: %d\n"RESET, new_node->num_args);
+			printf(MAG"!!!!"RESET);
+		    free_arr2D(new_node->args);
             free(new_node);
             return (1);
         }

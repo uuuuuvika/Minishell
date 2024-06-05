@@ -28,7 +28,7 @@ int main(int argc, char *argv[], char **envp)
 {
 	static t_data data;
 	char *input;
-
+	g_signal = 0;
 	(void)argc;
 	(void)argv;
 
@@ -56,7 +56,7 @@ int main(int argc, char *argv[], char **envp)
 				dup2(fin, STDIN);
 				dup2(fout, STDOUT);
 			}
-			else
+			else if (ft_strcmp(data.commands->args[0], "<<") == 0)
 			{
 				printf(YEL "Fork\n" RESET);
 				pipe_cmds(&data);
@@ -64,7 +64,7 @@ int main(int argc, char *argv[], char **envp)
 			// if(data.exit_code == 127)
 			// 	printf("command not found\n");
 			// printf("exit code in main is %d\n", data.exit_code);
-			//  printf("g_signal in main is %d\n", g_signal);
+			//printf(CYN"g_signal in main is %d\n"RESET, g_signal);
 		}
 		free(input);
 	}

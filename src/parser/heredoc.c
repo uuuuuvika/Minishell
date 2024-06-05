@@ -47,23 +47,12 @@ char *split_expand_join(char *line, t_data *data)
 	return (exp_line);
 }
 
-void sigint_handler(int sig) {
-    if (sig == SIGINT) {
-        g_signal = 2;
-    }
-}
-
-// Function to set up signal handler for readline
-void setup_readline_signal_handler() {
-    signal(SIGINT, sigint_handler);
-}
 
 void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 {
 	//(void)current;
 	char *line;
 	int fd;
-	setup_readline_signal_handler();
 	//char *joined_line = ft_strdup("");
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	current->here_doc = fd;
@@ -71,12 +60,25 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	printf(BLU"current %s\n" RESET,current->args[0]);
 		// fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	printf("delimiter: %s\n", delimiter);
+	// int orig_rl_catch_signals = rl_catch_signals;
+    // rl_catch_signals = 0;    
 	while (1)
 	{
+		g_signal = 0;
+		printf(MAG"g_signal: %d\n"RESET, g_signal);
 		line = readline("> ");
-		if (g_signal) {
+		if (!line || errno == EINVAL) {
+			printf("you have pressed CTRL-D\n");
+			data->commands = NULL;
+			break;
+        }
+		if (g_signal == 2)
+		{
         	printf("\nCTRL+C detected. Exiting readline...\n");
-    	    free(line);
+			free(line);
+			//rl_replace_line("", 1);
+			//data->commands = NULL;
+			g_signal = 0;
             break; // Exit the loop when CTRL+C is detected
         }
 		if (ft_strcmp(line, delimiter) == 0)
@@ -100,6 +102,7 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 		write(fd, "\n", 1);
 		free(line);
 	}
+	//rl_catch_signals = orig_rl_catch_signals;
 	close(fd);
 }
 
