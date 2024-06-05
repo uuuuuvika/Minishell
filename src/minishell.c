@@ -1,8 +1,5 @@
 #include "minishell.h"
 
-// Minishell > <<
-// make: *** [Makefile:19: m] Segmentation fault (core dumped)
-// vshcherb@c4c1c2:~/Desktop/Minishell$ << ^C
 int is_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
@@ -35,30 +32,27 @@ int main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 
+	signal(SIGINT, sig_handler);
 	cpy_envs(&data, envp);
-	signal(SIGINT, handle_sigint);
 	while (1)
 	{
-		//handle_ctrl();
-		if(g_signal == 1)
-		{
-			printf("\nYou have pressed CTRL-C\n");
-			g_signal = 0;
-			//rl_replace_line("", 0);
-		}
 		input = readline(YEL "Minishell > " RESET);
-		if (!input || errno == EINVAL || g_signal == 1)
+		if(g_signal == 2)
 		{
-			//printf("you have pressed CTRL-D\n");
+			printf("You have pressed CTRL-C\n");
+			g_signal = 0;
+			continue;
+		}
+		if (!input || errno == EINVAL)
+		{
+			printf("you have pressed CTRL-D\n");
 			break;
 		}
 		if (ft_strlen(input) > 0 && !is_str_space(input))
 		{
 			add_history(input);
 			parse(input, &data);
-			printf("%i\n",data.commands->num_args);
-			printf("%s\n",data.commands->args[0]);
-			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)) )
+			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)))
 			{
 				printf(YEL "Executing simple builtin/$? in main\n" RESET);
 				int fin = dup(STDIN);
@@ -68,23 +62,17 @@ int main(int argc, char *argv[], char **envp)
 				dup2(fin, STDIN);
 				dup2(fout, STDOUT);
 			}
-			else
+			else if (ft_strncmp(input, "<<", 2) != 0) // << E | wc maybe??
 			{
-				printf(YEL "Fork\n" RESET);
+				printf(YEL "Pipe\n" RESET);
 				pipe_cmds(&data);
 			}
 			// printf("exit code in main is %d\n", data.exit_code);
 			printf("g_signal in main: %d\n", g_signal);
 		}
+		printf("exit code in main is %d\n", data.exit_code);
 		free(input);
-		rl_redisplay();
-		// rl_replace_line("", 0);
-		// //rl_on_new_line();
-		// rl_redisplay();
-		// free_data(&data);
 	}
 	clear_history();
 	return (0);
 }
-/// Commands not working
-// env | grep $HOME stays open until ctrl-C

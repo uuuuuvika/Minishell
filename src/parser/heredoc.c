@@ -40,10 +40,10 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || errno == EINVAL || g_signal == 1)
+		if (!line || errno == EINVAL || g_signal == 2)
 		{
 			printf("you have pressed CTRL-D\n");
-			g_signal = 0;
+			g_signal = 0; // need to reset g_signal, otherwise it will be 2 in the next iteration and the program will exit
 			data->exit_code = 130;
 			//rl_replace_line("", 0);
 			//clear_history();
