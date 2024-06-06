@@ -53,8 +53,6 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [x] << EOF (without cat) is causing seg fault
 - [ ] Check freeing and leaks
 - [ ] Review/replace error messages and exit codes
-- [ ] `Minishell > $>` munmap_chunk(): invalid pointer, make: *** [Makefile:19: m] Aborted (core dumped)
-
 
 
       
