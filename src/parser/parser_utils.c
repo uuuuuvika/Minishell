@@ -3,7 +3,7 @@
 int cnt_args(char **args)
 {
     int i = 0;
-    while (args[i] && !is_redir(args[i]))
+    while (args[i] && !is_redirect(args[i]))
         i++;
     return (i);
 }

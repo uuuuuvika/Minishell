@@ -46,8 +46,8 @@ void	fd_dup2(t_cmd *current)
 {
 	if (current->here_doc != 0)
 	{
-		int r = open("here_doc", O_RDONLY, 777);
-		//printf("here_doc: %d\n", r);
+		int r = open(BLU"here_doc"RESET, O_RDONLY, 777);
+		printf(BLU "here_doc: %d\n" RESET, r);//////////
 		if (dup2(r, STDIN) == -1)
 			handle_error("dup2 error here_doc");
 	}

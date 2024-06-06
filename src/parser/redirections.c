@@ -1,13 +1,15 @@
 #include "minishell.h"
 
-int is_redir(char *str)
+int is_redirect(char *str)
 {
     return (ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">>") == 0 || ft_strcmp(str, "<<") == 0);
 }
 
 void redirect_assign(t_cmd *current, t_data *data)
 {
-    int i = 0;
+    int i;
+
+    i = 0;
     while (current->args[i])
     {
         if (ft_strcmp(current->args[i], ">") == 0)
@@ -34,8 +36,9 @@ void redirect_assign(t_cmd *current, t_data *data)
     }
 }
 
-void    redirect_fd_dup(t_cmd *current)
+void redirect_fd_dup(t_cmd *current, t_data *data)
 {
+    printf("here_doc: %d\n", data->cmn_here_doc);
     if (current->redirect_in != -1)
     {
         if (dup2(current->redirect_in, STDIN) == -1)
@@ -44,11 +47,14 @@ void    redirect_fd_dup(t_cmd *current)
     }
     if (current->redirect_out != -1)
     {
-       // int fout = dup(STDOUT);
         if (dup2(current->redirect_out, STDOUT) == -1)
             handle_error("dup2 error redirect_out");
         close(current->redirect_out);
     }
+    if(data->cmn_here_doc != 0)
+    {
+        if (dup2(data->cmn_here_doc, STDOUT) == -1)
+            handle_error("dup2 error here_doc");
+        close(data->cmn_here_doc);
+    }
 }
-
-

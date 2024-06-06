@@ -1,11 +1,33 @@
 #include "minishell.h"
 
+
+void sig_handler_fork(int sig)
+{
+	if (sig == SIGINT)
+  	{
+	//	printf(MAG"handle_ctrl_fork\n"RESET);
+		printf("\n");
+		g_signal = 2;
+		//printf(CYN "g_singal %d" RESET,g_signal);
+	}
+	else if (sig == 13)
+	{
+		g_signal = 1;
+	}
+}
+
+void handle_ctrl_fork()
+{
+	signal(SIGINT, sig_handler_fork);
+	signal(SIGQUIT, SIG_IGN);
+}
+
 int pipe_cmds(t_data *data)
 {
     t_cmd *current;
     pid_t pid[data->num_of_children];
     int i;
-
+	handle_ctrl_fork();////// added here
     i = 0;
     current = data->commands;
     while (current != NULL)

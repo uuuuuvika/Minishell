@@ -1,5 +1,5 @@
 cc		= cc
-CFLAGS  = -Wall -Werror -Wextra -Iinclude -Ilib/libft
+CFLAGS  = -Wall -Werror -Wextra -Iinclude -Ilib/libft -g
 LDFLAGS = -lreadline -L./lib/libft -lft #-lhistory
 
 SRCDIR = src

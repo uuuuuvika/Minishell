@@ -1,15 +1,13 @@
 #include "minishell.h"
 
-//check if the token is a builtin command
-int is_builtin(t_cmd *command)
+int is_builtin(char *cmd)
 {
-    char *token = command->args[0];
-    int i = 0;
+    int i;
     char *builtins[] = {"echo", "cd", "pwd", "env", "exit", "export", "unset", NULL};
-
+    i = 0;
     while (builtins[i] != NULL)
     {
-        if (strcmp(token, builtins[i]) == 0)
+        if (ft_strcmp(cmd, builtins[i]) == 0)
             return (1);
         i++;
     }

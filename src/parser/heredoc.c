@@ -1,44 +1,27 @@
 #include "minishell.h"
 
-// To try:
-
-// c4a9c8% cat << 'EOF'
-// heredoc> $USER
-// heredoc> EOF
-// $USER
-
-// c4a9c8% cat << "EOF"
-// heredoc> $USER
-// heredoc> EOF
-// $USER
-
-// Minishell > << EOF
-// delimiter: EOF
-// > EOF
-// make: *** [Makefile:19: m] Segmentation fault (core dumped)
-
 char *split_expand_join(char *line, t_data *data)
 {
 	char *exp_line;
 	char **splitted;
 	int i;
-	
+
 	exp_line = ft_strdup("");
 	splitted = ft_split(line, ' ');
 	i = 0;
 
-	printf(BLU "line to expand: %s\n" RESET, line);
-	print_2D(splitted);
-	printf(BLU "num_args: %d\n" RESET, cnt_args(splitted));
-	print_2D(splitted);
+	// printf(BLU "line to expand: %s\n" RESET, line);
+	// print_2D(splitted);
+	// printf(BLU "num_args: %d\n" RESET, cnt_args(splitted));
+	// print_2D(splitted);
 	while (splitted[i])
 	{
-		printf(BLU"Splitted[%d]: %s\n" RESET, i, splitted[i]);
+		// printf(BLU "Splitted[%d]: %s\n" RESET, i, splitted[i]);
 		expand_arg(splitted, cnt_args(splitted), data);
-		printf(BLU"Expanded[%d]: %s\n"RESET, i, splitted[i]);
-		// if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
-		// 	splitted[i] = getenv(splitted[i] + 1);
-		if(i > 0)
+		// printf(BLU "Expanded[%d]: %s\n" RESET, i, splitted[i]);
+		//  if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
+		//  	splitted[i] = getenv(splitted[i] + 1);
+		if (i > 0)
 			exp_line = ft_strjoin(exp_line, " ");
 		exp_line = ft_strjoin(exp_line, splitted[i]);
 		i++;
@@ -47,6 +30,34 @@ char *split_expand_join(char *line, t_data *data)
 	return (exp_line);
 }
 
+// to handle cat ', echo ' etc.
+void read_heredoc_simple(char *delimiter, t_data *data)
+{
+	char *line;
+	int fd;
+
+	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	data->cmn_here_doc = fd;
+	while (1)
+	{
+		line = readline("> ");
+		if (ft_strcmp(line, delimiter) == 0)
+		{
+			free(line);
+			break;
+		}
+		if (ft_strchr(line, '$'))
+		{
+			free(line);
+			line = split_expand_join(line, data);
+		}
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
+	// dup2(fd, STDIN);
+	close(fd);
+}
 
 void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 {
@@ -56,10 +67,11 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	//char *joined_line = ft_strdup("");
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	current->here_doc = fd;
+	printf(BLU"current->here_doc: %d\n" RESET, current->here_doc);
 	//dup2(fd, STDOUT);
 	printf(BLU"current %s\n" RESET,current->args[0]);
 		// fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	printf("delimiter: %s\n", delimiter);
+	printf(BLU"delimiter: %s\n"MAG, delimiter);
 	// int orig_rl_catch_signals = rl_catch_signals;
     // rl_catch_signals = 0;    
 	while (1)
@@ -74,10 +86,11 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
         }
 		if (g_signal == 2)
 		{
-        	printf("\nCTRL+C detected. Exiting readline...\n");
+        	printf(MAG"\nCTRL+C detected. Exiting readline...\n"RESET);
 			free(line);
 			//rl_replace_line("", 1);
 			//data->commands = NULL;
+			data->exit_code = 130;//// !important for exit code
 			g_signal = 0;
             break; // Exit the loop when CTRL+C is detected
         }
@@ -86,7 +99,7 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 			free(line);
 			break;
 		}
-		if (delimiter[0] != '\'' || delimiter[0] != '\"')////// not nice
+		if (current->here_doc_exp)
 		{
 			if (ft_strchr(line, '$'))
 			{

@@ -1,21 +1,5 @@
 #include "minishell.h"
 
-int is_b(char *cmd)
-{
-    int i = 0;
-    char *builtins[] = {"echo", "cd", "pwd", "env", "exit", "export", "unset", NULL};
-
-    while (builtins[i] != NULL)
-    {
-        if (strcmp(cmd, builtins[i]) == 0)
-        {
-            return (1);
-        }
-        i++;
-    }
-    return (0);
-}
-
 void	exec_builtin(t_data *data, t_cmd *cmd)
 {
 	if (ft_strcmp(cmd->args[0], "cd") == 0)
@@ -39,10 +23,12 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
     char	*path;
 
     // check_NULL(cmd->args[0]);
+	if(cmd->num_args == 0)
+		return;
     int i = 0;
     while(ft_strcmp(cmd->args[i] , "") == 0 && cmd->args[i + 1] != NULL)
         i++;
-    if (is_b(cmd->args[i]))
+    if (is_builtin(cmd->args[i]))
 		exec_builtin(data, cmd);
 	else
 	{
