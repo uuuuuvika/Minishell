@@ -44,7 +44,6 @@ int pipe_cmds(t_data *data)
 
     i = 0;
     current = data->commands;
-    //handle_ctr_f();
     while (current != NULL)
     {
         pid[i] = fork();

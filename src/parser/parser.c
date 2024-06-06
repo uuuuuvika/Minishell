@@ -1,3 +1,4 @@
+
 #include "minishell.h"
 
 int parse(char *input, t_data *data)
@@ -27,13 +28,11 @@ int parse(char *input, t_data *data)
         new_node->redirect_out = -1;
         new_node->here_doc = 0;
         new_node->next = NULL;
-        printf("trtrt\n");
         int i = 0;
         while (new_node->args[i])
         {
             if (ft_strcmp(new_node->args[i], "<<") == 0)
             {
-                printf("gggggg\n");
                 if (new_node->args[i + 1] == NULL)
                 {
                     free_arr2D(new_node->args);
@@ -48,7 +47,7 @@ int parse(char *input, t_data *data)
             }
             i++;
         }
-        printf("ffffff\n");
+
         return_dub_quotes(new_node->args, data);
         expand_arg(new_node->args, new_node->num_args, data);
         return_sin_quotes(new_node->args, data);
