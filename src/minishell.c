@@ -32,11 +32,16 @@ int main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 
+	signal(SIGINT, sig_handler);
 	cpy_envs(&data, envp);
 	while (1)
 	{
-		handle_ctrl();
 		input = readline(YEL "Minishell > " RESET);
+		if(g_signal == 2)
+		{
+			printf("You have pressed CTRL-C\n");
+			g_signal = 0;
+		}
 		if (!input || errno == EINVAL)
 		{
 			printf("you have pressed CTRL-D\n");
@@ -46,7 +51,7 @@ int main(int argc, char *argv[], char **envp)
 		{
 			add_history(input);
 			parse(input, &data);
-			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)) )
+			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)))
 			{
 				printf(YEL "Executing simple builtin/$? in main\n" RESET);
 				int fin = dup(STDIN);
@@ -56,17 +61,14 @@ int main(int argc, char *argv[], char **envp)
 				dup2(fin, STDIN);
 				dup2(fout, STDOUT);
 			}
-			else
+			else if (ft_strncmp(input, "<<", 2) != 0) // << E | wc maybe??
 			{
-				printf(YEL "Fork\n" RESET);
+				printf(YEL "Pipe\n" RESET);
 				pipe_cmds(&data);
 			}
-			// printf("exit code in main is %d\n", data.exit_code);
 		}
 		free(input);
 	}
 	clear_history();
 	return (0);
 }
-/// Commands not working
-// env | grep $HOME stays open until ctrl-C

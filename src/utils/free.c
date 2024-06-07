@@ -16,7 +16,7 @@ void free_data(t_data *data)
     t_cmd *next;
 
     current = data->commands;
-    while (current != NULL)
+    while (current->next != NULL)
     {
         next = current->next;
         free_arr2D(current->args);

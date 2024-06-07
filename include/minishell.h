@@ -27,6 +27,7 @@
 #include <sys/wait.h>
 #include <sys/param.h>
 #include <sys/stat.h>
+#include <sys/ioctl.h>
 #include <readline/readline.h>
 #include <sys/fcntl.h>
 #include <readline/history.h>
@@ -97,6 +98,8 @@ void sub_dub_quotes(char *line_copy, t_data *data);
 void return_dub_quotes(char **args, t_data *data);
 
 void expand_arg(char **args, int num_args, t_data *data);
+char *arr2D_to_str(char **args);
+int is_multi_words(char *str);
 
 int is_redirect(char *str);
 int cnt_args(char **args);
@@ -115,8 +118,14 @@ void fd_dup2(t_cmd *command);
 
 void read_heredoc(char *delimiter, t_cmd *current, t_data *data);
 void read_heredoc_simple(char *delimiter, t_data *data);
+void hd_is_expansion_needed(t_cmd *new_node);
+char *split_expand_join(char *line, t_data *data);
 
 void print_envs(t_data *data);
 void print_2D(char **args);
+
+void handle_ctrl_s();
+void sig_handler_s(int sig);
+void handle_sigint(int sig);
 
 #endif

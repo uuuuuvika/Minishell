@@ -35,7 +35,7 @@ void redirect_assign(t_cmd *current, t_data *data)
 
 void redirect_fd_dup(t_cmd *current, t_data *data)
 {
-    printf("here_doc: %d\n", data->cmn_here_doc);
+    //printf("here_doc: %d\n", data->cmn_here_doc);
     if (current->redirect_in != -1)
     {
         if (dup2(current->redirect_in, STDIN) == -1)

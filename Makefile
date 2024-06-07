@@ -8,7 +8,7 @@ OBJECTS := $(SOURCES:.c=.o)
 LIBFT = lib/libft/libft.a 
 
 minishell: $(OBJECTS) $(LIBFT)
-	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS) 
 
 $(LIBFT) :
 	$(MAKE) -C ./lib/libft

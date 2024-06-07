@@ -1,3 +1,4 @@
+
 #include "minishell.h"
 
 int parse(char *input, t_data *data)
@@ -27,19 +28,26 @@ int parse(char *input, t_data *data)
         new_node->redirect_out = -1;
         new_node->here_doc = 0;
         new_node->next = NULL;
-
         int i = 0;
         while (new_node->args[i])
         {
             if (ft_strcmp(new_node->args[i], "<<") == 0)
             {
-                if (new_node->args[i + 1][0] == '\'' || new_node->args[i + 1][0] == '\"')
+                if (new_node->args[i + 1] == NULL)
+                {
+                    free_arr2D(new_node->args);
+                    free(new_node);
+                    printf("Error: syntax error near unexpected token `newline'\n");
+                    return (1);
+                }
+                else if (new_node->args[i + 1][0] == '\'' || new_node->args[i + 1][0] == '\"')
                     new_node->here_doc_exp = 0;
                 else
                     new_node->here_doc_exp = 1;
             }
             i++;
         }
+
         return_dub_quotes(new_node->args, data);
         expand_arg(new_node->args, new_node->num_args, data);
         return_sin_quotes(new_node->args, data);
@@ -51,6 +59,7 @@ int parse(char *input, t_data *data)
             free(new_node);
             return (1);
         }
+
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
 
@@ -67,21 +76,20 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
-
-    //printf("num_of_children: %d\n", data->num_of_children);
-    t_cmd *current = data->commands;
-    while (current)
-    {
-        // printf("cmd: %s\n", current->args[0]);
-        printf("num_args: %d\n", current->num_args);
-        // for (int i = 0; current->args[i]; i++)
-        //     printf("args[%d]: %s\n", i, current->args[i]);
-        // printf("pipe_in: %d\n", current->pipe_in);
-        // printf("pipe_out: %d\n", current->pipe_out);
-        // printf("here_doc: %d\n", current->here_doc);
-        // printf("redirect_in: %d\n", current->redirect_in);
-        // printf("redirect_out: %d\n", current->redirect_out);
-        current = current->next;
-    }
+    // printf("num_of_children: %d\n", data->num_of_children);
+    //  t_cmd *current = data->commands;
+    //  while (current)
+    //  {
+    //      // printf("cmd: %s\n", current->args[0]);
+    //      printf("num_args: %d\n", current->num_args);
+    //      for (int i = 0; current->args[i]; i++)
+    //          printf("args[%d]: %s\n", i, current->args[i]);
+    //      // printf("pipe_in: %d\n", current->pipe_in);
+    //      // printf("pipe_out: %d\n", current->pipe_out);
+    //      // printf("here_doc: %d\n", current->here_doc);
+    //      // printf("redirect_in: %d\n", current->redirect_in);
+    //      // printf("redirect_out: %d\n", current->redirect_out);
+    //      current = current->next;
+    //  }
     return (0);
 }

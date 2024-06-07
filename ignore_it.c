@@ -311,3 +311,46 @@ int parse_input(char *input)
 // fgets(input, sizeof(input), stdin);
 // input[strcspn(input, "\n")] = '\0';
 
+
+// beta sub-shell
+// void replace_for_expansion(char **args, char *cmd, t_data *data)
+// {
+// 	free(*args);
+// 	if (is_multi_words(cmd))
+// 	{
+// 		// char **split = ft_split(cmd, ' ');
+// 		// printf("split[0]: %s\n", split[0]);
+// 		// printf("split[1]: %s\n", split[1]);
+// 		int fd[2];
+// 		pipe(fd);
+// 		pid_t pid;
+// 		char readbuffer[1000];
+// 		if ((pid = fork()) < 0)
+// 		{
+// 			printf("Fork error: %s\n", strerror(errno));
+// 		}
+// 		else if (pid == 0)
+// 		{ // Child process
+// 			char **argv = ft_split(cmd, ' ');
+// 			close(fd[0]);
+// 			dup2(fd[1], 1); // You connect to the pipe in input mode
+// 			char *path = find_path(argv[0], data);
+// 			execve(path, argv, data->envs);
+// 			close(fd[1]);
+// 			printf("Shouldn't execute this\n");
+// 			exit(1);
+// 		}
+// 		else
+// 		{ // Father process
+// 			wait(NULL);
+// 			read(fd[0], readbuffer, sizeof(readbuffer));
+// 			printf("Received string: %s", readbuffer);
+// 			*args = ft_strdup(readbuffer);
+// 			close(fd[0]);
+// 			close(fd[1]);
+// 		};
+		
+// 	}
+// 	else
+// 		*args = ft_strdup(cmd);
+// }
