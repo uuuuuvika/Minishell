@@ -41,7 +41,6 @@ int main(int argc, char *argv[], char **envp)
 		{
 			printf("You have pressed CTRL-C\n");
 			g_signal = 0;
-			continue;
 		}
 		if (!input || errno == EINVAL)
 		{
@@ -67,10 +66,7 @@ int main(int argc, char *argv[], char **envp)
 				printf(YEL "Pipe\n" RESET);
 				pipe_cmds(&data);
 			}
-			// printf("exit code in main is %d\n", data.exit_code);
-			printf("g_signal in main: %d\n", g_signal);
 		}
-		printf("exit code in main is %d\n", data.exit_code);
 		free(input);
 	}
 	clear_history();

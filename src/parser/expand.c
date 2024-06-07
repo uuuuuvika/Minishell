@@ -27,46 +27,10 @@ int is_multi_words(char *str)
 	return (0);
 }
 
-void replace_for_expansion(char **args, char *cmd, t_data *data)
+void replace_for_expansion(char **args, char *cmd)
 {
 	free(*args);
-	if (is_multi_words(cmd))
-	{
-		// char **split = ft_split(cmd, ' ');
-		// printf("split[0]: %s\n", split[0]);
-		// printf("split[1]: %s\n", split[1]);
-		int fd[2];
-		pipe(fd);
-		pid_t pid;
-		char readbuffer[1000];
-		if ((pid = fork()) < 0)
-		{
-			printf("Fork error: %s\n", strerror(errno));
-		}
-		else if (pid == 0)
-		{ // Child process
-			char **argv = ft_split(cmd, ' ');
-			close(fd[0]);
-			dup2(fd[1], 1); // You connect to the pipe in input mode
-			char *path = find_path(argv[0], data);
-			execve(path, argv, data->envs);
-			close(fd[1]);
-			printf("Shouldn't execute this\n");
-			exit(1);
-		}
-		else
-		{ // Father process
-			wait(NULL);
-			read(fd[0], readbuffer, sizeof(readbuffer));
-			printf("Received string: %s", readbuffer);
-			*args = ft_strdup(readbuffer);
-			close(fd[0]);
-			close(fd[1]);
-		};
-		
-	}
-	else
-		*args = ft_strdup(cmd);
+	*args = ft_strdup(cmd);
 }
 
 char *arr2D_to_str(char **args)
@@ -108,18 +72,17 @@ void expand_arg(char **args, int num_args, t_data *data)
 						data->exit_code = 130;
 						g_signal = 0;
 						printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
-						data->exit_code = 127; // So when we call $? after "-minishell: 130: command not found" it changes to "(..)127: command(..)""
+						data->exit_code = 127; 
 					}
 					split[j] = ft_itoa(data->exit_code); /// Check this later for proper allocation
 					return;
-					// split[j] = ft_itoa(data->exit_code);
 				}
 				else if (split[j][0] == '$')
 				{
 					char *env_name = ft_strdup(split[j] + 1);
 					// printf(RED "env_name: %s\n" RESET, env_name);
 					if (ft_getenv(env_name, data->envs) != NULL)
-						replace_for_expansion(&split[j], ft_getenv(env_name, data->envs), data);
+						replace_for_expansion(&split[j], ft_getenv(env_name, data->envs));
 					else
 						split[j][0] = '\0';
 					free(env_name);
@@ -142,16 +105,16 @@ void expand_arg(char **args, int num_args, t_data *data)
 					data->exit_code = 130;
 					g_signal = 0;
 					printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
-					data->exit_code = 127; // So when we call $? after "-minishell: 130: command not found" it changes to "(..)127: command(..)""
+					data->exit_code = 127;
 				}
-				args[i] = ft_itoa(data->exit_code); /// Check this later for proper allocation
+				args[i] = ft_itoa(data->exit_code);
 				return;
 			}
 			else if (args[i][0] == '$')
 			{
 				char *env_name = ft_strdup(args[i] + 1);
 				if (ft_getenv(env_name, data->envs) != NULL)
-					replace_for_expansion(&args[i], ft_getenv(env_name, data->envs), data);
+					replace_for_expansion(&args[i], ft_getenv(env_name, data->envs));
 				else
 					args[i] = "\0";
 				free(env_name);

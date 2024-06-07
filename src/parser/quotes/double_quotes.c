@@ -47,18 +47,6 @@ void return_dub_quotes(char **args, t_data *data)
 {
     int i = 0;
     int t = 0;
-    // while (args[i])
-    // {
-    //     if (args[i][0] == '"' && args[i][1] == '*')
-    //     {
-    //         free(args[i]);
-    //         args[i] = ft_strdup(data->sub[t]);
-    //         t++;
-    //     }
-    //     else if (args[i][0] == '"' && args[i][1] == '"')
-    //         args[i][0] = '\0';
-    //     i++;
-    // }
     while (args[i])
     {
         int j = 0;

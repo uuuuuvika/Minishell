@@ -35,8 +35,6 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	current->here_doc = fd; // probably can be replaced by data->cmn_here_doc
 
-	//signal(SIGINT, handle_sigint);
-
 	while (1)
 	{
 		line = readline("> ");
@@ -45,9 +43,6 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 			printf("you have pressed CTRL-D\n");
 			g_signal = 0; // need to reset g_signal, otherwise it will be 2 in the next iteration and the program will exit
 			data->exit_code = 130;
-			//rl_replace_line("", 0);
-			//clear_history();
-			//free(line);
 			break;
 		}
 		if (ft_strcmp(line, delimiter) == 0)
