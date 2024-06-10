@@ -4,9 +4,9 @@ void ft_exit(t_data *data)
 {
 	free_arr2D(data->envs);
     free_arr2D(data->sub);
+    free_arr2D(data->subb);
     free_data(data);
-    //free_commands(data->commands);
+    clear_history();
     //need to check & free it properly
-    //free_commands(data->commands);
     exit(0);
 }

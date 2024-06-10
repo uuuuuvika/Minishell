@@ -55,6 +55,7 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
+<<<<<<< HEAD
 "C_Cpp_Runner.msvcSecureNoWarnings": false,
 "files.associations": {
 	"minishell.h": "c",
@@ -67,4 +68,10 @@
 	"param.h": "c"
 },
 "CodeGPT.apiKey": "CodeGPT Plus Beta"
+=======
+  "C_Cpp_Runner.msvcSecureNoWarnings": false,
+  "files.associations": {
+    "minishell.h": "c"
+  }
+>>>>>>> 68618c91c53b3a199a3dec1ce16963ffed3384d0
 }

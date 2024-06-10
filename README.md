@@ -37,11 +37,14 @@ apt-get install git build-essential libreadline-dev
 - [x] `cat $PATH`should write `no such a file or directory`
 ---
 - [x] Check expansions for `cat $EXPANDTOFILE ??` Try with paths maybe?
-- [x] Reorganice expand function
+- [x] Reorganize expand function
 - [x] Split expansions so we can store commands in env and expand them after
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
 - [x] echo "$TERM fsfsfs" substitude "$TERM fsfsfs" by "\0" but it should print `xterm-256color fsfsfs`
----
+---Minishell > $>
+munmap_chunk(): invalid pointer
+make: *** [Makefile:19: m] Aborted (core dumped)
+
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history :cat:
 - [ ] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
@@ -50,7 +53,7 @@ apt-get install git build-essential libreadline-dev
 - [x] << EOF (without cat) is causing seg fault
 - [ ] Check freeing and leaks
 - [ ] Review/replace error messages and exit codes
-
+- [ ] Fix `cat < nonexisting_file`
 
       
 ## General TODO:

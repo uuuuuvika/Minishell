@@ -4,7 +4,7 @@ int g_signal = 0;
 void handle_ctrl()
 {
 	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, SIG_IGN);
+	signal(SIGQUIT, sig_handler);
 }
 
 void sig_handler(int sig)
