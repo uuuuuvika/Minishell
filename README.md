@@ -54,7 +54,7 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [ ] check fucked up history :cat:
 - [ ] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
 - [ ] Ctrl-C has to exit heredoc :cat:
-- [ ] when `ctrl+c` in `cat << EOF > file` should not enter pipe_cmd since it changes the exit code
+- [ ] when `ctrl+c` in `cat << EOF > file` and call `$?` exit code is 0, it should be 130
 
       
 ## General TODO:
