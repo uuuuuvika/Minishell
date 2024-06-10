@@ -32,19 +32,15 @@ int main(int argc, char *argv[], char **envp)
 	(void)argc;
 	(void)argv;
 
-	signal(SIGINT, sig_handler);
+	handle_ctrl();
 	cpy_envs(&data, envp);
 	while (1)
 	{
 		input = readline(YEL "Minishell > " RESET);
-		if(g_signal == 2)
-		{
-			printf("You have pressed CTRL-C\n");
-			g_signal = 0;
-		}
 		if (!input || errno == EINVAL)
 		{
-			printf("you have pressed CTRL-D\n");
+			free(input);
+			printf(MAG "you have pressed CTRL-D\n" RESET);
 			break;
 		}
 		if (ft_strlen(input) > 0 && !is_str_space(input))
@@ -63,7 +59,8 @@ int main(int argc, char *argv[], char **envp)
 			}
 			else if (ft_strncmp(input, "<<", 2) != 0) // << E | wc maybe??
 			{
-				printf(YEL "Pipe\n" RESET);
+				printf(YEL "Pipe" RESET);
+				printf(RESET "\n" RESET);
 				pipe_cmds(&data);
 			}
 		}

@@ -38,13 +38,21 @@ void read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || errno == EINVAL || g_signal == 2)
+		if (!line || errno == EINVAL)
 		{
-			printf("you have pressed CTRL-D\n");
+			printf(MAG "you have pressed CTRL-D\n" RESET);
 			g_signal = 0; // need to reset g_signal, otherwise it will be 2 in the next iteration and the program will exit
 			data->exit_code = 130;
 			break;
 		}
+		if (g_signal == 2)
+		{
+        	printf(MAG"\nCTRL+C detected. Exiting heredoc...\n"RESET);
+			g_signal = 0; // need to reset g_signal, otherwise it will be 2 in the next iteration and the program will exit
+			free(line);
+			data->exit_code = 130;//// !important for exit code
+            break;
+        }
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			free(line);

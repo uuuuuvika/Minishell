@@ -1,40 +1,22 @@
 #include "minishell.h"
 
-// void sig_handler_f(int sig)
-// {
-// 	(void)sig;
-// 	if (sig == SIGINT)
-//     {
-// 	 	printf("\n");
-//      	rl_on_new_line();
-// 	// 	rl_replace_line("", 0);
-// 	// 	rl_redisplay();
-// 	// 	clear_history();
-//         g_signal = 2;
-// 	}
-// 	// else if (sig == SIGPIPE)
-// 	// {
-// 	// 	g_signal = 1;
-// 	// }
-// }
+void sig_handler_fork(int sig)
+{
+	if (sig == SIGINT)
+  	{
+		printf("\n");
+		g_signal = 0; // need to reset g_signal, otherwise it will be 2 in the next iteration and the program will exit in heredoc
+		// printf(MAG"handle_ctrl_fork\n"RESET);
+		// printf(CYN "g_singal %d" RESET,g_signal);
+	}
+}
 
-// void handle_ctr_f()
-// {
-// 	signal(SIGINT, sig_handler_f);
-//     //signal(SIGPIPE, sig_handler_f);
-// 	//signal(SIGQUIT, sig_handler_f);
-// }
-
-
-// void handle_sigint_f(int sig) {
-//     (void)sig;
-//     g_signal = 1;
-//     //printf("\nYou have pressed CTRL-C\n");
-// 	ioctl(0, TIOCSTI, "\n");
-// 	//rl_replace_line("", 0);
-// }
-
-
+void handle_ctrl_fork(t_data *data)
+{
+	if(signal(SIGINT, sig_handler_fork))
+		data->exit_code = 130;// !important
+	signal(SIGQUIT, SIG_IGN);
+}
 
 int pipe_cmds(t_data *data)
 {
@@ -46,6 +28,7 @@ int pipe_cmds(t_data *data)
     current = data->commands;
     while (current != NULL)
     {
+		handle_ctrl_fork(data); // set signal handler for fork
         pid[i] = fork();
         if (pid[i] == -1)
             return EXIT_FAILURE;
@@ -62,5 +45,6 @@ int pipe_cmds(t_data *data)
         i++;
     }
     ultimate_wait(data, pid);
+	handle_ctrl(); // reset signal handler
     return EXIT_SUCCESS;
 }
