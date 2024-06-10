@@ -32,7 +32,6 @@ apt-get install git build-essential libreadline-dev
 - [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 ---
-- [ ] Add data->exit _code to all builtins
 - [x] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
 - [x] `cat $PATH`should write `no such a file or directory`
 ---
@@ -45,15 +44,17 @@ apt-get install git build-essential libreadline-dev
 munmap_chunk(): invalid pointer
 make: *** [Makefile:19: m] Aborted (core dumped)
 
+- [x] cat '$TERM' giving seg fault when not forking ( cat '$TERM' | wc is fine)
+- [x] << EOF (without cat) is causing seg fault
 - [ ] replace realloc (in parser) with allowed fnc
+- [ ] Check freeing and leaks
+- [ ] Review/replace error messages and exit codes
+- [ ] Add data->exit _code to all builtins
+- [ ] Fix `cat < nonexisting_file`
 - [ ] check fucked up history :cat:
 - [ ] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
 - [ ] Ctrl-C has to exit heredoc :cat:
-- [x] cat '$TERM' giving seg fault when not forking ( cat '$TERM' | wc is fine)
-- [x] << EOF (without cat) is causing seg fault
-- [ ] Check freeing and leaks
-- [ ] Review/replace error messages and exit codes
-- [ ] Fix `cat < nonexisting_file`
+- [ ] when `ctrl+c` in `cat << EOF > file` should not enter pipe_cmd since it changes the exit code
 
       
 ## General TODO:
