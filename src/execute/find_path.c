@@ -14,8 +14,8 @@ char *find_path(char *cmd, t_data *data)
 	int i = 0;
 	while (paths[i])
 	{
-		paths[i] = ft_strjoin(paths[i], "/");
-		paths[i] = ft_strjoin(paths[i], cmd);
+		paths[i] = ft_strjoin_nf(paths[i], "/");
+		paths[i] = ft_strjoin_nf(paths[i], cmd);
 		if (stat(paths[i], &statbuf) == 0)
 		{
 			path = ft_strdup(paths[i]);

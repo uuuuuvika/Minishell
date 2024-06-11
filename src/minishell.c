@@ -53,6 +53,7 @@ int main(int argc, char *argv[], char **envp)
 				int fin = dup(STDIN);
 				int fout = dup(STDOUT);
 				redirect_fd_dup(data.commands, &data);
+				print_2D(data.commands->args);
 				exec_cmd(&data, data.commands);
 				dup2(fin, STDIN);
 				dup2(fout, STDOUT);
