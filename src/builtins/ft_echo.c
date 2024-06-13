@@ -19,5 +19,6 @@ void ft_echo(t_data *data, t_cmd *cmd)
             printf(" ");
     }
     if (ft_strcmp(cmd->args[1], "-n") != 0)
-        printf("\n");
+		printf("\n");
+	data->exit_code = 0;
 }

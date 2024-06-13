@@ -32,4 +32,5 @@ void ft_unset(t_data *data, t_cmd *cmd)
         remove_env(data, cmd->args[i]);
         i++;
     }
+	data->exit_code = 0;
 }

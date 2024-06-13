@@ -123,9 +123,11 @@ char *split_expand_join(char *line, t_data *data);
 
 void print_envs(t_data *data);
 void print_2D(char **args);
+int ft_isalldigit(char *str);
 
 void handle_ctrl_s();
 void sig_handler_s(int sig);
 void handle_sigint(int sig);
+
 
 #endif

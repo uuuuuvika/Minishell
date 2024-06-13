@@ -59,14 +59,26 @@ int add_var(char ***envar, char *newvar)
 
 void ft_export(t_data *data, t_cmd *cmd)
 {
-    // int     i;
     int j;
 
-    // i = 0;
     j = 1;
-    // check_NULL(cmd->args[1]); // need to check args format as well
-    while (cmd->args[j] != NULL)
+    if (cmd->num_args > 1)
+	{
+		if(cmd->args[j][0] == '=' || !ft_isalpha(cmd->args[1][0]))
+		{
+			printf("minishell: export: `%s': not a valid identifier\n", cmd->args[1]);
+			data->exit_code = 1;
+			return;
+		}
+		if(ft_strchr(cmd->args[j], '=') == NULL)
+		{
+			data->exit_code = 1;
+			j++;
+		}
+	}
+	while (cmd->args[j] != NULL)
     {
+		print_2D(cmd->args);
         if(!replace_var(data->envs, cmd->args[j]))
         {
            // printf(GRN "Add variable\n" RESET);
@@ -74,4 +86,12 @@ void ft_export(t_data *data, t_cmd *cmd)
         }
         j++;
     }
+	data->exit_code = 0;
 }
+
+//Check this
+// darotche@c4b10c1:~$ export 45
+// bash: export: `45': not a valid identifier
+// darotche@c4b10c1:~$ $?
+// 1: command not found
+// darotche@c4b10c1:~$ 
