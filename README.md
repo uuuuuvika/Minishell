@@ -48,12 +48,12 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [x] << EOF (without cat) is causing seg fault
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] Check freeing and leaks
-- [ ] Review/replace error messages and exit codes
+- [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins
 - [ ] Fix `cat < nonexisting_file`
 - [ ] check fucked up history :cat:
 - [ ] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
-- [ ] Ctrl-C has to exit heredoc :cat:
+- [x] Ctrl-C has to exit heredoc
 - [ ] when `ctrl+c` in `cat << EOF > file` and call `$?` exit code is 0, it should be 130
 
       
