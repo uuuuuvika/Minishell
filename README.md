@@ -46,15 +46,21 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 
 - [x] cat '$TERM' giving seg fault when not forking ( cat '$TERM' | wc is fine)
 - [x] << EOF (without cat) is causing seg fault
+- [x] Ctrl-C has to exit heredoc
+- [x] when `ctrl+c` in `cat << EOF > file` and call `$?` exit code is 0, it should be 130
+- [ ] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
+- [ ] check fucked up history :cat:
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] Check freeing and leaks
-- [ ] Review/replace error messages and exit codes
+- [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins
 - [ ] Fix `cat < nonexisting_file`
-- [ ] check fucked up history :cat:
-- [ ] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
-- [ ] Ctrl-C has to exit heredoc :cat:
-- [ ] when `ctrl+c` in `cat << EOF > file` and call `$?` exit code is 0, it should be 130
+- [ ] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
+- [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
+- [ ] expansions not working when input is `$PWD` or `$HOME`
+
+
+
 
       
 ## General TODO:
