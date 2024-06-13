@@ -34,11 +34,19 @@ void ft_cd(t_data *data, t_cmd *cmd)
     }
 	// printf(BLU"Directory before cd: " RESET);
     // ft_pwd(data);
+
+	if(cmd->num_args > 2)
+	{
+		perror("minishell: cd: too many arguments");
+		data->exit_code = 1;
+		free(old_pwd);
+		return;
+	}
     if (cmd->args[1] == NULL || cmd->args[1][0] == '~')
 		chdir(getenv("HOME"));
     else if (chdir(cmd->args[1]) != 0)
     {
-        perror("chdir failed");
+        perror(cmd->args[1]);
 		data->exit_code = 1;
         free(old_pwd);
         return;
