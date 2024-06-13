@@ -22,9 +22,11 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 {
     char	*path;
 
-    // check_NULL(cmd->args[0]);
 	if(cmd->num_args == 0)
+	{
+		printf("minishell: : command not found\n");
 		return;
+	}
     int i = 0;
     while(ft_strcmp(cmd->args[i] , "") == 0 && cmd->args[i + 1] != NULL)
         i++;

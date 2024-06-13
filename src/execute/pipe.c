@@ -28,7 +28,7 @@ int pipe_cmds(t_data *data)
     current = data->commands;
     while (current != NULL)
     {
-		handle_ctrl_fork(data); // set signal handler for fork
+		//handle_ctrl_fork(data); // set signal handler for fork
         pid[i] = fork();
         if (pid[i] == -1)
             return EXIT_FAILURE;

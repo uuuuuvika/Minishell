@@ -1,6 +1,51 @@
 
 #include "minishell.h"
 
+int cnt_missing_space(char *line)
+{
+    int i;
+    int count;
+
+    i = 0;
+    count = 0;
+    while (line[i])
+    {
+        if (line[i] == '>' || line[i] == '<')
+        {
+            if (line[i + 1] != ' ' && line[i + 1] != '\0' && line[i + 1] != '>' && line[i + 1] != '<')
+                count++;
+            if (line[i - 1] != ' ' && i != 0 && line[i - 1] != '>' && line[i - 1] != '<')
+                count++;
+        }
+        i++;
+    }
+    return (count);
+}
+
+char *add_space_to_redirect(char *line)
+{
+    char *new_line;
+    int i;
+    int j;
+
+    new_line = malloc(sizeof(char) * (ft_strlen(line) * 2 + 1));
+    i = 0;
+    j = 0;
+    while (line[i])
+    {
+        if (line[i] == '>' || line[i] == '<')
+        {
+            new_line[j++] = ' ';
+            new_line[j++] = line[i++];
+            new_line[j++] = ' ';
+        }
+        else
+            new_line[j++] = line[i++];
+    }
+    new_line[j] = '\0';
+    return (new_line);
+}
+
 int parse(char *input, t_data *data)
 {
     char *line_copy;
@@ -12,6 +57,14 @@ int parse(char *input, t_data *data)
     // check_NULL(line_copy);
     sub_dub_quotes(line_copy, data);
     sub_sin_quotes(line_copy, data);
+
+    printf("%d\n", cnt_missing_space(line_copy));
+    // if (cnt_missing_space(line_copy) > 0)
+    // {
+    //     free(line_copy);
+    //     line_copy = add_space_to_redirect(input);
+    // }
+
     future_children = ft_split(line_copy, '|');
     free(line_copy);
 
@@ -29,6 +82,7 @@ int parse(char *input, t_data *data)
         new_node->here_doc = 0;
         new_node->next = NULL;
         int i = 0;
+
         while (new_node->args[i])
         {
             if (ft_strcmp(new_node->args[i], "<<") == 0)
