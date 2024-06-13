@@ -48,12 +48,12 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [x] << EOF (without cat) is causing seg fault
 - [x] Ctrl-C has to exit heredoc
 - [x] when `ctrl+c` in `cat << EOF > file` and call `$?` exit code is 0, it should be 130
-- [x] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat :cat:
-- [x] check fucked up history :cat:
+- [x] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat
+- [ ] check fucked up history
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] Check freeing and leaks
 - [x] Add data->exit _code to all builtins
-- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
+- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd`
 - [ ] Review/replace error messages and exit codes, specially for `exit 123` :cat:
 - [ ] Fix `cat < nonexisting_file`
 - [x] expansions not working when input is `$PWD` or `$HOME`
