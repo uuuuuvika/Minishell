@@ -7,7 +7,7 @@ void ft_env(t_data *data)
     i = 0;
     if (data->envs == NULL)
     {
-        printf(RED "envp is null\n" RESET);
+       // printf(RED "envp is null\n" RESET);
         return;
     }
     while (data->envs[i] != NULL)

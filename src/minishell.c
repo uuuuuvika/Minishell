@@ -40,7 +40,7 @@ int main(int argc, char *argv[], char **envp)
 		if (!input || errno == EINVAL)
 		{
 			free(input);
-			printf(MAG "you have pressed CTRL-D\n" RESET);
+			//printf(MAG "you have pressed CTRL-D\n" RESET);
 			break;
 		}
 		if (ft_strlen(input) > 0 && !is_str_space(input))
@@ -49,7 +49,7 @@ int main(int argc, char *argv[], char **envp)
 			parse(input, &data);
 			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)))
 			{
-				printf(YEL "Executing simple builtin/$? in main\n" RESET);
+				//printf(YEL "Executing simple builtin/$? in main\n" RESET);
 				int fin = dup(STDIN);
 				int fout = dup(STDOUT);
 				redirect_fd_dup(data.commands, &data);
@@ -59,8 +59,8 @@ int main(int argc, char *argv[], char **envp)
 			}
 			else if (ft_strncmp(input, "<<", 2) != 0) // << E | wc maybe??
 			{
-				printf(YEL "Pipe" RESET);
-				printf(RESET "\n" RESET);
+				//printf(YEL "Pipe" RESET);
+				//printf(RESET "\n" RESET);
 				pipe_cmds(&data);
 			}
 		}

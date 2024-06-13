@@ -2,8 +2,9 @@
 
 int is_redirect(char *str)
 {
-    return (ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">>") == 0 || ft_strcmp(str, "<<") == 0);
+    return (ft_strncmp(str, ">", 1) == 0 || ft_strncmp(str, "<", 1) == 0 || ft_strncmp(str, ">>", 2) == 0 || ft_strncmp(str, "<<", 1) == 0);
 }
+
 
 void redirect_assign(t_cmd *current, t_data *data)
 {
@@ -17,18 +18,42 @@ void redirect_assign(t_cmd *current, t_data *data)
             current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
             i++;
         }
+        else if (current->args[i][0] == '>' && current->args[i][1] != '>')
+        {
+            char *file = ft_strdup(current->args[i] + 1);
+            current->redirect_out = open(file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+        }
+
         else if (ft_strcmp(current->args[i], "<") == 0)
         {
             current->redirect_in = open(current->args[i + 1], O_RDONLY);
             i++;
         }
+        else if (current->args[i][0] == '<' && current->args[i][1] != '<')
+        {
+            char *file = ft_strdup(current->args[i] + 1);
+            current->redirect_in = open(file, O_RDONLY);
+        }
+
         else if (ft_strcmp(current->args[i], ">>") == 0)
         {
             current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
             i++;
         }
+        else if (current->args[i][0] == '>' && current->args[i][1] == '>')
+        {
+            char *file = ft_strdup(current->args[i] + 2);
+            current->redirect_out = open(file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+        }
+
         else if (ft_strcmp(current->args[i], "<<") == 0)
             read_heredoc(current->args[i + 1], current, data);
+        else if (current->args[i][0] == '<' && current->args[i][1] == '<')
+        {
+            char *file = ft_strdup(current->args[i] + 2);
+            read_heredoc(file, current, data);
+            //i++;
+        }
         i++;
     }
 }
