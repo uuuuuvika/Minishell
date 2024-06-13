@@ -52,8 +52,8 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [ ] check fucked up history :cat:
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] Check freeing and leaks
+- [x] Add data->exit _code to all builtins
 - [ ] Review/replace error messages and exit codes :cat:
-- [ ] Add data->exit _code to all builtins
 - [ ] Fix `cat < nonexisting_file`
 - [ ] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
 - [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
