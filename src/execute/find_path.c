@@ -2,39 +2,36 @@
 
 char *check_abs_path(char *cmd, t_data *data)
 {
-    struct stat statbuf;
+    struct	stat statbuf;
 
     if (stat(cmd, &statbuf) == 0)
     {
         if (S_ISDIR(statbuf.st_mode))
         {
             errno = EISDIR; // Is a directory
-            fprintf(stderr, "-minishell: %s: Is a directory\n", cmd);
+        	perror(cmd);
             data->exit_code = 126;
-            return NULL;
+            return (cmd);
         }
         else if (statbuf.st_mode & S_IXUSR)
-        {
-            return ft_strdup(cmd); // Command is executable
-        }
+            return (cmd); // Command is executable
         else
         {
             errno = EACCES; // Permission denied
-            fprintf(stderr, "-minishell: %s: Permission denied\n", cmd);
+            perror(cmd);
             data->exit_code = 126;
-            return NULL;
+            return (cmd);
         }
     }
-    return NULL;
+    return (NULL);
 }
 
-// Function to check relative path using PATH environment variable
 char *check_rel_path(char *cmd, t_data *data)
 {
-    struct stat statbuf;
-    char *path;
-    char **paths;
-    int i;
+    struct	stat statbuf;
+    char	*path;
+    char	**paths;
+    int		i;
 
     paths = ft_split(ft_getenv("PATH", data->envs), ':');
     i = 0;
@@ -45,26 +42,25 @@ char *check_rel_path(char *cmd, t_data *data)
         if (stat(path, &statbuf) == 0)
         {
             free_arr2D(paths);
-            return path;
+            return(path);
         }
         free(path);
         i++;
     }
-    free_arr2D(paths);
-    return NULL;
+    free_arr2D (paths);
+    return (NULL);
 }
 
-// Main function to find executable path
-char *find_path(char *cmd, t_data *data)
+char	*find_path(char *cmd, t_data *data)
 {
-	char *path;
+	char	*path;
 
     if (ft_strcmp(cmd, "") == 0)
     {
         errno = ENOENT; // No such file or directory
         perror("-minishell");
         data->exit_code = 127;
-        return NULL;
+        return (NULL);
     }
 	path = check_abs_path(cmd, data);
     if (path != NULL)
@@ -72,12 +68,8 @@ char *find_path(char *cmd, t_data *data)
 	path = check_rel_path(cmd, data);
 	if (path != NULL)
 		return (path);
-	else
-	{
-		// If neither absolute nor relative path found
-		errno = ENOENT; // No such file or directory
-		fprintf(stderr, BLU "-minishell: %s: Command not found\n" RESET, cmd);
-		data->exit_code = 127;
-	}
-    return NULL;
+	errno = ENOENT;
+	printf(BLU "-minishell: %s: Command not found\n" RESET, cmd);
+	data->exit_code = 127;
+    return (NULL);
 }
