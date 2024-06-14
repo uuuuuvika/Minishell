@@ -30,7 +30,6 @@ apt-get install git build-essential libreadline-dev
 - [x] `'$BOB' '$JO'` should return `$BOB: command not found` 
 - [x] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others.
 - [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not
-- [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 ---
 - [x] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
 - [x] `cat $PATH`should write `no such a file or directory`
@@ -49,18 +48,19 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [x] Ctrl-C has to exit heredoc
 - [x] when `ctrl+c` in `cat << EOF > file` and call `$?` exit code is 0, it should be 130
 - [x] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat
-- [ ] check fucked up history
-- [ ] replace realloc (in parser) with allowed fnc
-- [ ] Check freeing and leaks
 - [x] Add data->exit _code to all builtins
 - [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd`
-- [ ] Review/replace error messages and exit codes, specially for `exit 123` :cat:
-- [ ] Fix `cat < nonexisting_file`
+- [x] Fix `cat < nonexisting_file`
 - [x] expansions not working when input is `$PWD` or `$HOME`
-- [ ] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
-- [ ] `export VAR=123` should not export numbers or variable names without `=` Also check exit codes for each case.
+- [x] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
+- [x] `export VAR=123` should not export numbers or variable names without `=` Also check exit codes for each case.
 - [ ] unset V is not unsetting a variable
+- [ ] Check freeing and leaks
+- [ ] replace realloc (in parser) with allowed fnc
+- [ ] check fucked up history
 - [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing
+- [ ] Review/replace error messages and exit codes, specially for `exit 123` :cat:
+- [ ] heredoc + expansions + quotes :face_with_peeking_eye:
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
