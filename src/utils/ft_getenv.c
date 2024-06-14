@@ -19,3 +19,23 @@ char *ft_getenv(char *env_name, char **envs)
 	}
 	return (NULL);
 }
+
+char *get_env_name(char *s, char c)
+{
+	int i;
+	int len;
+
+	len = 0;
+	i = 0;
+	char *name;
+	while(s[len] != '=' && s[len] != '\0')
+		len++;
+	name = malloc(sizeof(char) * len + 1);
+	while (s[i] != c && s[i] != '\0')
+	{
+		name[i] = s[i];
+		i++;
+	}
+	name[i] = '\0';
+	return (name);
+}

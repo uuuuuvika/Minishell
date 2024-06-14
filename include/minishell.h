@@ -81,6 +81,7 @@ void redirect_fd_dup(t_cmd *command, t_data *data);
 int is_expansion(char **args);
 void replace_for_expansion(char **args, char *cmd);
 char *ft_getenv(char *env_name, char **envs);
+char *get_env_name(char *s, char c);
 char *find_path(char *cmd, t_data *data);
 void exec_cmd(t_data *data, t_cmd *cmd);
 int is_builtin(char *command);

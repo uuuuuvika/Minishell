@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:25:09 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/26 17:43:36 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/15 01:18:32 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,18 @@ int	ft_isalnum(int c)
 		return (1);
 	}
 	return (0);
+}
+
+int	ft_isallalnum(char *str) //returns 1 if all characters in str are alphanumeric, 0 otherwise
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isalnum(str[i]))
+			return (0);
+		i++;
+	}
+	return (1); 
 }
