@@ -60,6 +60,7 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [ ] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
 - [ ] `export VAR=123` should not export numbers or variable names without `=` Also check exit codes for each case.
 - [ ] unset V is not unsetting a variable
+- [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
