@@ -9,8 +9,8 @@ void remove_env(t_data *data, char *arg)
     while (data->envs[i] != NULL)
     {
 		env_name = get_env_name(data->envs[i], '=');
- 		//printf(GRN"env_name: %s\n"RESET, env_name);
-        if (ft_strncmp(data->envs[i], arg, ft_strlen(arg)) == 0)
+ 		printf(GRN"env_name: %s\n"RESET, env_name);
+        if (ft_strcmp(env_name, arg) == 0)
         {
             free(data->envs[i++]);
             while (data->envs[i] != NULL)
