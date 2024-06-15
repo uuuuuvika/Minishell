@@ -3,10 +3,13 @@
 void remove_env(t_data *data, char *arg)
 {
     int i;
+	char *env_name;
 
     i = 0;
     while (data->envs[i] != NULL)
     {
+		env_name = get_env_name(data->envs[i], '=');
+ 		//printf(GRN"env_name: %s\n"RESET, env_name);
         if (ft_strncmp(data->envs[i], arg, ft_strlen(arg)) == 0)
         {
             free(data->envs[i++]);
@@ -16,6 +19,7 @@ void remove_env(t_data *data, char *arg)
                 i++;
             }
             data->envs[i - 1] = NULL;
+			free(env_name);
             return;
         }
         i++;
