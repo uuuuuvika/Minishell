@@ -61,6 +61,7 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing
 - [ ] Review/replace error messages and exit codes, specially for `exit 123` :cat:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
+- [ ] check cat free_data combination
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
