@@ -1,70 +1,6 @@
 
 #include "minishell.h"
 
-int cnt_missing_space(char *line)
-{
-    int i;
-    int count;
-
-    i = 0;
-    count = 0;
-    while (line[i])
-    {
-        if (line[i] == '>' || line[i] == '<')
-        {
-            if (line[i + 1] != ' ' && line[i + 1] != '\0' && line[i + 1] != '>' && line[i + 1] != '<')
-                count++;
-            if (line[i - 1] != ' ' && i != 0 && line[i - 1] != '>' && line[i - 1] != '<')
-                count++;
-        }
-        i++;
-    }
-    return (count);
-}
-
-char *add_space_to_redirect(char *line)
-{
-    char *new_line;
-    int i;
-    int j;
-
-    new_line = malloc(sizeof(char) * (ft_strlen(line) * 2 + 1));
-    i = 0;
-    j = 0;
-    while (line[i])
-    {
-        if (line[i] == '>' || line[i] == '<')
-        {
-            if(line[i+1] == '>' || line[i+1] == '<')
-            {
-                new_line[j++] = ' ';
-                new_line[j++] = line[i++];
-                new_line[j++] = line[i++];
-                new_line[j++] = ' ';
-            }
-            else if (i != 0 && line[i - 1] != ' ' && line[i - 1] != '>' && line[i - 1] != '<')
-            {
-                new_line[j++] = ' ';
-                new_line[j++] = line[i++];
-                new_line[j++] = ' ';
-            }
-            else if ( line[i + 1] != '\0' && line[i + 1] != ' ' && line[i + 1] != '>' && line[i + 1] != '<')
-            {
-                new_line[j++] = line[i++];
-                new_line[j++] = ' ';
-            }
-            // else if (line[i + 1] == '\0' || line[i + 1] == '>' || line[i + 1] == '<'
-            // new_line[j++] = ' ';
-            // new_line[j++] = line[i++];
-            // new_line[j++] = ' ';
-        }
-        else
-            new_line[j++] = line[i++];
-    }
-    new_line[j] = '\0';
-    return (new_line);
-}
-
 int parse(char *input, t_data *data)
 {
     char *line_copy;
@@ -77,15 +13,16 @@ int parse(char *input, t_data *data)
     sub_dub_quotes(line_copy, data);
     sub_sin_quotes(line_copy, data);
     
+    char *expanded_line = expand_line(line_copy, data);
 
-    if (cnt_missing_space(line_copy) > 0)
+    if (cnt_missing_space(expanded_line) > 0)
     {
-        free(line_copy);
-        line_copy = add_space_to_redirect(input);
+        free(expanded_line);
+        expanded_line = add_space_to_redirect(input);
     }
 
-    future_children = ft_split(line_copy, '|');
-    free(line_copy);
+    future_children = ft_split(expanded_line, '|');
+    free(expanded_line);
 
     t_cmd *new_node = NULL;
     nch = 0;
@@ -110,7 +47,7 @@ int parse(char *input, t_data *data)
                 {
                     free_arr2D(new_node->args);
                     free(new_node);
-                   // printf("Error: syntax error near unexpected token `newline'\n");
+                    // printf("Error: syntax error near unexpected token `newline'\n");
                     return (1);
                 }
                 else if (new_node->args[i + 1][0] == '\'' || new_node->args[i + 1][0] == '\"')
@@ -125,13 +62,11 @@ int parse(char *input, t_data *data)
         expand_arg(new_node->args, new_node->num_args, data);
         return_sin_quotes(new_node->args, data);
         redirect_assign(new_node, data);
-        //$nonistent 
 
         if (new_node->num_args == 0)
         {
             free_arr2D(new_node->args);
             free(new_node);
-            //printf("Error: syntax error near unexpected token `newline'\n");
             return (1);
         }
 
@@ -151,20 +86,6 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
-    // printf("num_of_children: %d\n", data->num_of_children);
-    //  t_cmd *current = data->commands;
-    //  while (current)
-    //  {
-    //      // printf("cmd: %s\n", current->args[0]);
-    //      printf("num_args: %d\n", current->num_args);
-    //      for (int i = 0; current->args[i]; i++)
-    //          printf("args[%d]: %s\n", i, current->args[i]);
-    //      // printf("pipe_in: %d\n", current->pipe_in);
-    //      // printf("pipe_out: %d\n", current->pipe_out);
-    //      // printf("here_doc: %d\n", current->here_doc);
-    //      // printf("redirect_in: %d\n", current->redirect_in);
-    //      // printf("redirect_out: %d\n", current->redirect_out);
-    //      current = current->next;
-    //  }
+
     return (0);
 }

@@ -14,7 +14,7 @@ void sig_handler(int sig)
   	{
 	//	printf(MAG"handle_ctrl\n"RESET);////////////
 		ioctl(0, TIOCSTI, "\n");
-		rl_replace_line("", 1);// We need this line to clear the  input line when typing heredoc input but not hitting enter
+		//rl_replace_line("", 1);// We need this line to clear the  input line when typing heredoc input but not hitting enter
 		rl_on_new_line(); /// This line is for when we press ctrl+c before inputting anything
 		//rl_redisplay();
 		g_signal = 2;

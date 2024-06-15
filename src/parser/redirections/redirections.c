@@ -5,6 +5,66 @@ int is_redirect(char *str)
     return (ft_strncmp(str, ">", 1) == 0 || ft_strncmp(str, "<", 1) == 0 || ft_strncmp(str, ">>", 2) == 0 || ft_strncmp(str, "<<", 1) == 0);
 }
 
+int cnt_missing_space(char *line)
+{
+    int i;
+    int count;
+
+    i = 0;
+    count = 0;
+    while (line[i])
+    {
+        if (line[i] == '>' || line[i] == '<')
+        {
+            if (line[i + 1] != ' ' && line[i + 1] != '\0' && line[i + 1] != '>' && line[i + 1] != '<')
+                count++;
+            if (line[i - 1] != ' ' && i != 0 && line[i - 1] != '>' && line[i - 1] != '<')
+                count++;
+        }
+        i++;
+    }
+    return (count);
+}
+
+char *add_space_to_redirect(char *line)
+{
+    char *new_line;
+    int i;
+    int j;
+
+    new_line = malloc(sizeof(char) * (ft_strlen(line) * 2 + 1));
+    i = 0;
+    j = 0;
+    while (line[i])
+    {
+        if (line[i] == '>' || line[i] == '<')
+        {
+            if (line[i + 1] == '>' || line[i + 1] == '<')
+            {
+                new_line[j++] = ' ';
+                new_line[j++] = line[i++];
+                new_line[j++] = line[i++];
+                new_line[j++] = ' ';
+            }
+            else if (i != 0 && line[i - 1] != ' ' && line[i - 1] != '>' && line[i - 1] != '<')
+            {
+                new_line[j++] = ' ';
+                new_line[j++] = line[i++];
+                new_line[j++] = ' ';
+            }
+            else if (line[i + 1] != '\0' && line[i + 1] != ' ' && line[i + 1] != '>' && line[i + 1] != '<')
+            {
+                new_line[j++] = line[i++];
+                new_line[j++] = ' ';
+            }
+        }
+        else
+            new_line[j++] = line[i++];
+    }
+    new_line[j] = '\0';
+    return (new_line);
+}
+
 void redirect_assign(t_cmd *current, t_data *data)
 {
     int i;
@@ -35,7 +95,6 @@ void redirect_assign(t_cmd *current, t_data *data)
 
 void redirect_fd_dup(t_cmd *current, t_data *data)
 {
-    //printf("here_doc: %d\n", data->cmn_here_doc);
     if (current->redirect_in != -1)
     {
         if (dup2(current->redirect_in, STDIN) == -1)
