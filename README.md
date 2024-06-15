@@ -37,7 +37,6 @@ apt-get install git build-essential libreadline-dev
 - [x] Check expansions for `cat $EXPANDTOFILE ??` Try with paths maybe?
 - [x] Reorganize expand function
 - [x] Split expansions so we can store commands in env and expand them after
-- [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
 - [x] echo "$TERM fsfsfs" substitude "$TERM fsfsfs" by "\0" but it should print `xterm-256color fsfsfs`
 ---Minishell > $>
 munmap_chunk(): invalid pointer
@@ -54,7 +53,8 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [x] expansions not working when input is `$PWD` or `$HOME`
 - [x] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
 - [x] `export VAR=123` should not export numbers or variable names without `=` Also check exit codes for each case.
-- [ ] unset V is not unsetting a variable
+- [x] unset V is not unsetting a variable
+- [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
 - [ ] Check freeing and leaks
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] check fucked up history
