@@ -38,45 +38,47 @@ void replace_for_expansion(char **args, char *cmd, t_data *data)
 	free(*args);
 	if (is_multi_words(cmd))
 	{
-		//char **split = ft_split(cmd, ' ');
+		
+		char **split = ft_split(cmd, ' ');
 		//printf("split[0]: %s\n", split[0]);
 		// printf("split[1]: %s\n", split[1]);
-		int fd[2];
-		pipe(fd);
-		pid_t pid;
-		char readbuffer[10000];
+		// int fd[2];
+		// pipe(fd);
+		// pid_t pid;
+		// char readbuffer[1224];
 
-		if ((pid = fork()) < 0)
-		{
-			printf("Fork error: %s\n", strerror(errno));
-		}
-		else if (pid == 0)
-		{
-			char **argv = ft_split(cmd, ' ');
-			close(fd[0]);
-			dup2(fd[1], 1);
-			char *path = find_path(argv[0], data);
-			execve(path, argv, data->envs);
-			close(fd[1]);
-			printf("Shouldn't execute this\n");
-			exit(1);
-		}
-		else
-		{
-			wait(NULL);
-			read(fd[0], readbuffer, sizeof(readbuffer));
-			//printf("Received string: %s", readbuffer);
-			*args = ft_strdup(readbuffer);
-			close(fd[0]);
-			close(fd[1]);
-		};
+		// if ((pid = fork()) < 0)
+		// {
+		// 	printf("Fork error: %s\n", strerror(errno));
+		// }
+		// else if (pid == 0)
+		// {
+		// 	char **argv = ft_split(cmd, ' ');
+
+		// 	close(fd[0]);
+		// 	dup2(fd[1], 1);
+		// 	close(fd[1]);
+		// 	char *path = find_path(argv[0], data);
+		// 	printf("path: %s\n", path);
+		// 	printf("argv[0]: %s\n", argv[0]);
+		// 	execve(path, argv, data->envs);
+		// 	printf("Shouldn't execute this\n");
+		// 	exit(1);
+		// }
+		// else
+		// {
+		// 	wait(NULL);
+		// 	read(fd[0], readbuffer, sizeof(readbuffer));
+		// 	//printf("Received string: %s", readbuffer);
+		// 	*args = ft_strdup(readbuffer);
+		// 	close(fd[0]);
+		// 	close(fd[1]);
+		// };
 	}
 	else if (cmd[0] == '$')
 	{
 		char *env_name = ft_strdup(cmd + 1);
-		//printf(RED "INSIDE env_name: %s\n" RESET, env_name);
 		if (ft_getenv(env_name, data->envs) != NULL)
-			//replace_for_expansion(&split[j], ft_getenv(env_name, data->envs), data);
 			*args = ft_strdup(ft_getenv(env_name, data->envs));
 		else
 			*args = ft_strdup(cmd);
@@ -84,7 +86,6 @@ void replace_for_expansion(char **args, char *cmd, t_data *data)
 	}
 	else
 		*args = ft_strdup(cmd);
-	printf("!!!!!! args: %s\n", *args);
 }
 
 char *arr2D_to_str(char **args)

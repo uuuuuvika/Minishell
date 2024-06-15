@@ -35,9 +35,28 @@ char *add_space_to_redirect(char *line)
     {
         if (line[i] == '>' || line[i] == '<')
         {
-            new_line[j++] = ' ';
-            new_line[j++] = line[i++];
-            new_line[j++] = ' ';
+            if(line[i+1] == '>' || line[i+1] == '<')
+            {
+                new_line[j++] = ' ';
+                new_line[j++] = line[i++];
+                new_line[j++] = line[i++];
+                new_line[j++] = ' ';
+            }
+            else if (i != 0 && line[i - 1] != ' ' && line[i - 1] != '>' && line[i - 1] != '<')
+            {
+                new_line[j++] = ' ';
+                new_line[j++] = line[i++];
+                new_line[j++] = ' ';
+            }
+            else if ( line[i + 1] != '\0' && line[i + 1] != ' ' && line[i + 1] != '>' && line[i + 1] != '<')
+            {
+                new_line[j++] = line[i++];
+                new_line[j++] = ' ';
+            }
+            // else if (line[i + 1] == '\0' || line[i + 1] == '>' || line[i + 1] == '<'
+            // new_line[j++] = ' ';
+            // new_line[j++] = line[i++];
+            // new_line[j++] = ' ';
         }
         else
             new_line[j++] = line[i++];
@@ -57,13 +76,13 @@ int parse(char *input, t_data *data)
     // check_NULL(line_copy);
     sub_dub_quotes(line_copy, data);
     sub_sin_quotes(line_copy, data);
+    
 
-    printf("%d\n", cnt_missing_space(line_copy));
-    // if (cnt_missing_space(line_copy) > 0)
-    // {
-    //     free(line_copy);
-    //     line_copy = add_space_to_redirect(input);
-    // }
+    if (cnt_missing_space(line_copy) > 0)
+    {
+        free(line_copy);
+        line_copy = add_space_to_redirect(input);
+    }
 
     future_children = ft_split(line_copy, '|');
     free(line_copy);
@@ -106,11 +125,13 @@ int parse(char *input, t_data *data)
         expand_arg(new_node->args, new_node->num_args, data);
         return_sin_quotes(new_node->args, data);
         redirect_assign(new_node, data);
+        //$nonistent 
 
         if (new_node->num_args == 0)
         {
             free_arr2D(new_node->args);
             free(new_node);
+            //printf("Error: syntax error near unexpected token `newline'\n");
             return (1);
         }
 
