@@ -47,21 +47,3 @@ void free_data(t_data *data) // ls
     data->subb = NULL;
     data->cmn_here_doc = 0;
 }
-
-// void free_command(t_cmd *command)
-// {
-//     free_arr2D(command->args);
-//     free(command);
-// }
-
-// void free_commands(t_cmd *commands)
-// {
-//     t_cmd *tmp;
-
-// 	while (commands)
-// 	{
-// 		tmp = commands;
-// 		commands = commands->next;
-// 		free_command(tmp);
-// 	}
-// }

@@ -76,6 +76,7 @@ int parse(char *input, t_data *data);
 void redirect_fd_dup(t_cmd *command, t_data *data);
 
 char *ft_getenv(char *env_name, char **envs);
+char *get_env_name(char *s, char c);
 
 char *find_path(char *cmd, t_data *data);
 void exec_cmd(t_data *data, t_cmd *cmd);
@@ -118,11 +119,19 @@ char *split_expand_join(char *line, t_data *data);
 
 void print_envs(t_data *data);
 void print_2D(char **args);
+
+int ft_isalldigit(char *str);
+
+// void handle_ctrl_s();
+// void sig_handler_s(int sig);
+// void handle_sigint(int sig);
+
 char *arr2D_to_str(char **args);
 
 void print_cmd_nodes(t_data *data);
 
 int cnt_missing_space(char *line);
 char *add_space_to_redirect(char *input);
+
 
 #endif

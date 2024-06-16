@@ -15,4 +15,5 @@ void ft_env(t_data *data)
         printf("%s\n", data->envs[i]);
         i++;
     }
+	data->exit_code = 0;
 }
