@@ -177,60 +177,60 @@
 // } Command;
 
 //parse the input (very basic)
-int parse_input(char *input)
-{
-    char *line_copy;
-    char *token;
+// int parse_input(char *input)
+// {
+//     char *line_copy;
+//     char *token;
 
-    if (input == NULL)
-    {
-        printf("Error! Input is NULL.\n");
-        return -1;
-    }
+//     if (input == NULL)
+//     {
+//         printf("Error! Input is NULL.\n");
+//         return -1;
+//     }
 
-    line_copy = strdup(input);
+//     line_copy = strdup(input);
 
-    if (line_copy == NULL)
-    {
-        printf("Error!\n");
-        return -1;
-    }
+//     if (line_copy == NULL)
+//     {
+//         printf("Error!\n");
+//         return -1;
+//     }
 
-    token = strtok(line_copy, " \t\n\r");
+//     token = strtok(line_copy, " \t\n\r");
 
-    while (token != NULL)
-    {
-        printf("%s\n", token);
+//     while (token != NULL)
+//     {
+//         printf("%s\n", token);
 
-        if (is_builtin(token))
-        {
-            printf(RED "Found a builtin command --> %s\n" RESET, token);
-            if (strcmp(token, "exit") == 0)
-            {
-                printf("Exiting minishell...\n");
-                exit(0);
-            }
-            //uses forbiden global variable, oops
-            if (strcmp(token, "env") == 0)
-            {
-                printf("Printing environment variables...\n");
-                for (char **current = environ; *current; current++)
-                {
-                    puts(*current);
-                }
-                return 0;
-            }
-        }
+//         if (is_builtin(token))
+//         {
+//             printf(RED "Found a builtin command --> %s\n" RESET, token);
+//             if (strcmp(token, "exit") == 0)
+//             {
+//                 printf("Exiting minishell...\n");
+//                 exit(0);
+//             }
+//             //uses forbiden global variable, oops
+//             if (strcmp(token, "env") == 0)
+//             {
+//                 printf("Printing environment variables...\n");
+//                 for (char **current = environ; *current; current++)
+//                 {
+//                     puts(*current);
+//                 }
+//                 return 0;
+//             }
+//         }
 
-        if (strcmp(token, "|") == 0)
-            printf(RED "Found a pipe!\n" RESET);
+//         if (strcmp(token, "|") == 0)
+//             printf(RED "Found a pipe!\n" RESET);
 
-        token = strtok(NULL, " \t\n\r");
-    }
+//         token = strtok(NULL, " \t\n\r");
+//     }
 
-    free(line_copy);
-    return 0;
-}
+//     free(line_copy);
+//     return 0;
+// }
 
 //Hanneses forks and pipes
 // int main()

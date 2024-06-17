@@ -12,8 +12,17 @@ int parse(char *input, t_data *data)
     // check_NULL(line_copy);
     sub_dub_quotes(line_copy, data);
     sub_sin_quotes(line_copy, data);
-    future_children = ft_split(line_copy, '|');
-    free(line_copy);
+    
+    char *expanded_line = expand_line(line_copy, data);
+
+    if (cnt_missing_space(expanded_line) > 0)
+    {
+        free(expanded_line);
+        expanded_line = add_space_to_redirect(input);
+    }
+
+    future_children = ft_split(expanded_line, '|');
+    free(expanded_line);
 
     t_cmd *new_node = NULL;
     nch = 0;
@@ -29,6 +38,7 @@ int parse(char *input, t_data *data)
         new_node->here_doc = 0;
         new_node->next = NULL;
         int i = 0;
+
         while (new_node->args[i])
         {
             if (ft_strcmp(new_node->args[i], "<<") == 0)
@@ -37,7 +47,7 @@ int parse(char *input, t_data *data)
                 {
                     free_arr2D(new_node->args);
                     free(new_node);
-                    printf("Error: syntax error near unexpected token `newline'\n");
+                    // printf("Error: syntax error near unexpected token `newline'\n");
                     return (1);
                 }
                 else if (new_node->args[i + 1][0] == '\'' || new_node->args[i + 1][0] == '\"')
@@ -76,20 +86,6 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
-    // printf("num_of_children: %d\n", data->num_of_children);
-    //  t_cmd *current = data->commands;
-    //  while (current)
-    //  {
-    //      // printf("cmd: %s\n", current->args[0]);
-    //      printf("num_args: %d\n", current->num_args);
-    //      for (int i = 0; current->args[i]; i++)
-    //          printf("args[%d]: %s\n", i, current->args[i]);
-    //      // printf("pipe_in: %d\n", current->pipe_in);
-    //      // printf("pipe_out: %d\n", current->pipe_out);
-    //      // printf("here_doc: %d\n", current->here_doc);
-    //      // printf("redirect_in: %d\n", current->redirect_in);
-    //      // printf("redirect_out: %d\n", current->redirect_out);
-    //      current = current->next;
-    //  }
+
     return (0);
 }

@@ -63,9 +63,6 @@ int handle_error(const char *message);
 int check_NULL(char *str);
 void free_arr2D(char **arr2D);
 void free_data(t_data *data);
-// void	free_command(t_cmd *command);
-// void	free_commands(t_cmd *commands);
-// void	free_data(t_data *data);
 
 void ft_cd(t_data *data, t_cmd *cmd);
 void ft_echo(t_data *data, t_cmd *cmd);
@@ -77,29 +74,27 @@ void ft_exit(t_data *data);
 
 int parse(char *input, t_data *data);
 void redirect_fd_dup(t_cmd *command, t_data *data);
-// void	expand_arg(char **args, int num_args, t_data *data);
-int is_expansion(char **args);
-void replace_for_expansion(char **args, char *cmd);
+
 char *ft_getenv(char *env_name, char **envs);
 char *get_env_name(char *s, char c);
+
 char *find_path(char *cmd, t_data *data);
 void exec_cmd(t_data *data, t_cmd *cmd);
 int is_builtin(char *command);
-// int is_b(char *command);
 
 int count_env(char **envp);
 int cpy_envs(t_data *data, char **envp);
 
-// void	sin_quotes(char *args, t_data *data);
-// void	rm_quotes(char *str);
-// void	rm_quotes_arr(char **arr);
 void sub_sin_quotes(char *line_copy, t_data *data);
 void return_sin_quotes(char **args, t_data *data);
 void sub_dub_quotes(char *line_copy, t_data *data);
 void return_dub_quotes(char **args, t_data *data);
 
 void expand_arg(char **args, int num_args, t_data *data);
-char *arr2D_to_str(char **args);
+int is_expansion(char **args);
+void replace_for_expansion(char **args, char *cmd);
+char *expand_line(char *line, t_data *data);
+
 int is_multi_words(char *str);
 
 int is_redirect(char *str);
@@ -124,11 +119,19 @@ char *split_expand_join(char *line, t_data *data);
 
 void print_envs(t_data *data);
 void print_2D(char **args);
+
 int ft_isalldigit(char *str);
 
-void handle_ctrl_s();
-void sig_handler_s(int sig);
-void handle_sigint(int sig);
+// void handle_ctrl_s();
+// void sig_handler_s(int sig);
+// void handle_sigint(int sig);
+
+char *arr2D_to_str(char **args);
+
+void print_cmd_nodes(t_data *data);
+
+int cnt_missing_space(char *line);
+char *add_space_to_redirect(char *input);
 
 
 #endif

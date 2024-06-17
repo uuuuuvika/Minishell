@@ -1,7 +1,6 @@
 #include "minishell.h"
 
 // CMD LINES FOR TESTING:
-
 // darotche@c4b5c1:~$ $PWD $?
 // bash: /home/darotche: Is a directory
 
@@ -15,40 +14,6 @@
 // pass ? as a cmd and later in exec_cmd replace it for data->exit code
 // Find somewhere to split the expanded string for example when ls -l
 
-int is_multi_words(char *str)
-{
-	int i = 0;
-	while (str[i])
-	{
-		if (str[i] == ' ')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
-void replace_for_expansion(char **args, char *cmd)
-{
-	free(*args);
-	*args = ft_strdup(cmd);
-}
-
-char *arr2D_to_str(char **args)
-{
-	char *str;
-	int i;
-
-	str = NULL;
-	i = 0;
-	while (args[i])
-	{
-		str = ft_strjoin(str, args[i]);
-		str = ft_strjoin(str, " ");
-		i++;
-	}
-	free_arr2D(args);
-	return (str);
-}
 
 void expand_arg(char **args, int num_args, t_data *data)
 {
@@ -72,7 +37,7 @@ void expand_arg(char **args, int num_args, t_data *data)
 						data->exit_code = 130;
 						g_signal = 0;
 						printf(MAG "-minishell: %d: command not found \n" WHT, data->exit_code);
-						data->exit_code = 127; 
+						data->exit_code = 127;
 					}
 					split[j] = ft_itoa(data->exit_code); /// Check this later for proper allocation
 					return;
@@ -80,7 +45,7 @@ void expand_arg(char **args, int num_args, t_data *data)
 				else if (split[j][0] == '$')
 				{
 					char *env_name = ft_strdup(split[j] + 1);
-					// printf(RED "env_name: %s\n" RESET, env_name);
+					//printf(RED "env_name: %s\n" RESET, env_name);
 					if (ft_getenv(env_name, data->envs) != NULL)
 						replace_for_expansion(&split[j], ft_getenv(env_name, data->envs));
 					else
@@ -104,8 +69,8 @@ void expand_arg(char **args, int num_args, t_data *data)
 				{
 					data->exit_code = 130;
 					g_signal = 0;
-					//printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
-					//data->exit_code = 127;
+					// printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
+					// data->exit_code = 127;
 				}
 				args[i] = ft_itoa(data->exit_code);
 				return;
@@ -113,6 +78,7 @@ void expand_arg(char **args, int num_args, t_data *data)
 			else if (args[i][0] == '$')
 			{
 				char *env_name = ft_strdup(args[i] + 1);
+				//printf(RED "env_name: %s\n" RESET, env_name);
 				if (ft_getenv(env_name, data->envs) != NULL)
 					replace_for_expansion(&args[i], ft_getenv(env_name, data->envs));
 				else

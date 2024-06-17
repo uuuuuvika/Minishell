@@ -40,7 +40,7 @@ int main(int argc, char *argv[], char **envp)
 		if (!input || errno == EINVAL)
 		{
 			free(input);
-			printf(MAG "you have pressed CTRL-D\n" RESET);
+			// printf(MAG "you have pressed CTRL-D\n" RESET);
 			break;
 		}
 		if (ft_strlen(input) > 0 && !is_str_space(input))
@@ -53,18 +53,20 @@ int main(int argc, char *argv[], char **envp)
 				int fin = dup(STDIN);
 				int fout = dup(STDOUT);
 				redirect_fd_dup(data.commands, &data);
-				//print_2D(data.commands->args);
+				// print_2D(data.commands->args);
 				exec_cmd(&data, data.commands);
 				dup2(fin, STDIN);
 				dup2(fout, STDOUT);
 			}
-			else if (ft_strncmp(input, "<<", 2) != 0) // << E | wc maybe??
+			else if (ft_strncmp(input, "<<", 2) != 0 && data.commands) // << E | wc maybe??
 			{
 			//	printf(YEL "Pipe" RESET);
 			//	printf(RESET "\n" RESET);
 				pipe_cmds(&data);
 			}
 		}
+
+		//free_data(&data);
 		free(input);
 	}
 	clear_history();
