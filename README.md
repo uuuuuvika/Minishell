@@ -54,22 +54,20 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [x] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
 - [x] `export VAR=123` should not export numbers or variable names without `=` Also check exit codes for each case.
 - [x] unset V is not unsetting a variable
-- [ ] Execute `$EXPANDCOMMAND` (expansions to commands)
-- [ ] Check freeing and leaks
+- [x] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
+- [x] expansions not working when input is `$PWD` or `$HOME`
+- [x] check fucked up history
+- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
+- [x] `exit 123` `exit 100` `exit -100` `exit assa asda`
+- [ ] Execute `$EXPANDCOMMAND` (expansions to commands) :face_with_peeking_eye:
 - [ ] replace realloc (in parser) with allowed fnc
-- [ ] check fucked up history
-- [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing
-- [ ] Review/replace error messages and exit codes, specially for `exit 123` :cat:
+- [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
-- [ ] check cat free_data combination
-      
 - [ ] Check freeing and leaks
 - [ ] Review/replace error messages and exit codes :cat:
-- [ ] Add data->exit _code to all builtins
+- [ ] Add data->exit _code to all builtins :cat:
+- [ ] check cat free_data combination
 - [ ] Fix `cat < nonexisting_file`
-- [ ] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
-- [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
-- [x] expansions not working when input is `$PWD` or `$HOME`
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
