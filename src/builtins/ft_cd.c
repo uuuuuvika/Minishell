@@ -37,7 +37,8 @@ void ft_cd(t_data *data, t_cmd *cmd)
 
 	if(cmd->num_args > 2)
 	{
-		perror("minishell: cd: too many arguments");
+		write_error("minishell: cd: ");
+		write_error("too many arguments\n");
 		data->exit_code = 1;
 		free(old_pwd);
 		return;

@@ -1,20 +1,5 @@
 #include "minishell.h"
 
-// CMD LINES FOR TESTING:
-// darotche@c4b5c1:~$ $PWD $?
-// bash: /home/darotche: Is a directory
-
-// darotche@c4b5c1:~$ $? $TERM
-// 126: command not found
-
-// try:
-// export VAR2='echo 123'
-
-/// We do not need to handle this "echo "$(whoami)"""
-// pass ? as a cmd and later in exec_cmd replace it for data->exit code
-// Find somewhere to split the expanded string for example when ls -l
-
-
 void expand_arg(char **args, int num_args, t_data *data)
 {
 	(void)num_args;
@@ -29,7 +14,7 @@ void expand_arg(char **args, int num_args, t_data *data)
 			int j = 0;
 			while (split[j])
 			{
-				// printf("split[j]: %s\n", split[j]);
+				//printf("split[j]: %s\n", split[j]);
 				if (ft_strcmp(split[j], "$?") == 0)
 				{
 					if (g_signal == 2)
@@ -45,7 +30,7 @@ void expand_arg(char **args, int num_args, t_data *data)
 				else if (split[j][0] == '$')
 				{
 					char *env_name = ft_strdup(split[j] + 1);
-					//printf(RED "env_name: %s\n" RESET, env_name);
+					printf(RED "env_name: %s\n" RESET, env_name);
 					if (ft_getenv(env_name, data->envs) != NULL)
 						replace_for_expansion(&split[j], ft_getenv(env_name, data->envs));
 					else

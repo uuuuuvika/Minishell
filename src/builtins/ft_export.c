@@ -68,7 +68,8 @@ void ft_export(t_data *data, t_cmd *cmd)
 		identifier = get_env_name(cmd->args[j], '=');
 		if(cmd->args[j][0] == '=' || !ft_isallalnum(identifier) || ft_isalldigit(identifier))
 		{
-			printf("minishell: export: `%s': not a valid identifier\n", cmd->args[1]);
+			write_error("minishell: export: ");
+			write_error("not a valid identifier\n");
 			data->exit_code = 1;
 			return;
 		}

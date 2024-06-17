@@ -59,18 +59,19 @@ typedef struct s_data
     int cmn_here_doc;
 } t_data;
 
-int handle_error(const char *message);
-int check_NULL(char *str);
-void free_arr2D(char **arr2D);
-void free_data(t_data *data);
+void	write_error(const char *msg);
+int		handle_error(const char *message);
+int		check_NULL(char *str);
+void	free_arr2D(char **arr2D);
+void	free_data(t_data *data);
 
-void ft_cd(t_data *data, t_cmd *cmd);
-void ft_echo(t_data *data, t_cmd *cmd);
-void ft_env(t_data *data);
-void ft_pwd(t_data *data);
-void ft_unset(t_data *data, t_cmd *cmd);
-void ft_export(t_data *data, t_cmd *cmd);
-void ft_exit(t_data *data);
+void	ft_cd(t_data *data, t_cmd *cmd);
+void	ft_echo(t_data *data, t_cmd *cmd);
+void	ft_env(t_data *data);
+void	ft_pwd(t_data *data);
+void	ft_unset(t_data *data, t_cmd *cmd);
+void	ft_export(t_data *data, t_cmd *cmd);
+void	ft_exit(t_data *data);
 
 int parse(char *input, t_data *data);
 void redirect_fd_dup(t_cmd *command, t_data *data);
@@ -117,21 +118,18 @@ void read_heredoc_simple(char *delimiter, t_data *data);
 void hd_is_expansion_needed(t_cmd *new_node);
 char *split_expand_join(char *line, t_data *data);
 
-void print_envs(t_data *data);
-void print_2D(char **args);
+void	print_envs(t_data *data);
+void	print_2D(char **args);
+void	print_cmd_nodes(t_data *data);
 
-int ft_isalldigit(char *str);
+
+char	*arr2D_to_str(char **args);
+
+int		cnt_missing_space(char *line);
+char	*add_space_to_redirect(char *input);
 
 // void handle_ctrl_s();
 // void sig_handler_s(int sig);
 // void handle_sigint(int sig);
-
-char *arr2D_to_str(char **args);
-
-void print_cmd_nodes(t_data *data);
-
-int cnt_missing_space(char *line);
-char *add_space_to_redirect(char *input);
-
 
 #endif

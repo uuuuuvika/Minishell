@@ -1,5 +1,41 @@
 #include "minishell.h"
 
+// void write_error(const char *msg)
+// {
+//     write(2, msg, ft_strlen(msg)); // 2 is the file descriptor for stderr
+// }
+
+// void	error_messages(char *cmd)
+// {
+// 	if (errno == ENOENT) {
+//             write_error("minishell: ");
+//             write_error(cmd);
+//             write_error(": command not found\n");
+//         } else if (errno == EACCES) {
+//             write_error("minishell: ");
+//             write_error(cmd);
+//             write_error(": permission denied\n");
+//         } else if (errno == ENOTDIR) {
+//             write_error("minishell: ");
+//             write_error(cmd);
+//             write_error(": not a directory\n");
+//         } else if (errno == EISDIR) {
+//             write_error("minishell: ");
+//             write_error(cmd);
+//             write_error(": is a directory\n");
+//         } else if (errno == ENAMETOOLONG) {
+//             write_error("minishell: ");
+//             write_error(cmd);
+//             write_error(": file name too long\n");
+//         } else {
+//             write_error("minishell: ");
+//             write_error(cmd);
+//             write_error(": ");
+//             write_error(strerror(errno));
+//             write_error("\n");
+//         }
+// }
+
 void	exec_builtin(t_data *data, t_cmd *cmd)
 {
 	if (ft_strcmp(cmd->args[0], "cd") == 0)
@@ -36,6 +72,14 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 	{
 		//Check if it will be cmd not found or is directory
 		path = find_path(cmd->args[i], data);
+		if (!path)
+		{
+			write_error("minishell: ");
+			write_error(cmd->args[i]);
+			write_error(": command not found\n");
+			return;
+        }
 		execve(path, cmd->args, data->envs);
+    //    error_messages(cmd->args[i]);
 	}
 }

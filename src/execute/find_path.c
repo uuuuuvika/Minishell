@@ -17,9 +17,9 @@ char *check_abs_path(char *cmd, t_data *data)
             return (cmd); // Command is executable
         else
         {
-            errno = EACCES; // Permission denied
-            perror(cmd);
-            data->exit_code = 126;
+            //errno = EACCES; // Permission denied
+        //    perror(cmd);
+            data->exit_code = 127;
             return (cmd);
         }
     }
@@ -54,12 +54,11 @@ char *check_rel_path(char *cmd, t_data *data)
 char	*find_path(char *cmd, t_data *data)
 {
 	char	*path;
-
     if (ft_strcmp(cmd, "") == 0)
     {
-        errno = ENOENT; // No such file or directory
-        perror("-minishell");
-        data->exit_code = 127;
+        //errno = ENOENT; // No such file or directory
+        //perror("-minishell");
+    //    data->exit_code = 127;
         return (NULL);
     }
 	path = check_abs_path(cmd, data);
@@ -68,8 +67,12 @@ char	*find_path(char *cmd, t_data *data)
 	path = check_rel_path(cmd, data);
 	if (path != NULL)
 		return (path);
-	errno = ENOENT;
-	printf(BLU "-minishell: %s: Command not found\n" RESET, cmd);
+	// write_error("minishell: ");
+	// write_error(cmd);
+	// write_error(": command not found\n");
+	//errno = "Command nt found";
+//	perror("");
+	//printf(BLU "-minishell: %s: Command not found\n" RESET, cmd);
 	data->exit_code = 127;
     return (NULL);
 }
