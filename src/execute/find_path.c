@@ -17,8 +17,8 @@ char *check_abs_path(char *cmd, t_data *data)
             return (cmd); // Command is executable
         else
         {
-            //errno = EACCES; // Permission denied
-        //    perror(cmd);
+            errno = EACCES; // Permission denied
+            perror(cmd);
             data->exit_code = 127;
             return (cmd);
         }

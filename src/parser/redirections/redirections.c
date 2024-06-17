@@ -65,104 +65,117 @@ char *add_space_to_redirect(char *line)
     return (new_line);
 }
 
-int	is_existing_file(char *file)
+void redirect_assign(t_cmd *current, t_data *data)
 {
-	struct stat statbuf;
+    int i;
 
-	if (stat(file, &statbuf) == 0)
-		return (1);
-	return (0);
-}
-
-int	is_permit_denied(char *file)
-{
-	if	(access(file, F_OK) == -1)
-		return (1);
-	if (access(file, R_OK | W_OK) == -1)
+	i = 0;
+    while (current->args[i])
 	{
-        if (errno == EACCES)
-            return 1;
-	}
-	return (0);
-}
-
-int check_file(char *file, t_data *data)
-{
-	if (!is_existing_file(file))
-	{
-		write_error("minishell: ");
-		write_error(file);
-		write_error(": No such file or directory\n");
-		data->exit_code = 1;
-		return (1);
-	}
-	else if (is_permit_denied(file))
-	{
-		write_error("minishell: ");
-		write_error(file);
-		write_error(": Permission denied\n");
-		data->exit_code = 1;
-		return (1);
-	}
-	return (0);
-}
-void redirect_assign(t_cmd *current, t_data *data) {
-    int i = 0;
-    while (current->args[i]) {
-        if (ft_strcmp(current->args[i], ">") == 0) {
+        if (ft_strcmp(current->args[i], ">") == 0)
+		{
             current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-            if (current->redirect_out == -1) {
+            if (current->redirect_out == -1)
+			 {
                 perror("minishell: open");
                 data->exit_code = 1;
                 return;
             }
             i++;
-        } else if (ft_strcmp(current->args[i], "<") == 0) {
-            if (check_file(current->args[i + 1], data)) {
-                return;
-            }
-            current->redirect_in = open(current->args[i + 1], O_RDONLY);
-            if (current->redirect_in == -1) {
-                perror("minishell: open");
-                data->exit_code = 1;
-                return;
-            }
-            i++;
-        } else if (ft_strcmp(current->args[i], ">>") == 0) {
-            current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-            if (current->redirect_out == -1) {
-                perror("minishell: open");
-                data->exit_code = 1;
-                return;
-            }
-            i++;
-        } else if (ft_strcmp(current->args[i], "<<") == 0) {
-            read_heredoc(current->args[i + 1], current, data);
         }
+		else if (ft_strcmp(current->args[i], "<") == 0)
+		{
+            current->redirect_in = open(current->args[i + 1], O_RDONLY);
+            if (current->redirect_in == -1)
+			{
+                write_error("minishell: ");
+				write_error("No such file or directory\n");
+                data->exit_code = 1;
+				return;
+            }
+            i++;
+        }
+		else if (ft_strcmp(current->args[i], ">>") == 0)
+		{
+            current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
+            if (current->redirect_out == -1)
+			{
+                write_error("minishell: ");
+				write_error(current->args[i + 1]);
+                data->exit_code = 1;
+                return;
+            }
+            i++;
+        }
+		else if (ft_strcmp(current->args[i], "<<") == 0)
+            read_heredoc(current->args[i + 1], current, data);
         i++;
     }
 }
 
-void redirect_fd_dup(t_cmd *current, t_data *data) {
-    if (current->redirect_in != -1) {
-        if (dup2(current->redirect_in, STDIN_FILENO) == -1) {
-            perror("dup2 error redirect_in");
-            exit(1); // Handle the error appropriately
-        }
+void redirect_fd_dup(t_cmd *current, t_data *data)
+{
+    if (current->redirect_in != -1)
+    {
+        if (dup2(current->redirect_in, STDIN) == -1)
+            handle_error("dup2 error redirect_in");
         close(current->redirect_in);
     }
-    if (current->redirect_out != -1) {
-        if (dup2(current->redirect_out, STDOUT_FILENO) == -1) {
-            perror("dup2 error redirect_out");
-            exit(1); // Handle the error appropriately
-        }
+    if (current->redirect_out != -1)
+    {
+        if (dup2(current->redirect_out, STDOUT) == -1)
+            handle_error("dup2 error redirect_out");
         close(current->redirect_out);
     }
-    if (data->cmn_here_doc != 0) {
-        if (dup2(data->cmn_here_doc, STDOUT_FILENO) == -1) {
-            perror("dup2 error here_doc");
-            exit(1); // Handle the error appropriately
-        }
+    if(data->cmn_here_doc != 0)
+    {
+        if (dup2(data->cmn_here_doc, STDOUT) == -1)
+            handle_error("dup2 error here_doc");
         close(data->cmn_here_doc);
     }
 }
+
+
+
+
+// int	is_existing_file(char *file)
+// {
+// 	struct stat statbuf;
+
+// 	if (stat(file, &statbuf) == 0)
+// 		return (1);
+// 	return (0);
+// }
+
+// int	is_permit_denied(char *file)
+// {
+// 	if	(access(file, F_OK) == -1)
+// 		return (1);
+// 	if (access(file, R_OK | W_OK) == -1)
+// 	{
+//         if (errno == EACCES)
+//             return 1;
+// 	}
+// 	return (0);
+// }
+
+// int check_file(char *file, t_data *data)
+// {
+// 	if (!is_existing_file(file))
+// 	{
+// 		write_error("minishell: ");
+// 		write_error(file);
+// 		write_error(": No such file or directory\n");
+// 		data->exit_code = 1;
+// 		return (1);
+// 	}
+// 	else if (is_permit_denied(file))
+// 	{
+// 		write_error("minishell: ");
+// 		write_error(file);
+// 		write_error(": Permission denied\n");
+// 		data->exit_code = 1;
+// 		return (1);
+// 	}
+// 	return (0);
+// }
