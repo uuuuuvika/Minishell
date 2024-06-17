@@ -69,7 +69,7 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [ ] Fix `cat < nonexisting_file`
 - [ ] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
 - [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
-- [ ] expansions not working when input is `$PWD` or `$HOME`
+- [x] expansions not working when input is `$PWD` or `$HOME`
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
