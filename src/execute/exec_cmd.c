@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/18 14:41:26 by darotche          #+#    #+#             */
+/*   Updated: 2024/06/18 14:44:32 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 // void write_error(const char *msg)
@@ -56,17 +68,18 @@ void	exec_builtin(t_data *data, t_cmd *cmd)
 
 void	exec_cmd(t_data *data, t_cmd *cmd)
 {
-    char	*path;
+	char	*path;
+	int		i;
 
-	if(cmd->num_args == 0)
+	if (cmd->num_args == 0)
 	{
 		printf("minishell: : command not found\n");
-		return;
+		return ;
 	}
-    int i = 0;
-    while(ft_strcmp(cmd->args[i] , "") == 0 && cmd->args[i + 1] != NULL)
-        i++;
-    if (is_builtin(cmd->args[i]))
+	i = 0;
+	while (ft_strcmp(cmd->args[i] , "") == 0 && cmd->args[i + 1] != NULL)
+		i++;
+	if (is_builtin(cmd->args[i]))
 		exec_builtin(data, cmd);
 	else
 	{
@@ -77,8 +90,8 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 			write_error("minishell: ");
 			write_error(cmd->args[i]);
 			write_error(": command not found\n");
-			return;
-        }
+			return ;
+		}
 		execve(path, cmd->args, data->envs);
     //    error_messages(cmd->args[i]);
 	}
