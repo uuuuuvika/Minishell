@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 19:13:01 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:52:13 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,20 @@ char *check_rel_path(char *cmd, t_data *data)
     struct	stat statbuf;
     char	*path;
     char	**paths;
+	char	*env_path;
+	
     int		i;
 
 	path = NULL;
 	paths = NULL;
-    paths = ft_split(ft_getenv("PATH", data->envs), ':');
+	env_path = ft_getenv("PATH", data->envs);
+    paths = ft_split(env_path, ':');
+	free (env_path);
     i = 0;
     while (paths[i])
     {
-        path = ft_strjoin_nf(paths[i], "/");
-        path = ft_strjoin_nf(path, cmd);
+        path = ft_strjoin(paths[i], "/");
+        path = ft_strjoin(path, cmd);
         if (stat(path, &statbuf) == 0)
         {
             free_arr2D(paths);
@@ -61,8 +65,8 @@ char *check_rel_path(char *cmd, t_data *data)
         free(path);
         i++;
     }
-    free_arr2D (paths);
-    return (NULL);
+//    free (path);
+	return (NULL);
 }
 
 char	*find_path(char *cmd, t_data *data)
@@ -90,6 +94,6 @@ char	*find_path(char *cmd, t_data *data)
 //	perror("");
 	//printf(BLU "-minishell: %s: Command not found\n" RESET, cmd);
 	data->exit_code = 127;
-	free(path);
+	//free(path);
     return (NULL);
 }
