@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 19:52:13 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/18 20:15:46 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,13 @@ char *check_rel_path(char *cmd, t_data *data)
     char	*path;
     char	**paths;
 	char	*env_path;
-	
     int		i;
 
 	path = NULL;
 	paths = NULL;
 	env_path = ft_getenv("PATH", data->envs);
     paths = ft_split(env_path, ':');
-	free (env_path);
+	free(env_path);
     i = 0;
     while (paths[i])
     {
@@ -94,6 +93,5 @@ char	*find_path(char *cmd, t_data *data)
 //	perror("");
 	//printf(BLU "-minishell: %s: Command not found\n" RESET, cmd);
 	data->exit_code = 127;
-	//free(path);
     return (NULL);
 }
