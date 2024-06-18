@@ -22,11 +22,10 @@ apt-get install git build-essential libreadline-dev
 - [x] Run: `''` and  `' '` fix it, it works with double quotes but not single quotes
 - [x] Test only spaces or tabs
 - [x] echo -n -n -n -n hola has to print hola and no new line. Now it prints -n hola
-- [x] 'ls -l'  and ls '-l'
-- [x] `echo '$USER'` must print "$USER"  Now it prints $USER
+- [ ] 'ls -l'  and ls '-l'
 - [x] expansions have to work with exported variables, this does not work with getenv()
 - [x] expand whole command line
-- [x] Check what happens for non existing expansions $NONEXISTING
+- [ ] Check what happens for non existing expansions $NONEXISTING
 - [x] `'$BOB' '$JO'` should return `$BOB: command not found` 
 - [x] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others.
 - [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not
