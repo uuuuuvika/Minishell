@@ -16,8 +16,8 @@ apt-get install git build-essential libreadline-dev
 
 ## To fix for Evaluation Sheet:
 - [x] Change path thing. It needs to run with `/bin/ls`, check for relative and absolute paths, not found with `bin/ls`
-- [x] Try `unset PATH` Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again
-- [x] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right.
+- [ ] Try `unset PATH` Commands with relative or absolute paths will stop working. export PATH=/bin  will allow some commands to work again
+- [ ] Set the $PATH to a multiple directory value directory1:directory2 and ensure that directories are checked in order from left to right.
 ---
 - [x] Run: `''` and  `' '` fix it, it works with double quotes but not single quotes
 - [x] Test only spaces or tabs
