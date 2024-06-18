@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:41:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 14:44:32 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:12:04 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 	char	*path;
 	int		i;
 
+	path = NULL;
 	if (cmd->num_args == 0)
 	{
 		printf("minishell: : command not found\n");

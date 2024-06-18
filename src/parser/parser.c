@@ -14,14 +14,14 @@ int parse(char *input, t_data *data)
     sub_sin_quotes(line_copy, data);
     
     char *expanded_line = expand_line(line_copy, data);
-
-    if (cnt_missing_space(expanded_line) > 0)
+	if (cnt_missing_space(expanded_line) > 0)
     {
         free(expanded_line);
         expanded_line = add_space_to_redirect(input);
     }
 
     future_children = ft_split(expanded_line, '|');
+	free(line_copy);
     free(expanded_line);
 
     t_cmd *new_node = NULL;

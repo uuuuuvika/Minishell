@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 18:17:03 by darotche          #+#    #+#             */
-/*   Updated: 2024/05/10 14:56:39 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:19:14 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(char const *s)
 	int			len;
 	int			i;
 
+	if (s == NULL)
+		return (NULL);
 	len = ft_strlen(s);
 	str = malloc(sizeof(char) * (len + 1));
 	i = 0;

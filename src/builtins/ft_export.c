@@ -6,15 +6,15 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 13:40:49 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:28:29 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int varname_len(char *var)
+int	varname_len(char *var)
 {
-    int i;
+    int	i;
 
     i = 0;
     while (var[i] && var[i] != '=')
@@ -36,7 +36,9 @@ int varname_len(char *var)
 
 int replace_var(char **envar, char *newvar)
 {
-    int i = 0;
+    int	i;
+
+	i = 0;
     while (envar[i])
     {
         if ((varname_len(envar[i]) == varname_len(newvar)) && (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
@@ -83,9 +85,10 @@ void ft_export(t_data *data, t_cmd *cmd)
 			write_error("minishell: export: ");
 			write_error("not a valid identifier\n");
 			data->exit_code = 1;
-			return;
+			free (identifier);
+			return ;
 		}
-		free(identifier);
+		free (identifier);
 		if(ft_strchr(cmd->args[j], '=') == NULL)
 		{
 			data->exit_code = 1;

@@ -1,13 +1,13 @@
 #include "minishell.h"
 
-int is_space(char c)
+int	is_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
 		return (1);
 	return (0);
 }
 
-int is_str_space(char *str)
+int	is_str_space(char *str)
 {
 	int i = 0;
 	while (str[i])
@@ -19,15 +19,15 @@ int is_str_space(char *str)
 	return (1);
 }
 
-int is_dsqm(t_cmd *cmd)
+int	is_dsqm(t_cmd *cmd)
 {
 	return (ft_strcmp(cmd->args[0], "$?") == 0);
 }
 
-int main(int argc, char *argv[], char **envp)
+int	main(int argc, char *argv[], char **envp)
 {
-	static t_data data;
-	char *input;
+	static t_data	data;
+	char			*input;
 
 	(void)argc;
 	(void)argv;
@@ -65,9 +65,7 @@ int main(int argc, char *argv[], char **envp)
 				pipe_cmds(&data);
 			}
 		}
-
-		//free_data(&data);
-		free(input);
+		free (input);
 	}
 	clear_history();
 	return (0);
