@@ -57,17 +57,19 @@ make: *** [Makefile:19: m] Aborted (core dumped)
 - [x] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
 - [x] expansions not working when input is `$PWD` or `$HOME`
 - [x] check fucked up history
-- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
+- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd`
 - [x] `exit 123` `exit 100` `exit -100` `exit assa asda`
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands) :face_with_peeking_eye:
 - [ ] replace realloc (in parser) with allowed fnc
 - [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
-- [ ] Check freeing and leaks
+- [ ] Check freeing and leaks :cat:
 - [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins :cat:
 - [ ] check cat free_data combination
-- [ ] Fix `cat < nonexisting_file`
+- [ ] Fix `cat < missing_file`
+- [ ] `$EMPTY echo hi` should print hi
+- [ ] tests 17-21 variations of `$`
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
