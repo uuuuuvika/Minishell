@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/18 13:40:08 by darotche          #+#    #+#             */
+/*   Updated: 2024/06/18 13:41:48 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	ft_isnumeric(const char *str)
@@ -36,10 +48,7 @@ void	ft_exit(t_data *data)
         }
 		else
 		{
-            exit_code = atoi(data->commands->args[1]);
-            exit_code = exit_code % 256;
-            if (exit_code < 0)
-				exit_code += 256;
+            exit_code = (unsigned char)ft_atoi(data->commands->args[1]);
             data->exit_code = exit_code;
         }
     }
