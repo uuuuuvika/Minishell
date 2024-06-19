@@ -49,7 +49,7 @@ apt-get install git build-essential libreadline-dev
 - [x] expansions not working when input is `$PWD` or `$HOME`
 - [x] check fucked up history
 - [x] `exit 123` `exit 100` `exit -100` `exit assa asda`
-
+---
 - [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
 - [ ] `cat $PATH`should write `no such a file or directory` :cat:
 - [ ] Check what happens for non existing expansions $NONEXISTING 
