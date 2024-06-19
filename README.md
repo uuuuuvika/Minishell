@@ -48,13 +48,12 @@ apt-get install git build-essential libreadline-dev
 - [x] unset V is not unsetting a variable
 - [x] expansions not working when input is `$PWD` or `$HOME`
 - [x] check fucked up history
-- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd`
 - [x] `exit 123` `exit 100` `exit -100` `exit assa asda`
 - [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd`
-- [ ] `cat $PATH`should write `no such a file or directory`
+- [ ] `cat $PATH`should write `no such a file or directory` :cat:
 - [ ] Check what happens for non existing expansions $NONEXISTING
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands) :face_with_peeking_eye:
-- [ ] replace realloc (in parser) with allowed fnc
+- [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
 - [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 - [ ] Check freeing and leaks :cat:
