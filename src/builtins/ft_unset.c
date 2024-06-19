@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:41:01 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 17:41:56 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:50:31 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	remove_env(t_data *data, char *arg)
 	while (data->envs[i] != NULL)
 	{
 		env_name = get_env_name(data->envs[i], '=');
+	
  		//printf(GRN"env_name: %s\n"RESET, env_name);
 		if (ft_strcmp(env_name, arg) == 0)
 		{
@@ -31,7 +32,6 @@ void	remove_env(t_data *data, char *arg)
 				i++;
 			}
 			data->envs[i - 1] = NULL;
-			free (env_name);
 			return ;
 		}
 		i++;

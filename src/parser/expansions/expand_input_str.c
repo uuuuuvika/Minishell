@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:22:47 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 20:29:54 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:03:32 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*expand_line(char *line, t_data *data)
                 free (split[i]);
                 split[i] = ft_strdup(env);
             }
-			free (env);
         }
         i++;
     }

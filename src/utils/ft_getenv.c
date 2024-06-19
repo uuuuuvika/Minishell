@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:40:24 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 19:07:31 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/19 14:46:58 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_getenv(char *env_name, char **envs)
 
 	val = NULL;
 	i = 0;
+	if(env_name == NULL)
+		return (NULL);
 	// printf("env_name: %s\n", env_name);
 	while (envs[i])
 	{
@@ -37,27 +39,6 @@ char	*ft_getenv(char *env_name, char **envs)
 	return (NULL);
 }
 
-
-// char *ft_getenv(char *env_name, char **envs)
-// {
-// 	int i;
-// 	char *env_value;
-
-// 	i = 0;
-// 	// printf("env_name: %s\n", env_name);
-// 	while (envs[i])
-// 	{
-// 		if (ft_strncmp(envs[i], env_name, ft_strlen(env_name)) == 0 && envs[i][ft_strlen(env_name)] == '=')
-// 		{
-// 			env_value = ft_strdup(envs[i] + ft_strlen(env_name) + 1);
-// 			//printf(GRN "Valid env: %s\n" RESET, env_value);
-// 			return (env_value);
-// 		}
-// 		i++;
-// 	}
-// 	return (NULL);
-// }
-
 char	*get_env_name(char *s, char c)
 {
 	int		i;
@@ -66,6 +47,8 @@ char	*get_env_name(char *s, char c)
 
 	len = 0;
 	i = 0;
+	if (s == NULL)
+		return (NULL);
 	while(s[len] != '=' && s[len] != '\0')
 		len++;
 	name = malloc(sizeof(char) * len + 1);

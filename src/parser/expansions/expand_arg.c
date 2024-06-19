@@ -30,7 +30,7 @@ void expand_arg(char **args, int num_args, t_data *data)
 				else if (split[j][0] == '$')
 				{
 					char *env_name = ft_strdup(split[j] + 1);
-					printf(RED "env_name: %s\n" RESET, env_name);
+				//	printf(RED "env_name: %s\n" RESET, env_name);
 					if (ft_getenv(env_name, data->envs) != NULL)
 						replace_for_expansion(&split[j], ft_getenv(env_name, data->envs));
 					else
@@ -67,7 +67,7 @@ void expand_arg(char **args, int num_args, t_data *data)
 				if (ft_getenv(env_name, data->envs) != NULL)
 					replace_for_expansion(&args[i], ft_getenv(env_name, data->envs));
 				else
-					args[i] = "\0";
+					args[i] = "\0";// We need to find another way for this. non valid expansios should not print anything
 				free(env_name);
 			}
 		}
