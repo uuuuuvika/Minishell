@@ -13,7 +13,7 @@ SOURCES	= \
 	ft_lstmap_bonus.c
 NAME	= libft.a
 OBJECTS = $(SOURCES:.c=.o) 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 ${NAME}: $(OBJECTS)
 	@ar rc $(NAME) $(OBJECTS)
