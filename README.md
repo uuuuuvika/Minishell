@@ -23,51 +23,47 @@ apt-get install git build-essential libreadline-dev
 - [x] Test only spaces or tabs
 - [x] echo -n -n -n -n hola has to print hola and no new line. Now it prints -n hola
 - [x] 'ls -l'  and ls '-l'
-- [x] `echo '$USER'` must print "$USER"  Now it prints $USER
 - [x] expansions have to work with exported variables, this does not work with getenv()
 - [x] expand whole command line
-- [x] Check what happens for non existing expansions $NONEXISTING
 - [x] `'$BOB' '$JO'` should return `$BOB: command not found` 
 - [x] `cat '` is segfault and `cat "` does not behave like bash. Also seg fault for `echo '` `echo "` `pwd '` among others.
 - [x] `cat << 'EOF'` and `cat << "EOF"`  and should not expand, maybe use a flag for what should be expanded or not
 ---
 - [x] Try `$? + $?` in comparison to bash. I think it should execute only `$?` but we need to double check
-- [x] `cat $PATH`should write `no such a file or directory`
 ---
 - [x] Check expansions for `cat $EXPANDTOFILE ??` Try with paths maybe?
 - [x] Reorganize expand function
 - [x] Split expansions so we can store commands in env and expand them after
 - [x] echo "$TERM fsfsfs" substitude "$TERM fsfsfs" by "\0" but it should print `xterm-256color fsfsfs`
----Minishell > $>
-munmap_chunk(): invalid pointer
-make: *** [Makefile:19: m] Aborted (core dumped)
-
 - [x] cat '$TERM' giving seg fault when not forking ( cat '$TERM' | wc is fine)
 - [x] << EOF (without cat) is causing seg fault
 - [x] Ctrl-C has to exit heredoc
 - [x] when `ctrl+c` in `cat << EOF > file` and call `$?` exit code is 0, it should be 130
 - [x] Something goes wrong with ctrl-D and ctrl-C. We need to handle signals in a diferent way when readline in heredoc and cat
 - [x] Add data->exit _code to all builtins
-- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd`
-- [x] Fix `cat < nonexisting_file`
 - [x] expansions not working when input is `$PWD` or `$HOME`
 - [x] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
 - [x] `export VAR=123` should not export numbers or variable names without `=` Also check exit codes for each case.
-- [x] unset V is not unsetting a variable
 - [x] check for right syntax in `export VAR=123` Needs to have `=` and var name should be only alpha I think (check tester)
+- [x] unset V is not unsetting a variable
 - [x] expansions not working when input is `$PWD` or `$HOME`
 - [x] check fucked up history
-- [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
 - [x] `exit 123` `exit 100` `exit -100` `exit assa asda`
+---
+- [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
+- [ ] `cat $PATH`should write `no such a file or directory` :cat:
+- [ ] Check what happens for non existing expansions $NONEXISTING 
 - [ ] Execute `$EXPANDCOMMAND` (expansions to commands) :face_with_peeking_eye:
-- [ ] replace realloc (in parser) with allowed fnc
+- [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
 - [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
-- [ ] Check freeing and leaks
+- [ ] Check freeing and leaks :cat:
 - [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins :cat:
 - [ ] check cat free_data combination
-- [ ] Fix `cat < nonexisting_file`
+- [ ] Fix `cat < missing_file` is not exiting cat
+- [ ] `$EMPTY echo hi` should print hi
+- [ ] tests 17-21 variations of `$`
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
