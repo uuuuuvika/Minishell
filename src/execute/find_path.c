@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/19 15:52:18 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/20 23:20:34 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char *check_rel_path(char *cmd, t_data *data)
     i = 0;
     while (paths[i])
     {
-        path = ft_strjoin(paths[i], "/");
-        path = ft_strjoin(path, cmd);
+        path = ft_strjoin_nf(paths[i], "/");
+        path = ft_strjoin_nf(path, cmd);
         if (stat(path, &statbuf) == 0)
             return(path);
 		free(path);
@@ -79,11 +79,11 @@ char	*find_path(char *cmd, t_data *data)
 	char	*path;
 
 	path = NULL;
-    if (ft_strcmp(cmd, "") == 0)
-    {
-        errno = ENOENT; // No such file or directory
-        perror("-minishell");
-    }
+    // if (ft_strcmp(cmd, "") == 0)
+    // {
+    //     errno = ENOENT; // No such file or directory
+    //     perror("-minishell");
+    // }
 	path = check_abs_path(cmd, data);
     if (path != NULL)
 		return (path);

@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:08 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 14:49:06 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/20 23:01:56 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_isnumeric(const char *str)
 void	ft_exit(t_data *data)
 {
 	int exit_code;
-	
+
 	exit_code = 0;
     if (data->commands->num_args > 2)
 	{
@@ -57,5 +57,5 @@ void	ft_exit(t_data *data)
     free_arr2D(data->envs);
     free_data(data);
     clear_history();
-    exit(data->exit_code);
+    exit (data->exit_code);
 }

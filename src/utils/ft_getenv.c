@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:40:24 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/19 14:46:58 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/20 22:47:52 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ char	*ft_getenv(char *env_name, char **envs)
 {
 	int		i;
 	char	*env_value;
-	char	*val;
+//	char	*val;
 
-	val = NULL;
+	//val = NULL;
+	env_value = NULL;
 	i = 0;
 	if(env_name == NULL)
 		return (NULL);
@@ -27,15 +28,16 @@ char	*ft_getenv(char *env_name, char **envs)
 	{
 		if (ft_strncmp(envs[i], env_name, ft_strlen(env_name)) == 0 && envs[i][ft_strlen(env_name)] == '=')
 		{
-			free (val);
-			val = ft_strdup(envs[i] + ft_strlen(env_name) + 1);
-			env_value = val;
+			free (env_value);
+			//val = ft_strdup(envs[i] + ft_strlen(env_name) + 1);
+			//env_value = val;
+			env_value = ft_strdup(envs[i] + ft_strlen(env_name) + 1);
 			//printf(GRN "Valid env: %s\n" RESET, env_value);
 			return (env_value);
 		}
 		i++;
 	}
-	free (val);
+	free (env_value);
 	return (NULL);
 }
 

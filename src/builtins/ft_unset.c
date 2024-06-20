@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:41:01 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/19 14:50:31 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/20 23:25:55 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	remove_env(t_data *data, char *arg)
 				i++;
 			}
 			data->envs[i - 1] = NULL;
+			free(env_name);
 			return ;
 		}
 		i++;
+		free(env_name);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 19:28:29 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/20 23:33:19 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ int add_var(char ***envar, char *newvar)
 
 void ft_export(t_data *data, t_cmd *cmd)
 {
-    int j;
+    int		j;
+	char	*identifier;
 
     j = 1;
     if (cmd->num_args > 1)
 	{
-		char *identifier;
 		identifier = get_env_name(cmd->args[j], '=');
 		if(cmd->args[j][0] == '=' || !ft_isallalnum(identifier) || ft_isalldigit(identifier))
 		{
