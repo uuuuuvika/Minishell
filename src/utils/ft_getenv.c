@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:40:24 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/20 22:47:52 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:19:47 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ char	*ft_getenv(char *env_name, char **envs)
 	i = 0;
 	if(env_name == NULL)
 		return (NULL);
-	// printf("env_name: %s\n", env_name);
+	//printf("env_name: %s\n", env_name);
+	
 	while (envs[i])
 	{
 		if (ft_strncmp(envs[i], env_name, ft_strlen(env_name)) == 0 && envs[i][ft_strlen(env_name)] == '=')
 		{
-			free (env_value);
-			//val = ft_strdup(envs[i] + ft_strlen(env_name) + 1);
-			//env_value = val;
+			//free (val);
+			if(envs[i][ft_strlen(env_name) + 1] == '\0')
+				return (NULL);
 			env_value = ft_strdup(envs[i] + ft_strlen(env_name) + 1);
 			//printf(GRN "Valid env: %s\n" RESET, env_value);
 			return (env_value);

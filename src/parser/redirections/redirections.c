@@ -65,52 +65,72 @@ char *add_space_to_redirect(char *line)
     return (new_line);
 }
 
-void redirect_assign(t_cmd *current, t_data *data)
+int redirect_assign(t_cmd *current, t_data *data)
 {
     int i;
 
-	i = 0;
+    i = 0;
     while (current->args[i])
-	{
+    {
         if (ft_strcmp(current->args[i], ">") == 0)
-		{
+        {
             current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
             if (current->redirect_out == -1)
-			 {
-                perror("minishell: open");
-                data->exit_code = 1;
-                return;
+            {
+                write_error("minishell: ");
+                if (current->args[i + 1])
+                {
+                    write_error(current->args[i + 1]);
+                    write_error(": No such file or directory\n");
+                    return (1);
+                }
+                write_error("syntax error near unexpected token `newline'\n");
             }
             i++;
         }
-		else if (ft_strcmp(current->args[i], "<") == 0)
-		{
+        else if (ft_strcmp(current->args[i], "<") == 0)
+        {
             current->redirect_in = open(current->args[i + 1], O_RDONLY);
             if (current->redirect_in == -1)
-			{
+            {
                 write_error("minishell: ");
-				write_error("No such file or directory\n");
-                data->exit_code = 1;
-				return;
+                if (current->args[i + 1])
+                {
+                    write_error(current->args[i + 1]);
+                    write_error(": No such file or directory\n");
+                    return (1);
+                }
+                write_error("syntax error near unexpected token `newline'\n");
+                // return (2);
             }
             i++;
         }
-		else if (ft_strcmp(current->args[i], ">>") == 0)
-		{
+        else if (ft_strcmp(current->args[i], ">>") == 0)
+        {
             current->redirect_out = open(current->args[i + 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
             if (current->redirect_out == -1)
-			{
+            {
                 write_error("minishell: ");
-				write_error(current->args[i + 1]);
-                data->exit_code = 1;
-                return;
+                if (current->args[i + 1])
+                {
+                    write_error(current->args[i + 1]);
+                    write_error(": No such file or directory\n");
+                    return (1);
+                }
+                write_error("syntax error near unexpected token `newline'\n");
             }
             i++;
         }
-		else if (ft_strcmp(current->args[i], "<<") == 0)
-            read_heredoc(current->args[i + 1], current, data);
+        else if (ft_strcmp(current->args[i], "<<") == 0)
+        {
+            if (current->args[i + 1])
+                read_heredoc(current->args[i + 1], current, data);
+            else
+                write_error("syntax error near unexpected token `newline'\n");
+        }
         i++;
     }
+    return (0);
 }
 
 void redirect_fd_dup(t_cmd *current, t_data *data)
@@ -127,7 +147,7 @@ void redirect_fd_dup(t_cmd *current, t_data *data)
             handle_error("dup2 error redirect_out");
         close(current->redirect_out);
     }
-    if(data->cmn_here_doc != 0)
+    if (data->cmn_here_doc != 0)
     {
         if (dup2(data->cmn_here_doc, STDOUT) == -1)
             handle_error("dup2 error here_doc");

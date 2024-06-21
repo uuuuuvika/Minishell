@@ -66,11 +66,11 @@ void	free_arr2D(char **arr2D);
 void	free_data(t_data *data);
 
 void	ft_cd(t_data *data, t_cmd *cmd);
-void	ft_echo(t_data *data, t_cmd *cmd);
+void	ft_echo(t_data *data, t_cmd *cmd, int i);
 void	ft_env(t_data *data);
 void	ft_pwd(t_data *data);
 void	ft_unset(t_data *data, t_cmd *cmd);
-void	ft_export(t_data *data, t_cmd *cmd);
+void	ft_export(t_data *data, t_cmd *cmd, int i);
 void	ft_exit(t_data *data);
 
 int parse(char *input, t_data *data);
@@ -83,6 +83,8 @@ char *find_path(char *cmd, t_data *data);
 void exec_cmd(t_data *data, t_cmd *cmd);
 int is_builtin(char *command);
 
+
+
 int count_env(char **envp);
 int cpy_envs(t_data *data, char **envp);
 
@@ -91,7 +93,7 @@ void return_sin_quotes(char **args, t_data *data);
 void sub_dub_quotes(char *line_copy, t_data *data);
 void return_dub_quotes(char **args, t_data *data);
 
-void expand_arg(char **args, int num_args, t_data *data);
+void expand_arg(char **args, t_data *data);
 int is_expansion(char **args);
 void replace_for_expansion(char **args, char *cmd);
 char *expand_line(char *line, t_data *data);
@@ -101,7 +103,7 @@ int is_multi_words(char *str);
 int is_redirect(char *str);
 int cnt_args(char **args);
 void pipe_assign(t_cmd *command);
-void redirect_assign(t_cmd *cmd, t_data *data);
+int redirect_assign(t_cmd *cmd, t_data *data);
 
 void sig_handler(int sig);
 void handle_ctrl(void);

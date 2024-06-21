@@ -14,6 +14,7 @@ int parse(char *input, t_data *data)
     sub_sin_quotes(line_copy, data);
     
     char *expanded_line = expand_line(line_copy, data);
+
 	if (cnt_missing_space(expanded_line) > 0)
     {
         free(expanded_line);
@@ -38,10 +39,10 @@ int parse(char *input, t_data *data)
         new_node->here_doc = 0;
         new_node->next = NULL;
         int i = 0;
-
+       // print_2D(new_node->args);
         while (new_node->args[i])
         {
-            if (ft_strcmp(new_node->args[i], "<<") == 0)
+            if (ft_strcmp(new_node->args[i], "<<") == 0) /// take care in redirection function
             {
                 if (new_node->args[i + 1] == NULL)
                 {
@@ -59,14 +60,23 @@ int parse(char *input, t_data *data)
         }
 
         return_dub_quotes(new_node->args, data);
-        expand_arg(new_node->args, new_node->num_args, data);
+        expand_arg(new_node->args, data);
+        
         return_sin_quotes(new_node->args, data);
-        redirect_assign(new_node, data);
+       // print_2D(new_node->args);
+        if (redirect_assign(new_node, data))
+        {
+           // free_arr2D(new_node->args);
+           // free(new_node);
+            data->exit_code = 1;
+            return (1);
+        }
 
         if (new_node->num_args == 0)
         {
-            free_arr2D(new_node->args);
-            free(new_node);
+            // free_arr2D(new_node->args);
+            // free(new_node);
+             data->exit_code = 1;
             return (1);
         }
 

@@ -1,76 +1,150 @@
 #include "minishell.h"
 
-void expand_arg(char **args, int num_args, t_data *data)
+int is_all_dollars(char *str)
 {
-	(void)num_args;
 	int i = 0;
-	if ((ft_strlen(args[0]) == 1 && ft_strcmp(args[0], "$") == 0))
-		return;
+	while (str[i])
+	{
+		if (str[i] != '$')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void expand_dollar_question(char **arg, t_data *data)
+{
+	if (g_signal == 2)
+	{
+		data->exit_code = 130;
+		g_signal = 0;
+	}
+	*arg = ft_itoa(data->exit_code);
+}
+
+void expand_env_variable(char **arg, t_data *data)
+{
+	// char *env_name = ft_strdup(*arg + 1);
+	char *env_value = ft_getenv(ft_strdup(*arg + 1), data->envs);
+	if (env_value != NULL)
+		replace_for_expansion(arg, env_value);
+	else
+		(*arg)[0] = '\0';
+	// free(env_name);
+}
+
+void expand_multiple_args(char **split, t_data *data)
+{
+	int j = 0;
+	while (split[j])
+	{
+		if (ft_strcmp(split[j], "$?") == 0)
+		{
+			expand_dollar_question(&split[j], data);
+			return;
+		}
+		else if (split[j][0] == '$')
+			expand_env_variable(&split[j], data);
+		j++;
+	}
+}
+
+void expand_single_arg(char **arg, t_data *data)
+{
+	if (ft_strcmp(*arg, "$?") == 0)
+		expand_dollar_question(arg, data);
+	else if ((*arg)[0] == '$')
+		expand_env_variable(arg, data);
+}
+
+void expand_arg(char **args, t_data *data)
+{
+	int i = 0;
+
 	while (args[i])
 	{
-		if (is_multi_words(args[i]))
+		if (!is_all_dollars(args[i]))
 		{
-			char **split = ft_split(args[i], ' ');
-			int j = 0;
-			while (split[j])
+			if (is_multi_words(args[i]))
 			{
-				//printf("split[j]: %s\n", split[j]);
-				if (ft_strcmp(split[j], "$?") == 0)
-				{
-					if (g_signal == 2)
-					{
-						data->exit_code = 130;
-						g_signal = 0;
-						printf(MAG "-minishell: %d: command not found \n" WHT, data->exit_code);
-						data->exit_code = 127;
-					}
-					split[j] = ft_itoa(data->exit_code); /// Check this later for proper allocation
-					return;
-				}
-				else if (split[j][0] == '$')
-				{
-					char *env_name = ft_strdup(split[j] + 1);
-				//	printf(RED "env_name: %s\n" RESET, env_name);
-					if (ft_getenv(env_name, data->envs) != NULL)
-						replace_for_expansion(&split[j], ft_getenv(env_name, data->envs));
-					else
-						split[j][0] = '\0';
-					free(env_name);
-				}
-				j++;
+				char **split = ft_split(args[i], ' ');
+				expand_multiple_args(split, data);
+				char *tmp = arr2D_to_str(split);
+				free(args[i]);
+				args[i] = ft_strdup(tmp);
+				free(tmp);
 			}
-			// print_2D(split);
-			char *tmp = arr2D_to_str(split);
-			// printf(MAG "tmp: %s\n" RESET, tmp);
-			free(args[i]);
-			args[i] = ft_strdup(tmp);
-			free(tmp);
-		}
-		else
-		{
-			if (ft_strcmp(args[i], "$?") == 0)
-			{
-				if (g_signal == 2)
-				{
-					data->exit_code = 130;
-					g_signal = 0;
-					// printf(RED "-minishell: %d: command not found \n" WHT, data->exit_code);
-					// data->exit_code = 127;
-				}
-				args[i] = ft_itoa(data->exit_code);
-				return;
-			}
-			else if (args[i][0] == '$')
-			{
-				char *env_name = ft_strdup(args[i] + 1);
-				//printf(RED "env_name: %s\n" RESET, env_name);
-				if (ft_getenv(env_name, data->envs) != NULL)
-					replace_for_expansion(&args[i], ft_getenv(env_name, data->envs));
-				else
-					args[i] = "\0";// We need to find another way for this. non valid expansios should not print anything
-				free(env_name);
-			}
+			else
+				expand_single_arg(&args[i], data);
 		}
 		i++;
 	}
 }
+
+// void expand_arg(char **args, t_data *data)
+// {
+
+// 	int i = 0;
+
+// 	if (is_all_dollars(args[0]))
+// 		return;
+
+// 	while (args[i])
+// 	{
+// 		if (is_multi_words(args[i]))
+// 		{
+// 			char **split = ft_split(args[i], ' ');
+// 			int j = 0;
+// 			while (split[j])
+// 			{
+// 				if (ft_strcmp(split[j], "$?") == 0)
+// 				{
+// 					if (g_signal == 2)
+// 					{
+// 						data->exit_code = 130;
+// 						g_signal = 0;
+// 					}
+// 					split[j] = ft_itoa(data->exit_code); /// Check this later for proper allocation
+// 					return;
+// 				}
+// 				else if (split[j][0] == '$')
+// 				{
+// 					char *env_name = ft_strdup(split[j] + 1);
+// 					if (ft_getenv(env_name, data->envs) != NULL)
+// 						replace_for_expansion(&split[j], ft_getenv(env_name, data->envs));
+// 					else
+// 						split[j][0] = '\0';
+// 					free(env_name);
+// 				}
+// 				j++;
+// 			}
+// 			char *tmp = arr2D_to_str(split);
+// 			free(args[i]);
+// 			args[i] = ft_strdup(tmp);
+// 			free(tmp);
+// 		}
+// 		else
+// 		{
+// 			if (ft_strcmp(args[i], "$?") == 0)
+// 			{
+// 				if (g_signal == 2)
+// 				{
+// 					data->exit_code = 130;
+// 					g_signal = 0;
+// 				}
+// 				args[i] = ft_itoa(data->exit_code);
+// 				return;
+// 			}
+// 			else if (args[i][0] == '$')
+// 			{
+// 				char *env_name = ft_strdup(args[i] + 1);
+// 				if (ft_getenv(env_name, data->envs) != NULL)
+// 					replace_for_expansion(&args[i], ft_getenv(args[i] + 1, data->envs));
+// 				else
+// 					args[i][0] = '\0';// We need to find another way for this. non valid expansios should not print anything
+// 				free(env_name);
+// 			}
+// 		}
+// 		i++;
+// 	}
+// }

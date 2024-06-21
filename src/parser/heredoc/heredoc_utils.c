@@ -16,7 +16,7 @@ char *split_expand_join(char *line, t_data *data)
     while (splitted[i])
     {
         // printf(BLU "Splitted[%d]: %s\n" RESET, i, splitted[i]);
-        expand_arg(splitted, cnt_args(splitted), data);
+        expand_arg(splitted, data);
         // printf(BLU "Expanded[%d]: %s\n" RESET, i, splitted[i]);
         //  if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
         //  	splitted[i] = getenv(splitted[i] + 1);

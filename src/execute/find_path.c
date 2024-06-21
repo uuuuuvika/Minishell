@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/20 23:20:34 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:16:15 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char	*find_path(char *cmd, t_data *data)
 	path = check_abs_path(cmd, data);
     if (path != NULL)
 		return (path);
+
 	path = check_rel_path(cmd, data);
 	if (path != NULL)
 		return (path);
