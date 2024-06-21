@@ -50,20 +50,24 @@ apt-get install git build-essential libreadline-dev
 - [x] check fucked up history
 - [x] `exit 123` `exit 100` `exit -100` `exit assa asda`
 ---
+- [x] Fix `cat < missing_file` is not exiting cat
+- [x] Check what happens for non existing expansions $NONEXISTING 
+- [x] Execute `$EXPANDCOMMAND` (expansions to commands)
+- [x] tests 17-21 variations of `$`
+- [x] < t1
+- [x] $NONEXISTINGEXPANSION should return/print nothing :face_with_peeking_eye:
+
 - [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
-- [ ] `cat $PATH`should write `no such a file or directory` :cat:
-- [ ] Check what happens for non existing expansions $NONEXISTING 
-- [ ] Execute `$EXPANDCOMMAND` (expansions to commands) :face_with_peeking_eye:
+- [ ] `cat $PATH`should write `is a directory` :cat:
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
-- [ ] < t1 or $NONEXISTINGEXPANSION should return/print nothing :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 - [ ] Check freeing and leaks :cat:
 - [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins :cat:
 - [ ] check cat free_data combination
-- [ ] Fix `cat < missing_file` is not exiting cat
-- [ ] `$EMPTY echo hi` should print hi
-- [ ] tests 17-21 variations of `$`
+- [ ] `$EMPTY echo hi` should print hi and `export` after changing built_exec
+- [ ] `echo $?HELLO` 
+
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
