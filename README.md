@@ -58,6 +58,7 @@ apt-get install git build-essential libreadline-dev
 - [x] $NONEXISTINGEXPANSION should return/print nothing 
 - [x] `$EMPTY echo hi` should print hi and `$EMPT export V=` after changing built_exec
 - [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
+
 - [ ] `cat $PATH` error :cat:
 - [ ] check cat free_data combination
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
