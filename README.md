@@ -55,17 +55,17 @@ apt-get install git build-essential libreadline-dev
 - [x] Execute `$EXPANDCOMMAND` (expansions to commands)
 - [x] tests 17-21 variations of `$`
 - [x] < t1
-- [x] $NONEXISTINGEXPANSION should return/print nothing :face_with_peeking_eye:
+- [x] $NONEXISTINGEXPANSION should return/print nothing 
+- [x] `$EMPTY echo hi` should print hi and `$EMPT export V=` after changing built_exec
 
 - [ ] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
-- [ ] `cat $PATH`should write `is a directory` :cat:
+- [ ] `cat $PATH` error :cat:
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 - [ ] Check freeing and leaks :cat:
 - [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins :cat:
 - [ ] check cat free_data combination
-- [ ] `$EMPTY echo hi` should print hi and `$EMPT export V=` after changing built_exec
 - [ ] `echo $?HELLO` 
 
       
