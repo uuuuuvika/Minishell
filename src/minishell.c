@@ -19,9 +19,16 @@ int	is_str_space(char *str)
 	return (1);
 }
 
+// int	is_dsqm(t_cmd *cmd)
+// {
+// 	return (ft_strcmp(cmd->args[0], "$?") == 0);
+// }
+
 int	is_dsqm(t_cmd *cmd)
 {
-	return (ft_strcmp(cmd->args[0], "$?") == 0);
+	if (ft_strcmp(cmd->args[0], "$?") != 0 || ft_strncmp(cmd->args[0], "$", 1) != 0)
+		return (1);
+	return (0);
 }
 
 int	main(int argc, char *argv[], char **envp)
