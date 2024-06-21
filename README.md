@@ -65,7 +65,7 @@ apt-get install git build-essential libreadline-dev
 - [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins :cat:
 - [ ] check cat free_data combination
-- [ ] `$EMPTY echo hi` should print hi and `export` after changing built_exec
+- [ ] `$EMPTY echo hi` should print hi and `$EMPT export V=` after changing built_exec
 - [ ] `echo $?HELLO` 
 
       
