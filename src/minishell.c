@@ -65,6 +65,7 @@ int	main(int argc, char *argv[], char **envp)
 				pipe_cmds(&data);
 			}
 		}
+		free_data(&data);
 		free (input);
 	}
 	clear_history();

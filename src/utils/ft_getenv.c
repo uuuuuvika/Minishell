@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_getenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:40:24 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/19 14:46:58 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 02:24:06 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,15 @@ char	*ft_getenv(char *env_name, char **envs)
 	i = 0;
 	if(env_name == NULL)
 		return (NULL);
-	// printf("env_name: %s\n", env_name);
+	//printf("env_name: %s\n", env_name);
+	
 	while (envs[i])
 	{
 		if (ft_strncmp(envs[i], env_name, ft_strlen(env_name)) == 0 && envs[i][ft_strlen(env_name)] == '=')
 		{
 			free (val);
+			if(envs[i][ft_strlen(env_name) + 1] == '\0')
+				return (NULL);
 			val = ft_strdup(envs[i] + ft_strlen(env_name) + 1);
 			env_value = val;
 			//printf(GRN "Valid env: %s\n" RESET, env_value);
