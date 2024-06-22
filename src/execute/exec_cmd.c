@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:41:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/21 17:05:39 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/22 23:47:58 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 	i = 0;
 	while (ft_strcmp(cmd->args[i] , "\0") == 0 && cmd->args[i + 1] != NULL)
 		i++;
-	
 	if (is_builtin(cmd->args[i]))
 		exec_builtin(data, cmd, i);
 	else

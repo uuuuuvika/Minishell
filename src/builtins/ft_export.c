@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/21 17:02:54 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/22 23:51:23 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ int add_var(char ***envar, char *newvar)
 void ft_export(t_data *data, t_cmd *cmd, int i)
 {
 	char *env_name;
+	//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
+	//printf(RED"cmd->num_args: %d\n"RESET, cmd->num_args);
 	i++;
     if (cmd->num_args > 1)
-    {
+    {	//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
 		while (cmd->args[i] != NULL)
 		{
 			env_name = get_env_name(cmd->args[i], '=');
