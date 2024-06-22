@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/19 15:52:18 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 02:11:35 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,15 @@ char	*find_path(char *cmd, t_data *data)
 	char	*path;
 
 	path = NULL;
-    if (ft_strcmp(cmd, "") == 0)
-    {
-        errno = ENOENT; // No such file or directory
-        perror("-minishell");
-    }
+    // if (ft_strcmp(cmd, "") == 0)
+    // {
+    //     errno = ENOENT; // No such file or directory
+    //     perror("-minishell");
+    // }
 	path = check_abs_path(cmd, data);
     if (path != NULL)
 		return (path);
+
 	path = check_rel_path(cmd, data);
 	if (path != NULL)
 		return (path);

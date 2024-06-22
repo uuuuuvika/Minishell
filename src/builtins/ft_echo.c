@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:27 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 13:40:29 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 02:45:03 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_echo(t_data *data, t_cmd *cmd)
+void ft_echo(t_data *data, t_cmd *cmd, int i)
 {
     (void) data;
-    int i;
+   // int i;
 
-    i = 1;
-
+    //i = 1;
+    i++;
+    
     while (cmd->args && ft_strcmp(cmd->args[i], "-n") == 0) 
         i++;
     while (cmd->args[i])
