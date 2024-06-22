@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:45:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 14:45:22 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/22 22:41:56 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void sig_handler(int sig)
   	{
 	//	printf(MAG"handle_ctrl\n"RESET);////////////
 		ioctl(0, TIOCSTI, "\n");
-		//rl_replace_line("", 1);// We need this line to clear the  input line when typing heredoc input but not hitting enter
+		rl_replace_line("", 1);// We need this line to clear the  input line when typing heredoc input but not hitting enter
 		rl_on_new_line(); /// This line is for when we press ctrl+c before inputting anything
 		//rl_redisplay();
 		g_signal = 2;

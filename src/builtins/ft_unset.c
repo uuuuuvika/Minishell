@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:41:01 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/19 14:50:31 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 17:04:14 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,19 @@ void	remove_env(t_data *data, char *arg)
 				i++;
 			}
 			data->envs[i - 1] = NULL;
+			free(env_name);
 			return ;
 		}
 		i++;
+		free(env_name);
 	}
 }
 
-void	ft_unset(t_data *data, t_cmd *cmd)
+void	ft_unset(t_data *data, t_cmd *cmd, int i)
 {
-	int	i;
+	//int	i;
 
-	i = 1;
+	i++;
 	while (cmd->args[i] != NULL)
 	{
 		remove_env(data, cmd->args[i]);

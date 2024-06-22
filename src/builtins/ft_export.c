@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/21 02:48:38 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/06/22 23:51:23 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,42 +68,87 @@ int add_var(char ***envar, char *newvar)
     tmp[count_env(*envar) + 1] = NULL;
     free_arr2D(*envar);
     *envar = tmp;
+//	print_2D(*envar);
     return (0);
 }
 
 void ft_export(t_data *data, t_cmd *cmd, int i)
 {
-    int j;
-
-    j = i + 1;
-    
+	char *env_name;
+	//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
+	//printf(RED"cmd->num_args: %d\n"RESET, cmd->num_args);
+	i++;
     if (cmd->num_args > 1)
-    {
-        char *identifier;
-        identifier = get_env_name(cmd->args[j], '=');
-        if (cmd->args[j][0] == '=' || !ft_isallalnum(identifier) || ft_isalldigit(identifier))
-        {
-            write_error("minishell: export: ");
-            write_error("not a valid identifier\n");
-            data->exit_code = 1;
-            free(identifier);
-            return;
-        }
-        free(identifier);
-        if (ft_strchr(cmd->args[j], '=') == NULL)
-        {
-            data->exit_code = 1;
-            j++;
-        }
-    }
-    while (cmd->args[j] != NULL)
-    {
-        if (!replace_var(data->envs, cmd->args[j]))
-        {
-            // printf(GRN "Add variable\n" RESET);
-            add_var(&data->envs, cmd->args[j]);
-        }
-        j++;
+    {	//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
+		while (cmd->args[i] != NULL)
+		{
+			env_name = get_env_name(cmd->args[i], '=');
+		//	printf(RED"env_name: %s\n"RESET, env_name);
+		//	printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
+			if (!(ft_strchr(cmd->args[i], '=')) && ft_isallalpha(cmd->args[i]))
+			{
+				//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
+			//	data->exit_code = 1;
+				i++;
+				return;
+			}
+			else if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name) || ft_isall_digit(env_name) || ft_strchr(cmd->args[i], '=') == NULL)
+			{
+				write_error("minishell: export: ");
+				write_error(cmd->args[i]);
+				write_error(": not a valid identifier\n");
+				data->exit_code = 1;
+				free(env_name);
+				return;
+			}
+			if (ft_strchr(cmd->args[i], '=') == NULL)
+			{
+				data->exit_code = 1;
+				i++;
+			}
+			free(env_name);
+			if (!replace_var(data->envs, cmd->args[i]))
+			{
+				//printf(GRN "Add variable %s\n" RESET, cmd->args[i]);
+				add_var(&data->envs, cmd->args[i]);
+			}
+			i++;
+		}
     }
     data->exit_code = 0;
 }
+
+
+// void ft_export(t_data *data, t_cmd *cmd, int i)
+// {
+// 	char *env_name;
+// 	i++;
+//     if (cmd->num_args > 1)
+//     {
+//         env_name = get_env_name(cmd->args[i], '=');
+//         if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name) || ft_isall_digit(env_name))
+//         {
+//             write_error("minishell: export: ");
+//             write_error("not a valid env_name\n");
+//             data->exit_code = 1;
+//             free(env_name);
+//             return;
+//         }
+//         free(env_name);
+//         if (ft_strchr(cmd->args[i], '=') == NULL)
+//         {
+//             data->exit_code = 1;
+//             i++;
+//         }
+//     }
+//     while (cmd->args[i] != NULL)
+//     {
+//         if (!replace_var(data->envs, cmd->args[i]))
+//         {
+//             // printf(GRN "Add variable\n" RESET);
+//             add_var(&data->envs, cmd->args[i]);
+//         }
+//         i++;
+//     }
+//     data->exit_code = 0;
+// }

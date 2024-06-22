@@ -24,6 +24,14 @@ int	is_dsqm(t_cmd *cmd)
 	return (ft_strcmp(cmd->args[0], "$?") == 0);
 }
 
+// int	is_dsqm(t_cmd *cmd)
+// {
+// 	// if (ft_strcmp(cmd->args[0], "$?") != 0 || ft_strncmp(cmd->args[0], "$", 1) != 0)
+// 	// 	return (1);
+// 	// return (0);
+// 	return (ft_strncmp(cmd->args[0], "$?", 1) == 0 || ft_strcmp(cmd->args[0], "") == 0);
+// }
+
 int	main(int argc, char *argv[], char **envp)
 {
 	static t_data	data;
@@ -47,7 +55,12 @@ int	main(int argc, char *argv[], char **envp)
 		{
 			add_history(input);
 			parse(input, &data);
-			if ((data.num_of_children == 1 && is_builtin(data.commands->args[0])) || (data.num_of_children == 1 && is_dsqm(data.commands)))
+			//print_2D(data.commands->args);
+			//printf("%d\n", is_dsqm(data.commands));
+			int i = 0;
+			while (ft_strcmp(data.commands->args[i] , "\0") == 0 && data.commands->args[i+1] != NULL)
+				i++;
+			if ((data.num_of_children == 1 && is_builtin(data.commands->args[i])) || (data.num_of_children == 1 && is_dsqm(data.commands)))
 			{
 				//printf(YEL "Executing simple builtin/$? in main\n" RESET);
 				int fin = dup(STDIN);

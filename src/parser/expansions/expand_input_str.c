@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_input_str.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:22:47 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/21 02:12:18 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:17:36 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char *expand_line(char *line, t_data *data)
                 free(split[i]);
                 split[i] = ft_strdup(env);
             }
+			free(env);
         }
         i++;
     }

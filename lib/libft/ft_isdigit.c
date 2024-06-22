@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:27:08 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/17 19:04:29 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:32:05 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
-int ft_isalldigit(char *str)
+int ft_isall_digit(char *str)
 {
 	int i;
 

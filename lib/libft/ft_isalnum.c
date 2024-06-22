@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:25:09 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/15 01:18:32 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:33:22 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_isalnum(int c)
 	return (0);
 }
 
-int	ft_isallalnum(char *str) //returns 1 if all characters in str are alphanumeric, 0 otherwise
+int	ft_isall_alnum(char *str) //returns 1 if all characters in str are alphanumeric, 0 otherwise
 {
 	int i;
 

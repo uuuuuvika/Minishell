@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/21 02:11:35 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/06/21 13:16:15 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ char *check_rel_path(char *cmd, t_data *data)
     i = 0;
     while (paths[i])
     {
-        path = ft_strjoin(paths[i], "/");
-        path = ft_strjoin(path, cmd);
+        path = ft_strjoin_nf(paths[i], "/");
+        path = ft_strjoin_nf(path, cmd);
         if (stat(path, &statbuf) == 0)
             return(path);
 		free(path);
