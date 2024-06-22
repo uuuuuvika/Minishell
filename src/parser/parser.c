@@ -68,6 +68,7 @@ int parse(char *input, t_data *data)
         {
            // free_arr2D(new_node->args);
            // free(new_node);
+           //printf("Error: syntax error near unexpected token `newline'\n");
             data->exit_code = 1;
             return (1);
         }
