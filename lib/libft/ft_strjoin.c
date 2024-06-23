@@ -1,17 +1,29 @@
 #include "libft.h"
 
-char	*ft_strjoin_nf(char *s1, char *s2)
+static size_t ft_spec_strlen(char *str)
+{
+	int i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strjoin_nf(char *s1, char *s2) // NUL hello
 {
 	char	*join;
 	size_t	len;
 	size_t	i;
 	size_t	j;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
+	len = ft_spec_strlen(s1) + ft_spec_strlen(s2);
 	join = malloc((len + 1) * sizeof(char));
 	i = 0;
 	if (join == 0)
-		return (0);
+		return (NULL);
 	while (s1[i])
 	{
 		join[i] = s1[i];
@@ -27,17 +39,6 @@ char	*ft_strjoin_nf(char *s1, char *s2)
 	return (join);
 }
 
-static size_t ft_spec_strlen(char *str)
-{
-	int i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
 
 char *ft_strjoin(char *str1, char *str2) //hello
 {
