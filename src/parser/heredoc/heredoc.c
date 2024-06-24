@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-// to handle cat ', echo ' etc.
 void read_heredoc_simple(char *delimiter, t_data *data)
 {
 	char *line;
@@ -32,14 +31,14 @@ int handle_ctrl_heredoc(char *line, t_cmd *current, t_data *data)
 {
     if (!line || errno == EINVAL)
     {
-        printf(MAG "you have pressed CTRL-D\n" RESET);
+        //printf(MAG "you have pressed CTRL-D\n" RESET);
         g_signal = 0; // Reset g_signal
         data->exit_code = 130;
         return 1;
     }
     if (g_signal == 2)
     {
-        printf(MAG "\nCTRL+C detected. Exiting heredoc...\n" RESET);
+        //printf(MAG "\nCTRL+C detected. Exiting heredoc...\n" RESET);
         if(ft_strcmp(current->args[0], "cat") == 0)
             g_signal = 2; // Reset g_signal
         else

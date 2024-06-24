@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int is_all_dollars(char *str)
+int	is_all_dollars(char *str)
 {
 	int i = 0;
 	while (str[i])
@@ -12,7 +12,7 @@ int is_all_dollars(char *str)
 	return (1);
 }
 
-void expand_dollar_question(char **arg, t_data *data)
+void	expand_dollar_question(char **arg, t_data *data)
 {
 	if (g_signal == 2)
 	{
@@ -22,20 +22,21 @@ void expand_dollar_question(char **arg, t_data *data)
 	*arg = ft_itoa(data->exit_code);
 }
 
-void expand_env_variable(char **arg, t_data *data)
+void	expand_env_variable(char **arg, t_data *data)
 {
-	// char *env_name = ft_strdup(*arg + 1);
+	char *env_name = ft_strdup(*arg + 1);
 	char *env_value;
 	
-	env_value = ft_getenv(ft_strdup(*arg + 1), data->envs);
+	env_value = ft_getenv(env_name, data->envs);
 	if (env_value != NULL)
 		replace_for_expansion(arg, env_value);
 	else
-		(*arg)[0] = ft_strdup("")[0];
+		(*arg)[0] = '\0';
+	free(env_name);
 	free(env_value);
 }
 
-void expand_multiple_args(char **split, t_data *data)
+void	expand_multiple_args(char **split, t_data *data)
 {
 	int j = 0;
 	while (split[j])
@@ -51,7 +52,7 @@ void expand_multiple_args(char **split, t_data *data)
 	}
 }
 
-void expand_single_arg(char **arg, t_data *data)
+void	expand_single_arg(char **arg, t_data *data)
 {
 	if (ft_strcmp(*arg, "$?") == 0)
 		expand_dollar_question(arg, data);
@@ -59,7 +60,7 @@ void expand_single_arg(char **arg, t_data *data)
 		expand_env_variable(arg, data);
 }
 
-void expand_arg(char **args, t_data *data)
+void	expand_arg(char **args, t_data *data)
 {
 	int i = 0;
 

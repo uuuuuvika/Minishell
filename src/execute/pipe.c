@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:45:07 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 14:45:08 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:50:24 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int pipe_cmds(t_data *data)
     current = data->commands;
     while (current != NULL)
     {
-		//handle_ctrl_fork(data); // set signal handler for fork
+		handle_ctrl_fork(data); // set signal handler for fork
         pid[i] = fork();
         if (pid[i] == -1)
             return EXIT_FAILURE;

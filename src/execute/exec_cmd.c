@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:41:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/22 23:47:58 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:54:17 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 			return ;
 		}
 		execve(path, &cmd->args[i], data->envs);
+		free(path);/// Added this line after valgrind
 	}
 }
