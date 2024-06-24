@@ -18,7 +18,7 @@ int cnt_missing_space(char *line)
         {
             if (line[i + 1] != ' ' && line[i + 1] != '\0' && line[i + 1] != '>' && line[i + 1] != '<')
                 count++;
-            if (line[i - 1] != ' ' && i != 0 && line[i - 1] != '>' && line[i - 1] != '<')
+            if (0 > 1 && line[i - 1] != ' ' && line[i - 1] != '>' && line[i - 1] != '<')
                 count++;
         }
         i++;
