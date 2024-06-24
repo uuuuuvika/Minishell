@@ -25,12 +25,14 @@ void expand_dollar_question(char **arg, t_data *data)
 void expand_env_variable(char **arg, t_data *data)
 {
 	// char *env_name = ft_strdup(*arg + 1);
-	char *env_value = ft_getenv(ft_strdup(*arg + 1), data->envs);
+	char *env_value;
+	
+	env_value = ft_getenv(ft_strdup(*arg + 1), data->envs);
 	if (env_value != NULL)
 		replace_for_expansion(arg, env_value);
 	else
-		(*arg)[0] = '\0';
-	// free(env_name);
+		(*arg)[0] = ft_strdup("")[0];
+	free(env_value);
 }
 
 void expand_multiple_args(char **split, t_data *data)

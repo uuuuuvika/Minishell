@@ -17,7 +17,7 @@ void sub_dub_quotes(char *line_copy, t_data *data)
         return;
     }
 
-    data->sub = malloc((count_subs / 2) * sizeof(char *));
+    data->sub = malloc(((count_subs / 2) + 1) * sizeof(char *));
     int s_index = 0;
     index = 0;
     while (line_copy[index])
