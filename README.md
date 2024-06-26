@@ -72,9 +72,12 @@ apt-get install git build-essential libreadline-dev
 - [ ] `echo '"$USER"'` prints "*****"
 
 LEAKS
-- [ ] `ls filenotexist` | grep bla and after `$?`
+- [x] `$? + $?`
+- [ ] `'$USER'` and `echo '$USER'`
+- [ ] `ls filenotexist | grep bla and after` `$?`
+- [ ] `'ls -l'`
 - [ ] `cat | cat | rev`
-- [ ] `$? + $?`
+- [ ] 
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
