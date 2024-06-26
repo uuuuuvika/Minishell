@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 23:20:09 by vshcherb          #+#    #+#             */
-/*   Updated: 2024/06/26 23:30:35 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/06/26 23:44:27 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int     parse(char *input, t_data *data);
 void    redirect_fd_dup(t_cmd *command, t_data *data);
 
 char    *ft_getenv(char *env_name, char **envs);
-char    get_env_name(char *s, char c);
+char   *get_env_name(char *s, char c);
 
 char    *find_path(char *cmd, t_data *data);
 void    exec_cmd(t_data *data, t_cmd *cmd);
