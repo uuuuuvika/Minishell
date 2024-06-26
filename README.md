@@ -72,6 +72,7 @@ apt-get install git build-essential libreadline-dev
 
 LEAKS
 - [ ] `ls filenotexist` | grep bla and after `$?`
+- [ ] `cat | cat | rev`
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
