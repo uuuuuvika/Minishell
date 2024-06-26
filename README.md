@@ -66,7 +66,6 @@ apt-get install git build-essential libreadline-dev
       
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
-- [ ] Check freeing and leaks :cat:
 - [ ] `echo $?HELLO`
 - [ ] `cat file | grep bla | more` (eval sheet)
 - [ ] `echo '"$USER"'` prints "*****"
@@ -78,12 +77,13 @@ apt-get install git build-essential libreadline-dev
 
 LEAKS
 - [x] `$? + $?`
-- [ ] `'$USER'` and `echo '$USER'`
-- [ ] `ls filenotexist | grep bla and after` `$?`
-- [ ] `'ls -l'`
-- [ ] `cat | cat | rev`
+- [x] `'$USER'` and `echo '$USER'`
+- [x] `ls filenotexist | grep bla and after` `$?`
+- [x] `'ls -l'`
+- [x] `cat | cat | rev`
 - [ ] `cat '` Seg fault
 - [ ] iotcl problem
+- [ ] `<< E` and then $?
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
