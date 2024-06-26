@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansions_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:59:00 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/26 19:59:52 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 21:56:30 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,3 @@ void	replace_for_expansion(char **args, char *cmd)
 	free(*args);
 	*args = ft_strdup(cmd);
 }
-
-// might need it for the future
-// if (cmd[0] == '$')
-// 	{
-// 		char *env_name = ft_strdup(cmd + 1);
-// 		if (ft_getenv(env_name, data->envs) != NULL)
-// 			*args = ft_strdup(ft_getenv(env_name, data->envs));
-// 		else
-// 			*args = ft_strdup(cmd);
-// 		free(env_name);
-// 	}

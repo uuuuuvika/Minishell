@@ -29,7 +29,7 @@ void	sub_sin_quotes(char *line_copy, t_data *data)
 			while (line_copy[++k] != '\'')
 				;
 			int len = k - index;
-			char *str = calloc(len, sizeof(char));
+			char *str = ft_calloc(len, sizeof(char));
 			int str_index = 0;
 			while (line_copy[++index] != '\'')
 			{
@@ -37,6 +37,7 @@ void	sub_sin_quotes(char *line_copy, t_data *data)
 				line_copy[index] = '#';
 			}
 			data->subb[s_index++] = ft_strdup(str);
+			free(str);
 		}
 		index++;
 	}

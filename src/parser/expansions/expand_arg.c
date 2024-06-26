@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/26 19:53:40 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 22:58:18 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ void	expand_dollar_question(char **arg, t_data *data)
 		data->exit_code = 130;
 		g_signal = 0;
 	}
-	*arg = ft_itoa(data->exit_code);
+	char *tmp = ft_itoa(data->exit_code);
+
+	// printf("%lu\n", strlen(tmp));
+	// printf("tmp: %s\n", tmp);
+
+	replace_for_expansion(arg, tmp);
+	free(tmp);
+	//*arg = ft_strdup(tmp); 
 }
 
 void	expand_env_variable(char **arg, t_data *data)

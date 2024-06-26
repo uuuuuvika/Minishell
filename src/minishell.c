@@ -54,7 +54,7 @@ int main(int argc, char *argv[], char **envp)
 		if (ft_strlen(input) > 0 && !is_str_space(input))
 		{
 			add_history(input);
-			if (parse(input, &data))
+			if (parse(input, &data) != 0)
 			{
 				free(input);
 				//printf("vghjhm mError: syntax error near unexpected token `newline'\n");

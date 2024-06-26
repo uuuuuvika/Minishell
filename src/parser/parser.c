@@ -12,17 +12,17 @@ int parse(char *input, t_data *data)
     // check_NULL(line_copy);
     sub_dub_quotes(line_copy, data);
     sub_sin_quotes(line_copy, data);
-    
+
     char *expanded_line = expand_line(line_copy, data);
 
-	if (cnt_missing_space(expanded_line) > 0)
+    if (cnt_missing_space(expanded_line) > 0)
     {
         free(expanded_line);
         expanded_line = add_space_to_redirect(input);
     }
 
     future_children = ft_split(expanded_line, '|');
-	free(line_copy);
+    free(line_copy);
     free(expanded_line);
 
     t_cmd *new_node = NULL;
@@ -39,7 +39,7 @@ int parse(char *input, t_data *data)
         new_node->here_doc = 0;
         new_node->next = NULL;
         int i = 0;
-       // print_2D(new_node->args);
+        // print_2D(new_node->args);
         while (new_node->args[i])
         {
             if (ft_strcmp(new_node->args[i], "<<") == 0) /// take care in redirection function
@@ -61,15 +61,17 @@ int parse(char *input, t_data *data)
 
         return_dub_quotes(new_node->args, data);
         expand_arg(new_node->args, data);
-        
+
         return_sin_quotes(new_node->args, data);
-       // print_2D(new_node->args);
-        if (redirect_assign(new_node, data))
+        // print_2D(new_node->args);
+        int j = 0;
+        j = redirect_assign(new_node, data);
+        if (j != 0)
         {
-           // free_arr2D(new_node->args);
-           // free(new_node);
-           //printf("Error: syntax error near unexpected token `newline'\n");
-            data->exit_code = 1;
+            // free_arr2D(new_node->args);
+            // free(new_node);
+            // printf("Error: syntax error near unexpected token `newline'\n");
+            data->exit_code = j;
             return (1);
         }
 
@@ -77,7 +79,8 @@ int parse(char *input, t_data *data)
         {
             // free_arr2D(new_node->args);
             // free(new_node);
-             data->exit_code = 1;
+            printf("Error: syntax error near unexpected token `newline'\n");
+            data->exit_code = 1;
             return (1);
         }
 
@@ -97,6 +100,6 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
-
+    //print_2D(data->commands->args);
     return (0);
 }
