@@ -6,75 +6,63 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/22 23:51:23 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:09:53 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int varname_len(char *var)
+int	varname_len(char *var)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (var[i] && var[i] != '=')
-        i++;
-    return (i);
+	i = 0;
+	while (var[i] && var[i] != '=')
+		i++;
+	return (i);
 }
 
-// int var_cmp(char **envar, char *newvar)
-// {
-//     int i = 0;
-//     while (envar[i])
-//     {
-//         if ((varname_len(envar[i]) == varname_len(newvar)) && (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
-//             return (1);
-//         i++;
-//     }
-//     return (0);
-// }
-
-int replace_var(char **envar, char *newvar)
+int	replace_var(char **envar, char *newvar)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (envar[i])
-    {
-        if ((varname_len(envar[i]) == varname_len(newvar)) && (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
-        {
-            free(envar[i]);
-            envar[i] = ft_strdup(newvar);
-            return (1);
-        }
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (envar[i])
+	{
+		if ((varname_len(envar[i]) == varname_len(newvar))
+			&& (ft_strncmp(envar[i], newvar, varname_len(envar[i])) == 0))
+		{
+			free(envar[i]);
+			envar[i] = ft_strdup(newvar);
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }
 
-int add_var(char ***envar, char *newvar)
+int	add_var(char ***envar, char *newvar)
 {
-    char **tmp;
-    int i;
+	char	**tmp;
+	int		i;
 
-    tmp = malloc(sizeof(char *) * (count_env(*envar) + 2));
-    i = 0;
-    while ((*envar)[i])
-    {
-        tmp[i] = ft_strdup((*envar)[i]);
-        i++;
-    }
-    tmp[count_env(*envar)] = ft_strdup(newvar);
-    tmp[count_env(*envar) + 1] = NULL;
-    free_arr2D(*envar);
-    *envar = tmp;
-//	print_2D(*envar);
-    return (0);
+	tmp = malloc(sizeof(char *) * (count_env(*envar) + 2));
+	i = 0;
+	while ((*envar)[i])
+	{
+		tmp[i] = ft_strdup((*envar)[i]);
+		i++;
+	}
+	tmp[count_env(*envar)] = ft_strdup(newvar);
+	tmp[count_env(*envar) + 1] = NULL;
+	free_arr2D(*envar);
+	*envar = tmp;
+	return (0);
 }
 
-void ft_export(t_data *data, t_cmd *cmd, int i)
+void	ft_export(t_data *data, t_cmd *cmd, int i)
 {
-	char *env_name;
+	char	*env_name;
 	//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
 	//printf(RED"cmd->num_args: %d\n"RESET, cmd->num_args);
 	i++;
@@ -90,7 +78,7 @@ void ft_export(t_data *data, t_cmd *cmd, int i)
 				//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
 			//	data->exit_code = 1;
 				i++;
-				return;
+				return ;
 			}
 			else if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name) || ft_isall_digit(env_name) || ft_strchr(cmd->args[i], '=') == NULL)
 			{
@@ -99,7 +87,7 @@ void ft_export(t_data *data, t_cmd *cmd, int i)
 				write_error(": not a valid identifier\n");
 				data->exit_code = 1;
 				free(env_name);
-				return;
+				return ;
 			}
 			if (ft_strchr(cmd->args[i], '=') == NULL)
 			{
@@ -132,7 +120,7 @@ void ft_export(t_data *data, t_cmd *cmd, int i)
 //             write_error("not a valid env_name\n");
 //             data->exit_code = 1;
 //             free(env_name);
-//             return;
+//             return ;
 //         }
 //         free(env_name);
 //         if (ft_strchr(cmd->args[i], '=') == NULL)

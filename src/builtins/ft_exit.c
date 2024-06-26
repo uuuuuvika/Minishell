@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:08 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/20 23:01:56 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:04:04 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,32 @@
 
 int	ft_isnumeric(const char *str)
 {
-    if (*str == '\0')
+	if (*str == '\0')
 		return (0);
-    if (*str == '+' || *str == '-')
+	if (*str == '+' || *str == '-')
 		str++;
-    while (*str)
+	while (*str)
 	{
-        if (*str < '0' || *str > '9')
+		if (*str < '0' || *str > '9')
 			return (0);
-        str++;
-    }
-    return (1); 
+		str++;
+	}
+	return (1); 
 }
 
 void	ft_exit(t_data *data)
 {
-	int exit_code;
+	int	exit_code;
 
 	exit_code = 0;
-    if (data->commands->num_args > 2)
+	if (data->commands->num_args > 2)
 	{
-        write_error("minishell: exit: too many arguments\n");
-        data->exit_code = 1;
-    }
+		write_error("minishell: exit: too many arguments\n");
+		data->exit_code = 1;
+	}
 	else if (data->commands->num_args == 2)
 	{
-        if (!ft_isnumeric(data->commands->args[1]))
+	if (!ft_isnumeric(data->commands->args[1]))
 		{
             write_error("minishell: exit: ");
 			write_error(data->commands->args[1]);
@@ -48,14 +48,14 @@ void	ft_exit(t_data *data)
         }
 		else
 		{
-            exit_code = (unsigned char)ft_atoi(data->commands->args[1]);
+			exit_code = (unsigned char)ft_atoi(data->commands->args[1]);
             data->exit_code = exit_code;
         }
     }
 	else
-        data->exit_code = 0;
-    free_arr2D(data->envs);
-    free_data(data);
-    clear_history();
-    exit (data->exit_code);
+		data->exit_code = 0;
+	free_arr2D(data->envs);
+	free_data(data);
+	clear_history();
+	exit(data->exit_code);
 }

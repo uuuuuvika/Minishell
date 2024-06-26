@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 20:22:47 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/21 13:17:36 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:01:06 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char *expand_line(char *line, t_data *data)
     split = ft_split(line, ' ');
     
     // if (ft_getenv(&split[0][1], data->envs) == NULL)
-    //     return;
+    //     return ;
 
     i = 0;
     while (split[i])

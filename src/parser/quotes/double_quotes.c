@@ -14,7 +14,7 @@ void sub_dub_quotes(char *line_copy, t_data *data)
     {
         char *del = "\"";
         read_heredoc_simple(del, data);
-        return;
+        return ;
     }
 
     data->sub = malloc(((count_subs / 2) + 1) * sizeof(char *));

@@ -35,7 +35,7 @@ void sub_sin_quotes(char *line_copy, t_data *data)
 	{
 		char *del = "\'";
 		read_heredoc_simple(del, data);
-		return;
+		return ;
 	}
 
 	data->subb = malloc(((count_subs / 2) + 1) * sizeof(char *));

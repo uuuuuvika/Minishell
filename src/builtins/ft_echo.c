@@ -6,32 +6,28 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:27 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/22 23:55:28 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:00:08 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_echo(t_data *data, t_cmd *cmd, int i)
+void	ft_echo(t_data *data, t_cmd *cmd, int i)
 {
-    (void) data;
-   // int i;
-
-    //i = 1;
-    i++;
-    
-    while (cmd->args && ft_strcmp(cmd->args[i], "-n") == 0) 
-        i++;
-    while (cmd->args[i])
-    {
-        if (!cmd->args[i])
-            return ;
-        printf("%s", cmd->args[i]);
-        i++;
-        if (cmd->args[i] != NULL)
-            printf(" ");
-    }
-    if (ft_strcmp(cmd->args[1], "-n") != 0)
+	(void) data;/////
+	i++;
+	while (cmd->args && ft_strcmp(cmd->args[i], "-n") == 0) 
+		i++;
+	while (cmd->args[i])
+	{
+		if (!cmd->args[i])
+			return ;
+		printf("%s", cmd->args[i]);
+		i++;
+		if (cmd->args[i] != NULL)
+			printf(" ");
+	}
+	if (ft_strcmp(cmd->args[1], "-n") != 0)
 		printf("\n");
 	data->exit_code = 0;
 }

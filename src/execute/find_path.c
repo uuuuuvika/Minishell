@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/24 16:30:47 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:18:03 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char *check_abs_path(char *cmd, t_data *data, struct stat statbuf)
     perror("-minishell");
     return (cmd);
 }
-
+// Trying things:
 // char *check_rel_path(char *cmd, t_data *data)
 // {
 //     struct stat statbuf;
@@ -82,7 +82,7 @@ char *check_abs_path(char *cmd, t_data *data, struct stat statbuf)
 //     return (f ? tmp : NULL);
 // }
 
-//Working function
+// Working function
 // char *check_rel_path(char *cmd, t_data *data)
 // {
 //     struct	stat statbuf;
@@ -101,9 +101,6 @@ char *check_abs_path(char *cmd, t_data *data, struct stat statbuf)
 // 	}
 //     paths = ft_split(env_path, ':');
 // 	free(env_path);
-//     i = 0;
-//     while (paths[i])
-//     {
 //         path = ft_strjoin_nf(paths[i], "/");
 //         path = ft_strjoin_nf(path, cmd);
 //         if (stat(path, &statbuf) == 0)
@@ -123,8 +120,6 @@ char *check_rel_path(char *cmd, t_data *data, struct stat statbuf)
 	char	*env_path;
     int		i;
 
-	path = NULL;
-	paths = NULL;
 	env_path = ft_getenv("PATH", data->envs);
 	if(env_path == NULL)
     {
@@ -136,13 +131,17 @@ char *check_rel_path(char *cmd, t_data *data, struct stat statbuf)
     i = 0;
     while (paths[i])
     {
-        tmp_path = ft_strjoin(paths[i], "/");
+        tmp_path = ft_strjoin_nf(paths[i], "/");
         path = ft_strjoin(tmp_path, cmd);
         if (stat(path, &statbuf) == 0)
-            return(path);
+		{
+			free_arr2D(paths);///
+		    return (path);
+		}
 		free(path);
         i++;
     }
+	free_arr2D(paths);///
 	return (NULL);
 }
 
@@ -164,6 +163,8 @@ char *find_path(char *cmd, t_data *data)
     path = check_rel_path(cmd, data, statbuf);
     if (path != NULL)
 	{
+		if (ft_strcmp(cmd, "") == 0)
+			data->exit_code = 0;
         return (path);
 	}
 	//  write_error("minishell: ");

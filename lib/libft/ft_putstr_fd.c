@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:57:32 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/27 16:00:13 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 19:01:06 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // void    ft_putchar_fd(char c, int fd)
 // {
 //     if (fd < 0)
-//         return;
+//         return ;
 //     write(fd, &c, 1);
 // }
 void	ft_putstr_fd(char	*s, int fd)

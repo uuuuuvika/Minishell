@@ -16,7 +16,7 @@ void free_data(t_data *data) // ls
     t_cmd *next;
 
     if (data->commands == NULL)
-        return;
+        return ;
     current = data->commands;
     while (current->next != NULL)
     {

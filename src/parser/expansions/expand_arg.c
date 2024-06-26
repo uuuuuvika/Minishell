@@ -44,7 +44,7 @@ void	expand_multiple_args(char **split, t_data *data)
 		if (ft_strcmp(split[j], "$?") == 0)
 		{
 			expand_dollar_question(&split[j], data);
-			return;
+			return ;
 		}
 		else if (split[j][0] == '$')
 			expand_env_variable(&split[j], data);
@@ -90,7 +90,7 @@ void	expand_arg(char **args, t_data *data)
 // 	int i = 0;
 
 // 	if (is_all_dollars(args[0]))
-// 		return;
+// 		return ;
 
 // 	while (args[i])
 // 	{
@@ -108,7 +108,7 @@ void	expand_arg(char **args, t_data *data)
 // 						g_signal = 0;
 // 					}
 // 					split[j] = ft_itoa(data->exit_code); /// Check this later for proper allocation
-// 					return;
+// 					return ;
 // 				}
 // 				else if (split[j][0] == '$')
 // 				{
@@ -136,7 +136,7 @@ void	expand_arg(char **args, t_data *data)
 // 					g_signal = 0;
 // 				}
 // 				args[i] = ft_itoa(data->exit_code);
-// 				return;
+// 				return ;
 // 			}
 // 			else if (args[i][0] == '$')
 // 			{
