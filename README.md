@@ -68,7 +68,10 @@ apt-get install git build-essential libreadline-dev
 - [ ] Check freeing and leaks :cat:
 - [ ] `echo $?HELLO`
 - [ ] `cat file | grep bla | more` (eval sheet)
+- [ ] `echo '"$USER"'` prints "*****"
 
+LEAKS
+- [ ] `ls filenotexist` | grep bla and after `$?`
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
