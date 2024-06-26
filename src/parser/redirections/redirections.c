@@ -127,8 +127,8 @@ int redirect_assign(t_cmd *current, t_data *data)
         {
             if (current->args[i + 1])
                 read_heredoc(current->args[i + 1], current, data);
-            else
-                write_error("syntax error near unexpected token `newline'\n");
+            // else
+            //     write_error("syntax error near unexpected token `newline'\n");
         }
         i++;
     }

@@ -38,6 +38,7 @@ int parse(char *input, t_data *data)
         new_node->redirect_out = -1;
         new_node->here_doc = 0;
         new_node->next = NULL;
+        
         int i = 0;
         // print_2D(new_node->args);
         while (new_node->args[i])
@@ -68,18 +69,12 @@ int parse(char *input, t_data *data)
         j = redirect_assign(new_node, data);
         if (j != 0)
         {
-            // free_arr2D(new_node->args);
-            // free(new_node);
-            // printf("Error: syntax error near unexpected token `newline'\n");
             data->exit_code = j;
             return (1);
         }
 
         if (new_node->num_args == 0)
         {
-            // free_arr2D(new_node->args);
-            // free(new_node);
-            printf("Error: syntax error near unexpected token `newline'\n");
             data->exit_code = 1;
             return (1);
         }
