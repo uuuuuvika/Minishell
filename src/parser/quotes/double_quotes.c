@@ -29,7 +29,7 @@ void	sub_dub_quotes(char *line_copy, t_data *data)
             while (line_copy[++k] != '"')
                 ;
             int len = k - index;
-            char *str = calloc(len, sizeof(char));
+            char *str = ft_calloc(len, sizeof(char));
             int str_index = 0;
             while (line_copy[++index] != '"')
             {

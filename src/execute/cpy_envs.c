@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/24 13:54:03 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:55:59 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	cpy_envs(t_data *data, char **envp)
 	data->envs = ft_calloc(count_env(envp) + 1, sizeof(char *));
 	if (!data->envs)
 	{
-		perror(RED "Calloc failed\n" RESET);
+		perror(RED "ft_calloc failed\n" RESET);
 		return (1);
 	}
 	count = 0;
