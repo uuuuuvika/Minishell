@@ -66,7 +66,8 @@ apt-get install git build-essential libreadline-dev
 - [ ] Check freeing and leaks :cat:
 - [ ] Review/replace error messages and exit codes :cat:
 - [ ] Add data->exit _code to all builtins :cat:
-- [ ] `echo $?HELLO` 
+- [ ] `echo $?HELLO`
+- [ ] `cat file | grep bla | more` (eval sheet)
 
       
 ## General TODO:
