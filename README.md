@@ -77,7 +77,7 @@ LEAKS
 - [ ] `ls filenotexist | grep bla and after` `$?`
 - [ ] `'ls -l'`
 - [ ] `cat | cat | rev`
-- [ ] `cat '`
+- [ ] `cat '` Seg fault
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
