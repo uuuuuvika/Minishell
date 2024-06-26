@@ -70,6 +70,7 @@ apt-get install git build-essential libreadline-dev
 - [ ] `echo $?HELLO`
 - [ ] `cat file | grep bla | more` (eval sheet)
 - [ ] `echo '"$USER"'` prints "*****"
+- [ ] tab
 
 LEAKS
 - [x] `$? + $?`
@@ -78,6 +79,7 @@ LEAKS
 - [ ] `'ls -l'`
 - [ ] `cat | cat | rev`
 - [ ] `cat '` Seg fault
+- [ ] iotcl problem
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
