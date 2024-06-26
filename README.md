@@ -59,14 +59,15 @@ apt-get install git build-essential libreadline-dev
 - [x] `$EMPTY echo hi` should print hi and `$EMPT export V=` after changing built_exec
 - [x] Add too many arguments error for `cd $PWD bla` and `exit 123 asdasd` :cat:
 
-- [ ] `cat $PATH` error :cat:
+- [x] `cat $PATH` error :cat:
+- [x] Review/replace error messages and exit codes :cat:
+- [x] Add data->exit _code to all builtins :cat:
 - [ ] check cat free_data combination
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 - [ ] Check freeing and leaks :cat:
-- [ ] Review/replace error messages and exit codes :cat:
-- [ ] Add data->exit _code to all builtins :cat:
-- [ ] `echo $?HELLO` 
+- [ ] `echo $?HELLO`
+- [ ] `cat file | grep bla | more` (eval sheet)
 
       
 ## General TODO:
