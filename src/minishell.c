@@ -49,7 +49,7 @@ int main(int argc, char *argv[], char **envp)
 		{
 			free(input);
 			// printf(MAG "you have pressed CTRL-D\n" RESET);
-			break;
+			break ;
 		}
 		if (ft_strlen(input) > 0 && !is_str_space(input))
 		{

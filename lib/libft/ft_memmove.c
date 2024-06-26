@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:57:07 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/28 13:26:41 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:07:44 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 // 	printf("memmove before : %s\n", str);
 // 	ft_memmove(str+3, str +1, 3);
 // 	printf("memmove after : %s\n", str);
-// 	return 0;
+// 	return (0);
 // }

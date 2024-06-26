@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 18:01:20 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/31 15:41:44 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:07:44 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,5 @@ t_list	*ft_lstlast(t_list *lst)
 // 		printf("Last node value: %s\n", (char*)last->content);
 // 	else
 // 		printf("List is empty.\n");
-// 	return 0;
+// 	return (0);
 // }

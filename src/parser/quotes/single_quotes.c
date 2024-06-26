@@ -1,26 +1,6 @@
 #include "minishell.h"
 
-// ech"o" hi = hi
-// ech"o" h''i = hi
-// [1:02 PM] plandolf
-// ech"o" h'""'i = h""i
-// [1:02 PM] plandolf
-// ech"o" h"'""'"i = h''i
-// e''ch"o" h"'""'"i = h''i
-// [1:05 PM] plandolf
-// e' 'ch"o" h"'""'"i = command not found
-// e" "ch"o" h"'""'"i = command not found
-// 'ech"o"' h"'""'"i = not found
-// 'ech"'o'"' h"'""'"i = not found
-// 'ech'o'' h"'""'"i = h''i
-// ''ech'o''' h"'""'"i = h''i
-// ARG= ho
-// ec$ARG hi = hi
-// ec$ARG $A''RG = RG :cara_pensativa::cara_pensativa::cara_pensativa:
-// [1:05 PM] plandolf
-// ec$A''RG hi = ecRG: command not found
-
-void sub_sin_quotes(char *line_copy, t_data *data)
+void	sub_sin_quotes(char *line_copy, t_data *data)
 {
 	int index = 0;
 	int count_subs = 0;
@@ -63,7 +43,7 @@ void sub_sin_quotes(char *line_copy, t_data *data)
 	data->subb[s_index] = NULL;
 }
 
-void return_sin_quotes(char **args, t_data *data)
+void	return_sin_quotes(char **args, t_data *data)
 {
 	
 	int i = 0;

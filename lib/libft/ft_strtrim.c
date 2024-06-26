@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 21:07:27 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/28 13:06:37 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:07:44 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 //     printf("%s\n", c);
 
 //     free(c);
-//     return 0;
+//     return (0);
 // }

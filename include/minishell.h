@@ -95,6 +95,7 @@ void return_dub_quotes(char **args, t_data *data);
 
 void expand_arg(char **args, t_data *data);
 int is_expansion(char **args);
+int	is_all_dollars(char *str);
 void replace_for_expansion(char **args, char *cmd);
 char *expand_line(char *line, t_data *data);
 

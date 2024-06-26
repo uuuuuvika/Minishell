@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void sub_dub_quotes(char *line_copy, t_data *data)
+void	sub_dub_quotes(char *line_copy, t_data *data)
 {
     int index = 0;
     int count_subs = 0;
@@ -43,7 +43,7 @@ void sub_dub_quotes(char *line_copy, t_data *data)
     data->sub[s_index] = NULL;
 }
 
-void return_dub_quotes(char **args, t_data *data)
+void	return_dub_quotes(char **args, t_data *data)
 {
     int i = 0;
     int t = 0;

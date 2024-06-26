@@ -60,7 +60,7 @@ char *ft_strjoin(char *str1, char *str2) //hello
 	{
 		newstr[i++] = *str2;
 		if (*str2++ == '\n')
-			break;
+			break ;
 	}
 
 	newstr[i] = '\0';

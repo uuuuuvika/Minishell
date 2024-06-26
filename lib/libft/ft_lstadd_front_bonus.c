@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 14:45:32 by darotche          #+#    #+#             */
-/*   Updated: 2023/05/29 14:47:18 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/26 20:07:44 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,5 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 // 	free(b);
 // 	free(c);
 // 	free(d);
-// 	return 0;
+// 	return (0);
 // }
