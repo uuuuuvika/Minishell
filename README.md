@@ -71,6 +71,8 @@ apt-get install git build-essential libreadline-dev
 - [ ] `cat file | grep bla | more` (eval sheet)
 - [ ] `echo '"$USER"'` prints "*****"
 - [ ] tab
+- [ ] split parser
+- [ ] split main
 
 LEAKS
 - [x] `$? + $?`
