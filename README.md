@@ -62,13 +62,19 @@ apt-get install git build-essential libreadline-dev
 - [x] `cat $PATH` error :cat:
 - [x] Review/replace error messages and exit codes :cat:
 - [x] Add data->exit _code to all builtins :cat:
-- [ ] check cat free_data combination
+- [x] check cat free_data combination
+      
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
 - [ ] heredoc + expansions + quotes :face_with_peeking_eye:
 - [ ] Check freeing and leaks :cat:
 - [ ] `echo $?HELLO`
 - [ ] `cat file | grep bla | more` (eval sheet)
+- [ ] `echo '"$USER"'` prints "*****"
 
+LEAKS
+- [ ] `ls filenotexist` | grep bla and after `$?`
+- [ ] `cat | cat | rev`
+- [ ] `$? + $?`
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit

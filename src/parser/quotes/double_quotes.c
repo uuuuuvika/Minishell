@@ -10,9 +10,12 @@ void	sub_dub_quotes(char *line_copy, t_data *data)
             count_subs++;
         index++;
     }
+    //printf("count_subs: %d\n", count_subs);
+
     if (count_subs % 2 != 0)
     {
         char *del = "\"";
+       printf("I'm heres\n");
         read_heredoc_simple(del, data);
         return ;
     }
@@ -37,6 +40,7 @@ void	sub_dub_quotes(char *line_copy, t_data *data)
                 line_copy[index] = '*';
             }
             data->sub[s_index++] = ft_strdup(str);
+            free(str);
         }
         index++;
     }

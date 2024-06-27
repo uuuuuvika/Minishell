@@ -24,14 +24,6 @@ int is_dsqm(t_cmd *cmd)
 	return (ft_strcmp(cmd->args[0], "$?") == 0);
 }
 
-// int	is_dsqm(t_cmd *cmd)
-// {
-// 	// if (ft_strcmp(cmd->args[0], "$?") != 0 || ft_strncmp(cmd->args[0], "$", 1) != 0)
-// 	// 	return (1);
-// 	// return (0);
-// 	return (ft_strncmp(cmd->args[0], "$?", 1) == 0 || ft_strcmp(cmd->args[0], "") == 0);
-// }
-
 int main(int argc, char *argv[], char **envp)
 {
 	static t_data data;
@@ -42,21 +34,34 @@ int main(int argc, char *argv[], char **envp)
 
 	handle_ctrl();
 	cpy_envs(&data, envp);
+	printf("\n");
+    printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+    printf("\t __  __  __  _  _  __  ___  _  _  ___  __    __      \n");
+    printf("\t(  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )     \n");
+    printf("\t )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__    \n");
+    printf("\t(_/\\/\\_)(__)(_)\\_)(__)(___/(_)(_)(___)(____)(____)    \n");
+    printf("                                                           \n");
+    printf("\t \t\tby Vika & Dai, Berlin Summer 2024     \n");
+    printf("                                                            \n");
+    printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n");
 	while (1)
 	{
 		input = readline(YEL "Minishell > " RESET);
 		if (!input || errno == EINVAL)
 		{
 			free(input);
+			free_data(&data);
 			// printf(MAG "you have pressed CTRL-D\n" RESET);
 			break ;
 		}
+
 		if (ft_strlen(input) > 0 && !is_str_space(input))
 		{
 			add_history(input);
-			if (parse(input, &data))
+			if (parse(input, &data) != 0)
 			{
 				free(input);
+				
 				//printf("vghjhm mError: syntax error near unexpected token `newline'\n");
 				continue;
 			}
@@ -69,7 +74,6 @@ int main(int argc, char *argv[], char **envp)
 
 			if ((data.num_of_children == 1 && is_builtin(data.commands->args[i])) || (data.num_of_children == 1 && is_dsqm(data.commands)))
 			{
-
 				//printf(YEL "Executing simple builtin/$? in main\n" RESET);
 				//printf(RED "cmd is: %s\n" RESET, data.commands->args[i]);
 				int fin = dup(STDIN);
