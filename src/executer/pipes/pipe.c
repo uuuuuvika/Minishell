@@ -6,35 +6,17 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:45:07 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/26 17:42:45 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:20:23 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void sig_handler_fork(int sig)
-{
-	if (sig == SIGINT)
-  	{
-		printf("\n");
-		g_signal = 0; // need to reset g_signal, otherwise it will be 2 in the next iteration and the program will exit in heredoc
-		// printf(MAG"handle_ctrl_fork\n"RESET);
-		// printf(CYN "g_singal %d" RESET,g_signal);
-	}
-}
-
-void handle_ctrl_fork(t_data *data)
-{
-	if(signal(SIGINT, sig_handler_fork))
-		data->exit_code = 130;// !important
-	signal(SIGQUIT, SIG_IGN);
-}
-
 int pipe_cmds(t_data *data)
 {
-    t_cmd *current;
-    pid_t pid[data->num_of_children];
-    int i;
+    t_cmd	*current;
+    pid_t	pid[data->num_of_children];
+    int		i;
 
     i = 0;
     current = data->commands;

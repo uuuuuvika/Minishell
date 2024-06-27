@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/18 14:45:00 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/27 17:11:00 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void	ultimate_wait(t_data *data, pid_t *pid)
 
 void	fd_dup2(t_cmd *current)
 {
+	int r;
+
 	if (current->here_doc != 0)
 	{
-		int r = open("here_doc", O_RDONLY, 777);
+		r = open("here_doc", O_RDONLY, 777);
 		printf(GRN"here_doc: %d\n"RESET, r);
 		if (dup2(r, STDIN) == -1)
 			handle_error("dup2 error here_doc");
@@ -83,5 +85,4 @@ void	fd_dup2(t_cmd *current)
 		if (dup2(current->pipe_out, STDOUT) == -1)
 			handle_error("dup2 error pipe_out");
 	}
-	
 }

@@ -1,99 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/27 15:18:12 by darotche          #+#    #+#             */
+/*   Updated: 2024/06/27 16:54:45 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int is_space(char c)
+int	ctrl_d(char *input, t_data *data)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
+	if (!input || errno == EINVAL)
+	{
+		free(input);
+		free_data(data);
+		//printf(MAG "you have pressed CTRL-D\n" RESET);
 		return (1);
+	}
 	return (0);
 }
 
-int is_str_space(char *str)
+void	simplecmd_or_pipe(t_data *data, char *input)
 {
-	int i = 0;
-	while (str[i])
+	int	i;
+	int	fin;
+	int	fout;
+
+	i = 0;
+	while (data->commands && ft_strcmp(data->commands->args[i], "") == 0
+		&& data->commands->args[i + 1] != NULL)
 	{
-		if (!is_space(str[i]))
-			return (0);
 		i++;
 	}
-	return (1);
+	if ((data->num_of_children == 1 && is_builtin(data->commands->args[i]))
+		|| (data->num_of_children == 1 && is_dsqm(data->commands)))
+	{
+		//printf(YEL "Executing simple builtin/$? in main\n" RESET);
+		fin = dup(STDIN);
+		fout = dup(STDOUT);
+		redirect_fd_dup(data->commands, data);
+		// print_2D(data->commands->args);
+		exec_cmd(data, data->commands);
+		dup2(fin, STDIN);
+		dup2(fout, STDOUT);
+	}
+	else if (ft_strncmp(input, "<<", 2) != 0 && data->commands)
+	{
+		// printf(YEL "Pipe" RESET);
+		// printf(RESET "\n" RESET);
+		pipe_cmds(data);
+	}
 }
 
-int is_dsqm(t_cmd *cmd)
+void	free_main(t_data *data, char *input)
 {
-	return (ft_strcmp(cmd->args[0], "$?") == 0);
+	free_data(data);
+	free(input);
 }
 
-int main(int argc, char *argv[], char **envp)
+int	main(void)
 {
-	static t_data data;
-	char *input;
-
-	(void)argc;
-	(void)argv;
+	static t_data	data;
+	extern char		**environ;
+	char			*input;
 
 	handle_ctrl();
-	cpy_envs(&data, envp);
-	printf("\n");
-    printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
-    printf("\t __  __  __  _  _  __  ___  _  _  ___  __    __      \n");
-    printf("\t(  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )     \n");
-    printf("\t )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__    \n");
-    printf("\t(_/\\/\\_)(__)(_)\\_)(__)(___/(_)(_)(___)(____)(____)    \n");
-    printf("                                                           \n");
-    printf("\t \t\tby Vika & Dai, Berlin Summer 2024     \n");
-    printf("                                                            \n");
-    printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\n");
+	cpy_envs(&data, environ);
 	while (1)
 	{
 		input = readline(YEL "Minishell > " RESET);
-		if (!input || errno == EINVAL)
-		{
-			free(input);
-			free_data(&data);
-			// printf(MAG "you have pressed CTRL-D\n" RESET);
+		if (ctrl_d(input, &data))
 			break ;
-		}
-
 		if (ft_strlen(input) > 0 && !is_str_space(input))
 		{
 			add_history(input);
 			if (parse(input, &data) != 0)
 			{
-				free(input);
-				
+				free(input);	
 				//printf("vghjhm mError: syntax error near unexpected token `newline'\n");
-				continue;
+				continue ;
 			}
-			//print_2D(data.commands->args);
-			// printf("%d\n", is_dsqm(data.commands));
-
-			int i = 0;
-			while (data.commands && ft_strcmp(data.commands->args[i], "") == 0 && data.commands->args[i + 1] != NULL)
-				i++;
-
-			if ((data.num_of_children == 1 && is_builtin(data.commands->args[i])) || (data.num_of_children == 1 && is_dsqm(data.commands)))
-			{
-				//printf(YEL "Executing simple builtin/$? in main\n" RESET);
-				//printf(RED "cmd is: %s\n" RESET, data.commands->args[i]);
-				int fin = dup(STDIN);
-				int fout = dup(STDOUT);
-				redirect_fd_dup(data.commands, &data);
-				// print_2D(data.commands->args);
-				exec_cmd(&data, data.commands);
-				dup2(fin, STDIN);
-				dup2(fout, STDOUT);
-			}
-			else if (ft_strncmp(input, "<<", 2) != 0 && data.commands) // << E | wc maybe??
-			{
-				// printf(RED "in pipes cmd is: %s\n" RESET, data.commands->args[i]);
-				// printf(YEL "Pipe" RESET);
-				// printf(RESET "\n" RESET);
-				pipe_cmds(&data);
-			}
+			simplecmd_or_pipe(&data, input);
 		}
-		free_data(&data);
-		free(input);
+		free_main(&data, input);
 	}
 	clear_history();
 	return (0);
