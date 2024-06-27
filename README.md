@@ -74,7 +74,8 @@ apt-get install git build-essential libreadline-dev
 - [ ] split main
 - [ ] split free_data
 - [ ] unlink files?
-- [ ] errors for `''` `""` `' ' ` `" "` 
+- [ ] errors for `''` `""` `' ' ` `" "`
+- [ ]  // << E | wc maybe??
 
 LEAKS
 - [x] `$? + $?`
