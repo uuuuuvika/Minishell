@@ -68,5 +68,6 @@
     "stdlib.h": "c",
     "param.h": "c",
     "errno.h": "c"
-  }
+},
+"CodeGPT.apiKey": "CodeGPT Plus Beta"
 }
