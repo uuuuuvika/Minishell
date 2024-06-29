@@ -85,7 +85,7 @@ int redirect_assign(t_cmd *current, t_data *data)
                     return (1);
                 }
                 write_error("syntax error near unexpected token `newline'\n");
-                 return (2);
+                return (2);
             }
             i++;
         }
@@ -119,17 +119,12 @@ int redirect_assign(t_cmd *current, t_data *data)
                     return (1);
                 }
                 write_error("syntax error near unexpected token `newline'\n");
-                 return (2);
+                return (2);
             }
             i++;
         }
         else if (ft_strcmp(current->args[i], "<<") == 0)
-        {
-            if (current->args[i + 1])
                 read_heredoc(current->args[i + 1], current, data);
-            // else
-            //     write_error("syntax error near unexpected token `newline'\n");
-        }
         i++;
     }
     return (0);

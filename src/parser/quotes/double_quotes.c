@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	sub_dub_quotes(char *line_copy, t_data *data)
+int	sub_dub_quotes(char *line_copy, t_data *data)
 {
     int index = 0;
     int count_subs = 0;
@@ -15,9 +15,8 @@ void	sub_dub_quotes(char *line_copy, t_data *data)
     if (count_subs % 2 != 0)
     {
         char *del = "\"";
-       printf("I'm heres\n");
         read_heredoc_simple(del, data);
-        return ;
+        return (1);
     }
 
     data->sub = malloc(((count_subs / 2) + 1) * sizeof(char *));
@@ -45,6 +44,7 @@ void	sub_dub_quotes(char *line_copy, t_data *data)
         index++;
     }
     data->sub[s_index] = NULL;
+    return (0);
 }
 
 void	return_dub_quotes(char **args, t_data *data)
@@ -74,4 +74,5 @@ void	return_dub_quotes(char **args, t_data *data)
         }
         i++;
     }
+
 }

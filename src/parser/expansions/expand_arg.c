@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	expand_dollar_question(char **arg, t_data *data)
+void expand_dollar_question(char **arg, t_data *data)
 {
 	if (g_signal == 2)
 	{
@@ -20,19 +20,14 @@ void	expand_dollar_question(char **arg, t_data *data)
 		g_signal = 0;
 	}
 	char *tmp = ft_itoa(data->exit_code);
-
-	// printf("%lu\n", strlen(tmp));
-	// printf("tmp: %s\n", tmp);
-
 	replace_for_expansion(arg, tmp);
 	free(tmp);
-	//*arg = ft_strdup(tmp); 
 }
 
-void	expand_env_variable(char **arg, t_data *data)
+void expand_env_variable(char **arg, t_data *data)
 {
-	char	*env_name;
-	char	*env_value;
+	char *env_name;
+	char *env_value;
 
 	env_name = ft_strdup(*arg + 1);
 	env_value = ft_getenv(env_name, data->envs);
@@ -44,9 +39,9 @@ void	expand_env_variable(char **arg, t_data *data)
 	free(env_value);
 }
 
-void	expand_multiple_args(char **split, t_data *data)
+void expand_multiple_args(char **split, t_data *data)
 {
-	int	j;
+	int j;
 
 	j = 0;
 	while (split[j])
@@ -54,7 +49,7 @@ void	expand_multiple_args(char **split, t_data *data)
 		if (ft_strcmp(split[j], "$?") == 0)
 		{
 			expand_dollar_question(&split[j], data);
-			return ;
+			return;
 		}
 		else if (split[j][0] == '$')
 			expand_env_variable(&split[j], data);
@@ -62,19 +57,70 @@ void	expand_multiple_args(char **split, t_data *data)
 	}
 }
 
-void	expand_single_arg(char **arg, t_data *data)
+int count_dsqm(char **arg)
 {
-	if (ft_strcmp(*arg, "$?") == 0)
-		expand_dollar_question(arg, data);
-	else if ((*arg)[0] == '$')
-		expand_env_variable(arg, data);
+	int i = 0;
+	int count = 0;
+	while ((*arg)[i])
+	{
+		if ((*arg)[i] == '$' && (*arg)[i + 1] == '?')
+		{
+			count++;
+			i++;
+		}
+		i++;
+	}
+	return (count);
 }
 
-void	expand_arg(char **args, t_data *data)
+void expand_single_arg(char **arg, t_data *data)
 {
-	int		i;
-	char	**split;
-	char	*tmp;
+    int i = 0;
+    int j = 0;
+    int count = 0;
+    char *result;
+    char *tmp;
+
+    if ((*arg)[0] == '$' && (*arg)[1] != '?')
+        expand_env_variable(arg, data);
+    else
+    {
+        count = count_dsqm(arg);
+        if (count > 0)
+        {
+            result = ft_strdup("");
+            while ((*arg)[i])
+            {
+                if ((*arg)[i] == '$' && (*arg)[i + 1] == '?')
+                {
+                    tmp = ft_substr(*arg, j, i - j);
+                    result = ft_strjoin(result, tmp);
+                    free(tmp);
+                    tmp = ft_itoa(data->exit_code);
+                    result = ft_strjoin(result, tmp);
+                    free(tmp);
+                    i += 2;
+                    j = i;
+                }
+                else
+                    i++;
+            }
+            tmp = ft_substr(*arg, j, i - j);
+            result = ft_strjoin(result, tmp);
+            free(tmp);
+
+            free(*arg);
+            *arg = result;
+        }
+    }
+}
+
+
+void expand_arg(char **args, t_data *data)
+{
+	int i;
+	char **split;
+	char *tmp;
 
 	i = 0;
 	while (args[i])

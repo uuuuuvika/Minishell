@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	sub_sin_quotes(char *line_copy, t_data *data)
+int	sub_sin_quotes(char *line_copy, t_data *data)
 {
 	int index = 0;
 	int count_subs = 0;
@@ -15,7 +15,7 @@ void	sub_sin_quotes(char *line_copy, t_data *data)
 	{
 		char *del = "\'";
 		read_heredoc_simple(del, data);
-		return ;
+		return (1);
 	}
 
 	data->subb = malloc(((count_subs / 2) + 1) * sizeof(char *));
@@ -42,6 +42,7 @@ void	sub_sin_quotes(char *line_copy, t_data *data)
 		index++;
 	}
 	data->subb[s_index] = NULL;
+	return (0);
 }
 
 void	return_sin_quotes(char **args, t_data *data)

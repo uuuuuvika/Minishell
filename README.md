@@ -64,17 +64,17 @@ apt-get install git build-essential libreadline-dev
 - [x] Add data->exit _code to all builtins :cat:
 - [x] check cat free_data combination
       
+- [x] tab
+- [x] heredoc + expansions + quotes
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
-- [ ] heredoc + expansions + quotes :face_with_peeking_eye:
-- [ ] `echo $?HELLO`
-- [ ] `cat file | grep bla | more` (eval sheet)
+- [ ] `echo $?HELLO` 🤔
+- [ ] `cat file | grep bla | more` (eval sheet) ----> it works like in bash for me....
 - [ ] `echo '"$USER"'` prints "*****"
-- [ ] tab
-- [ ] split parser
+- [ ] split parser 🤔
 - [ ] split main
 - [ ] split free_data
 - [ ] unlink files?
-- [ ] errors for `''` `""` `' ' ` `" "`
+- [ ] errors for `''` `""` `' ' ` `" "` 🤔
 - [ ]  // << E | wc maybe??
 
 LEAKS
@@ -83,7 +83,7 @@ LEAKS
 - [x] `ls filenotexist | grep bla and after` `$?`
 - [x] `'ls -l'`
 - [x] `cat | cat | rev`
-- [ ] `cat '` Seg fault
+- [x] `cat '` Seg fault ----> seg fault fixed, but need to check leaks
 - [ ] iotcl problem
 - [ ] `<< E` and then $?
       
