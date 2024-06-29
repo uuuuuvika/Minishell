@@ -67,11 +67,11 @@ apt-get install git build-essential libreadline-dev
 - [x] tab
 - [x] heredoc + expansions + quotes
 - [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
-- [x] `echo $?HELLO` 🤔
+- [x] `echo $?HELLO`
 - [ ] `cat file | grep bla | more` (eval sheet) ----> it works like in bash for me....
 - [ ] `echo '"$USER"'` prints "*****"
 - [ ] split parser 🤔
-- [ ] split main
+- [ ] split main :cat:
 - [ ] split free_data
 - [ ] unlink files?
 - [ ] errors for `''` `""` `' ' ` `" "` 🤔

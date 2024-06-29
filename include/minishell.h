@@ -107,6 +107,7 @@ int     sub_sin_quotes(char *line_copy, t_data *data);
 void	return_sin_quotes(char **args, t_data *data);
 int     sub_dub_quotes(char *line_copy, t_data *data);
 void	return_dub_quotes(char **args, t_data *data);
+int     sub_quotes(char *line_copy, t_data *data);
 
 void	expand_arg(char **args, t_data *data);
 int		is_expansion(char **args);

@@ -8,6 +8,15 @@ int parse(char *input, t_data *data)
     int nch;
 
     line_copy = ft_strdup(input);
+
+    int i = 0;
+    while (line_copy[i])
+    {
+        if(line_copy[i] == '\t')
+            line_copy[i] = ' ';
+       i++;
+    }
+    
     if (sub_quotes(line_copy, data))
         return (1);
 
