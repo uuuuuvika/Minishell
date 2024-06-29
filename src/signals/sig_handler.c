@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:45:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 17:54:29 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:41:08 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	sig_handler(int sig)
 	{
 		// printf(MAG"handle_ctrl\n"RESET);////////////
 		ioctl(0, TIOCSTI, "\n");
-		//rl_replace_line("", 1);
+		rl_replace_line("", 1);
 		rl_on_new_line(); /// This line is for when we press ctrl+c before inputting anything
 		g_signal = 2;
 		//printf(CYN "g_singal %d" RESET,g_signal);//////////////

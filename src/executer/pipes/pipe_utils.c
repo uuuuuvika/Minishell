@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 17:11:00 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/29 21:43:09 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	fd_dup2(t_cmd *current)
 	if (current->here_doc != 0)
 	{
 		r = open("here_doc", O_RDONLY, 777);
-		printf(GRN"here_doc: %d\n"RESET, r);
+		//printf(GRN"here_doc: %d\n"RESET, r);
 		if (dup2(r, STDIN) == -1)
 			handle_error("dup2 error here_doc");
 	}
