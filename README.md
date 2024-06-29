@@ -66,9 +66,9 @@ apt-get install git build-essential libreadline-dev
       
 - [x] tab
 - [x] heredoc + expansions + quotes
-- [ ] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
+- [x] replace realloc (in parser) with allowed fnc :face_with_peeking_eye:
 - [x] `echo $?HELLO`
-- [ ] `cat file | grep bla | more` (eval sheet) ----> it works like in bash for me....
+- [x] `cat file | grep bla | more` (eval sheet) ----> it works like in bash for me....
 - [ ] `echo '"$USER"'` prints "*****"
 - [ ] split parser 🤔
 - [ ] split main :cat:
@@ -85,7 +85,7 @@ LEAKS
 - [x] `cat | cat | rev`
 - [x] `cat '` Seg fault ----> seg fault fixed, but need to check leaks
 - [ ] iotcl problem
-- [ ] `<< E` and then $?
+- [x] `<< E` and then $?
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit

@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 20:04:49 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 00:33:50 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/06/30 00:27:33 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	{
 		line = readline("> ");
 		if (handle_ctrl_heredoc(line, current, data))
+		{
 			break ;
+		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			data->exit_code = 0;
@@ -96,5 +98,5 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 		write(fd, "\n", 1);
 		free(line);
 	}
-	close(fd);
+	//close(fd);
 }

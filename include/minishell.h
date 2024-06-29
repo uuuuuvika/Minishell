@@ -125,8 +125,8 @@ void    read_heredoc(char *delimiter, t_cmd *current, t_data *data);
 void    read_heredoc_simple(char *delimiter, t_data *data);
 int     heredoc_preprocess(t_cmd *new_node);
 char    *split_expand_join(char *line, t_data *data);
-void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
-void	read_heredoc_simple(char *delimiter, t_data *data);
+//void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
+//void	read_heredoc_simple(char *delimiter, t_data *data);
 void	hd_is_expansion_needed(t_cmd *new_node);
 char	*split_expand_join(char *line, t_data *data);
 

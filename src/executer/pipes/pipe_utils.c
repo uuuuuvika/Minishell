@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/29 21:43:09 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/06/30 00:16:11 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	fd_dup2(t_cmd *current)
 		if (dup2(r, STDIN) == -1)
 			handle_error("dup2 error here_doc");
 	}
+	
 	if (current->pipe_in != -1)
 	{
 		if (dup2(current->pipe_in, STDIN) == -1)

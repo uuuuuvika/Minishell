@@ -12,11 +12,11 @@ int parse(char *input, t_data *data)
     int i = 0;
     while (line_copy[i])
     {
-        if(line_copy[i] == '\t')
+        if (line_copy[i] == '\t')
             line_copy[i] = ' ';
-       i++;
+        i++;
     }
-    
+
     if (sub_quotes(line_copy, data))
         return (1);
 
@@ -55,25 +55,36 @@ int parse(char *input, t_data *data)
         return_dub_quotes(new_node->args, data);
 
         expand_arg(new_node->args, data);
-        
+
         return_sin_quotes(new_node->args, data);
 
         int j = 0;
         j = redirect_assign(new_node, data);
         if (j != 0)
         {
+            free_arr2D(new_node->args);
+            free(new_node);
+            free_arr2D(future_children);
+            free_arr2D(data->sub);
+            free_arr2D(data->subb);
             data->exit_code = j;
             return (1);
         }
 
-        if (new_node->num_args == 0)
-        {
-            data->exit_code = 1;
-            return (1);
-        }
+        char **temp = malloc(sizeof(char *) * (new_node->num_args + 1));
 
-        new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
-        new_node->args[new_node->num_args] = NULL;
+        int k = 0;
+        while (k < new_node->num_args)
+        {
+            temp[k] = ft_strdup(new_node->args[k]);
+            k++;
+        }
+        temp[k] = NULL;
+        free_arr2D(new_node->args);
+        new_node->args = temp;
+
+        // new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
+        // new_node->args[new_node->num_args] = NULL;
 
         if (nch++ == 0)
             data->commands = new_node;
@@ -88,6 +99,7 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
-    // print_2D(data->commands->args);
+    //print_cmd_nodes(data);
+    //print_2D(data->commands->args);
     return (0);
 }

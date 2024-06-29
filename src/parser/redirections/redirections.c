@@ -5,7 +5,7 @@ int	is_redirect(char *str)
 	return (ft_strncmp(str, ">", 1) == 0
 		|| ft_strncmp(str, "<", 1) == 0
 		|| ft_strncmp(str, ">>", 2) == 0
-		|| ft_strncmp(str, "<<", 1) == 0);
+		|| ft_strncmp(str, "<<", 2) == 0);
 }
 
 int cnt_missing_space(char *line)

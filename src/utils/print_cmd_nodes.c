@@ -15,6 +15,7 @@ void print_cmd_nodes(t_data *data)
         printf("here_doc: %d\n", current->here_doc);
         printf("redirect_in: %d\n", current->redirect_in);
         printf("redirect_out: %d\n", current->redirect_out);
+        printf("\n");
         current = current->next;
     }
 }

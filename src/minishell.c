@@ -3,44 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:18:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 16:54:45 by darotche         ###   ########.fr       */
+/*   Updated: 2024/06/30 01:02:57 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include <termios.h>
 
-int	ctrl_d(char *input, t_data *data)
+int ctrl_d(char *input, t_data *data)
 {
 	if (!input || errno == EINVAL)
 	{
 		free(input);
 		free_data(data);
-		//printf(MAG "you have pressed CTRL-D\n" RESET);
+		// printf(MAG "you have pressed CTRL-D\n" RESET);
 		return (1);
 	}
 	return (0);
 }
 
-void	simplecmd_or_pipe(t_data *data, char *input)
+void simplecmd_or_pipe(t_data *data, char *input)
 {
-	int	i;
-	int	fin;
-	int	fout;
+	int i;
+	int fin;
+	int fout;
 
 	i = 0;
-	while (data->commands && ft_strcmp(data->commands->args[i], "") == 0
-		&& data->commands->args[i + 1] != NULL)
+	while (data->commands && ft_strcmp(data->commands->args[i], "") == 0 && data->commands->args[i + 1] != NULL)
 	{
 		i++;
 	}
-	if ((data->num_of_children == 1 && is_builtin(data->commands->args[i]))
-		|| (data->num_of_children == 1 && is_dsqm(data->commands)))
+	if ((data->num_of_children == 1 && is_builtin(data->commands->args[i])) || (data->num_of_children == 1 && is_dsqm(data->commands)))
 	{
-		//printf(YEL "Executing simple builtin/$? in main\n" RESET);
+		// printf(YEL "Executing simple builtin/$? in main\n" RESET);
 		fin = dup(STDIN);
 		fout = dup(STDOUT);
 		redirect_fd_dup(data->commands, data);
@@ -57,34 +55,34 @@ void	simplecmd_or_pipe(t_data *data, char *input)
 	}
 }
 
-void	free_main(t_data *data, char *input)
+void free_main(t_data *data, char *input)
 {
 	free_data(data);
 	free(input);
 }
 
-int	main(void)
+int main(void)
 {
-	static t_data	data;
-	extern char		**environ;
-	char			*input;
+	static t_data data;
+	extern char **environ;
+	char *input;
 
 	rl_bind_key('\t', rl_insert);
 	handle_ctrl();
 	cpy_envs(&data, environ);
+	print_banner();
 	while (1)
 	{
 		input = readline(YEL "Minishell > " RESET);
 		if (ctrl_d(input, &data))
-			break ;
+			break;
 		if (ft_strlen(input) > 0 && !is_str_space(input))
 		{
 			add_history(input);
 			if (parse(input, &data) != 0)
 			{
-				free(input);	
-				//printf("vghjhm mError: syntax error near unexpected token `newline'\n");
-				continue ;
+				free(input);
+				continue;
 			}
 			simplecmd_or_pipe(&data, input);
 		}
