@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <termios.h>
 
 int	ctrl_d(char *input, t_data *data)
 {
@@ -68,6 +69,7 @@ int	main(void)
 	extern char		**environ;
 	char			*input;
 
+	rl_bind_key('\t', rl_insert);
 	handle_ctrl();
 	cpy_envs(&data, environ);
 	while (1)

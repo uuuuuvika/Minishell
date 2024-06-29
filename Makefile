@@ -1,5 +1,5 @@
 cc		= cc
-CFLAGS  = -g -Wall -Werror -Wextra -Iinclude -Ilib/libft
+CFLAGS  = -g -Wall -Werror -Wextra -Iinclude -Ilib/libft #-fsanitize=address -fsanitize=undefined
 LDFLAGS = -lreadline -L./lib/libft -lft #-lhistory
 
 SRCDIR = src

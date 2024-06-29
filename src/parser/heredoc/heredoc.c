@@ -69,7 +69,7 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	char *exp_line;
 
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	current->here_doc = fd; // probably can be replaced by data->cmn_here_doc
+	current->here_doc = fd;
 	g_signal = 0; // Important to reset signal
 	while (1)
 	{

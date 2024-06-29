@@ -103,10 +103,11 @@ int		is_redirect(char *str);
 int		cnt_args(char **args);
 int		redirect_assign(t_cmd *cmd, t_data *data);
 
-void	sub_sin_quotes(char *line_copy, t_data *data);
+int     sub_sin_quotes(char *line_copy, t_data *data);
 void	return_sin_quotes(char **args, t_data *data);
-void	sub_dub_quotes(char *line_copy, t_data *data);
+int     sub_dub_quotes(char *line_copy, t_data *data);
 void	return_dub_quotes(char **args, t_data *data);
+int     sub_quotes(char *line_copy, t_data *data);
 
 void	expand_arg(char **args, t_data *data);
 int		is_expansion(char **args);
@@ -120,6 +121,10 @@ void	ultimate_fd_close(t_data *data);
 void	ultimate_wait(t_data *data, pid_t *pid);
 void	fd_dup2(t_cmd *command);
 
+void    read_heredoc(char *delimiter, t_cmd *current, t_data *data);
+void    read_heredoc_simple(char *delimiter, t_data *data);
+int     heredoc_preprocess(t_cmd *new_node);
+char    *split_expand_join(char *line, t_data *data);
 void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
 void	read_heredoc_simple(char *delimiter, t_data *data);
 void	hd_is_expansion_needed(t_cmd *new_node);

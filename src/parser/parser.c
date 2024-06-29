@@ -7,11 +7,18 @@ int parse(char *input, t_data *data)
     char **future_children;
     int nch;
 
-    // check_NULL(input);
     line_copy = ft_strdup(input);
-    // check_NULL(line_copy);
-    sub_dub_quotes(line_copy, data);
-    sub_sin_quotes(line_copy, data);
+
+    int i = 0;
+    while (line_copy[i])
+    {
+        if(line_copy[i] == '\t')
+            line_copy[i] = ' ';
+       i++;
+    }
+    
+    if (sub_quotes(line_copy, data))
+        return (1);
 
     char *expanded_line = expand_line(line_copy, data);
 
@@ -38,33 +45,19 @@ int parse(char *input, t_data *data)
         new_node->redirect_out = -1;
         new_node->here_doc = 0;
         new_node->next = NULL;
-        
-        int i = 0;
-        // print_2D(new_node->args);
-        while (new_node->args[i])
+
+        if (heredoc_preprocess(new_node))
         {
-            if (ft_strcmp(new_node->args[i], "<<") == 0) /// take care in redirection function
-            {
-                if (new_node->args[i + 1] == NULL)
-                {
-                    free_arr2D(new_node->args);
-                    free(new_node);
-                    // printf("Error: syntax error near unexpected token `newline'\n");
-                    return (1);
-                }
-                else if (new_node->args[i + 1][0] == '\'' || new_node->args[i + 1][0] == '\"')
-                    new_node->here_doc_exp = 0;
-                else
-                    new_node->here_doc_exp = 1;
-            }
-            i++;
+            data->exit_code = 2;
+            return (1);
         }
 
         return_dub_quotes(new_node->args, data);
-        expand_arg(new_node->args, data);
 
+        expand_arg(new_node->args, data);
+        
         return_sin_quotes(new_node->args, data);
-        // print_2D(new_node->args);
+
         int j = 0;
         j = redirect_assign(new_node, data);
         if (j != 0)
@@ -95,6 +88,6 @@ int parse(char *input, t_data *data)
     data->num_of_children = nch;
     pipe_assign(data->commands);
     free_arr2D(future_children);
-    //print_2D(data->commands->args);
+    // print_2D(data->commands->args);
     return (0);
 }
