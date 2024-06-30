@@ -57,22 +57,6 @@ void expand_multiple_args(char **split, t_data *data)
 	}
 }
 
-int count_dsqm(char **arg)
-{
-	int i = 0;
-	int count = 0;
-	while ((*arg)[i])
-	{
-		if ((*arg)[i] == '$' && (*arg)[i + 1] == '?')
-		{
-			count++;
-			i++;
-		}
-		i++;
-	}
-	return (count);
-}
-
 void expand_single_arg(char **arg, t_data *data)
 {
     int i = 0;

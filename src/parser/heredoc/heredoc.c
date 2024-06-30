@@ -39,7 +39,7 @@ void	read_heredoc_simple(char *delimiter, t_data *data)
 	close(fd);
 }
 
-int	handle_ctrl_heredoc(char *line, t_cmd *current, t_data *data)
+int	handle_keypress_heredoc(char *line, t_cmd *current, t_data *data)
 {
 	if (!line || errno == EINVAL)
 	{
@@ -74,7 +74,7 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 	while (1)
 	{
 		line = readline("> ");
-		if (handle_ctrl_heredoc(line, current, data))
+		if (handle_keypress_heredoc(line, current, data))
 		{
 			break ;
 		}

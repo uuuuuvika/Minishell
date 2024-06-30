@@ -76,6 +76,7 @@ int		handle_error(const char *message);
 int		check_NULL(char *str);
 void	free_arr2D(char **arr2D);
 void	free_data(t_data *data);
+void	free_main(t_data *data, char *input);
 
 char	*find_path(char *cmd, t_data *data);
 void	exec_cmd(t_data *data, t_cmd *cmd);
@@ -115,19 +116,18 @@ int		is_all_dollars(char *str);
 void	replace_for_expansion(char **args, char *cmd);
 char	*expand_line(char *line, t_data *data);
 int		is_multi_words(char *str);
+int     count_dsqm(char **arg);
 
 void	fd_close(t_cmd *command);
 void	ultimate_fd_close(t_data *data);
 void	ultimate_wait(t_data *data, pid_t *pid);
 void	fd_dup2(t_cmd *command);
 
+
 void    read_heredoc(char *delimiter, t_cmd *current, t_data *data);
 void    read_heredoc_simple(char *delimiter, t_data *data);
-int     heredoc_preprocess(t_cmd *new_node);
+int     heredoc_preprocess(t_cmd *new_node, t_data *data);
 char    *split_expand_join(char *line, t_data *data);
-//void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
-//void	read_heredoc_simple(char *delimiter, t_data *data);
-void	hd_is_expansion_needed(t_cmd *new_node);
 char	*split_expand_join(char *line, t_data *data);
 
 void	print_envs(t_data *data);
@@ -138,15 +138,18 @@ char	*arr2D_to_str(char **args);
 
 int		cnt_missing_space(char *line);
 char	*add_space_to_redirect(char *input);
+char	*replace_tabs_with_spaces(char *line);
+char	*handle_missing_spaces(char *line);
 
 void	sig_handler(int sig);
-void	handle_ctrl(void);
+void	handle_keypress(void);
 void	sig_handler_fork(int sig);
-void	handle_ctrl_fork(t_data *data);
+void	handle_keypress_fork(t_data *data);
 
 int		is_space(char c);
 int		is_str_space(char *str);
 int		is_dsqm(t_cmd *cmd);
 void	print_banner(void);
+void	print_banner_2(void);
 
 #endif

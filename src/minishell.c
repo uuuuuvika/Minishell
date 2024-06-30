@@ -11,15 +11,12 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <termios.h>
 
 int ctrl_d(char *input, t_data *data)
 {
-	if (!input || errno == EINVAL)
+	if (!input || errno == EINVAL || errno == EIO)
 	{
-		free(input);
-		free_data(data);
-		// printf(MAG "you have pressed CTRL-D\n" RESET);
+		free_main(data, input);
 		return (1);
 	}
 	return (0);
@@ -42,15 +39,13 @@ void simplecmd_or_pipe(t_data *data, char *input)
 		fin = dup(STDIN);
 		fout = dup(STDOUT);
 		redirect_fd_dup(data->commands, data);
-		// print_2D(data->commands->args);
 		exec_cmd(data, data->commands);
 		dup2(fin, STDIN);
 		dup2(fout, STDOUT);
 	}
 	else if (ft_strncmp(input, "<<", 2) != 0 && data->commands)
 	{
-		// printf(YEL "Pipe" RESET);
-		// printf(RESET "\n" RESET);
+		// printf(YEL "Pipe\n" RESET);
 		pipe_cmds(data);
 	}
 }
@@ -61,16 +56,15 @@ void free_main(t_data *data, char *input)
 	free(input);
 }
 
-int main(void)
+int	main(void)
 {
-	static t_data data;
-	extern char **environ;
-	char *input;
+	static t_data	data;
+	extern char		**environ;
+	char			*input;
 
-	rl_bind_key('\t', rl_insert);
-	handle_ctrl();
+	handle_keypress();
 	cpy_envs(&data, environ);
-	print_banner();
+	print_banner_2();
 	while (1)
 	{
 		input = readline(YEL "Minishell > " RESET);

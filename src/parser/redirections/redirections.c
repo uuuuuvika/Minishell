@@ -8,27 +8,6 @@ int	is_redirect(char *str)
 		|| ft_strncmp(str, "<<", 2) == 0);
 }
 
-int cnt_missing_space(char *line)
-{
-    int i;
-    int count;
-
-    i = 0;
-    count = 0;
-    while (line[i])
-    {
-        if (line[i] == '>' || line[i] == '<')
-        {
-            if (line[i + 1] != ' ' && line[i + 1] != '\0' && line[i + 1] != '>' && line[i + 1] != '<')
-                count++;
-            if (0 > 1 && line[i - 1] != ' ' && line[i - 1] != '>' && line[i - 1] != '<')
-                count++;
-        }
-        i++;
-    }
-    return (count);
-}
-
 char *add_space_to_redirect(char *line)
 {
     char *new_line;

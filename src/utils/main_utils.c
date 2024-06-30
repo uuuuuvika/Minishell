@@ -39,13 +39,26 @@ int	is_dsqm(t_cmd *cmd)
 void	print_banner(void)
 {
 	printf("\n");
-    printf(YEL"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
-    printf("*   __  __  __  _  _  __  ___  _  _  ___  __    __      *\n");
-    printf("*  (  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )     *\n");
-    printf("*   )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__    *\n");
-    printf("*  (_/\\/\\_)(__)(_)\\_)(__)(___/(_)(_)(___)(____)(____)   *\n");
-    printf("*                                                       *\n");
-    printf("*                  by Vika & Dai, Berlin Summer 2024    *\n");
-    printf("*                                                       *\n");
-    printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n"RESET);
+	printf(YEL "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+	printf("*   __  __  __  _  _  __  ___  _  _  ___  __    __      *\n");
+	printf("*  (  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )     *\n");
+	printf("*   )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__    *\n");
+	printf("*  (_/\\/\\_)(__)(_)\\_)(__)(___/(_)(_)(___)(____)(____)   *\n");
+	printf("*                                                       *\n");
+	printf("*                  by Vika & Dai, Berlin Summer 2024    *\n");
+	printf("*                                                       *\n");
+	printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n" RESET);
+}
+
+void	print_banner_2(void)
+{
+	printf(MAG"\n");
+	printf("   __  __  __  _  _  __  ___  _  _  ___  __    __\n");
+	printf("  (  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )\n");
+	printf("   )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__\n");
+	printf("  (_/\\/\\_)(__)(_)\\_)(__)(___/(_)(_)(___)(____)(____)\n");
+	printf("\n"RESET);
+	printf(CYN"                  by Vika & Dai, Berlin Summer 2024\n"RESET);
+	printf("\n");
+
 }
