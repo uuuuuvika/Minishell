@@ -22,6 +22,23 @@ int	cnt_args(char **args)
 	return (i);
 }
 
+void args_realloc(t_cmd *new_node)
+{
+    char **temp;
+    int i;
+
+    temp = malloc(sizeof(char *) * (new_node->num_args + 1));
+    i = 0;
+    while (i < new_node->num_args)
+    {
+        temp[i] = ft_strdup(new_node->args[i]);
+        i++;
+    }
+    temp[i] = NULL;
+    free_arr2D(new_node->args);
+    new_node->args = temp;
+}
+
 void	pipe_assign(t_cmd *command)
 {
 	int		p[2];
@@ -41,56 +58,4 @@ void	pipe_assign(t_cmd *command)
 		previous = current;
 		current = current->next;
 	}
-}
-
-
-int cnt_missing_space(char *line)
-{
-    int i;
-    int count;
-
-    i = 0;
-    count = 0;
-    while (line[i])
-    {
-        if (line[i] == '>' || line[i] == '<')
-        {
-            if (line[i + 1] != ' ' && line[i + 1] != '\0' && line[i + 1] != '>' && line[i + 1] != '<')
-                count++;
-            if (0 > 1 && line[i - 1] != ' ' && line[i - 1] != '>' && line[i - 1] != '<')
-                count++;
-        }
-        i++;
-    }
-    return (count);
-}
-
-char	*replace_tabs_with_spaces(char *line)
-{
-    char	*new_line;
-	int		i;
-
-	new_line = ft_strdup(line);
-	i = 0;
-    while(new_line[i])
-	{
-        if (new_line[i] == '\t')
-            new_line[i] = ' ';
-		i++;
-    }
-	//free(line);
-    return (new_line);
-}
-
-char	*handle_missing_spaces(char *line)
-{
-	char	*new_line;
-
-    if (cnt_missing_space(line) > 0)
-	{
-    	new_line = add_space_to_redirect(line);
-        free(line);
-        return (new_line);
-    }
-    return (line);
 }

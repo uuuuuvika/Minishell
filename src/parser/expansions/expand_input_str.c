@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*expand_line(char *line, t_data *data)
+char	*expand_input_str(char *line, t_data *data)
 {
 	char	**split;
 	char	*env;
@@ -27,9 +27,7 @@ char	*expand_line(char *line, t_data *data)
 		{
 			env = ft_getenv(split[i] + 1, data->envs);
 			if (env)
-			{
 				replace_for_expansion(&split[i], env);
-			}
 			free(env);
 		}
 		i++;

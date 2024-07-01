@@ -99,6 +99,12 @@ void	pipe_assign(t_cmd *command);
 int		pipe_cmds(t_data *data);
 
 int		parse(char *input, t_data *data);
+char	*refine_input(char *input, t_data *data);
+t_cmd	*create_cmd_node(char *input);
+void	add_cmd_to_list(t_cmd **head, t_cmd *new_node);
+void	args_realloc(t_cmd *new_node);
+int		handle_redirects(t_cmd *new_node, t_data *data, char **future_children);
+
 void	redirect_fd_dup(t_cmd *command, t_data *data);
 int		is_redirect(char *str);
 int		cnt_args(char **args);
@@ -111,10 +117,13 @@ void	return_dub_quotes(char **args, t_data *data);
 int     sub_quotes(char *line_copy, t_data *data);
 
 void	expand_arg(char **args, t_data *data);
+void	expand_env_variable(char **arg, t_data *data);
+void	expand_multiple_args(char **split, t_data *data);
+void	expand_dsqm(char **arg, t_data *data);
 int		is_expansion(char **args);
 int		is_all_dollars(char *str);
 void	replace_for_expansion(char **args, char *cmd);
-char	*expand_line(char *line, t_data *data);
+char	*expand_input_str(char *line, t_data *data);
 int		is_multi_words(char *str);
 int     count_dsqm(char **arg);
 

@@ -22,7 +22,7 @@ int ctrl_d(char *input, t_data *data)
 	return (0);
 }
 
-void simplecmd_or_pipe(t_data *data, char *input)
+void simplecmd_or_pipe(t_data *data)
 {
 	int i;
 	int fin;
@@ -43,11 +43,9 @@ void simplecmd_or_pipe(t_data *data, char *input)
 		dup2(fin, STDIN);
 		dup2(fout, STDOUT);
 	}
-	else if (ft_strncmp(input, "<<", 2) != 0 && data->commands)
-	{
+	else
 		// printf(YEL "Pipe\n" RESET);
 		pipe_cmds(data);
-	}
 }
 
 void free_main(t_data *data, char *input)
@@ -78,7 +76,7 @@ int	main(void)
 				free(input);
 				continue;
 			}
-			simplecmd_or_pipe(&data, input);
+			simplecmd_or_pipe(&data);
 		}
 		free_main(&data, input);
 	}
