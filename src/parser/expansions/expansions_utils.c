@@ -40,6 +40,25 @@ int	is_multi_words(char *str)
 	return (0);
 }
 
+int count_dsqm(char **arg)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while ((*arg)[i])
+	{
+		if ((*arg)[i] == '$' && (*arg)[i + 1] == '?')
+		{
+			count++;
+			i++;
+		}
+		i++;
+	}
+	return (count);
+}
+
 void	replace_for_expansion(char **args, char *cmd)
 {
 	free(*args);

@@ -22,6 +22,23 @@ int	cnt_args(char **args)
 	return (i);
 }
 
+void args_realloc(t_cmd *new_node)
+{
+    char **temp;
+    int i;
+
+    temp = malloc(sizeof(char *) * (new_node->num_args + 1));
+    i = 0;
+    while (i < new_node->num_args)
+    {
+        temp[i] = ft_strdup(new_node->args[i]);
+        i++;
+    }
+    temp[i] = NULL;
+    free_arr2D(new_node->args);
+    new_node->args = temp;
+}
+
 void	pipe_assign(t_cmd *command)
 {
 	int		p[2];

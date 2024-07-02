@@ -87,7 +87,7 @@ LEAKS
 - [x] `cat | cat | rev`
 - [x] `cat '` Seg fault ----> seg fault fixed, but need to check leaks
 - [ ] iotcl problem
-- [ ] `<< E` and then $?
+- [x] `<< E` and then $?
       
 ## General TODO:
 - [x] Simple built in commands: echo, echo -n, cd, pwd, export, unset, env, exit
