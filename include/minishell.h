@@ -44,6 +44,7 @@
 # include <sys/fcntl.h>
 # include <readline/history.h>
 # include <errno.h>
+# include <termios.h>
 
 extern int	g_signal;
 
@@ -73,7 +74,7 @@ typedef struct s_data
 
 void	write_error(const char *msg);
 int		handle_error(const char *message);
-int		check_NULL(char *str);
+int		check_null(char *str);
 void	free_arr2D(char **arr2D);
 void	free_data(t_data *data);
 

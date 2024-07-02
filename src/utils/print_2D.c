@@ -1,9 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_2D.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/02 14:34:57 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/02 14:35:52 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void print_2D(char **args)
+void	print_2D(char **args)
 {
-	int j = 0;
-	while(args[j])
+	int j;
+
+	j = 0;
+	while (args[j])
 	{
 		printf(BLU "args[%d]: %s\n" RESET, j, args[j]);
 		j++;

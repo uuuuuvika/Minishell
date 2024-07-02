@@ -6,12 +6,11 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:18:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 16:54:45 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/02 13:15:56 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <termios.h>
 
 int	ctrl_d(char *input, t_data *data)
 {
@@ -19,7 +18,6 @@ int	ctrl_d(char *input, t_data *data)
 	{
 		free(input);
 		free_data(data);
-		//printf(MAG "you have pressed CTRL-D\n" RESET);
 		return (1);
 	}
 	return (0);

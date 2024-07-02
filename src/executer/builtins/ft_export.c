@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 17:10:19 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:31:01 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,14 @@ int	add_var(char ***envar, char *newvar)
 	return (0);
 }
 
+void	export_error_and_code(char *arg, t_data *data)
+{
+	write_error("minishell: export: ");
+	write_error(arg);
+	write_error(": not a valid identifier\n");
+	data->exit_code = 1;
+}
+
 void	ft_export(t_data *data, t_cmd *cmd, int i)
 {
 	char	*env_name;
@@ -70,21 +78,14 @@ void	ft_export(t_data *data, t_cmd *cmd, int i)
 		while (cmd->args[i] != NULL)
 		{
 			env_name = get_env_name(cmd->args[i], '=');
-		//	printf(RED"env_name: %s\n"RESET, env_name);
-		//	printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
 			if (!(ft_strchr(cmd->args[i], '=')) && ft_isallalpha(cmd->args[i]))
 			{
-				//printf(RED"cmd->args[i]: %s\n"RESET, cmd->args[i]);
-			//	data->exit_code = 1;
 				i++;
 				return ;
 			}
 			else if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name) || ft_isall_digit(env_name) || ft_strchr(cmd->args[i], '=') == NULL)
 			{
-				write_error("minishell: export: ");
-				write_error(cmd->args[i]);
-				write_error(": not a valid identifier\n");
-				data->exit_code = 1;
+				export_error_and_code(cmd->args[i], data);
 				free(env_name);
 				return ;
 			}
@@ -95,12 +96,10 @@ void	ft_export(t_data *data, t_cmd *cmd, int i)
 			}
 			free(env_name);
 			if (!replace_var(data->envs, cmd->args[i]))
-			{
-				//printf(GRN "Add variable %s\n" RESET, cmd->args[i]);
 				add_var(&data->envs, cmd->args[i]);
-			}
 			i++;
 		}
     }
     data->exit_code = 0;
 }
+

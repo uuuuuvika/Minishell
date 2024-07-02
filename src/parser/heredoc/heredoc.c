@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 20:04:49 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 00:33:50 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/02 13:12:15 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,8 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 			if (ft_strchr(line, '$')) // check if there are quotes
 			{
 				exp_line = split_expand_join(line, data);
-				// free(line);
+				free(line);
 				line = exp_line;
-				// free(exp_line);
 			}
 		}
 		write(fd, line, ft_strlen(line));
