@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:57:05 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 01:14:53 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:17:16 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	create_child_nodes(t_data *data, char *expanded_line)
 		nch++;
 	}
 	data->num_of_children = nch;
-	free_arr2D(future_children);
+	free_dobarr(future_children);
 	return (0);
 }
 
@@ -93,7 +93,7 @@ int	parse(char *input, t_data *data)
 	// data->num_of_children = nch;
 	
 	pipe_assign(data->commands);
-	//free_arr2D(future_children);
+	//free_dobarr(future_children);
 	//print_cmd_nodes(data);
 	return (0);
 }

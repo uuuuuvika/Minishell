@@ -26,6 +26,6 @@ char	*dobarr_to_str(char **args)
 		str = ft_strjoin(str, args[i]);
 		i++;
 	}
-	free_arr2D(args);
+	free_dobarr(args);
 	return (str);
 }

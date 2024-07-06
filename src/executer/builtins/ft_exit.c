@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:08 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/02 13:45:42 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:17:17 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_exit(t_data *data)
 	}
 	else
 		data->exit_code = 0;
-	free_arr2D(data->envs);
+	free_dobarr(data->envs);
 	free_data(data);
 	clear_history();
 	exit(data->exit_code);

@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 23:31:50 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:17:17 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*create_path(char *cmd, char **paths, struct stat statbuf)
 		path = ft_strjoin(tmp_path, cmd);
 		if (stat(path, &statbuf) == 0)
 		{
-			free_arr2D(paths);
+			free_dobarr(paths);
 			return (path);
 		}
 		free(path);
@@ -51,7 +51,7 @@ char	*check_rel_path(char *cmd, t_data *data, struct stat statbuf)
 	path = create_path(cmd, paths, statbuf);
 	if (path != 0)
 		return (path);
-	free_arr2D(paths);
+	free_dobarr(paths);
 	return (NULL);
 }
 

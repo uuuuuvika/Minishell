@@ -82,7 +82,7 @@ void	write_error(const char *msg);
 void	write_error_arg(const char *arg, const char *msg);
 int		handle_error(const char *message);
 int		check_null(char *str);
-void	free_arr2D(char **arr2D);
+void	free_dobarr(char **arr2D);
 void	free_data(t_data *data);
 void	free_main(t_data *data, char *input);
 
