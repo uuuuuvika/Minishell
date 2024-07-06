@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:59:33 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 17:35:21 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:28:30 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_arr2D(char **arr2D)
+void	free_dobarr(char **arr2D)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ void	free_cmd(t_cmd *cmd)
 	while (current->next != NULL)
 	{
 		next = current->next;
-		free_arr2D(current->args);
+		free_dobarr(current->args);
 		current->args = NULL;
 		current->num_args = 0;
 		current->pipe_in = 0;
@@ -45,7 +45,7 @@ void	free_cmd(t_cmd *cmd)
 		free(current);
 		current = next;
 	}
-	free_arr2D(current->args);
+	free_dobarr(current->args);
 	free(current);
 	current = NULL;
 }
@@ -59,8 +59,8 @@ void	free_data(t_data *data)
 	free_cmd(data->commands);
 	data->commands = NULL;
 	data->num_of_children = 0;
-	free_arr2D(data->sub);
-	free_arr2D(data->subb);
+	free_dobarr(data->sub);
+	free_dobarr(data->subb);
 	data->sub = NULL;
 	data->subb = NULL;
 	data->cmn_here_doc = 0;

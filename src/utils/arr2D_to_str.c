@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arr2D_to_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 13:21:04 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/02 13:27:39 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:28:30 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*arr2D_to_str(char **args)
 		str = ft_strjoin(str, args[i]);
 		i++;
 	}
-	free_arr2D(args);
+	free_dobarr(args);
 	return (str);
 }
