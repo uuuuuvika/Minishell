@@ -143,6 +143,7 @@ void	fd_dup2(t_cmd *command);
 void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
 void	read_heredoc_simple(char *delimiter, t_data *data);
 int		heredoc_preprocess(t_cmd *new_node, t_data *data);
+void	handle_here_doc_dup(t_cmd *current);
 char	*split_expand_join(char *line, t_data *data);
 
 void	print_envs(t_data *data);
