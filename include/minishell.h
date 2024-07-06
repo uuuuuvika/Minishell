@@ -120,6 +120,9 @@ void	return_dub_quotes(char **args, t_data *data);
 //int     sub_quotes(char *line_copy, t_data *data);
 int		count_quotes(char *line_copy, char *del);
 int		handle_odd_quotes(int count_subs, t_data *data, char *del);
+int		word_len(char *line_copy, int start, char *del);
+void	handle_empty_quotes(char *arg, char *del);
+void	replace_substring(char **arg, int j, char *sub);
 
 void	expand_arg(char **args, t_data *data);
 void	expand_env_variable(char **arg, t_data *data);

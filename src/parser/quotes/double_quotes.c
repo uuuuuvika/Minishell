@@ -1,86 +1,34 @@
 #include "minishell.h"
 
-// int	sub_dub_quotes(char *line_copy, t_data *data)
-// {
-//     int index = 0;
-//     int count_subs = 0;
-//     while (line_copy[index])
-//     {
-//         if (line_copy[index] == '"')
-//             count_subs++;
-//         index++;
-//     }
-//     if (count_subs % 2 != 0)
-//     {
-//         char *del = "\"";
-//         read_heredoc_simple(del, data);
-//         return (1);
-//     }
-
-//     data->sub = malloc(((count_subs / 2) + 1) * sizeof(char *));
-//     int s_index = 0;
-//     index = 0;
-//     while (line_copy[index])
-//     {
-//         if (line_copy[index] == '"')
-//         {
-//             int k = index;
-
-//             while (line_copy[++k] != '"')
-//                 ;
-//             int len = k - index;
-//             char *str = ft_calloc(len, sizeof(char));
-//             int str_index = 0;
-//             while (line_copy[++index] != '"')
-//             {
-//                 str[str_index++] = line_copy[index];
-//                 line_copy[index] = '*';
-//             }
-//             data->sub[s_index++] = ft_strdup(str);
-//             free(str);
-//         }
-//         index++;
-//     }
-//     data->sub[s_index] = NULL;
-//     return (0);
-// }
-
-
-int find_length_to_next_quote(char *line_copy, int index)
+int get_quoted_substr(char *line_copy, char *str, int index)
 {
-    int k;
-
-    k = index;
-    while (line_copy[++k] != '"')
-        ;
-    return k - index;
-}
-
-void extract_and_replace(char *line_copy, char *str, int *index, int *s_index, t_data *data)
-{
-    int str_index = 0;
-    while (line_copy[++(*index)] != '"')
+    int str_index;
+    
+    str_index = 0;
+    while (line_copy[++index] != '"')
     {
-        str[str_index++] = line_copy[*index];
-        line_copy[*index] = '*';
+        str[str_index++] = line_copy[index];
+        line_copy[index] = '*';
     }
-    data->sub[(*s_index)++] = ft_strdup(str);
-    free(str);
+    return index;
 }
 
 void sub_d_quotes(char *line_copy, t_data *data)
 {
-    int index;
+    int index = 0;
     int s_index = 0;
+    int len;
+    char *str;
 
-    index = 0;
     while (line_copy[index])
     {
         if (line_copy[index] == '"')
         {
-            int len = find_length_to_next_quote(line_copy, index);
-            char *str = ft_calloc(len, sizeof(char));
-            extract_and_replace(line_copy, str, &index, &s_index, data);
+            len = word_len(line_copy, index, "\"");
+            str = ft_calloc(len, sizeof(char));
+            index = get_quoted_substr(line_copy, str, index);
+            data->sub[s_index++] = ft_strdup(str);
+            free(str);
         }
         index++;
     }
@@ -99,59 +47,29 @@ int sub_dub_quotes(char *line_copy, t_data *data)
     return (0);
 }
 
-// void return_dub_quotes(char **args, t_data *data)
-// {
-//     int i = 0;
-//     int t = 0;
-//     while (args[i])
-//     {
-//         int j = 0;
-//         if (args[i][0] == '"' && args[i][1] == '"')
-//             args[i][0] = '\0';
-//         else
-//         {
-//             while (args[i][j])
-//             {
-//                 if (args[i][j] == '"' && args[i][j + 1] == '*')
-//                 {
-//                     char *tmp = malloc((j + 2) * sizeof(char));
-//                     ft_strlcpy(tmp, args[i], j + 1);
-//                     // printf("tmp: %s\n", tmp);
-//                     free(args[i]);
-//                     args[i] = ft_strjoin(tmp, data->sub[t]);
-//                     t++;
-//                 }
-//                 j++;
-//             }
-//         }
-//         i++;
-//     }
-// }
-
 void return_dub_quotes(char **args, t_data *data)
 {
-    int i = 0;
-    int t = 0;
+    int i;
+    int t;
+    int j;
+    char *tmp;
+
+    i = 0;
+    t = 0;
     while (args[i])
     {
-        int j = 0;
-        if (args[i][0] == '"' && args[i][1] == '"')
-            args[i][0] = '\0';
-        else
+        j = 0;
+        handle_empty_quotes(args[i], "\"");
+        while (args[i][j])
         {
-            while (args[i][j])
+            if (args[i][j] == '"' && args[i][j + 1] == '*')
             {
-                if (args[i][j] == '"' && args[i][j + 1] == '*')
-                {
-                    char *tmp = malloc((j + 2) * sizeof(char));
-                    ft_strlcpy(tmp, args[i], j + 1);
-                    // printf("tmp: %s\n", tmp);
-                    free(args[i]);
-                    args[i] = ft_strjoin(tmp, data->sub[t]);
-                    t++;
-                }
-                j++;
+                tmp = malloc((j + 2) * sizeof(char));
+                ft_strlcpy(tmp, args[i], j + 1);
+                free(args[i]);
+                args[i] = ft_strjoin(tmp, data->sub[t++]);
             }
+            j++;
         }
         i++;
     }
