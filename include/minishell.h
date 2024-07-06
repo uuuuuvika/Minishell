@@ -141,7 +141,7 @@ char    *split_expand_join(char *line, t_data *data);
 char	*split_expand_join(char *line, t_data *data);
 
 void	print_envs(t_data *data);
-void	print_2D(char **args);
+void	print_dobarr(char **args);
 void	print_cmd_nodes(t_data *data);
 
 char	*arr2D_to_str(char **args);
@@ -161,5 +161,7 @@ int		is_str_space(char *str);
 int		is_dsqm(t_cmd *cmd);
 void	print_banner(void);
 void	print_banner_2(void);
+void	export_error_and_code(char *arg, t_data *data);
+int		varname_len(char *var);
 
 #endif

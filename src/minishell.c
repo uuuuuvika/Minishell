@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:18:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 17:37:11 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 18:14:12 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ int	main(void)
 
 	handle_keypress();
 	cpy_envs(&data, environ);
-	//print_banner_2();
 	while (1)
 	{
 		input = readline(YEL "Minishell > " RESET);

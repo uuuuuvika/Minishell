@@ -1,38 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 18:27:08 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 18:12:46 by darotche         ###   ########.fr       */
+/*   Created: 2024/07/06 18:37:16 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/06 18:39:24 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_isdigit(int c)
+void	export_error_and_code(char *arg, t_data *data)
 {
-	if ((c >= '0' && c <= '9'))
-	{
-		return (1);
-	}
-	return (0);
+	write_error("minishell: export: ");
+	write_error(arg);
+	write_error(": not a valid identifier\n");
+	data->exit_code = 1;
 }
 
-int isalldigit(char *str)
+int	varname_len(char *var)
 {
-	int i;
+	int	i;
 
-	if (*str == '\0')
-		return (0); 
 	i = 0;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
+	while (var[i] && var[i] != '=')
 		i++;
-	}
-	return (1);
+	return (i);
 }

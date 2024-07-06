@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/02 13:28:55 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:59:44 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,6 @@ char	*find_path(char *cmd, t_data *data)
 
 	statbuf.st_mode = 0;
 	path = NULL;
-	// if (ft_strcmp(cmd, "") == 0)
-    // {
-    //     errno = ENOENT; // No such file or directory
-    //     perror("-minishell");
-    // }
 	path = check_abs_path(cmd, data, statbuf);
 	if (path != NULL)
 		return (path);
@@ -106,12 +101,6 @@ char	*find_path(char *cmd, t_data *data)
 			data->exit_code = 0;
 		return (path);
 	}
-	//  write_error("minishell: ");
-    // // write_error(cmd);
-    // //write_error(": command not found\n");
-    // errno = ENOENT;
-    // perror("-minishell");
-    // printf(BLU "-minishell: %s: Command not found\n" RESET, cmd);
 	data->exit_code = 127;
 	return (NULL);
 }

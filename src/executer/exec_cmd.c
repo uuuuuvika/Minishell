@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:41:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 16:26:30 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 18:02:48 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 	int		i;
 
 	path = NULL;
-	// if (cmd->num_args == 0)
-	// {
-	// 	printf("minishell: : command not found\n");
-	// 	return ;
-	// }
 	i = 0;
 	while (ft_strcmp(cmd->args[i], "\0") == 0 && cmd->args[i + 1] != NULL)
 		i++;
@@ -55,7 +50,6 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 		exec_builtin(data, cmd, i);
 	else
 	{
-		//Check if it will be cmd not found or is directory
 		path = find_path(cmd->args[i], data);
 		if (!path)
 		{
