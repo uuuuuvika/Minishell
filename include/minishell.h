@@ -33,7 +33,7 @@
 #define ERR_DUP2_RED_OUT "minishell: dup2 error: redirect_out\n"
 #define ERR_DUP2_RED_IN "minishell: dup2 error: redirect_in\n"
 #define ERR_DUP2_HER_DOC "minishell: dup2 error: here_doc\n"
-#define ERR_NO_FILE "No such file or directory\n"
+#define ERR_NO_FILE ": No such file or directory\n"
 
 # include "libft.h"
 # include <unistd.h>
@@ -82,7 +82,7 @@ void	write_error(const char *msg);
 void	write_error_arg(const char *arg, const char *msg);
 int		handle_error(const char *message);
 int		check_null(char *str);
-void	free_arr2D(char **arr2D);
+void	free_dobarr(char **arr2D);
 void	free_data(t_data *data);
 void	free_main(t_data *data, char *input);
 
@@ -117,6 +117,9 @@ void	redirect_fd_dup(t_cmd *command, t_data *data);
 int		is_redirect(char *str);
 int		cnt_args(char **args);
 int		redirect_assign(t_cmd *cmd, t_data *data);
+int		open_file(const char *f, int flags, t_cmd *current, int is_out);
+int		handle_redirection(const char *f, int flags, t_cmd *current, int is_out);
+int		process_redirection(t_cmd *current, int *index, int flags, int is_out);
 
 int     sub_sin_quotes(char *line_copy, t_data *data);
 void	return_sin_quotes(char **args, t_data *data);

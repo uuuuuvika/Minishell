@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 20:18:47 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/26 20:18:48 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:28:30 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void args_realloc(t_cmd *new_node)
         i++;
     }
     temp[i] = NULL;
-    free_arr2D(new_node->args);
+    free_dobarr(new_node->args);
     new_node->args = temp;
 }
 

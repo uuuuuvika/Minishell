@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 17:14:47 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:28:30 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	add_var(char ***envar, char *newvar)
 	}
 	tmp[count_env(*envar)] = ft_strdup(newvar);
 	tmp[count_env(*envar) + 1] = NULL;
-	free_arr2D(*envar);
+	free_dobarr(*envar);
 	*envar = tmp;
 	return (0);
 }
