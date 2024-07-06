@@ -15,7 +15,7 @@ int	sub_sin_quotes(char *line_copy, t_data *data)
 	{
 		char *del = "\'";
 		read_heredoc_simple(del, data);
-		printf(RED"Error: single quotes not closed\n"RESET);
+		//printf(RED"Error: single quotes not closed\n"RESET);
 		return (1);
 	}
 
@@ -45,6 +45,8 @@ int	sub_sin_quotes(char *line_copy, t_data *data)
 	data->subb[s_index] = NULL;
 	return (0);
 }
+
+
 
 void	return_sin_quotes(char **args, t_data *data)
 {
