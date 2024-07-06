@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:18:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/30 01:02:57 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:22:31 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	main(void)
 
 	handle_keypress();
 	cpy_envs(&data, environ);
-	print_banner_2();
+	//print_banner_2();
 	while (1)
 	{
 		input = readline(YEL "Minishell > " RESET);

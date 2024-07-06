@@ -33,6 +33,6 @@ int parse(char *input, t_data *data)
 	data->num_of_children = nch;
 	pipe_assign(data->commands);
 	free_arr2D(future_children);
-	print_cmd_nodes(data);
+	//print_cmd_nodes(data);
 	return (0);
 }
