@@ -8,6 +8,19 @@ int parse(char *input, t_data *data)
 	int nch;
 	char *expanded_line;
 
+	if(ft_strcmp(input, "\'\'") == 0 || ft_strcmp(input, "\"\"") == 0)
+	{
+		printf("minishell: : command not found\n");
+		data->exit_code = 127;
+		return (1);
+	}
+	if(ft_strcmp(input, "\' \'") == 0 || ft_strcmp(input, "\" \"") == 0)
+	{
+		printf("minishell:  : command not found\n");
+		data->exit_code = 127;
+		return (1);
+	}
+	
 	expanded_line = refine_input(input, data);
 	if (!expanded_line)
 		return (1);
