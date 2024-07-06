@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 22:18:07 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:25:37 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,8 @@ void	expand_single_arg(char **arg, t_data *data)
 {
 	if ((*arg)[0] == '$' && (*arg)[1] != '?')
 		expand_env_variable(arg, data);
-	else if ((*arg)[0] == '$' && (*arg)[1] == '?')
-		expand_dsqm(arg, data);
 	else
-		return;
+		expand_dsqm(arg, data);
 }
 
 void	expand_arg(char **args, t_data *data)
