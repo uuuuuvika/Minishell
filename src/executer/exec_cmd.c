@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:41:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/26 19:35:07 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:26:30 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ void	exec_builtin(t_data *data, t_cmd *cmd, int i)
 		ft_unset(data, cmd, i);
 	else if (ft_strcmp(cmd->args[i], "exit") == 0)
 		ft_exit(data);
+}
+
+void	exec_error(char *cmd)
+{
+	write_error("minishell: ");
+	write_error(cmd);
+	write_error(": command not found\n");
 }
 
 void	exec_cmd(t_data *data, t_cmd *cmd)
@@ -52,12 +59,10 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 		path = find_path(cmd->args[i], data);
 		if (!path)
 		{
-			write_error("minishell: ");
-			write_error(cmd->args[i]);
-			write_error(": command not found\n");
+			exec_error(cmd->args[i]);
 			return ;
 		}
 		execve(path, &cmd->args[i], data->envs);
-		free(path);/// Added this line after valgrind
+		free(path);
 	}
 }

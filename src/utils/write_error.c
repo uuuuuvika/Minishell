@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/02 14:54:28 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/02 15:13:11 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void write_error(const char *msg)
+void	write_error(const char *msg)
 {
-    write(2, msg, ft_strlen(msg)); // 2 is the file descriptor for stderr
+	write(2, msg, ft_strlen(msg));
 }

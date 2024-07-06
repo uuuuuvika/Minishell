@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:27 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/26 19:00:08 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/02 14:16:14 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_echo(t_data *data, t_cmd *cmd, int i)
 {
-	(void) data;/////
+	(void) data;
 	i++;
 	while (cmd->args && ft_strcmp(cmd->args[i], "-n") == 0) 
 		i++;

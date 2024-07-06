@@ -1,18 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_expansion.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/02 14:49:45 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/02 14:52:04 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int is_expansion(char **args) //find expansion in args
+int	is_expansion(char **args)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(args[i])
+	while (args[i])
 	{
 		if (args[i][0] == '$')
-		{
-			//printf(YEL "'$' found: %s\n" RESET, args[i]);
-			return(1);
-		}
+			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }

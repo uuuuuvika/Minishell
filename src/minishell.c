@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:18:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 17:22:31 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:37:11 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int ctrl_d(char *input, t_data *data)
 {
 	if (!input || errno == EINVAL || errno == EIO)
 	{
-		free_main(data, input);
+		free(input);
+		free_data(data);
 		return (1);
 	}
 	return (0);

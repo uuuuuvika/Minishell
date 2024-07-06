@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:08:28 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 17:20:14 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:35:44 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 int	is_space(char c)
 {
-	if (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f' || c == '\r')
+	if (c == ' ' || c == '\t' || c == '\n'
+		|| c == '\v' || c == '\f' || c == '\r')
 		return (1);
 	return (0);
 }
 
 int	is_str_space(char *str)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (str[i])
 	{
 		if (!is_space(str[i]))
@@ -39,7 +42,7 @@ int	is_dsqm(t_cmd *cmd)
 void	print_banner(void)
 {
 	printf("\n");
-	printf(YEL "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
+	printf(YEL"* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n");
 	printf("*   __  __  __  _  _  __  ___  _  _  ___  __    __      *\n");
 	printf("*  (  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )     *\n");
 	printf("*   )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__    *\n");
@@ -47,18 +50,5 @@ void	print_banner(void)
 	printf("*                                                       *\n");
 	printf("*                  by Vika & Dai, Berlin Summer 2024    *\n");
 	printf("*                                                       *\n");
-	printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n" RESET);
-}
-
-void	print_banner_2(void)
-{
-	printf(MAG"\n");
-	printf("   __  __  __  _  _  __  ___  _  _  ___  __    __\n");
-	printf("  (  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )\n");
-	printf("   )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__\n");
-	printf("  (_/\\/\\_)(__)(_)\\_)(__)(___/(_)(_)(___)(____)(____)\n");
-	printf("\n"RESET);
-	printf(CYN"                  by Vika & Dai, Berlin Summer 2024\n"RESET);
-	printf("\n");
-
+	printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n"RESET);
 }

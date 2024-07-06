@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_null.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/02 13:19:02 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/02 13:26:23 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int check_NULL(char *str)
+int	check_null(char *str)
 {
-    if (str == NULL)
-    {
-        printf("Error: %s\n", str);
-        return (-1);
-    }
-    return (0);
+	if (str == NULL)
+	{
+		printf("Error: %s\n", str);
+		return (-1);
+	}
+	return (0);
 }
