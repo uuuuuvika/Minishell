@@ -13,8 +13,8 @@ int is_redirect(char *str)
 {
     return (ft_strcmp(str, ">") == 0 
     || ft_strcmp(str, "<") == 0 
-    || ft_strcmp(str, ">>") == 0);
-    //|| ft_strcmp(str, "<<") == 0);
+    || ft_strcmp(str, ">>") == 0
+    || ft_strcmp(str, "<<") == 0);
 }
 
 char *add_space_to_redirect(char *line)
@@ -116,8 +116,10 @@ int redirect_assign(t_cmd *current, t_data *data)
         }
         else if (ft_strcmp(current->args[i], "<<") == 0){
                 read_heredoc(current->args[i + 1], current, data);
-                current->args[i][0] ='\0';
-                current->args[i + 1][0] = '\0';
+                //current->args[i][0] ='\0';
+                //current->args[i + 1][0] = '\0';
+                //current->args[i] = ft_strdup("here_doc");
+                //current->args[i + 1] = '';
                 i++;
         }
         i++;
