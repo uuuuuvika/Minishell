@@ -29,7 +29,11 @@
 # define WHT "\e[0;37m"
 # define RESET "\033[0m"
 
-#define ERR_SYNTAX "syntax error near unexpected token `newline'\n"
+#define ERR_SYNTAX "minishell: syntax error near unexpected token `newline'\n"
+#define ERR_DUP2_RED_OUT "minishell: dup2 error: redirect_out\n"
+#define ERR_DUP2_RED_IN "minishell: dup2 error: redirect_in\n"
+#define ERR_DUP2_HER_DOC "minishell: dup2 error: here_doc\n"
+#define ERR_NO_FILE "No such file or directory\n"
 
 # include "libft.h"
 # include <unistd.h>
@@ -75,6 +79,7 @@ typedef struct s_data
 }	t_data;
 
 void	write_error(const char *msg);
+void	write_error_arg(const char *arg, const char *msg);
 int		handle_error(const char *message);
 int		check_null(char *str);
 void	free_arr2D(char **arr2D);
