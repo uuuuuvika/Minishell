@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:59:33 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/02 15:12:03 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 16:43:39 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,15 @@ void	free_arr2D(char **arr2D)
 	free(arr2D);
 }
 
-void	free_cmd_list(t_cmd *cmd)
+void	free_cmd(t_cmd *cmd)
 {
 	t_cmd	*current;
 	t_cmd	*next;
 
+	if (cmd == NULL)
+		return ;
 	current = cmd;
-	while (current != NULL)
+	while (current->next != NULL)
 	{
 		next = current->next;
 		free_arr2D(current->args);
@@ -43,7 +45,9 @@ void	free_cmd_list(t_cmd *cmd)
 		free(current);
 		current = next;
 	}
+	free_arr2D(current->args);
 	free(current);
+	current = NULL;
 }
 
 void	free_data(t_data *data)
@@ -52,7 +56,8 @@ void	free_data(t_data *data)
 	{
 		return ;
 	}
-	free_cmd_list(data->commands);
+	free_cmd(data->commands);
+	data->commands = NULL;
 	data->num_of_children = 0;
 	free_arr2D(data->sub);
 	free_arr2D(data->subb);

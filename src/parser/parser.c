@@ -45,7 +45,6 @@ int parse(char *input, t_data *data)
         new_node->redirect_out = -1;
         new_node->here_doc = 0;
         new_node->next = NULL;
-
         if (heredoc_preprocess(new_node))
         {
             data->exit_code = 2;
@@ -71,7 +70,6 @@ int parse(char *input, t_data *data)
             data->exit_code = 1;
             return (1);
         }
-
         new_node->args = realloc(new_node->args, sizeof(char *) * (new_node->num_args + 1));
         new_node->args[new_node->num_args] = NULL;
 

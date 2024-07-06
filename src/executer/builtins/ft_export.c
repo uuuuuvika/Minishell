@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/02 14:31:01 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:14:47 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ void	ft_export(t_data *data, t_cmd *cmd, int i)
 		{
 			env_name = get_env_name(cmd->args[i], '=');
 			if (!(ft_strchr(cmd->args[i], '=')) && ft_isallalpha(cmd->args[i]))
-			{
-				i++;
 				return ;
-			}
 			else if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name) || ft_isall_digit(env_name) || ft_strchr(cmd->args[i], '=') == NULL)
 			{
 				export_error_and_code(cmd->args[i], data);
@@ -90,10 +87,7 @@ void	ft_export(t_data *data, t_cmd *cmd, int i)
 				return ;
 			}
 			if (ft_strchr(cmd->args[i], '=') == NULL)
-			{
 				data->exit_code = 1;
-				i++;
-			}
 			free(env_name);
 			if (!replace_var(data->envs, cmd->args[i]))
 				add_var(&data->envs, cmd->args[i]);
