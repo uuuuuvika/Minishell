@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_cmd_to_list.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/06 17:51:41 by vshcherb          #+#    #+#             */
+/*   Updated: 2024/07/06 17:52:44 by vshcherb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void add_cmd_to_list(t_cmd **cmd_list, t_cmd *new_node)
+void	add_cmd_to_list(t_cmd **cmd_list, t_cmd *new_node)
 {
-	t_cmd *current;
+	t_cmd	*current;
 
 	current = NULL;
 	if (*cmd_list == NULL)
