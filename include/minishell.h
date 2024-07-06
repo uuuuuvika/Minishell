@@ -29,6 +29,8 @@
 # define WHT "\e[0;37m"
 # define RESET "\033[0m"
 
+#define ERR_SYNTAX "syntax error near unexpected token `newline'\n"
+
 # include "libft.h"
 # include <unistd.h>
 # include <signal.h>
@@ -115,7 +117,12 @@ int     sub_sin_quotes(char *line_copy, t_data *data);
 void	return_sin_quotes(char **args, t_data *data);
 int     sub_dub_quotes(char *line_copy, t_data *data);
 void	return_dub_quotes(char **args, t_data *data);
-int     sub_quotes(char *line_copy, t_data *data);
+//int     sub_quotes(char *line_copy, t_data *data);
+int		count_quotes(char *line_copy, char *del);
+int		handle_odd_quotes(int count_subs, t_data *data, char *del);
+int		word_len(char *line_copy, int start, char *del);
+void	handle_empty_quotes(char *arg, char *del);
+void	replace_substring(char **arg, int j, char *sub);
 
 void	expand_arg(char **args, t_data *data);
 void	expand_env_variable(char **arg, t_data *data);
@@ -133,11 +140,9 @@ void	ultimate_fd_close(t_data *data);
 void	ultimate_wait(t_data *data, pid_t *pid);
 void	fd_dup2(t_cmd *command);
 
-
-void    read_heredoc(char *delimiter, t_cmd *current, t_data *data);
-void    read_heredoc_simple(char *delimiter, t_data *data);
-int     heredoc_preprocess(t_cmd *new_node, t_data *data);
-char    *split_expand_join(char *line, t_data *data);
+void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
+void	read_heredoc_simple(char *delimiter, t_data *data);
+int		heredoc_preprocess(t_cmd *new_node, t_data *data);
 char	*split_expand_join(char *line, t_data *data);
 
 void	print_envs(t_data *data);
@@ -155,6 +160,7 @@ void	sig_handler(int sig);
 void	handle_keypress(void);
 void	sig_handler_fork(int sig);
 void	handle_keypress_fork(t_data *data);
+void	handle_sigint_exit_code(t_data *data);
 
 int		is_space(char c);
 int		is_str_space(char *str);

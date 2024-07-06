@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_cmd_node.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/06 17:51:52 by vshcherb          #+#    #+#             */
+/*   Updated: 2024/07/06 17:52:57 by vshcherb         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_cmd *create_cmd_node(char *cmd_str)
+t_cmd	*create_cmd_node(char *cmd_str)
 {
-	t_cmd *new_node;
+	t_cmd	*new_node;
 
 	new_node = malloc(sizeof(t_cmd));
 	new_node->args = ft_split(cmd_str, ' ');

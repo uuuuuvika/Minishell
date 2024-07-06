@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_arg.c                                       :+:      :+:    :+:   */
+/*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/27 14:41:05 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 00:08:48 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,22 @@ void	expand_env_variable(char **arg, t_data *data)
 	free(env_value);
 }
 
-void expand_multiple_args(char **split, t_data *data)
+void	expand_multiple_args(char **split, t_data *data)
 {
-	int j;
+	int	i;
 
-	j = 0;
-	while (split[j])
+	i = 0;
+	while (split[i])
 	{
-		if (split[j][0] == '$' && split[j][1] == '?')
-		{
-			expand_dsqm(&split[j], data);
-			//return;
-		}
-		else if (split[j][0] == '$')
-			expand_env_variable(&split[j], data);
-		j++;
+		if (split[i][0] == '$' && split[i][1] == '?')
+			expand_dsqm(&split[i], data);
+		else if (split[i][0] == '$')
+			expand_env_variable(&split[i], data);
+		i++;
 	}
 }
 
-void expand_single_arg(char **arg, t_data *data)
+void	expand_single_arg(char **arg, t_data *data)
 {
 	if ((*arg)[0] == '$' && (*arg)[1] != '?')
 		expand_env_variable(arg, data);
