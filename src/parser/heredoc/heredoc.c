@@ -66,10 +66,11 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 {
 	char	*line;
 	int		fd;
-	char *exp_line;
+	//char *exp_line;
 
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	current->here_doc = fd;
+	
 	g_signal = 0; // Important to reset signal
 	while (1)
 	{
@@ -86,13 +87,13 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 		}
 		if (current->here_doc_exp)
 		{
-			if (ft_strchr(line, '$')) // check if there are quotes
-			{
-				exp_line = split_expand_join(line, data);
+			//if (ft_strchr(line, '$')) // check if there are quotes
+			//{
+				//exp_line = split_expand_join(line, data);
 				// free(line);
-				line = exp_line;
+				line = expand_input_str(line, data);
 				// free(exp_line);
-			}
+			//}
 		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);

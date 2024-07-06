@@ -32,6 +32,7 @@ char	*expand_input_str(char *line, t_data *data)
 		}
 		i++;
 	}
+	free(line);
 	new_line = arr2D_to_str(split);
 	return (new_line);
 }

@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-char *refine_input(char *input, t_data *data)
+char	*refine_input(char *input, t_data *data)
 {
 	char *clean_and_expanded_line;
 	char *line_copy;
@@ -11,6 +11,8 @@ char *refine_input(char *input, t_data *data)
 	line_copy = replace_tabs_with_spaces(input);
 	line_copy_2 = handle_missing_spaces(line_copy);
 	clean_and_expanded_line = expand_input_str(line_copy_2, data);
-	free(line_copy);
+	//free(line_copy);
 	return (clean_and_expanded_line);
 }
+
+// cat << E

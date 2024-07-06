@@ -80,7 +80,7 @@ void	fd_dup2(t_cmd *current)
 		if (dup2(current->redirect_out, STDOUT) == -1)
 			handle_error("dup2 error redirect_out");
 	}
-	else if (current->pipe_out != -1)
+	else  if (current->pipe_out != -1)
 	{
 		if (dup2(current->pipe_out, STDOUT) == -1)
 			handle_error("dup2 error pipe_out");
