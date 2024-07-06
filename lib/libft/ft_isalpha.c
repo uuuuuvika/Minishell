@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:26:04 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/14 23:25:27 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:20:03 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_isalpha(int c)
 
 int	ft_isallalpha(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])

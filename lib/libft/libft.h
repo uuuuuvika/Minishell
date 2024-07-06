@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 13:28:30 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 18:13:43 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:30:29 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char			*ft_strnstr(const char
 					*haystack, const char *needle, size_t len);
 int				ft_atoi(const char *str);
 void			*ft_calloc(size_t count, size_t size);
-int     		ft_strcmp(const char *str1, const char *str2);
+int				ft_strcmp(const char *str1, const char *str2);
 char			*ft_strdup(const char *s1);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);
