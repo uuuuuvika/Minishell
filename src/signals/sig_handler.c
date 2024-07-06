@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:45:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/02 15:14:23 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:34:51 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	g_signal = 0;
 
-void	handle_ctrl(void)
+void	handle_keypress(void)
 {
+	rl_bind_key('\t', rl_insert);
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }
@@ -42,7 +43,7 @@ void	sig_handler_fork(int sig)
 	}
 }
 
-void	handle_ctrl_fork(t_data *data)
+void	handle_keypress_fork(t_data *data)
 {
 	if (signal(SIGINT, sig_handler_fork))
 		data->exit_code = 130;

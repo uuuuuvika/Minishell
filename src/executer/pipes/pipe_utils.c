@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/29 21:43:09 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/06/30 00:16:11 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	fd_dup2(t_cmd *current)
 		if (dup2(current->redirect_out, STDOUT) == -1)
 			handle_error("dup2 error redirect_out");
 	}
-	else if (current->pipe_out != -1)
+	else  if (current->pipe_out != -1)
 	{
 		if (dup2(current->pipe_out, STDOUT) == -1)
 			handle_error("dup2 error pipe_out");

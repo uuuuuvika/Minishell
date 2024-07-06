@@ -21,8 +21,9 @@ char	*arr2D_to_str(char **args)
 	i = 0;
 	while (args[i])
 	{
+		if(i > 0)
+			str = ft_strjoin(str, " ");
 		str = ft_strjoin(str, args[i]);
-		str = ft_strjoin(str, " ");
 		i++;
 	}
 	free_arr2D(args);

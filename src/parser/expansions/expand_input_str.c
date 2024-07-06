@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char	*expand_line(char *line, t_data *data)
+char	*expand_input_str(char *line, t_data *data)
 {
 	char	**split;
 	char	*env;
@@ -20,8 +20,6 @@ char	*expand_line(char *line, t_data *data)
 	int		i;
 
 	split = ft_split(line, ' ');
-    // if (ft_getenv(&split[0][1], data->envs) == NULL)
-    //     return ;
 	i = 0;
 	while (split[i])
 	{
@@ -29,14 +27,12 @@ char	*expand_line(char *line, t_data *data)
 		{
 			env = ft_getenv(split[i] + 1, data->envs);
 			if (env)
-			{
-				free(split[i]);
-				split[i] = ft_strdup(env);
-			}
+				replace_for_expansion(&split[i], env);
 			free(env);
 		}
 		i++;
 	}
+	free(line);
 	new_line = arr2D_to_str(split);
 	return (new_line);
 }

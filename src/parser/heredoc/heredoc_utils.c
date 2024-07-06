@@ -21,25 +21,18 @@ char *split_expand_join(char *line, t_data *data)
 	exp_line = ft_strdup("");
 	splitted = ft_split(line, ' ');
 	i = 0;
-	// printf(BLU "line to expand: %s\n" RESET, line);
-	// print_2D(splitted);
-	// printf(BLU "num_args: %d\n" RESET, cnt_args(splitted));
 	while (splitted[i])
 	{
 		expand_arg(splitted, data);
-		// printf(BLU "Expanded[%d]: %s\n" RESET, i, splitted[i]);
-		//  if(ft_strchr(splitted[i], '$'))//Make it work for all expansions
-		//  	splitted[i] = getenv(splitted[i] + 1);
 		if (i > 0)
 			exp_line = ft_strjoin(exp_line, " ");
 		exp_line = ft_strjoin(exp_line, splitted[i]);
 		i++;
 	}
-	// printf(GRN "expanded line: %s\n" RESET, exp_line);
 	return (exp_line);
 }
 
-int heredoc_preprocess(t_cmd *new_node)
+int heredoc_preprocess(t_cmd *new_node, t_data *data)
 {
 	int i;
 
@@ -52,6 +45,7 @@ int heredoc_preprocess(t_cmd *new_node)
 			{
 				// free_arr2D(new_node->args);
 				// free(new_node);
+				data->exit_code = 2;
 				write_error("syntax error near unexpected token `newline'\n");
 				return (1);
 			}

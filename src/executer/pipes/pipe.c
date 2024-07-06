@@ -22,7 +22,7 @@ int pipe_cmds(t_data *data)
     current = data->commands;
     while (current != NULL)
     {
-		handle_ctrl_fork(data); // set signal handler for fork
+		handle_keypress_fork(data); // set signal handler for fork
         pid[i] = fork();
         if (pid[i] == -1)
             return EXIT_FAILURE;
@@ -39,6 +39,6 @@ int pipe_cmds(t_data *data)
         i++;
     }
     ultimate_wait(data, pid);
-	handle_ctrl(); // reset signal handler
+	handle_keypress(); // reset signal handler
     return EXIT_SUCCESS;
 }

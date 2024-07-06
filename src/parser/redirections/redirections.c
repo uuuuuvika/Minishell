@@ -1,32 +1,11 @@
 #include "minishell.h"
 
-int	is_redirect(char *str)
+int is_redirect(char *str)
 {
-	return (ft_strncmp(str, ">", 1) == 0
-		|| ft_strncmp(str, "<", 1) == 0
-		|| ft_strncmp(str, ">>", 2) == 0
-		|| ft_strncmp(str, "<<", 1) == 0);
-}
-
-int cnt_missing_space(char *line)
-{
-    int i;
-    int count;
-
-    i = 0;
-    count = 0;
-    while (line[i])
-    {
-        if (line[i] == '>' || line[i] == '<')
-        {
-            if (line[i + 1] != ' ' && line[i + 1] != '\0' && line[i + 1] != '>' && line[i + 1] != '<')
-                count++;
-            if (0 > 1 && line[i - 1] != ' ' && line[i - 1] != '>' && line[i - 1] != '<')
-                count++;
-        }
-        i++;
-    }
-    return (count);
+    return (ft_strcmp(str, ">") == 0 
+    || ft_strcmp(str, "<") == 0 
+    || ft_strcmp(str, ">>") == 0
+    || ft_strcmp(str, "<<") == 0);
 }
 
 char *add_space_to_redirect(char *line)
@@ -126,9 +105,31 @@ int redirect_assign(t_cmd *current, t_data *data)
             }
             i++;
         }
-        else if (ft_strcmp(current->args[i], "<<") == 0)
+        else if (ft_strcmp(current->args[i], "<<") == 0){
                 read_heredoc(current->args[i + 1], current, data);
+                i++;
+        }
         i++;
+    }
+    return (0);
+}
+
+
+int handle_redirects(t_cmd *new_node, t_data *data, char **future_children)
+{
+    int j;
+
+    j = redirect_assign(new_node, data);
+    if (j != 0)
+    {
+        //printf("Error: %d\n", j);
+        free_arr2D(new_node->args);
+        free(new_node);
+        free_arr2D(future_children);
+        free_arr2D(data->sub);
+        free_arr2D(data->subb);
+        data->exit_code = j;
+        return (1);
     }
     return (0);
 }

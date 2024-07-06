@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 20:04:49 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 17:28:33 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:32:56 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	read_heredoc_simple(char *delimiter, t_data *data)
 	close(fd);
 }
 
-int	handle_ctrl_heredoc(char *line, t_cmd *current, t_data *data)
+int	handle_keypress_heredoc(char *line, t_cmd *current, t_data *data)
 {
 	if (!line || errno == EINVAL)
 	{
@@ -66,16 +66,19 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 {
 	char	*line;
 	int		fd;
-	char *exp_line;
+	//char *exp_line;
 
 	fd = open("here_doc", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	current->here_doc = fd;
+	
 	g_signal = 0; // Important to reset signal
 	while (1)
 	{
 		line = readline("> ");
-		if (handle_ctrl_heredoc(line, current, data))
+		if (handle_keypress_heredoc(line, current, data))
+		{
 			break ;
+		}
 		if (ft_strcmp(line, delimiter) == 0)
 		{
 			data->exit_code = 0;
@@ -84,16 +87,17 @@ void	read_heredoc(char *delimiter, t_cmd *current, t_data *data)
 		}
 		if (current->here_doc_exp)
 		{
-			if (ft_strchr(line, '$')) // check if there are quotes
-			{
-				exp_line = split_expand_join(line, data);
-				free(line);
-				line = exp_line;
-			}
+			//if (ft_strchr(line, '$')) // check if there are quotes
+			//{
+				//exp_line = split_expand_join(line, data);
+				// free(line);
+				line = expand_input_str(line, data);
+				// free(exp_line);
+			//}
 		}
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);
 	}
-	close(fd);
+	//close(fd);
 }
