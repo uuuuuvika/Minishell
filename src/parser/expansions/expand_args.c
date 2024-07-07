@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 22:25:37 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:42:04 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	expand_arg(char **args, t_data *data)
 			{
 				split = ft_split(args[i], ' ');
 				expand_multiple_args(split, data);
-				tmp = arr2D_to_str(split);
+				tmp = dobarr_to_str(split);
 				free(args[i]);
 				args[i] = ft_strdup(tmp);
 				free(tmp);

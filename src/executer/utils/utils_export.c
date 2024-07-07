@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*   utils_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/09 18:26:04 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 19:20:03 by darotche         ###   ########.fr       */
+/*   Created: 2024/07/06 18:37:16 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/06 18:39:24 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_isalpha(int c)
+void	export_error_and_code(char *arg, t_data *data)
 {
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-	{
-		return (1);
-	}
-	return (0);
+	write_error("minishell: export: ");
+	write_error(arg);
+	write_error(": not a valid identifier\n");
+	data->exit_code = 1;
 }
 
-int	ft_isallalpha(char *str)
+int	varname_len(char *var)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-	{
-		if (!ft_isalpha(str[i]))
-			return (0);
+	while (var[i] && var[i] != '=')
 		i++;
-	}
-	return (1);
+	return (i);
 }

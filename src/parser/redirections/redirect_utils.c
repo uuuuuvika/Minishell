@@ -1,21 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/07 01:54:44 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/07 02:31:15 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int is_redirect(char *str)
+int	is_redirect(char *str)
 {
-    return (ft_strcmp(str, ">") == 0 || ft_strcmp(str, "<") == 0 || ft_strcmp(str, ">>") == 0 || ft_strcmp(str, "<<") == 0);
+	return (ft_strcmp(str, ">") == 0
+		|| ft_strcmp(str, "<") == 0
+		|| ft_strcmp(str, ">>") == 0
+		|| ft_strcmp(str, "<<") == 0);
 }
 
-int handle_redirection(const char *f, int flags, t_cmd *current, int is_out)
+int	handle_open(const char *f, int flags, t_cmd *current, int is_out)
 {
-    int result = open_file(f, flags, current, is_out);
-    return result;
+	int	result;
+
+	result = open_file(f, flags, current, is_out);
+	return (result);
 }
 
-int process_redirection(t_cmd *current, int *index, int flags, int is_out)
+int	process_redirection(t_cmd *current, int *index, int flags, int is_out)
 {
-    int result = handle_redirection(current->args[*index + 1], flags, current, is_out);
-    if (result != 0)
-        return result;
-    (*index)++;
-    return 0;
+	int	result;
+
+	result = handle_open(current->args[*index + 1], flags, current, is_out);
+	if (result != 0)
+		return (result);
+	(*index)++;
+	return (0);
 }

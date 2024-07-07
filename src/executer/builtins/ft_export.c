@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 13:40:46 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 01:28:30 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:50:05 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	varname_len(char *var)
-{
-	int	i;
-
-	i = 0;
-	while (var[i] && var[i] != '=')
-		i++;
-	return (i);
-}
 
 int	replace_var(char **envar, char *newvar)
 {
@@ -60,40 +50,77 @@ int	add_var(char ***envar, char *newvar)
 	return (0);
 }
 
-void	export_error_and_code(char *arg, t_data *data)
+int	validate_env_var(t_data *data, t_cmd *cmd, int i)
 {
-	write_error("minishell: export: ");
-	write_error(arg);
-	write_error(": not a valid identifier\n");
-	data->exit_code = 1;
+	char	*env_name;
+
+	env_name = get_env_name(cmd->args[i], '=');
+	if (!(ft_strchr(cmd->args[i], '=')) && ft_isallalpha(cmd->args[i]))
+	{
+		free(env_name);
+		return (0);
+	}
+	else if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name)
+			|| isalldigit(env_name) || ft_strchr(cmd->args[i], '=') == NULL)
+	{
+		export_error_and_code(cmd->args[i], data);
+		free(env_name);
+		return (0);
+	}
+	free(env_name);
+	return (1);
+}
+
+void	process_env_var(t_data *data, t_cmd *cmd, int i)
+{
+	if (ft_strchr(cmd->args[i], '=') == NULL)
+		data->exit_code = 1;
+	if (!replace_var(data->envs, cmd->args[i]))
+		add_var(&data->envs, cmd->args[i]);
 }
 
 void	ft_export(t_data *data, t_cmd *cmd, int i)
 {
-	char	*env_name;
-
 	i++;
-    if (cmd->num_args > 1)
-    {
+	if (cmd->num_args > 1)
+	{
 		while (cmd->args[i] != NULL)
 		{
-			env_name = get_env_name(cmd->args[i], '=');
-			if (!(ft_strchr(cmd->args[i], '=')) && ft_isallalpha(cmd->args[i]))
+			if (!validate_env_var(data, cmd, i))
 				return ;
-			else if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name) || ft_isall_digit(env_name) || ft_strchr(cmd->args[i], '=') == NULL)
-			{
-				export_error_and_code(cmd->args[i], data);
-				free(env_name);
-				return ;
-			}
-			if (ft_strchr(cmd->args[i], '=') == NULL)
-				data->exit_code = 1;
-			free(env_name);
-			if (!replace_var(data->envs, cmd->args[i]))
-				add_var(&data->envs, cmd->args[i]);
+			process_env_var(data, cmd, i);
 			i++;
 		}
-    }
-    data->exit_code = 0;
+	}
+	data->exit_code = 0;
 }
 
+// void	ft_export(t_data *data, t_cmd *cmd, int i)
+// {
+// 	char	*env_name;
+
+// 	i++;
+// 	if (cmd->num_args > 1)
+// 	{
+// 		while (cmd->args[i] != NULL)
+// 		{
+// 			env_name = get_env_name(cmd->args[i], '=');
+// 			if (!(ft_strchr(cmd->args[i], '=')) && ft_isallalpha(cmd->args[i]))
+// 				return ;
+// 			else if (cmd->args[i][0] == '=' || !ft_isall_alnum(env_name)
+// 				|| isalldigit(env_name) || ft_strchr(cmd->args[i], '=') == NULL)
+// 			{
+// 				export_error_and_code(cmd->args[i], data);
+// 				free(env_name);
+// 				return ;
+// 			}
+// 			if (ft_strchr(cmd->args[i], '=') == NULL)
+// 				data->exit_code = 1;
+// 			free(env_name);
+// 			if (!replace_var(data->envs, cmd->args[i]))
+// 				add_var(&data->envs, cmd->args[i]);
+// 			i++;
+// 		}
+// 	}
+// 	data->exit_code = 0;
+// }

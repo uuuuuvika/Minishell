@@ -1,30 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/07 00:57:05 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/07 02:37:24 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
-int parse(char *input, t_data *data)
+int	empty_quotes(char *input, t_data *data)
 {
-	char **future_children;
-	t_cmd *new_node;
-	int nch;
-	char *expanded_line;
-
-	if(ft_strcmp(input, "\'\'") == 0 || ft_strcmp(input, "\"\"") == 0)
+	if (ft_strcmp(input, "\'\'") == 0 || ft_strcmp(input, "\"\"") == 0)
 	{
 		printf("minishell: : command not found\n");
 		data->exit_code = 127;
 		return (1);
 	}
-	if(ft_strcmp(input, "\' \'") == 0 || ft_strcmp(input, "\" \"") == 0)
+	if (ft_strcmp(input, "\' \'") == 0 || ft_strcmp(input, "\" \"") == 0)
 	{
 		printf("minishell:  : command not found\n");
 		data->exit_code = 127;
 		return (1);
 	}
-	
-	expanded_line = refine_input(input, data);
-	if (!expanded_line)
-		return (1);
-		
+	return (0);
+}
+
+int	create_child_nodes(t_data *data, char *expanded_line)
+{
+	char	**future_children;
+	t_cmd	*new_node;
+	int		nch;
+
 	future_children = ft_split(expanded_line, '|');
 	free(expanded_line);
 	new_node = NULL;
@@ -44,8 +54,21 @@ int parse(char *input, t_data *data)
 		nch++;
 	}
 	data->num_of_children = nch;
-	pipe_assign(data->commands);
 	free_dobarr(future_children);
-	//print_cmd_nodes(data);
+	return (0);
+}
+
+int	parse(char *input, t_data *data)
+{
+	char	*expanded_line;
+
+	if (empty_quotes(input, data))
+		return (1);
+	expanded_line = refine_input(input, data);
+	if (!expanded_line)
+		return (1);
+	if (create_child_nodes(data, expanded_line))
+		return (1);
+	pipe_assign(data->commands);
 	return (0);
 }

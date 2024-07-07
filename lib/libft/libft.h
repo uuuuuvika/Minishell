@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 13:28:30 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/26 20:55:32 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/06 19:30:29 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_list
 int				ft_isalpha(int c);
 int				ft_isallalpha(char *str);
 int				ft_isall_alnum(char *str);
-int				ft_isall_digit(char *str);
+int				isalldigit(char *str);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isascii(int c);
@@ -49,7 +49,7 @@ char			*ft_strnstr(const char
 					*haystack, const char *needle, size_t len);
 int				ft_atoi(const char *str);
 void			*ft_calloc(size_t count, size_t size);
-int     		ft_strcmp(const char *str1, const char *str2);
+int				ft_strcmp(const char *str1, const char *str2);
 char			*ft_strdup(const char *s1);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char *s1, char *s2);

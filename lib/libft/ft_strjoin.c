@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/06 19:25:57 by darotche          #+#    #+#             */
+/*   Updated: 2024/07/06 19:27:26 by darotche         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
-static size_t ft_spec_strlen(char *str)
+static size_t	ft_spec_strlen(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!str)
@@ -12,7 +24,7 @@ static size_t ft_spec_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strjoin_nf(char *s1, char *s2) // NUL hello
+char	*ft_strjoin_nf(char *s1, char *s2)
 {
 	char	*join;
 	size_t	len;
@@ -39,11 +51,10 @@ char	*ft_strjoin_nf(char *s1, char *s2) // NUL hello
 	return (join);
 }
 
-
-char *ft_strjoin(char *str1, char *str2) //hello
+char	*ft_strjoin(char *str1, char *str2)
 {
-	int i;
-	char *newstr;
+	int		i;
+	char	*newstr;
 
 	i = 0;
 	newstr = malloc(ft_spec_strlen(str1) + ft_spec_strlen(str2) + 1);
@@ -62,7 +73,6 @@ char *ft_strjoin(char *str1, char *str2) //hello
 		if (*str2++ == '\n')
 			break ;
 	}
-
 	newstr[i] = '\0';
 	return (newstr);
 }
