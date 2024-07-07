@@ -181,5 +181,4 @@ void	print_banner_fun(void);
 void	export_error_and_code(char *arg, t_data *data);
 int		varname_len(char *var);
 
-
 #endif
