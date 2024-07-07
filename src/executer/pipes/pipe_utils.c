@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/06/30 00:16:11 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:29:31 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ultimate_wait(t_data *data, pid_t *pid)
 	while (i < data->num_of_children)
 	{
 		if (waitpid(pid[i], &exit_code, 0) == -1)
-			handle_error("waitpid failed");
+			write_error("waitpid failed");
 		if (WIFEXITED(exit_code))
 			data->exit_code = WEXITSTATUS(exit_code);
 		i++;

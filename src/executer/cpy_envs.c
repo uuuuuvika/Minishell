@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cpy_envs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/02 15:18:34 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:25:12 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,11 @@ int	cpy_envs(t_data *data, char **envp)
 {
 	int	count;
 
-	//print_banner();
+	//print_banner_fun(void);
 	count = 0;
 	data->envs = ft_calloc(count_env(envp) + 1, sizeof(char *));
 	if (!data->envs)
-	{
-		perror(RED "ft_calloc failed\n" RESET);
 		return (1);
-	}
 	while (envp[count])
 	{
 		data->envs[count] = ft_strdup(envp[count]);
