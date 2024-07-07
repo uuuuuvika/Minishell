@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 20:18:47 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 01:28:30 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:40:14 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ int	cnt_args(char **args)
 	return (i);
 }
 
-void args_realloc(t_cmd *new_node)
+void	args_realloc(t_cmd *new_node)
 {
-    char **temp;
-    int i;
+	char	**temp;
+	int		i;
 
-    temp = malloc(sizeof(char *) * (new_node->num_args + 1));
-    i = 0;
-    while (i < new_node->num_args)
-    {
-        temp[i] = ft_strdup(new_node->args[i]);
-        i++;
-    }
-    temp[i] = NULL;
-    free_dobarr(new_node->args);
-    new_node->args = temp;
+	temp = malloc(sizeof(char *) * (new_node->num_args + 1));
+	i = 0;
+	while (i < new_node->num_args)
+	{
+		temp[i] = ft_strdup(new_node->args[i]);
+		i++;
+	}
+	temp[i] = NULL;
+	free_dobarr(new_node->args);
+	new_node->args = temp;
 }
 
 void	pipe_assign(t_cmd *command)

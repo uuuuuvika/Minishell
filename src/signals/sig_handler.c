@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:45:12 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/06 18:13:48 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:38:27 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	handle_keypress_fork(t_data *data)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void handle_sigint_exit_code(t_data *data)
+void	handle_sigint_exit_code(t_data *data)
 {
-    if (g_signal == 2)
-    {
-        data->exit_code = 130;
-        g_signal = 0;
-    }
+	if (g_signal == 2)
+	{
+		data->exit_code = 130;
+		g_signal = 0;
+	}
 }

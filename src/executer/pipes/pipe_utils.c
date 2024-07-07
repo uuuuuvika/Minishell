@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
+/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:44:59 by darotche          #+#    #+#             */
 /*   Updated: 2024/07/07 02:29:31 by vshcherb         ###   ########.fr       */
@@ -54,35 +54,21 @@ void	ultimate_wait(t_data *data, pid_t *pid)
 	}
 }
 
-void	fd_dup2(t_cmd *current)
+void	handle_errorr(const char *message)
 {
-	int r;
+	perror(message);
+	exit(EXIT_FAILURE);
+}
+
+void	handle_here_doc_dup(t_cmd *current)
+{
+	int	r;
 
 	if (current->here_doc != 0)
 	{
 		r = open("here_doc", O_RDONLY, 777);
-		//printf(GRN"here_doc: %d\n"RESET, r);
-		if (dup2(r, STDIN) == -1)
+		if (dup2(r, STDIN_FILENO) == -1)
 			handle_error("dup2 error here_doc");
-	}
-	if (current->pipe_in != -1)
-	{
-		if (dup2(current->pipe_in, STDIN) == -1)
-			handle_error("dup2 error pipe_in");
-	}
-	else if (current->redirect_in != -1)
-	{
-		if (dup2(current->redirect_in, STDIN) == -1)
-			handle_error("dup2 error redirect_in");
-	}
-	if (current->redirect_out != -1)
-	{
-		if (dup2(current->redirect_out, STDOUT) == -1)
-			handle_error("dup2 error redirect_out");
-	}
-	else  if (current->pipe_out != -1)
-	{
-		if (dup2(current->pipe_out, STDOUT) == -1)
-			handle_error("dup2 error pipe_out");
+		close(r);
 	}
 }
