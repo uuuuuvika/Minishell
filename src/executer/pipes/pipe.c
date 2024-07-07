@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vika <vika@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:45:07 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 00:34:51 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 12:47:16 by vika             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	handle_input_dup(t_cmd *current)
 	if (current->pipe_in != -1)
 	{
 		if (dup2(current->pipe_in, STDIN_FILENO) == -1)
-			handle_error("dup2 error pipe_in");
+			write_error(ERR_DUP2_PIPE_IN);
 	}
 	else if (current->redirect_in != -1)
 	{
 		if (dup2(current->redirect_in, STDIN_FILENO) == -1)
-			handle_error("dup2 error redirect_in");
+			write_error(ERR_DUP2_RED_IN);
 	}
 }
 
@@ -31,12 +31,12 @@ void	handle_output_dup(t_cmd *current)
 	if (current->redirect_out != -1)
 	{
 		if (dup2(current->redirect_out, STDOUT_FILENO) == -1)
-			handle_error("dup2 error redirect_out");
+			write_error(ERR_DUP2_RED_OUT);
 	}
 	else if (current->pipe_out != -1)
 	{
 		if (dup2(current->pipe_out, STDOUT_FILENO) == -1)
-			handle_error("dup2 error pipe_out");
+			write_error(ERR_DUP2_PIPE_OUT);
 	}
 }
 

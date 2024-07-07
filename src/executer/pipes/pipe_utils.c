@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vika <vika@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:44:59 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 02:29:31 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 12:47:33 by vika             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,28 +47,22 @@ void	ultimate_wait(t_data *data, pid_t *pid)
 	while (i < data->num_of_children)
 	{
 		if (waitpid(pid[i], &exit_code, 0) == -1)
-			write_error("waitpid failed");
+			write_error(ERR_WAITPID);
 		if (WIFEXITED(exit_code))
 			data->exit_code = WEXITSTATUS(exit_code);
 		i++;
 	}
 }
 
-void	handle_errorr(const char *message)
-{
-	perror(message);
-	exit(EXIT_FAILURE);
-}
-
 void	handle_here_doc_dup(t_cmd *current)
 {
-	int	r;
+	int	here_doc_fd;
 
 	if (current->here_doc != 0)
 	{
-		r = open("here_doc", O_RDONLY, 777);
-		if (dup2(r, STDIN_FILENO) == -1)
-			handle_error("dup2 error here_doc");
-		close(r);
+		here_doc_fd = open("here_doc", O_RDONLY, 777);
+		if (dup2(here_doc_fd, STDIN_FILENO) == -1)
+			write_error(ERR_DUP2_HER_DOC);
+		close(here_doc_fd);
 	}
 }

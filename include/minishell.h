@@ -33,6 +33,8 @@
 # define ERR_DUP2_RED_OUT "minishell: dup2 error: redirect_out\n"
 # define ERR_DUP2_RED_IN "minishell: dup2 error: redirect_in\n"
 # define ERR_DUP2_HER_DOC "minishell: dup2 error: here_doc\n"
+# define ERR_DUP2_PIPE_IN "minishell: dup2 error: pipe_in\n"
+# define ERR_DUP2_PIPE_OUT "minishell: dup2 error: pipe_out\n"
 # define ERR_NO_FILE ": No such file or directory\n"
 # define ERR_WAITPID "minishell: waitpid error\n"
 
@@ -81,7 +83,6 @@ typedef struct s_data
 
 void	write_error(const char *msg);
 void	write_error_arg(const char *arg, const char *msg);
-int		handle_error(const char *message);
 int		check_null(char *str);
 void	free_dobarr(char **arr2D);
 void	free_data(t_data *data);
