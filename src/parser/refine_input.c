@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:55:34 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 00:56:07 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:08:07 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ char	*refine_input(char *input, t_data *data)
 	line_copy = replace_tabs_with_spaces(input);
 	line_copy_2 = handle_missing_spaces(line_copy);
 	clean_and_expanded_line = expand_input_str(line_copy_2, data);
-	//free(line_copy);
 	return (clean_and_expanded_line);
 }

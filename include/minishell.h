@@ -29,11 +29,11 @@
 # define WHT "\e[0;37m"
 # define RESET "\033[0m"
 
-#define ERR_SYNTAX "minishell: syntax error near unexpected token `newline'\n"
-#define ERR_DUP2_RED_OUT "minishell: dup2 error: redirect_out\n"
-#define ERR_DUP2_RED_IN "minishell: dup2 error: redirect_in\n"
-#define ERR_DUP2_HER_DOC "minishell: dup2 error: here_doc\n"
-#define ERR_NO_FILE ": No such file or directory\n"
+# define ERR_SYNTAX "minishell: syntax error near unexpected token `newline'\n"
+# define ERR_DUP2_RED_OUT "minishell: dup2 error: redirect_out\n"
+# define ERR_DUP2_RED_IN "minishell: dup2 error: redirect_in\n"
+# define ERR_DUP2_HER_DOC "minishell: dup2 error: here_doc\n"
+# define ERR_NO_FILE ": No such file or directory\n"
 
 # include "libft.h"
 # include <unistd.h>
@@ -106,24 +106,24 @@ int		cpy_envs(t_data *data, char **envp);
 void	pipe_assign(t_cmd *command);
 int		pipe_cmds(t_data *data);
 
+int		handle_redirects(t_cmd *new_node, t_data *data, char **future_children);
 int		parse(char *input, t_data *data);
 char	*refine_input(char *input, t_data *data);
 t_cmd	*create_cmd_node(char *input);
 void	add_cmd_to_list(t_cmd **head, t_cmd *new_node);
 void	args_realloc(t_cmd *new_node);
-int		handle_redirects(t_cmd *new_node, t_data *data, char **future_children);
 
 void	redirect_fd_dup(t_cmd *command, t_data *data);
 int		is_redirect(char *str);
 int		cnt_args(char **args);
 int		redirect_assign(t_cmd *cmd, t_data *data);
 int		open_file(const char *f, int flags, t_cmd *current, int is_out);
-int		handle_redirection(const char *f, int flags, t_cmd *current, int is_out);
+int		handle_open(const char *f, int flags, t_cmd *current, int is_out);
 int		process_redirection(t_cmd *current, int *index, int flags, int is_out);
 
-int     sub_sin_quotes(char *line_copy, t_data *data);
+int		sub_sin_quotes(char *line_copy, t_data *data);
 void	return_sin_quotes(char **args, t_data *data);
-int     sub_dub_quotes(char *line_copy, t_data *data);
+int		sub_dub_quotes(char *line_copy, t_data *data);
 void	return_dub_quotes(char **args, t_data *data);
 //int     sub_quotes(char *line_copy, t_data *data);
 int		count_quotes(char *line_copy, char *del);
@@ -141,7 +141,7 @@ int		is_all_dollars(char *str);
 void	replace_for_expansion(char **args, char *cmd);
 char	*expand_input_str(char *line, t_data *data);
 int		is_multi_words(char *str);
-int     count_dsqm(char **arg);
+int		count_dsqm(char **arg);
 
 void	fd_close(t_cmd *command);
 void	ultimate_fd_close(t_data *data);

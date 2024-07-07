@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 01:54:44 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 01:59:09 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:31:15 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_redirect(char *str)
 		|| ft_strcmp(str, "<<") == 0);
 }
 
-int	handle_redir(const char *f, int flags, t_cmd *current, int is_out)
+int	handle_open(const char *f, int flags, t_cmd *current, int is_out)
 {
 	int	result;
 
@@ -32,7 +32,7 @@ int	process_redirection(t_cmd *current, int *index, int flags, int is_out)
 {
 	int	result;
 
-	result = handle_redir(current->args[*index + 1], flags, current, is_out);
+	result = handle_open(current->args[*index + 1], flags, current, is_out);
 	if (result != 0)
 		return (result);
 	(*index)++;
