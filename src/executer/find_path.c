@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:40:19 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 01:52:52 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 15:26:29 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ char	*check_abs_path(char *cmd, t_data *data, struct stat statbuf)
 		else
 		{
 			errno = EACCES;
-			perror("-minishell");
+			perror("minishell");
 			data->exit_code = 126;
 			return (cmd);
 		}
 	}
 	data->exit_code = 127;
 	errno = ENOENT;
-	perror("-minishell");
+	perror("minishell");
 	return (cmd);
 }
 

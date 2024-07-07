@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:41:26 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 14:58:38 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 16:00:37 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	exec_cmd(t_data *data, t_cmd *cmd)
 
 	path = NULL;
 	i = 0;
-	if(cmd->args[i] == NULL)
+	if (cmd->args[i] == NULL)
 		return ;
 	while (ft_strcmp(cmd->args[i], "\0") == 0 && cmd->args[i + 1] != NULL)
 		i++;
