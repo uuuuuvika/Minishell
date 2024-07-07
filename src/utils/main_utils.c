@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 15:08:28 by darotche          #+#    #+#             */
 /*   Updated: 2024/07/06 18:01:40 by darotche         ###   ########.fr       */
@@ -51,4 +51,16 @@ void	print_banner(void)
 	printf("*                  by Vika & Dai, Berlin Summer 2024    *\n");
 	printf("*                                                       *\n");
 	printf("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * \n"RESET);
+}
+
+void	print_banner_fun(void)
+{
+	printf(MAG"\n");
+	printf("   __  __  __  _  _  __  ___  _  _  ___  __    __\n");
+	printf("  (  \\/  )(  )( \\( )(  )/ __)( )( )(  _)(  )  (  )\n");
+	printf("   )    (  )(  )  (  )( \\__ \\ )__(  ) _) )(__  )(__\n");
+	printf("  (_/\\/\\_)(__)(_)\\_)(__)(___/(_)(_)(___)(____)(____)\n");
+	printf("\n"RESET);
+	printf(CYN"                  by Vika & Dai, Berlin Summer 2024\n"RESET);
+	printf("\n");
 }

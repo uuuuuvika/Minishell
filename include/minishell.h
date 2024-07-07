@@ -34,6 +34,7 @@
 # define ERR_DUP2_RED_IN "minishell: dup2 error: redirect_in\n"
 # define ERR_DUP2_HER_DOC "minishell: dup2 error: here_doc\n"
 # define ERR_NO_FILE ": No such file or directory\n"
+# define ERR_WAITPID "minishell: waitpid error\n"
 
 # include "libft.h"
 # include <unistd.h>
@@ -125,7 +126,6 @@ int		sub_sin_quotes(char *line_copy, t_data *data);
 void	return_sin_quotes(char **args, t_data *data);
 int		sub_dub_quotes(char *line_copy, t_data *data);
 void	return_dub_quotes(char **args, t_data *data);
-//int     sub_quotes(char *line_copy, t_data *data);
 int		count_quotes(char *line_copy, char *del);
 int		handle_odd_quotes(int count_subs, t_data *data, char *del);
 int		word_len(char *line_copy, int start, char *del);
@@ -151,6 +151,7 @@ void	fd_dup2(t_cmd *command);
 void	read_heredoc(char *delimiter, t_cmd *current, t_data *data);
 void	read_heredoc_simple(char *delimiter, t_data *data);
 int		heredoc_preprocess(t_cmd *new_node, t_data *data);
+
 void	handle_here_doc_dup(t_cmd *current);
 char	*split_expand_join(char *line, t_data *data);
 
@@ -175,8 +176,9 @@ int		is_space(char c);
 int		is_str_space(char *str);
 int		is_dsqm(t_cmd *cmd);
 void	print_banner(void);
-void	print_banner_2(void);
+void	print_banner_fun(void);
 void	export_error_and_code(char *arg, t_data *data);
 int		varname_len(char *var);
+
 
 #endif
