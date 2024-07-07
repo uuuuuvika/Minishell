@@ -6,7 +6,7 @@
 /*   By: vshcherb <vshcherb@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 14:54:28 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 00:42:33 by vshcherb         ###   ########.fr       */
+/*   Updated: 2024/07/07 01:25:53 by vshcherb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	write_error(const char *msg)
 void	write_error_arg(const char *arg, const char *msg)
 {
 	write(2, "minishell: ", 11);
-	write(2, msg, ft_strlen(msg));
 	write(2, arg, ft_strlen(arg));
+	write(2, msg, ft_strlen(msg));
 }

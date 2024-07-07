@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arr2D_to_str.c                                     :+:      :+:    :+:   */
+/*   open_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/02 13:21:04 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 01:17:17 by darotche         ###   ########.fr       */
+/*   Created: 2024/07/07 01:32:12 by vshcherb          #+#    #+#             */
+/*   Updated: 2024/07/07 02:00:38 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*arr2D_to_str(char **args)
+int	open_file(const char *f, int flags, t_cmd *current, int is_out)
 {
-	char	*str;
-	int		i;
+	int	fd;
 
-	str = NULL;
-	i = 0;
-	while (args[i])
+	fd = open(f, flags, 0644);
+	if (fd == -1)
 	{
-		if(i > 0)
-			str = ft_strjoin(str, " ");
-		str = ft_strjoin(str, args[i]);
-		i++;
+		if (f)
+		{
+			write_error_arg(f, ERR_NO_FILE);
+			return (1);
+		}
+		write_error(ERR_SYNTAX);
+		return (2);
 	}
-	free_dobarr(args);
-	return (str);
+	if (is_out)
+		current->redirect_out = fd;
+	else
+		current->redirect_in = fd;
+	return (0);
 }

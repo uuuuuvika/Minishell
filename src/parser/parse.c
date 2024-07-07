@@ -6,7 +6,7 @@
 /*   By: darotche <darotche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 00:57:05 by darotche          #+#    #+#             */
-/*   Updated: 2024/07/07 01:17:16 by darotche         ###   ########.fr       */
+/*   Updated: 2024/07/07 02:01:57 by darotche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	create_child_nodes(t_data *data, char *expanded_line)
 
 int	parse(char *input, t_data *data)
 {
-	//char	**future_children;
-	//t_cmd	*new_node;
-	//int		nch;
+	// char	**future_children;
+	// t_cmd	*new_node;
+	// int		nch;
 	char	*expanded_line;
 
 	if (empty_quotes(input, data))
