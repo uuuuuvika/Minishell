@@ -113,7 +113,7 @@ Use `|` to pipe the output of one command as the input to another.
 ls -la | grep "pattern"
 ```
 
-This Minishell is a project of the 42 Berlin curriculum designed and written 2024 by (https://github.com/uuuuuvika) and https://github.com/ProjectDaiana
+This Minishell is a project of the 42 Berlin curriculum designed and written 2024 by /uuuuuvika and /ProjectDaiana
 
 For any questions or suggestions, please feel free to open an issue or contact the project maintainers at your.email@example.com.
 Happy coding!
