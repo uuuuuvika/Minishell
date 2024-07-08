@@ -58,17 +58,28 @@ You will be greeted with a prompt where you can start typing commands.
 Minishell supports a variety of commands, including both built-in commands and external commands available in your system's PATH.
 
 ### Built-in Commands
-
+```
     cd [directory]: Change the current directory to directory.
         cd ..: Move to the parent directory.
         cd ~: Move to the home directory.
         cd .: Stay in the current directory.
+```
+```
     exit [status]: Exit the shell with an optional exit status.
+```
+```
     echo [string]: Print string to the terminal.
         echo -n [string]: Print string without a trailing newline.
+```
+```
     env: Print all environment variables.
+```
+```
     export [var]=[value]: Set an environment variable var to value.
+```
+```
     unset [var]: Remove the environment variable var.
+```
 
 ### External Commands
 
