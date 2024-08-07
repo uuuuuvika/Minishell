@@ -1,4 +1,5 @@
-# Minishell Project README
+
+![mimishell](https://github.com/user-attachments/assets/14e9d12e-3a65-457e-aa20-3d67cc776e95)
 
 ## Table of Contents
 
@@ -10,7 +11,7 @@
 
 ## Introduction
 
-Minishell is a simple, minimalist shell designed to provide basic command-line interface functionality. It is a smaller, educational version of a Unix shell like `bash` or `zsh`, created to help understand how shells operate, manage processes, and handle user input.
+Minishell is a minimalist shell. It is a smaller, educational version of a Unix shell like `bash` or `zsh`, created to learn how shells operate, manage processes, and handle user input.
 
 ## Features
 
@@ -28,7 +29,7 @@ To install and set up Minishell, follow these steps:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/yourusername/minishell.git
+    git clone https://github.com/uuuuuvika/minishell.git
     cd minishell
     ```
 
@@ -52,7 +53,7 @@ You will be greeted with a prompt where you can start typing commands.
 
 ## Commands
 
-Minishell supports a variety of commands, including both built-in commands and external commands available in your system's PATH.
+Minishell supports both built-in commands and external commands available in your system's PATH.
 
 ### Built-in Commands
 ```
